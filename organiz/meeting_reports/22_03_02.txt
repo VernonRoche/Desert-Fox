@@ -1,0 +1,4 @@
+# Compte rendu premier TD
+
+ - Discussion à propos du calendrier et de notre strategie de programme.
+ - Discussion à propos du cahier des besoins.
