@@ -27,14 +27,13 @@ async function main() {
   console.log("port is", args.port);
 
   const app = express();
-  const port = args.port;
 
-  app.listen(port, () => {
-    console.log(`Server started at http://localhost:${port}`);
+  app.listen(args.port, () => {
+    console.log(`Server started at http://localhost:${args.port}`);
   });
 
   app.get("/", (req, res) => {
-    res.send("Welcome to desert fox backend");
+    res.json("Welcome to desert fox backend");
   });
 
   process.on("SIGINT", () => {
