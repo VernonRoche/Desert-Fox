@@ -1,0 +1,13 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "compile": "tsc",
+    "start": "yarn compile && node js"
+  },
+  "devDependencies": {
+    "typescript": "^4.5.5"
+  }
+}
