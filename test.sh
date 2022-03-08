@@ -1,3 +1,3 @@
 cd src/backend
-yarn install
-yarn test
+npm install
+npm test
