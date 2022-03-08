@@ -26,7 +26,8 @@ image: node:latest
 install-job:
   stage: install
   script:
-    - npm install -g yarn
+    - apt-get install npm
+    - npm install yarn -g
 
 unit-test-job: # This job runs in the test stage.
   stage: test # It only starts when the job in the build stage completes successfully.
