@@ -17,7 +17,7 @@ default:
   image: node
   tags:
     - CREMI
-    - VBcp8xyw
+    - Ubuntu
 
 stages: # List of stages for jobs, and their order of execution
   - install
