@@ -25,9 +25,9 @@ stages: # List of stages for jobs, and their order of execution
 install-job:
   stage: install
   script:
-    - npm install yarn
+    - cd src/backend && npm install yarn && npm install
 
 unit-test-job: # This job runs in the test stage.
   stage: test # It only starts when the job in the build stage completes successfully.
   script:
-    - bash test.sh
+    - cd src/backend && npm test
