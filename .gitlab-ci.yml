@@ -14,14 +14,13 @@
 # For more information, see: https://docs.gitlab.com/ee/ci/yaml/index.html#stages
 
 default:
+  image: node
   tags:
     - CREMI
 
 stages: # List of stages for jobs, and their order of execution
   - install
   - test
-
-image: node:latest
 
 install-job:
   stage: install
