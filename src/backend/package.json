@@ -5,9 +5,9 @@
   "license": "MIT",
   "scripts": {
     "clean": "rimraf js",
-    "compile": "yarn clean && tsc",
-    "start": "yarn compile && node js/main",
-    "test": "yarn compile && mocha js/test --recursive --exit"
+    "compile": "npm run clean && tsc",
+    "start": "npm run compile && node js/main",
+    "test": "npm run compile && mocha js/test --recursive --exit"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
