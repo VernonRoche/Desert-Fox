@@ -17,6 +17,6 @@
     ],
     "rules": {
         "semi": ["error", "always"],
-        "default-case": ["error", "always"]
+        "default-case": "error"
     }
 }
