@@ -1,0 +1,13 @@
+@startuml
+abstract AbstractUnit
+class Horse extends AbstractUnit
+class Mechanized extends AbstractUnit
+class Motorized extends AbstractUnit
+class Headquarters extends AbstractUnit
+class Artillery extends AbstractUnit
+class AntiTank extends AbstractUnit
+class SpecialForces extends AbstractUnit
+class Airborne extends AbstractUnit
+class Engineers extends AbstractUnit
+class Garrison extends AbstractUnit
+@enduml

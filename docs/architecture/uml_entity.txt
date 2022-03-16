@@ -1,0 +1,43 @@
+@startuml
+interface SupplyPoint extends Entity
+class GenralSupply implements SupplyPoint
+class EmergencySuplly implements SupplyPoint
+class CombatSupply implements SupplyPoint
+
+interface Embarkable extends Entity
+class RefitPoints implements Embarkable
+class RefitPoints implements Movable
+class Dump implements Embarkable
+
+interface Movable extends Entity
+class SupplyUnit implements Movable
+
+interface Unit extends Movable
+abstract AbstractUnit implements Unit
+
+
+abstract UnitDecorator implements Unit
+UnitDecorator o-- Unit
+class DisruptedDecorator extends UnitDecorator
+class DepletedDecorator extends UnitDecorator
+
+class UnitProxy implements Unit
+UnitProxy --> UnitDecorator : delegate
+
+abstract Foot implements Embarkable
+abstract Foot extends AbstractUnit
+class Heavy extends Foot
+class Light extends Foot
+
+
+class Horse extends AbstractUnit
+class Mechanized extends AbstractUnit
+class Motorized extends AbstractUnit
+class Headquarters extends AbstractUnit
+class Artillery extends AbstractUnit
+class AntiTank extends AbstractUnit
+class SpecialForces extends AbstractUnit
+class Airborne extends AbstractUnit
+class Engineers extends AbstractUnit
+class Garrison extends AbstractUnit
+@enduml
