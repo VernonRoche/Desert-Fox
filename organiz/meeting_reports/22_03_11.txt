@@ -1,3 +1,10 @@
 td le vendredi
 
 a faire le cahier des besoins
+
+
+Nous avons discuté de problèmes d'architectures par rapport aux Entity et aux Unit, nous avons finalement convenu que la map possédait une liste de Entity  et que chaque joueur possède des listes de chacun de ses types (Base, Unit, Dump). Les cases seraient implémentées avec des listes de voisins ou des listes de connexions aux voisins (modulables selon le terrain). Pour le mouvement, Dijkstra serait une bonne idée.
+Sinon, on peut implémenter le mouvement soit case par case, soit sans vérifier le trajet mais vérifier la case d'arrivée.
+
+Pour l'état disrupted on pourrait utiliser un décorator et le gérer par un proxy ou quelque chose du genre,
+ou alors une abstract qui implémente une unit avec un boolean disrupted et des methodes qui font gaffe à l'appel, mais ça pourrait donc être un décorator.
