@@ -1,3 +1,4 @@
+/////////////// V1 ///////////////
 @startuml
 interface SupplyPoint extends Entity
 class GenralSupply implements SupplyPoint
@@ -40,4 +41,85 @@ class SpecialForces extends AbstractUnit
 class Airborne extends AbstractUnit
 class Engineers extends AbstractUnit
 class Garrison extends AbstractUnit
+@enduml
+
+/////////////// V2 ///////////////
+@startuml
+skinparam classAttributeIconSize 0
+interface Entity{
++place(HexID id): void
++remove(): void
+}
+
+interface Embarkable{
++embark(): void
++disembark(): void
+}
+
+abstract Moveable{
+-HexID currentPosition
+-uint movementPoints
+-uint remainingMovementPoints
++possibleMoves(): List<HexID>
++move(HexID id): void
++nightMove(HexID id): void
++retreat(HexID id): void
++resetMovementPoints(): void
+}
+
+class Base{
+-boolean sent
+-boolean received
+-boolean primary
++send(Embarkable, Base): void
++canSend(): boolean
++canReceive(): boolean
++isPrimary(): boolean
++reset(): void
+}
+
+class SupplyUnit{
+-Embarkable item
++embark(Embarkable item): void
++disembark(): void
++createBase(): void
++hasItem(): boolean
++capture(): boolean
+}
+
+interface Unit{
++refit(): void
++train(): void
++reactionMove(HexID id): void
++moraleCheck(): boolean
++overrun(HexID id): void
++hasGeneralSupply(): boolean
++attack(HexID id, boolean combatSupply): void
+}
+
+interface Embarkable extends Entity
+class RefitPoints implements Embarkable
+class Dump implements Embarkable
+
+class Base implements Entity
+
+abstract Moveable implements Entity
+
+class SupplyUnit extends Moveable
+
+interface Unit extends Moveable
+abstract AbstractUnit implements Unit
+
+abstract UnitDecorator implements Unit
+UnitDecorator o-- Unit
+class DisruptedDecorator extends UnitDecorator
+class DepletedDecorator extends UnitDecorator
+
+class UnitProxy implements Unit
+UnitProxy --> UnitDecorator : delegate
+
+abstract Foot implements Embarkable
+abstract Foot extends AbstractUnit
+class Heavy extends Foot
+class Light extends Foot
 @enduml
