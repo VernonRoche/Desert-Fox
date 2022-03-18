@@ -1,0 +1,10 @@
+Td 
+ 
+- Compte-rendu des cahier des besoins rendu au mardi precendent.
+
+- explication de nos diagrames UML 
+
+Ce qui faudra faire :
+
+    - Commencer à coder notre projet.
+    
