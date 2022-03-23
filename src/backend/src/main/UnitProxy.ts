@@ -1,7 +1,7 @@
 import HexID from "./HexID";
 import Unit from "./Unit";
 
-export default class UnitProxy implements Unit {
+export default class UnitProxy extends Unit {
   refit(): void {
     throw new Error("Method not implemented.");
   }
