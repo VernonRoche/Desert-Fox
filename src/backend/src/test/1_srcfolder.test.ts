@@ -15,7 +15,6 @@ describe("Check files in src folder", function () {
           if (path.extname(filePath) !== ".ts") {
             notTsFiles.push(filePath);
           }
-          console.log("filePath:", filePath, "is valid");
         }
       });
     }
