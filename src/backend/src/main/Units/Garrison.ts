@@ -1,5 +1,5 @@
 import AbstractUnit from "./AbstractUnit";
-import HexID from "./HexID";
+import HexID from "../HexID";
 
 export default class Garrison extends AbstractUnit {
   refit(): void {

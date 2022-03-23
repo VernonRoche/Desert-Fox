@@ -1,5 +1,5 @@
-import HexID from "./HexID";
-import Moveable from "./Moveable";
+import HexID from "../HexID";
+import Moveable from "../Moveable";
 
 export default abstract class AbstractUnit extends Moveable {
   constructor(currentPosition: HexID, movementPoints: number, remainingMovementPoints: number) {

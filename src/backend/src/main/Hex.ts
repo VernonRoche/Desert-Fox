@@ -1,5 +1,5 @@
 import HexID from "./HexID";
-import AbstractUnit from "./AbstractUnit";
+import AbstractUnit from "./Units/AbstractUnit";
 
 class Hex {
   private _hexId: HexID;

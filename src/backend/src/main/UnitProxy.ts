@@ -1,4 +1,4 @@
-import AbstractUnit from "./AbstractUnit";
+import AbstractUnit from "./Units/AbstractUnit";
 import HexID from "./HexID";
 
 export default class UnitProxy extends AbstractUnit {
