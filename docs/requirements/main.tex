@@ -146,12 +146,15 @@ oasis par exemple
     \item \textbf{Priorité 3/3}
     \begin{itemize}
         \item Le joueur du Commonwealth peut accélérer le mouvement de ses unités en utilisant le rail et transport maritime.
-        \item Déplacement case par case.
+        \item Déplacement case par case, et enlever les points de mouvement correspondants de l'unité. Ceci pour limiter la capacité de mouvement.
     \end{itemize}
     \item \textbf{Priorité 2/3}
     \begin{itemize}
         \item Déplacement d'un point A à un point B, en parcourant le plus cours chemin
             On utilisera l'algorithme \emph{Dijkstra} pour satisfaire la condition.
+        \item Appliquer un bonus de mouvement dépendant du terrain d'un hexagone. C'est plus facile de se déplacer sur une plaine plutôt que a travers des montagnes.
+        \item Permettre aux unités qui doivent se replier de bouger de 1-3 hexagones. Ce mouvement ne coûte pas de points de mouvement.
+        \item Ajouter la mécanique du overrun. Les unités capables de le faire peuvent pendant leur phase de mouvement attaquer des unités. Les défenseurs alors peuvent utiliser leurs phase de réaction pour bouger un certain nombre de hexagones. La distance est définie par l'unité concernée.
     \end{itemize}   
     \item \textbf{Priorité 1/3}
     \begin{itemize}
@@ -167,6 +170,15 @@ oasis par exemple
         \item Pouvoir déterminer la puissance de combat de l'armée composée de ces unités.
         \item Définir les règles du combat, par exemple le fait que seul les unités/armées adjacentes peuvent entrer en combat,par la volonté de l'attaquant.
         \item Pouvoir simuler le combat et donner les résultats.
+        \begin{itemize}
+            \item Déterminer les dégâts causés par une unité en divisant les points d'attaque par les points de défense de l'ennemie pour obtenir un ratio.
+            \item Séparer les défenseurs en groupe de morale. Les unités avec le même morale se retrouvent dans le même groupe. Les résultats seront fait dans l'ordre descendant de morale. Par exemple si on a deux groupes de morale (de 1 et 2), alors les résultats du combat seront d'abord appliqués dans le groupe avec un morale de 2, puis a celui de morale 1.
+            \item Appliquer des éventuelles règles spéciales.
+            \item Si un hexagone contient que des unités de support, alors lancer un dé si l'attaquant le souhaite, pour tenter de capturer les unités. Un résultat de 1-3 est un succès et un résultat de 4-6 veut dire que les unités de support sont détruites.
+            \item Amasser les dégâts et puis causer des dégâts aux unités adverses. Les dégâts sont divises jusqu'à que le maximum d'unités ait reçu un point de dégât, puis infliger les deuxièmes points de dégâts sur les unités, si il reste des points de dégâts à distribuer.
+            \item Enlever du plateau les unités détruites, et les ajouter dans la liste d'unités détruites du joueur concernée.
+            \item Lancer un dé pour faire le test de morale des unités qui restent. Si le test échoue, alors l'unité est \"disrupted\".
+        \end{itemize}
         \item Pouvoir simuler la retraite d'une armée si les spécifications le permettent, par exemple le terrain et la condition de l'armée est convenable, et si l'utilisateur le souhaite.
     \end{itemize}
     \item \textbf{Priorité 1/3}
@@ -200,7 +212,7 @@ oasis par exemple
 
 \subsubsection{Affichage}
 \begin{itemize}
-    \item Affiche un message d'erreur ou de refus.
+    \item Affiche un message d'erreur ou de refus quand une requête ou commande invalide est entrée.
 \end{itemize}
 
 \subsubsection{Système}
@@ -230,7 +242,8 @@ Le serveur avertira l'utilisateur lors d'une mauvaise utilisation de l'interface
 
 \section{Tests et exemple}
 \begin{itemize}
-    \item Test unitaire TypeScript.
+    \item Il ne faut pas qu'un utilisateur puisse lancer une nouvelle partie sans finir la partie courante. Il faut tester a chaque nouvelle partie si l'utilisateur participe pas dans une partie déjà existante. Si c'est le cas, alors refuser la partie.
+    \item Tester si une partie est finie, si toutes les conditions sont atteintes. Dans notre cas on va simplifier le scénario et considérer que la partie est finie quand la base principale est prise. La perte de celle-ci doit finir la partie et afficher le joueur gagnant.
     \item Mocha, un framework qui permet de réaliser des tests de fonctionnement de nos fonctions.Nous créons un fichier dans le chemin :\href{https://gitlab.emi.u-bordeaux.fr/vsamson/desert-fox/-/blob/main/src/backend/src/test/index.test.ts}{index.test.ts}, il permet de vérifier le(s) erreur(s) dans les fonction qu'on a pushé et on pourra vérifier dans les \href{https://gitlab.emi.u-bordeaux.fr/vsamson/desert-fox/-/pipelines}{pipelines}.
     %item test système :
     
