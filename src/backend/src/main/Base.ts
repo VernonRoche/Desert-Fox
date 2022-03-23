@@ -1,3 +1,5 @@
+import Embarkable from "./Embarkable";
+
 export default class Base {
   private _sent: boolean;
   private _received: boolean;
