@@ -1,2 +1,6 @@
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export default interface Entity {}
+import HexID from "./HexID";
+
+export default interface Entity {
+    place(hexId: HexID): void;
+    remove(): void;
+}
