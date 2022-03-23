@@ -1,12 +1,16 @@
+import Entity from "./Entity";
 import HexID from "./HexID";
+import Moveable from "./Moveable";
 
-interface Unit {
-  nightMove(hexId: HexID): void;
-  move(hexId: HexID): void;
-  attack(hexId: HexID): void;
-  possibleMoves(): HexID[];
+interface Unit extends Moveable {
   refit(): void;
   train(): void;
+  reactionMove(hexId: HexID): void;
+  moraleCheck(): boolean;
+  overrun(hexId: HexID): void;
+  hasGeneralSupply(): boolean;
+  attack(hexId: HexID, combatSupply: boolean): void;
+  // TODO: ajouter un getId dans l'uml ?
   getId(): number;
 }
 
