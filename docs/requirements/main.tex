@@ -21,7 +21,7 @@
 
 \section{Description du projet}
 
-Le but de ce projet est de réaliser le moteur du jeu de guerre \emph{Desert Fox}. Le moteur contiendra une architecture qui puisse se déployer à travers Internet ou en local. L'interface graphique et les scénarios sera mis de côté afin de réaliser au mieux le moteur.\\
+Le but de ce projet est de réaliser le moteur du jeu de guerre \emph{Desert Fox}. Le moteur contiendra une architecture qui puisse se déployer à travers Internet ou en local. L'interface graphique et les scénarios seront mis de côté afin de réaliser au mieux le moteur.\\
 
 Deux joueurs vont devoir s'affronter sur une carte hexagonale. Le but du joueur de l'Axe est de sécuriser la Libye et l'Egypte en s'emparant d'Alexandrie, tandis que, le joueur Allié (Commonwealth et autres) protège Alexandrie et contenir les forces du joueur opposé.\\
 
@@ -43,79 +43,99 @@ La partie est hébergé sur un serveur afin de centraliser les données de la pa
 
 Divers projets open-source proposent des moteurs de jeu \emph{wargame}. Cependant la plupart de ces projets ne sont pas maintenu depuis plusieurs années ou elles ne sont pas adapté pour nos besoins. Comme la diversité des règles et d'extensions de \emph{Desert Fox}, qui ne peuvent pas être adapter aux moteurs de jeu existants.
 
-\begin{itemize}
-    \item Jeu Kriegsspiel : jeu de pions complexe développé par l'armée du royaume de Prusse au XIXe siècle pour enseigner les tactiques de combat aux officiers, adapte aussi dans des versions plus modernes \cite{livermore1879american}\\
-    \includegraphics[scale=0.5]{kriegspiel.jpeg}
-    
-    
-\end{itemize}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{kriegspiel.jpeg}
+\caption{Jeu \textit{Kriegsspiel} : jeu de pions complexe développé par l'armée du royaume de Prusse au XIXe siècle pour enseigner les tactiques de combat aux officiers, adapte aussi dans des versions plus modernes \cite{livermore1879american}}
+\end{figure}
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.3]{ss_e593c9966bc58b7326287db455776b2291718f76.1920x1080.jpg}
+\caption{\textit{Sudden Strike 2 Gold} : Le jeu propose cinq campagnes, une par faction, composé chacune d’une dizaine de missions : l'URSS, le Japon, l'Allemagne, États-Unis et Royaumes-Unis.}
+\end{figure}
 
 \section{Descriptions des besoins}
 \subsection{Besoins Fonctionnels}
 \subsubsection{Plateau de Jeu}
 
 \begin{itemize}
-    \item Définir la carte du jeu:
+    \item \textbf{Priorité 3/3}
     \begin{itemize}
-        \item Priorité 3/3, Les hexagones numérotés, chacun représentant une distance définie, par défaut : 16 kilomètres.
-        \item Priorité 2/3, Différencier plusieurs types de terrain, les montages, les mers de sable et les crêtes par exemple.
-        \item Priorité 1/3, Ajouter les différents types d'indicateurs afin d'illustrer les villages, les villes et les oasis par exemple.
+        \item Les hexagones numérotés, chacun représentant une distance définie, par défaut : 16 kilomètres
+        \item Définir les joueurs et leurs spécificités. Par exemple les nationalités possibles, le joueur
+qui joue le premier et celui qui a l’initiative.
+        \item Pouvoir poser des unités sur la carte et a retenir celles qui ne sont pas présentes dans
+celles-ci
+        \item Pouvoir poser plusieurs unités sur un hexagone.
+        \item Être capable de faire des lancés de dés et d’appliquer des modificateurs. La majeure partie
+du jeu se base sur les dés.
+        \item Définir une séquence de tour :
+        \begin{itemize}
+            \item Pouvoir alterner entre les joueurs
+            \item Respecter l’ordre strict d’un tour
+        \end{itemize}
+        \item Pouvoir déterminer quel joueur a l’initiative.
     \end{itemize}
-    \item Priorité 3/3, Définir les joueurs et leurs spécificités. Par exemple les nationalités possibles, le joueur qui joue le premier et celui qui a l'initiative.
-    \item Priorité 3/3, Pouvoir poser des unités sur la carte et a retenir celles qui ne sont pas présentes dans celles-ci.
-    \item Priorité 3/3, Pouvoir poser plusieurs unités sur un hexagone.
-    \item Priorité 2/3, Pouvoir charger la carte du jeu à partir d'un fichier txt ou json et pouvoir la sauvegarder aux mêmes formats également.
-    \item Priorité 3/3, Être capable de faire des lancés de dés et d'appliquer des modificateurs. La majeure partie du jeu se base sur les dés.
-    \item Priorité 3/3, Définir une séquence de tour:
+    \item \textbf{Priorité 2/3}
     \begin{itemize}
-        \item Pouvoir alterner entre les joueurs.
-        \item Respecter l'ordre strict d'un tour.
+        \item Différencier plusieurs types de terrain, les montages, les mers de sable et les crêtes
+par exemple.
+        \item Créer une base pour les cartes d’évènements. Celles-ci étant très différentes, l’implémen-
+tation sera limitée aux évènements génériques (non-spécifiques aux scénarios).
+        \item Pouvoir charger la carte du jeu à partir d’un fichier txt ou json et pouvoir la sauvegarder
+aux mêmes formats également.
     \end{itemize}
-    \item Priorité 2/3, Créer une base pour les cartes d'évènements. Celles-ci étant très différentes, l'implémentation sera limitée aux évènements génériques (non-spécifiques aux scénarios).
-    \item Priorité 3/3, Pouvoir déterminer quel joueur a l'initiative.
-    
+    \item \textbf{Priorité 1/3}
+    \begin{itemize}
+        \item Ajouter les différents types d’indicateurs afin d’illustrer les villages, les villes et les
+oasis par exemple
+    \end{itemize}
 \end{itemize}
-
 
 \subsubsection{API}
 \begin{itemize}
-    \item Priorité 3/3, Pouvoir échanger des informations basiques entre serveur et client.
-    \item Priorité 3/3, Pouvoir convertir un état de la carte du jeu en format utilisable par le client pour pouvoir ensuite afficher le plateau.
-    \item Priorité 3/3, Envoyer un coup joue dans un format utile pour le serveur, pour pouvoir faire des éventuelles modifications sur le plateau.
-    \item Priorité 3/3, Vérification des coups:
+    \item \textbf{Priorité 3/3}
     \begin{itemize}
-        \item Envoyer le coup joue au serveur.
-        \item Vérifier que le coup est valide.
-        \item Retourner une réponse positive ou négative. Si le coup est bon alors envoyer le nouvel état de le carte du jeu au client.
+        \item Pouvoir échanger des informations basiques entre serveur et client.
+        \item Pouvoir convertir un état de la carte du jeu en format utilisable par le client pour pouvoir ensuite afficher le plateau.
+        \item Envoyer un coup joue dans un format utile pour le serveur, pour pouvoir faire des éventuelles modifications sur le plateau.
+        \item Vérification des coups :
+        \begin{itemize}
+            \item Envoyer le coup joue au serveur.
+            \item Vérifier que le coup est valide.
+            \item Retourner une réponse positive ou négative. Si le coup est bon alors envoyer le nouvel état de le carte du jeu au client.
+        \end{itemize}
     \end{itemize}
-    
 \end{itemize}
-
-
 
 \subsubsection{Unités}
-\begin{itemize}
-    \item Priorité 3/3, Définir l'unité comme entité abstraite, qui aura un morale, peut être perturbée (disrupted) et qui peut prendre des actions basiques comme attaquer et bouger.
-    \item Priorité 3/3, Implémenter le système similaire à des points de vie (voir partie Depletion des règles).
-    \item Priorité 2/3, Permettre aux unités éligibles de s'entraîner et de faire des upgrade.
-    \item Priorité 3/3, Séparer les unités en catégories différentes: motorisées, à pied, mécanisées, cavalerie etc.
-    \item Priorité 3/3, Mettre en place les situations ou l'unité devient perturbée:
-    \begin{itemize}
-        \item Trop de troupes sur un hexagone.
-        \item Fin d'un mouvement de nuit.
-        \item Après la phase de \"Supply Attrition\", il y a un échec sur le test d'usure (attrition).
-    \end{itemize}
-    \item Priorité 3/3, Créer un système de zones de contrôle (ZDC):
-    \begin{itemize}
-        \item Pouvoir calculer si une unité peut exercer une ZDC.
-        \item Choisir quels hexagone sont dans cette ZDC.
-        \item Appliquer des effets potentiels sur des unités présentes dans la ZDC.
-        \item Permettre à certaines unités doivent ignorer les ZDC dans certaines phases d'un tour.
-    \end{itemize}
-    
-\end{itemize}
 
+\begin{itemize}
+    \item \textbf{Priorité 3/3}
+    \begin{itemize}
+        \item Définir l'unité comme entité abstraite, qui aura un morale, peut être perturbée (disrupted) et qui peut prendre des actions basiques comme attaquer et bouger.
+        \item Implémenter le système similaire à des points de vie (voir partie Depletion des règles).
+        \item Séparer les unités en catégories différentes: motorisées, à pied, mécanisées, cavalerie etc.
+        \item Mettre en place les situations ou l'unité devient perturbée :
+        \begin{itemize}
+            \item Trop de troupes sur un hexagone.
+            \item Fin d'un mouvement de nuit.
+            \item Après la phase de \"Supply Attrition\", il y a un échec sur le test d'usure (attrition).
+        \end{itemize}
+        \item Créer un système de zones de contrôle (ZDC):
+        \begin{itemize}
+            \item Pouvoir calculer si une unité peut exercer une ZDC.
+            \item Choisir quels hexagone sont dans cette ZDC.
+            \item Appliquer des effets potentiels sur des unités présentes dans la ZDC.
+            \item Permettre à certaines unités doivent ignorer les ZDC dans certaines phases d'un tour
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Priorité 2/3}
+    \begin{itemize}
+        \item Permettre aux unités éligibles de s'entraîner et de faire des upgrade.
+    \end{itemize}
+\end{itemize}
 
 \subsubsection{Organisation de l'armée}
 
@@ -123,40 +143,58 @@ Divers projets open-source proposent des moteurs de jeu \emph{wargame}. Cependan
 
 \subsubsection{Mouvement}
 \begin{itemize}
-    \item Priorité 3/3, Le joueur du Commonwealth peut accélérer le mouvement de ses unités en utilisant le rail et transport maritime.
-    L'utilisateur 
-    \item Priorité 3/3, Mouvement la nuit.
+    \item \textbf{Priorité 3/3}
+    \begin{itemize}
+        \item Le joueur du Commonwealth peut accélérer le mouvement de ses unités en utilisant le rail et transport maritime.
+        \item Déplacement case par case.
+    \end{itemize}
+    \item \textbf{Priorité 2/3}
+    \begin{itemize}
+        \item Déplacement d'un point A à un point B, en parcourant le plus cours chemin
+            On utilisera l'algorithme \emph{Dijkstra} pour satisfaire la condition.
+    \end{itemize}   
+    \item \textbf{Priorité 1/3}
+    \begin{itemize}
+        \item Mouvement la nuit.
+    \end{itemize}
 \end{itemize}
-
 
 \subsubsection{Combat}
 \begin{itemize}
-    \item Priorité 3/3 Pouvoir définir les unités participant au combat de ce round.
-    \item Priorité 3/3 Pouvoir déterminer la puissance de combat de l'armée composée de ces unités.
-    \item Priorité 3/3 Définir les règles du combat, par exemple le fait que seul les unités/armées adjacentes peuvent entrer en combat,par la volonté de l'attaquant.
-    \item Priorité 1/3 Si un Hex contient plusieurs terrains, le défendant doit pouvoir en choisir un pour sa défense.
-    \item Priorité 3/3 Pouvoir simuler le combat et donner les résultats.
-    \item Priorité 3/3 Pouvoir simuler la retraite d'une armée si les spécifications le permettent, par exemple le terrain et la condition de l'armée est convenable, et si l'utilisateur le souhaite.
+    \item \textbf{Priorité 3/3}
+    \begin{itemize}
+        \item Pouvoir définir les unités participant au combat de ce round.
+        \item Pouvoir déterminer la puissance de combat de l'armée composée de ces unités.
+        \item Définir les règles du combat, par exemple le fait que seul les unités/armées adjacentes peuvent entrer en combat,par la volonté de l'attaquant.
+        \item Pouvoir simuler le combat et donner les résultats.
+        \item Pouvoir simuler la retraite d'une armée si les spécifications le permettent, par exemple le terrain et la condition de l'armée est convenable, et si l'utilisateur le souhaite.
+    \end{itemize}
+    \item \textbf{Priorité 1/3}
+    \begin{itemize}
+        \item Si un Hex contient plusieurs terrains, le défendant doit pouvoir en choisir un pour sa défense.
+    \end{itemize}
 \end{itemize}
 
-
 \subsubsection{Opérations Aériennes et Navales}
+\begin{itemize}
+    \item \textbf{Priorité 3/3}
     \begin{itemize}
-        \item Priorité 3/3 Pouvoir déterminer les différentes unités aériennes et navales ainsi que leurs spécificités.
-        \item Priorité 3/3 Pouvoir déterminer les différentes cibles, comme par exemple des bases militaires ou les rivages(pour les opérations navales surtout), qu'ils peuvent cibler et attaquer.
-        \item Priorité 3/3 En ce qui concerne les opérations navales, ils peuvent effectuer des expéditions transportant des munitions ainsi que des unités/machines de guerre.
+        \item Pouvoir déterminer les différentes unités aériennes et navales ainsi que leurs spécificités.
+        \item Pouvoir déterminer les différentes cibles, comme par exemple des bases militaires ou les rivages(pour les opérations navales surtout), qu'ils peuvent cibler et attaquer.
+        \item En ce qui concerne les opérations navales, ils peuvent effectuer des expéditions transportant des munitions ainsi que des unités/machines de guerre.
     \end{itemize}
-
-
+\end{itemize}
 
 \subsubsection{Affichage}
 \begin{itemize}
-    \item Priorité 3/3, Afficher le joueur dont c'est le tour.
-    \item Priorité 3/3, Déterminer et afficher les informations de fin de partie et du vainqueur.
-    \item Priorité 3/3, Afficher les différents marqueurs sur l'état de chaque composante du jeu, par exemple hors d'approvisionnement pour les unités.
-    \item Afficher le résultat et les informations a la fin du combat.
+    \item \textbf{Priorité 3/3}
+    \begin{itemize}
+        \item Afficher le joueur dont c'est le tour.
+        \item Déterminer et afficher les informations de fin de partie et du vainqueur.
+        \item Afficher les différents marqueurs sur l'état de chaque composante du jeu, par exemple hors d'approvisionnement pour les unités.
+        \item Afficher le résultat et les informations a la fin du combat.
+    \end{itemize}
 \end{itemize}
-
 
 \subsection{Besoins Non-Fonctionnels}
 
@@ -172,12 +210,42 @@ Divers projets open-source proposent des moteurs de jeu \emph{wargame}. Cependan
 
 \section{Justification/ Scénario}
 
+Les joueurs devront se connecter sur un serveur afin d'accéder à la partie. Le serveur hébergera la partie en traitant les mécanismes de la partie en arrière plan. Les utilisateurs recevront une interface graphique en provenance du serveur et communiquera avec cette interface pour jouer dans la partie.
+Le serveur avertira l'utilisateur lors d'une mauvaise utilisation de l'interface et des requêtes parasites pour le serveur.
 
+\section{Architecture}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.3]{uml_abstract_unit.png}
+\caption{Diagramme UML des unités}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.3]{uml_entityV2.png}
+\caption{Diagramme UML de l'objet \emph{Entity}}
+\end{figure}
 
 \section{Tests et exemple}
-
+\begin{itemize}
+    \item Test unitaire TypeScript.
+    \item Mocha, un framework qui permet de réaliser des tests de fonctionnement de nos fonctions.Nous créons un fichier dans le chemin :\href{https://gitlab.emi.u-bordeaux.fr/vsamson/desert-fox/-/blob/main/src/backend/src/test/index.test.ts}{index.test.ts}, il permet de vérifier le(s) erreur(s) dans les fonction qu'on a pushé et on pourra vérifier dans les \href{https://gitlab.emi.u-bordeaux.fr/vsamson/desert-fox/-/pipelines}{pipelines}.
+    %item test système :
+    
+    %\item tests  serveur
+    %\item tests des besoins :
+    %\begin{itemize}
+    %    \item test des besoins fonctionnel :
+    %    \item test des besoins non-fonctionnel :
+    %\end{itemize}
+    
+\end{itemize}
 
 \section{Bibliographie}
+
+
 \bibliography{bibiography}
 
 \end{document}
