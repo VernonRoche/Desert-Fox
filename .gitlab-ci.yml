@@ -25,4 +25,4 @@ stages: # List of stages for jobs, and their order of execution
 unit-test-job: # This job runs in the test stage.
   stage: test # It only starts when the job in the build stage completes successfully.
   script:
-    - (cd src/backend && npm run compile && npm test)
+    - (cd src/backend && npm ci && npm run compile && npm test)
