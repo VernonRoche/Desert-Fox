@@ -1,7 +1,7 @@
 import AbstractUnit from "./AbstractUnit";
 import HexID from "./HexID";
 
-export default class UnitProxy extends AbstractUnit {
+export default class Motorized extends AbstractUnit {
   refit(): void {
     throw new Error("Method not implemented.");
   }
@@ -24,24 +24,6 @@ export default class UnitProxy extends AbstractUnit {
     throw new Error("Method not implemented.");
   }
   getId(): number {
-    throw new Error("Method not implemented.");
-  }
-  public place(hexId: HexID): void {
-    throw new Error("Method not implemented.");
-  }
-  public remove(): void {
-    throw new Error("Method not implemented.");
-  }
-  public possibleMoves(): HexID[] {
-    throw new Error("Method not implemented.");
-  }
-  public move(hexId: HexID): void {
-    throw new Error("Method not implemented.");
-  }
-  public nightMove(hexId: HexID): void {
-    throw new Error("Method not implemented.");
-  }
-  public resetMovementPoints(): void {
     throw new Error("Method not implemented.");
   }
 }
