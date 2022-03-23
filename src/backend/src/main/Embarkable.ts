@@ -1,4 +1,4 @@
-export default interface Embarkable{
-    embark(): void;
-    disembark(): void;
+export default interface Embarkable {
+  embark(): void;
+  disembark(): void;
 }

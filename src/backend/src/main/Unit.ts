@@ -4,7 +4,7 @@ import Moveable from "./Moveable";
 
 abstract class Unit extends Moveable {
   constructor(currentPosition: HexID, movementPoints: number, remainingMovementPoints: number) {
-    super(currentPosition,movementPoints,remainingMovementPoints);
+    super(currentPosition, movementPoints, remainingMovementPoints);
   }
 
   abstract refit(): void;

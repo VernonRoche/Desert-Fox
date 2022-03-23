@@ -1,12 +1,7 @@
 import HexID from "./HexID";
-import Moveable from "./Moveable";
 import Unit from "./Unit";
 
-export default abstract class AbstractUnit extends Unit {
-  constructor(currentPosition: HexID, movementPoints: number, remainingMovementPoints: number) {
-    super(currentPosition, movementPoints, remainingMovementPoints);
-  }
-
+export default class UnitProxy implements Unit {
   refit(): void {
     throw new Error("Method not implemented.");
   }
