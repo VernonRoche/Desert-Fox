@@ -8,6 +8,7 @@
     "compile": "npm run clean && tsc",
     "start": "npm run compile && node js/main",
     "test": "npm run compile && mocha js/test --recursive --exit",
+    "dev": "nodemon --config nodemon.json src/main/index.ts",
     "format": "prettier --config .prettierrc 'src/**/*.ts' --write"
   },
   "devDependencies": {
@@ -20,8 +21,10 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "mocha": "^9.2.1",
+    "nodemon": "^2.0.15",
     "prettier": "^2.5.1",
     "rimraf": "^3.0.2",
+    "ts-node": "^10.7.0",
     "typescript": "^4.5.5"
   },
   "dependencies": {
