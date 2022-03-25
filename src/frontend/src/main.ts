@@ -3,5 +3,12 @@ import App from "./App.vue";
 import router from "./router";
 import "./css/tailwind.css";
 
+const app = createApp(App);
 
-createApp(App).use(router).mount("#app");
+app.directive("scroll-to", {
+    mounted: (el) => {
+      el.scrollIntoView({ behavior: "smooth" });
+    },
+  });
+
+app.use(router).mount("#app");
