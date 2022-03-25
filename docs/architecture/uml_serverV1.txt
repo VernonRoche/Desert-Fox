@@ -1,0 +1,50 @@
+/////////////// V1 ///////////////
+@startuml
+skinparam classAttributeIconSize 0
+class Server
+{
+- Player p1
+- Player p2
+- Game g
++ createGame() : Game
++ destroyGame() : void
+}
+note left: Gérer la route "start Game"
+
+class Game{
+- Player p1
+- Player p2
+- Map map
+- Turn turn
+- loadMap() : void
+}
+note bottom: Gérer les routes game/<request>
+
+class Player{
+- Socket socket
+- Map map
+- Unit[] units
+- Base[] bases
+- ...
+}
+
+class Map{
+- Entity[] entities
+- ConnnexionsHexagones[]
+- HexID[] hexIds
++ place(Entity entity, HexID hexID) : void
+}
+
+class Turn{
++ currentPlayerID() : PlayerID
++ Phase getPhase() : Phase
+}
+note left of Turn::getPhase
+ Il faut définir Phase
+end note
+
+enum PlayerID{
+- ONE
+- TWO
+}
+@enduml
