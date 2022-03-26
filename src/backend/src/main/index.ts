@@ -4,27 +4,25 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 
 function launchWebSocketServer(
-  listener: any, 
-  portOriginCors: number, 
-  portSocket: number
+  listener: express.Express,
+  portOriginCors: number,
+  portSocket: number,
 ) {
-
   const httpServer = createServer(listener);
   const io = new Server(httpServer, {
     cors: {
-      origin: "http://localhost:" + portOriginCors
-    }
+      origin: "http://localhost:" + portOriginCors,
+    },
   });
 
   io.on("connection", (socket) => {
     console.log("User connected !");
 
     // Ping pong message implementation
-    socket.on('ping message', (msg) => {
+    socket.on("ping message", (msg) => {
       socket.emit("pong message", "pong");
-    });  
+    });
   });
-  
   httpServer.listen(portSocket);
 }
 
