@@ -38,7 +38,6 @@ describe("Check files in src folder", function () {
           if (hasAClass && file.charAt(0).toLowerCase() === file.charAt(0)) {
             notCapitalizedFiles.push(filePath);
           }
-          console.log("filePath:", filePath, "is valid");
         }
       });
     }
