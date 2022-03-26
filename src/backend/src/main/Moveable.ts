@@ -1,5 +1,5 @@
 import Entity from "./Entity";
-import HexID from "./HexID";
+import HexID from "./Map/HexID";
 
 export default abstract class Moveable implements Entity {
   private _currentPosition: HexID;

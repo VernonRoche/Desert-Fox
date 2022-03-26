@@ -1,18 +1,25 @@
 import HexID from "./HexID";
-import AbstractUnit from "./Units/AbstractUnit";
+import AbstractUnit from "../Units/AbstractUnit";
+import HexNeighbour from "./HexNeighbour";
+import Terrain from "./Terrain";
 
-class Hex {
+export default class Hex {
   private _hexId: HexID;
   private _units: AbstractUnit[];
-  constructor(hexId: HexID) {
+  private _connexions: HexNeighbour[];
+  private _terrain: Terrain;
+
+  constructor(hexId: HexID, terrain: Terrain) {
     this._hexId = hexId;
     this._units = [];
+    this._connexions = [];
+    this._terrain = terrain;
   }
-  public get hexId(): HexID {
+  public hexId(): HexID {
     return this._hexId;
   }
 
-  public get units(): AbstractUnit[] {
+  public units(): AbstractUnit[] {
     return this._units;
   }
 

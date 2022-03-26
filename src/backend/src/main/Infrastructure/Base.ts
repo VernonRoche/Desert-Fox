@@ -1,4 +1,4 @@
-import Embarkable from "./Embarkable";
+import Embarkable from "../Embarkable";
 
 export default class Base {
   private _sent: boolean;

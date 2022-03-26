@@ -1,7 +1,7 @@
 import AbstractUnit from "./AbstractUnit";
 import HexID from "../Map/HexID";
 
-export default class Artillery extends AbstractUnit {
+export default class HeavyFoot extends AbstractUnit {
   refit(): void {
     throw new Error("Method not implemented.");
   }

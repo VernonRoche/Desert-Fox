@@ -1,4 +1,4 @@
-import HexID from "../HexID";
+import HexID from "../Map/HexID";
 import Moveable from "../Moveable";
 
 export default abstract class AbstractUnit extends Moveable {

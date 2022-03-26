@@ -1,5 +1,5 @@
 import AbstractUnit from "./Units/AbstractUnit";
-import HexID from "./HexID";
+import HexID from "./Map/HexID";
 
 export default class UnitProxy extends AbstractUnit {
   refit(): void {
