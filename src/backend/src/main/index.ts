@@ -1,5 +1,32 @@
 import express from "express";
 import yargs from "yargs";
+import { createServer } from "http";
+import { Server } from "socket.io";
+
+function launchWebSocketServer(
+  listener: any, 
+  portOriginCors: number, 
+  portSocket: number
+) {
+
+  const httpServer = createServer(listener);
+  const io = new Server(httpServer, {
+    cors: {
+      origin: "http://localhost:" + portOriginCors
+    }
+  });
+
+  io.on("connection", (socket) => {
+    console.log("User connected !");
+
+    // Ping pong message implementation
+    socket.on('ping message', (msg) => {
+      socket.emit("pong message", "pong");
+    });  
+  });
+  
+  httpServer.listen(portSocket);
+}
 
 async function main() {
   const yargsOptions = yargs
@@ -40,6 +67,8 @@ async function main() {
     console.log("Program received SIGSEGV (CTRL+C), stopping server...");
     process.exit(1);
   });
+
+  launchWebSocketServer(app, 3001, 3002);
 }
 
 main();
