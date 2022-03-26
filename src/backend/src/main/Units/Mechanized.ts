@@ -1,5 +1,5 @@
 import AbstractUnit from "./AbstractUnit";
-import HexID from "../HexID";
+import HexID from "../Map/HexID";
 
 export default class Mechanized extends AbstractUnit {
   refit(): void {

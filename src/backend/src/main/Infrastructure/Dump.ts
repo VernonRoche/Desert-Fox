@@ -1,4 +1,4 @@
-import Embarkable from "./Embarkable";
+import Embarkable from "../Embarkable";
 
 export default class Dump implements Embarkable {
   embark(): void {

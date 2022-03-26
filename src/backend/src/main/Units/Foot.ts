@@ -1,5 +1,5 @@
-import AbstractUnit from "./Units/AbstractUnit";
-import Embarkable from "./Embarkable";
+import AbstractUnit from "./AbstractUnit";
+import Embarkable from "../Embarkable";
 
 export default abstract class Foot extends AbstractUnit implements Embarkable {
   embark(): void {

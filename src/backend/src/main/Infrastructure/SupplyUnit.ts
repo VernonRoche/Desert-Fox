@@ -1,6 +1,6 @@
-import Embarkable from "./Embarkable";
-import HexID from "./HexID";
-import Moveable from "./Moveable";
+import Embarkable from "../Embarkable";
+import HexID from "../Map/HexID";
+import Moveable from "../Moveable";
 
 export default class SupplyUnit extends Moveable {
   private _item: Embarkable;

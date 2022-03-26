@@ -18,7 +18,7 @@
         "prettier"
     ],
     "rules": {
-        "semi": ["error", "always"],
+        //"semi": ["error", "always"],
         "default-case": "error",
         "prettier/prettier": 2 // Means error
     }

@@ -1,4 +1,4 @@
-import HexID from "./HexID";
+import HexID from "./Map/HexID";
 
 export default interface Entity {
   place(hexId: HexID): void;
