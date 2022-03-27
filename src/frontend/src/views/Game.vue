@@ -40,10 +40,15 @@ import { io } from "socket.io-client";
 const terminalInput = ref("");
 const lines = ref([{ data: "Bienvenue sur Desert Fox!", author: "Game" }]);
 
-const socket = io("http://localhost:3002");
+const socket = io("http://localhost:3001");
 
 socket.on('pong message', (msg) => {
     lines.value.push({ data: msg, author: "WebSocket Server" });
+});
+
+document.addEventListener('beforeunload', () => {
+    console.log("Fermeture !");
+    socket.disconnect();
 });
 
 function addLine() {
@@ -53,8 +58,12 @@ function addLine() {
     if(terminalInput.value.toLowerCase() === "ping")
         socket.emit('ping message', terminalInput.value);
 
+    if(terminalInput.value.toLowerCase() === "exit")
+        socket.disconnect();
+
     terminalInput.value = "";
 }
+
 </script>
 
 <style scoped>
