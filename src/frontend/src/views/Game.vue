@@ -35,34 +35,33 @@
 
 <script lang="ts" setup>
 import { ref } from '@vue/runtime-dom';
-import { io } from "socket.io-client";
+import ClientSocket from '../utils/ClientSocket';
 
 const terminalInput = ref("");
 const lines = ref([{ data: "Bienvenue sur Desert Fox!", author: "Game" }]);
 
-const socket = io("http://localhost:3001");
-
-socket.on('pong message', (msg) => {
-    lines.value.push({ data: msg, author: "WebSocket Server" });
-});
-
-document.addEventListener('beforeunload', () => {
-    console.log("Fermeture !");
-    socket.disconnect();
-});
+const socket = new ClientSocket("localhost", 3001);
 
 function addLine() {
     if (!terminalInput.value) return;
     lines.value.push({ data: terminalInput.value, author: "Vous" });
 
     if(terminalInput.value.toLowerCase() === "ping")
-        socket.emit('ping message', terminalInput.value);
+        socket.send('ping message', terminalInput.value);
 
     if(terminalInput.value.toLowerCase() === "exit")
         socket.disconnect();
 
     terminalInput.value = "";
 }
+
+socket.eventListener('pong message', (msg) => {
+    lines.value.push({ data: msg, author: "WebSocket Server" });
+});
+
+document.addEventListener('beforeunload', () => {
+    socket.disconnect();
+});
 
 </script>
 
