@@ -1,6 +1,5 @@
-import express from "express";
 import yargs from "yargs";
-import SocketServer from "./SocketServer";
+import webSocketServer from "./SocketServer";
 
 async function main() {
   const yargsOptions = yargs
@@ -25,25 +24,15 @@ async function main() {
     return;
   }
 
-  console.log("port is", args.port);
+  webSocketServer.run();
 
-  const app = express();
-
-  app.listen(args.port, () => {
-    console.log(`Server started at http://localhost:${args.port}`);
-  });
-
-  app.get("/", (req, res) => {
-    res.json("Welcome to desert fox backend");
-  });
+  console.log("Client port needs to be:", webSocketServer.clientPort);
+  console.log("Server port is:", webSocketServer.serverPort);
 
   process.on("SIGINT", () => {
     console.log("Program received SIGSEGV (CTRL+C), stopping server...");
     process.exit(1);
   });
-
-  const webSocketServer = new SocketServer(app, 8000, 3001);
-  webSocketServer.run();
 }
 
 main();

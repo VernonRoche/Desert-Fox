@@ -1,27 +1,43 @@
 import http from "http";
 import { Server, Socket } from "socket.io";
-import { Express } from "express";
+import express, { Express } from "express";
 
-export default class SocketServer {
+export class SocketServer {
   private _httpServer: http.Server;
   private _socketServer: Server;
+  private _sockets: Socket[] = [];
+  private _clientPort: number;
+  private _serverPort: number;
 
-  constructor(listener: Express, portOrigin: number, portWS: number) {
+  constructor(listener: Express, clientPort: number, serverPort: number) {
+    this._clientPort = clientPort;
+    this._serverPort = serverPort;
     this._httpServer = http.createServer(listener);
     this._socketServer = new Server(this._httpServer, {
       cors: {
-        origin: "http://localhost:" + portOrigin,
+        origin: "http://localhost:" + clientPort,
       },
     });
 
-    this._httpServer.listen(portWS);
+    this._httpServer.listen(serverPort);
+  }
+
+  public get sockets(): Socket[] {
+    return this._sockets;
+  }
+
+  public get clientPort(): number {
+    return this._clientPort;
+  }
+
+  public get serverPort(): number {
+    return this._serverPort;
   }
 
   public run(): void {
     this.eventConnection((socket) => {
-      console.log(`User [${socket.id}] connected !`);
-      this.routeDisconnect(socket);
-      this.routePingPong(socket);
+      this._sockets.push(socket);
+      this.applyRoutes(socket);
     });
   }
 
@@ -37,15 +53,16 @@ export default class SocketServer {
   //////////// Routes
   /////////////////////////////////////////////////////////////
 
-  private routePingPong(socketClient: any): void {
+  private applyRoutes(socketClient: Socket) {
     socketClient.on("ping message", () => {
       socketClient.emit("pong message", "pong");
     });
-  }
 
-  private routeDisconnect(socketClient: any): void {
     socketClient.on("disconnect", (reason: string) => {
       console.log(`User [${socketClient.id}] disconneced !`);
     });
   }
 }
+
+const webSocketServer = new SocketServer(express(), 8000, 3001);
+export default webSocketServer;
