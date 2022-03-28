@@ -6,12 +6,13 @@ export default class SupplyUnit extends Moveable {
   private _item: Embarkable;
 
   constructor(
+    id: number,
     item: Embarkable,
     currentPosition: HexID,
     movementPoints: number,
     remainingMovementPoints: number,
   ) {
-    super(currentPosition, movementPoints, remainingMovementPoints);
+    super(id, currentPosition, movementPoints, remainingMovementPoints);
     this._item = item;
   }
 

@@ -35,9 +35,6 @@ export default class UnitProxy extends AbstractUnit {
   public possibleMoves(): HexID[] {
     throw new Error("Method not implemented.");
   }
-  public move(hexId: HexID): void {
-    throw new Error("Method not implemented.");
-  }
   public nightMove(hexId: HexID): void {
     throw new Error("Method not implemented.");
   }
