@@ -3,13 +3,15 @@ import AbstractUnit from "../Units/AbstractUnit";
 import Base from "../Infrastructure/Base";
 import SupplyUnit from "../Infrastructure/SupplyUnit";
 import RefitPoint from "../Infrastructure/RefitPoint";
+import Moveable from "../Moveable";
+import Entity from "../Entity";
 
 export default class Player {
-  private id: PlayerID;
-  private units: AbstractUnit[];
-  private bases: Base[];
-  private supplyUnits: SupplyUnit[];
-  private refitPoints: RefitPoint[];
+  private _id: PlayerID;
+  private _units: AbstractUnit[];
+  private _bases: Base[];
+  private _supplyUnits: SupplyUnit[];
+  private _refitPoints: RefitPoint[];
 
   constructor(
     id: PlayerID,
@@ -18,10 +20,15 @@ export default class Player {
     supplyUnits: SupplyUnit[],
     refitPoints: RefitPoint[],
   ) {
-    this.id = id;
-    this.units = units;
-    this.bases = bases;
-    this.supplyUnits = supplyUnits;
-    this.refitPoints = refitPoints;
+    this._id = id;
+    this._units = units;
+    this._bases = bases;
+    this._supplyUnits = supplyUnits;
+    this._refitPoints = refitPoints;
+  }
+
+  public hasUnit(entity: Entity): boolean {
+    const both: Entity[] = [...this._units, ...this._supplyUnits];
+    return Boolean(both.find((e) => entity.getID() === e.getID()));
   }
 }
