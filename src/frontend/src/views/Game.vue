@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from '@vue/runtime-dom';
+import { onUnmounted, ref } from '@vue/runtime-dom';
 import ClientSocket from '../utils/ClientSocket';
 
 const terminalInput = ref("");
@@ -42,15 +42,21 @@ const lines = ref([{ data: "Bienvenue sur Desert Fox!", author: "Game" }]);
 
 const socket = new ClientSocket("localhost", 3001);
 
+function disconnectSocket() {
+    lines.value.push({ data: "You are now disconnected", author: "WebSocket Server" });
+    socket.disconnect();
+
+}
+
 function addLine() {
     if (!terminalInput.value) return;
     lines.value.push({ data: terminalInput.value, author: "Vous" });
 
-    if(terminalInput.value.toLowerCase() === "ping")
+    if (terminalInput.value.trim().toLowerCase() === "ping")
         socket.send('ping message', terminalInput.value);
 
-    if(terminalInput.value.toLowerCase() === "exit")
-        socket.disconnect();
+    if (terminalInput.value.trim().toLowerCase() === "exit")
+        disconnectSocket();
 
     terminalInput.value = "";
 }
@@ -59,10 +65,7 @@ socket.eventListener('pong message', (msg) => {
     lines.value.push({ data: msg, author: "WebSocket Server" });
 });
 
-document.addEventListener('beforeunload', () => {
-    socket.disconnect();
-});
-
+onUnmounted(disconnectSocket);
 </script>
 
 <style scoped>
