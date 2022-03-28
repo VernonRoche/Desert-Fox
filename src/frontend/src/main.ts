@@ -6,7 +6,7 @@ import "./css/tailwind.css";
 const app = createApp(App);
 
 app.directive("scroll-to", {
-    mounted: (el) => {
+    mounted: (el: HTMLElement) => {
       el.scrollIntoView({ behavior: "smooth" });
     },
   });
