@@ -1,7 +1,7 @@
-import { io } from "socket.io-client";
+import { io, Socket } from "socket.io-client";
 
 export default class ClientSocket {
-  private _socket;
+  private _socket: Socket;
 
   constructor(domain: string, port: number) {
     this._socket = io(`http://${domain}:${port}`);
@@ -17,5 +17,9 @@ export default class ClientSocket {
 
   public disconnect(): void {
     this._socket.disconnect();
+  }
+
+  public get connected(): boolean {
+    return this._socket.connected;
   }
 }
