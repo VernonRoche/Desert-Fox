@@ -36,6 +36,7 @@ export class SocketServer {
 
   public run(): void {
     this.eventConnection((socket) => {
+      console.log(`User [${socket.id}] connected !`);
       this._sockets.push(socket);
       this.applyRoutes(socket);
     });
@@ -59,7 +60,10 @@ export class SocketServer {
     });
 
     socketClient.on("disconnect", (reason: string) => {
-      console.log(`User [${socketClient.id}] disconneced !`);
+      console.log(`User [${socketClient.id}] disconnected !`);
+      // keep all sockets that have a different id than current
+      // is pretty much just a remove
+      this._sockets = this._sockets.filter((socket) => socket.id !== socketClient.id);
     });
   }
 }
