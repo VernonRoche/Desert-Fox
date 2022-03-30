@@ -13,13 +13,13 @@
 
 <script setup lang="ts">
 const routes = [
-    {
-        path: "/",
-        name: "Accueil"
-    },
-    {
-        path: "/game",
-        name: "Jeu"
-    },
+  {
+    path: "/",
+    name: "Accueil",
+  },
+  {
+    path: "/game",
+    name: "Jeu",
+  },
 ];
 </script>

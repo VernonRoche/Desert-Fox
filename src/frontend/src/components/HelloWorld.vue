@@ -9,5 +9,5 @@ const props = defineProps<{
   i: number;
 }>();
 
-const message = 'Hello World!';
+const message = "Hello World!";
 </script>
