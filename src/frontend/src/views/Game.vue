@@ -1,6 +1,6 @@
 <template>
     <div id="game" class="flex flex-col gap-5 w-full">
-        <div id="showGame" class="flex gap-1 h-96">
+        <div id="showGame" class="flex gap-1">
             <GameScreen />
             <GameTerminal />
         </div>

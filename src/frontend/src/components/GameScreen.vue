@@ -1,5 +1,5 @@
 <template>
-    <div id="gamescreen" ref="screen" class="aspect-video border-2 border-black"></div>
+    <div id="gamescreen" ref="screen" class="border-2 border-black"></div>
 </template>
 
 <script lang="ts" setup>
