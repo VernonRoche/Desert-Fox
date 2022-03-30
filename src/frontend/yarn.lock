@@ -1383,6 +1383,11 @@ token-stream@1.0.0:
   resolved "https://registry.yarnpkg.com/token-stream/-/token-stream-1.0.0.tgz#cc200eab2613f4166d27ff9afc7ca56d49df6eb4"
   integrity sha1-zCAOqyYT9BZtJ/+a/HylbUnfbrQ=
 
+two.js@^0.8.4:
+  version "0.8.4"
+  resolved "https://registry.yarnpkg.com/two.js/-/two.js-0.8.4.tgz#e4e4e3775ee976b9d998b178b79009d6f43227c2"
+  integrity sha512-o2Qh0kM0xheKLYEkVNR1UUzYNAKkZhwUWab1+GIrOPw5qvMVjxRspAZf58lVs4U8UGY8R/qz01kKHc1WaMavEg==
+
 typescript@^4.5.4:
   version "4.6.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.6.2.tgz#fe12d2727b708f4eef40f51598b3398baa9611d4"

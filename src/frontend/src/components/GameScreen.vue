@@ -1,10 +1,20 @@
 <template>
-    <div
-        id="gamescreen"
-        class="aspect-video bg-black text-white flex justify-center items-center text-4xl font-bold rounded"
-    >Ecran du jeu</div>
+    <div id="gamescreen" ref="screen" class="aspect-video border-2 border-black"></div>
 </template>
 
 <script lang="ts" setup>
+import Two from "two.js";
+import { onMounted, ref } from "vue";
+import drawEverything from "../utils/twoMap";
+const screen = ref<null | HTMLDivElement>(null);
 
+onMounted(() => {
+    if (!screen.value) {
+        console.error("No gamescreen found");
+        return;
+    }
+    const two = new Two().appendTo(screen.value);
+    drawEverything(two);
+
+})
 </script>
