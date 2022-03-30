@@ -1,8 +1,10 @@
 <template>
   <NavBar />
   <main class="fullscreen">
-    <h1 class="text-center">Bienvenue sur le frontend de Desert Fox</h1>
-    <router-view></router-view>
+    <h1 class="text-center">
+      Bienvenue sur le frontend de Desert Fox
+    </h1>
+    <router-view />
   </main>
 </template>
 

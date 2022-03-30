@@ -1,28 +1,39 @@
 <template>
-    <div id="game-terminal" class="flex flex-col w-full bg-black rounded">
-        <div id="terminal" class="text-white overflow-y-scroll h-full">
-            <!-- Besoin de changer le v-scroll-to mais fonctionne pour l'instant -->
-            <p v-scroll-to class="pl-4" v-for="(line, index) in lines" :key="index">
-                <span class="italic border-r pr-2 mr-2">{{ toFrenchDate(line.time) }}</span>
-                <span class="font-bold">{{ line.author }}</span>
-                - {{ line.data }}
-            </p>
-        </div>
-        <form
-            @submit.prevent="submitLine"
-            class="border bg-transparent p-2 w-full pl-4 rounded text-white flex gap-1"
-        >
-            <span>></span>
-            <input
-                id="commandInput"
-                placeholder="Commande"
-                type="text"
-                v-model="terminalInput"
-                minlength="1"
-                class="bg-transparent w-full"
-            />
-        </form>
+  <div
+    id="game-terminal"
+    class="flex flex-col w-full bg-black rounded"
+  >
+    <div
+      id="terminal"
+      class="text-white overflow-y-scroll h-full"
+    >
+      <!-- Besoin de changer le v-scroll-to mais fonctionne pour l'instant -->
+      <p
+        v-for="(line, index) in lines"
+        :key="index"
+        v-scroll-to
+        class="pl-4"
+      >
+        <span class="italic border-r pr-2 mr-2">{{ toFrenchDate(line.time) }}</span>
+        <span class="font-bold">{{ line.author }}</span>
+        - {{ line.data }}
+      </p>
     </div>
+    <form
+      class="border bg-transparent p-2 w-full pl-4 rounded text-white flex gap-1"
+      @submit.prevent="submitLine"
+    >
+      <span>></span>
+      <input
+        id="commandInput"
+        v-model="terminalInput"
+        placeholder="Commande"
+        type="text"
+        minlength="1"
+        class="bg-transparent w-full"
+      >
+    </form>
+  </div>
 </template>
 
 <script lang="ts" setup>
