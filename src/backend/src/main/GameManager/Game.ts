@@ -47,6 +47,7 @@ export default class Game {
 
     if (!destinationHex.addUnit(unit)) return false;
     originHex.removeUnit(unit);
+    unit.place(destination);
     return true;
   }
 
