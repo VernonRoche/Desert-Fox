@@ -1,11 +1,7 @@
 import HexID from "./HexID";
 import AbstractUnit from "../Units/AbstractUnit";
-import HexNeighbour from "./HexNeighbour";
 import Terrain from "./Terrain";
 import SupplyUnit from "../Infrastructure/SupplyUnit";
-import PlayerID from "../GameManager/PlayerID";
-import Moveable from "../Moveable";
-import Entity from "../Entity";
 
 export default class Hex {
   private _hexId: HexID;
