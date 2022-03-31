@@ -41,7 +41,7 @@ export default abstract class Moveable implements Entity {
   // Checks if there are remaining movement points left and if yes
   // then remove one movement point and update current hex position
   public move(hexId: HexID): boolean {
-    if (this._remainingMovementPoints - 1 <= 0) {
+    if (this._remainingMovementPoints <= 0) {
       return false;
     }
     this._currentPosition = hexId;
