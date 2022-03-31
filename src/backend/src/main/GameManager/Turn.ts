@@ -59,8 +59,14 @@ export default class Turn {
 
   switchPlayer(): void {
     this._currentPlayer = (this._currentPlayer % 2) + 1;
-    if (this._currentPlayer == 2) {
+    if (this._currentPlayer == PlayerID.TWO) {
       this._currentPhase = 1;
+    }
+  }
+
+  public nextPhase(): void {
+    if (this.getCurrentPhase() == Phase.INITIAL) {
+      this._currentPhase = Phase.FIRST_PLAYER_MOVEMENT;
     }
   }
 

@@ -34,15 +34,16 @@ export default class Game {
     const originHex = this._map.findHex(unit.currentPosition());
     // Get the owner of the destination hex to see if we can move there
     const currentOwner = (hex: Hex): PlayerID => {
-      if (destinationHex.units().length > 0) {
-        return this._player1.hasUnit(destinationHex.units()[0]) ? PlayerID.ONE : PlayerID.TWO;
-      } else if (destinationHex.supplyUnits().length > 0) {
-        return this._player1.hasUnit(destinationHex.supplyUnits()[0]) ? PlayerID.ONE : PlayerID.TWO;
+      if (hex.units().length > 0) {
+        return this._player1.hasUnit(hex.units()[0]) ? PlayerID.ONE : PlayerID.TWO;
+      } else if (hex.supplyUnits().length > 0) {
+        return this._player1.hasUnit(hex.supplyUnits()[0]) ? PlayerID.ONE : PlayerID.TWO;
       }
       return PlayerID.NONE;
     };
 
-    if (playerId != currentOwner(destinationHex)) return false;
+    if (playerId != currentOwner(destinationHex) && currentOwner(destinationHex) != PlayerID.NONE)
+      return false;
 
     if (!destinationHex.addUnit(unit)) return false;
     originHex.removeUnit(unit);

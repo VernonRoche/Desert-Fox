@@ -5,6 +5,7 @@ import SupplyUnit from "../Infrastructure/SupplyUnit";
 import RefitPoint from "../Infrastructure/RefitPoint";
 import Moveable from "../Moveable";
 import Entity from "../Entity";
+import { Socket } from "socket.io";
 
 export default class Player {
   private _id: PlayerID;
@@ -12,6 +13,7 @@ export default class Player {
   private _bases: Base[];
   private _supplyUnits: SupplyUnit[];
   private _refitPoints: RefitPoint[];
+  private _socket: Socket;
 
   constructor(
     id: PlayerID,
@@ -19,17 +21,23 @@ export default class Player {
     bases: Base[],
     supplyUnits: SupplyUnit[],
     refitPoints: RefitPoint[],
+    socket: Socket,
   ) {
     this._id = id;
     this._units = units;
     this._bases = bases;
     this._supplyUnits = supplyUnits;
     this._refitPoints = refitPoints;
+    this._socket = socket;
   }
 
   public hasUnit(entity: Entity): boolean {
     const both: Entity[] = [...this._units, ...this._supplyUnits];
     return Boolean(both.find((e) => entity.getID() === e.getID()));
+  }
+
+  getUnitById(id: number): AbstractUnit | null {
+    return this._units.find((u) => u.getID() === id) ?? null;
   }
 
   getId(): PlayerID {
@@ -50,5 +58,9 @@ export default class Player {
 
   getRefitPoints(): RefitPoint[] {
     return this._refitPoints;
+  }
+
+  getSocket(): Socket {
+    return this._socket;
   }
 }

@@ -42,4 +42,23 @@ export default class GameMap {
     }
     return hex;
   }
+
+  public addUnit(unit: Entity): void {
+    this._entities.push(unit);
+  }
+
+  public toJSON(): string {
+    const json: JsonMap = [];
+    this._hexagons.forEach((hex) => {
+      json.push({
+        hexId: hex.getID(),
+        terrain: hex.getTerrain(),
+      });
+    });
+    return JSON.stringify(json);
+  }
+
+  public getUnitById(id: number): Entity | null {
+    return this._entities.find((unit) => unit.getID() === id) ?? null;
+  }
 }

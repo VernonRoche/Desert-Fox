@@ -74,4 +74,12 @@ export default class Hex {
   private isFull(): boolean {
     return this._units.length === this._HEX_CAPACITY;
   }
+
+  public getID(): string {
+    return this.hexId().id();
+  }
+
+  public getTerrain(): string {
+    return this._terrain.terrainType;
+  }
 }
