@@ -18,8 +18,8 @@ type BaseCommand = {
 type AllArgs = MoveArgs | AttackArgs;
 
 type MoveArgs = {
-  hexId: string;
-  unitId: string;
+  hexId?: string;
+  unitId?: string;
 };
 
 type AttackArgs = MoveArgs & {
@@ -42,6 +42,10 @@ export class SocketServer {
 
   private _commands: (player: Player) => Commands = (player: Player) => ({
     move: (args: MoveArgs) => {
+      if(!args.unitId || !args.hexId) {
+        player.getSocket().emit("commandMessage", { error: "invalidargs" });
+        return;
+      }
       const unitId = +args.unitId;
       if(isNaN(unitId)) {
         player.getSocket().emit("commandMessage", { error: "invalidunitid" });
@@ -59,6 +63,9 @@ export class SocketServer {
         return;
       }
       this._game?.moveUnit(player.getId(), unit, new HexID(x, y));
+    },
+    units: () => {
+      player.getSocket().emit("commandMessage", player.getUnits());
     },
   });
 
