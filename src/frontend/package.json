@@ -12,6 +12,8 @@
     "fix": "npm run lint && npm run format"
   },
   "dependencies": {
+    "@types/p5": "^1.4.2",
+    "p5": "^1.4.1",
     "two.js": "^0.8.4",
     "vue": "^3.2.25",
     "vue-router": "^4.0.14"

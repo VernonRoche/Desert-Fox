@@ -7,8 +7,8 @@ export default class ClientSocket {
     this._socket = io(`http://${domain}:${port}`);
   }
 
-  public send(eventName: string, data: string | JSON): void {
-    this._socket.emit(eventName, data);
+  public send(eventName: string, ...args: any[]): void {
+    this._socket.emit(eventName, args);
   }
 
   public eventListener(eventName: string, callback: (res: any) => void): void {

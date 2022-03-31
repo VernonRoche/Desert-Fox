@@ -20,6 +20,7 @@
         type="text"
         minlength="1"
         class="bg-transparent w-full"
+        @keyup.up="handleKeyUp"
       />
     </form>
   </div>
@@ -37,6 +38,34 @@ type Commands = Record<string, Command>;
 const commands: Commands = {
   ping: () => socket.send("ping message", terminalInput.value),
   exit: disconnectSocket,
+  message: (message: string[]) => socket.send("message", message.join(" ")),
+  move: (args: string[]) => {
+    let hasError = false;
+    if (isNaN(+args[0])) {
+      addLine(
+        "Game",
+        "Argument invalide, le premier argument doit être un numéro (identifiant d'une unité)",
+      );
+      hasError = true;
+    }
+    if (isNaN(+args[1])) {
+      addLine(
+        "Game",
+        "Argument invalide, le deuxième argument doit être un numéro (identifiant d'hexagone)",
+      );
+      hasError = true;
+    }
+    if (hasError) return;
+    socket.send("command", {
+      type: "move",
+      unitId: args[0],
+      hexId: args[1],
+    });
+  },
+  units: () =>
+    socket.send("command", {
+      type: "units",
+    }),
 };
 
 const lines = ref<{ data: string; author: string; time: Date }[]>([]);
@@ -51,6 +80,14 @@ socket.eventListener("connect", () => {
 
 socket.eventListener("pong message", (msg) => {
   addLine("Game", msg);
+});
+
+socket.eventListener("commandMessage", (resp: any) => {
+  if (resp.error) {
+    addLine("Game", resp.error);
+  } else {
+    addLine("Game", resp);
+  }
 });
 
 function disconnectSocket() {
@@ -99,6 +136,13 @@ function submitLine() {
   doCommand();
   // reset input
   terminalInput.value = "";
+}
+
+function handleKeyUp() {
+  if (terminalInput.value) return;
+  const filtered = lines.value.filter((line) => line.author === "Vous");
+  console.log(filtered);
+  terminalInput.value = filtered[filtered.length - 1].data;
 }
 
 onUnmounted(disconnectSocket);
