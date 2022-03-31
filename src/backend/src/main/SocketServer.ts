@@ -2,9 +2,7 @@ import http from "http";
 import { Server, Socket } from "socket.io";
 import express, { Express } from "express";
 import Game from "./GameManager/Game";
-import PlayerID from "./GameManager/PlayerID";
 import GameMap from "./Map/GameMap";
-import Entity from "./Entity";
 import Horse from "./Units/Horse";
 import Player from "./GameManager/Player";
 import HexID from "./Map/HexID";
@@ -38,16 +36,16 @@ export class SocketServer {
   private _serverPort: number;
   private _game?: Game;
   private _players: Player[] = [];
-  private _created: boolean = false;
+  private _created = false;
 
   private _commands: (player: Player) => Commands = (player: Player) => ({
     move: (args: MoveArgs) => {
-      if(!args.unitId || !args.hexId) {
+      if (!args.unitId || !args.hexId) {
         player.getSocket().emit("commandMessage", { error: "invalidargs" });
         return;
       }
       const unitId = +args.unitId;
-      if(isNaN(unitId)) {
+      if (isNaN(unitId)) {
         player.getSocket().emit("commandMessage", { error: "invalidunitid" });
         return;
       }
@@ -65,6 +63,7 @@ export class SocketServer {
       this._game?.moveUnit(player.getId(), unit, new HexID(x, y));
     },
     units: () => {
+      console.log("player (", player.getId(), ") has", player.getUnits().length, "units");
       player.getSocket().emit("commandMessage", player.getUnits());
     },
   });
@@ -98,26 +97,23 @@ export class SocketServer {
     //For Prototype Purposes
 
     this.eventConnection((socket) => {
-      if (this._sockets.length == 2) {
+      if (this._sockets.length === 2) {
         socket.emit("commandMessage", { error: "full" });
         return;
       }
 
       console.log(`User [${socket.id}] connected !`);
-      this._players.push(new Player(PlayerID.ONE, [], [], [], [], socket));
+      const units: AbstractUnit[] = [];
+      this._players.push(new Player(this._sockets.length, units, [], [], [], socket));
       this._sockets.push(socket);
       if (this._sockets.length >= 2 && !this._created) {
         //For Prototype Purposes
-        let horseHexId = new HexID(2, 2);
-        let horse = new Horse(id++, horseHexId, 1, 1);
-        let units = new Array();
+        const horseHexId = new HexID(2, 2);
+        const horse = new Horse(id++, horseHexId, 1, 1);
         units.push(horse);
+
         this._created = true;
-        this._game = new Game(
-          new GameMap(new Array(), "libya" as Maps),
-          this._players[0],
-          this._players[1],
-        );
+        this._game = new Game(new GameMap([], "libya" as Maps), this._players[0], this._players[1]);
         this._game.getMap().addUnit(horse);
         this.broadcast("gameCreated", this._game.getMap().toJSON());
       }
@@ -143,9 +139,9 @@ export class SocketServer {
     });
 
     const currentPlayer =
-      this._players[0].getSocket() == socketClient ? this._players[0] : this._players[1]; // get player TODO: kristo t nul;
+      this._players[0].getSocket().id === socketClient.id ? this._players[0] : this._players[1]; // get player TODO: kristo t nul;
 
-    socketClient.on("disconnect", (reason: string) => {
+    socketClient.on("disconnect", () => {
       console.log(`User [${socketClient.id}] disconnected !`);
       // keep all sockets that have a different id than current
       // is pretty much just a remove
@@ -157,17 +153,24 @@ export class SocketServer {
       this._socketServer.emit("message", data);
     });
 
-    socketClient.on("command", (data: BaseCommand & AttackArgs) => {
+    socketClient.on("command", (data: (BaseCommand & AttackArgs)[]) => {
       if (!this._game) {
         socketClient.emit("commandMessage", { error: "nogame" });
         return;
       }
-      if (!this._commands(currentPlayer)[data.type]) {
+
+      const request = data[0];
+
+      console.log("I received", request);
+
+      console.log(!this._commands(currentPlayer));
+
+      if (!this._commands(currentPlayer)[request.type]) {
         socketClient.emit("commandMessage", { error: "invalidcommand" });
         return;
       }
-      this._commands(currentPlayer)[data.type](data);
-      console.log(`User [${socketClient.id}] sent a command : ${data.type}`);
+      this._commands(currentPlayer)[request.type](request);
+      console.log(`User [${socketClient.id}] sent a command : ${request.type}`);
 
       this._socketServer.emit("commandMessage", { error: false });
     });

@@ -41,24 +41,31 @@ const commands: Commands = {
   message: (message: string[]) => socket.send("message", message.join(" ")),
   move: (args: string[]) => {
     let hasError = false;
-    if(isNaN(+args[0])){
-      addLine("Game", "Argument invalide, le premier argument doit être un numéro (identifiant d'une unité)")
+    if (isNaN(+args[0])) {
+      addLine(
+        "Game",
+        "Argument invalide, le premier argument doit être un numéro (identifiant d'une unité)",
+      );
       hasError = true;
     }
-    if(isNaN(+args[1])){
-      addLine("Game", "Argument invalide, le deuxième argument doit être un numéro (identifiant d'hexagone)")
+    if (isNaN(+args[1])) {
+      addLine(
+        "Game",
+        "Argument invalide, le deuxième argument doit être un numéro (identifiant d'hexagone)",
+      );
       hasError = true;
     }
-    if(hasError) return;
+    if (hasError) return;
     socket.send("command", {
       type: "move",
       unitId: args[0],
       hexId: args[1],
     });
   },
-  units: () => socket.send("command", {
-    type: "units",
-  }),
+  units: () =>
+    socket.send("command", {
+      type: "units",
+    }),
 };
 
 const lines = ref<{ data: string; author: string; time: Date }[]>([]);
@@ -73,6 +80,14 @@ socket.eventListener("connect", () => {
 
 socket.eventListener("pong message", (msg) => {
   addLine("Game", msg);
+});
+
+socket.eventListener("commandMessage", (resp: any) => {
+  if (resp.error) {
+    addLine("Game", resp.error);
+  } else {
+    addLine("Game", resp);
+  }
 });
 
 function disconnectSocket() {

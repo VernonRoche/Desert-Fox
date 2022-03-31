@@ -43,6 +43,10 @@ export default class GameMap {
     return hex;
   }
 
+  public getUnits(): Entity[] {
+    return this._entities;
+  }
+
   public addUnit(unit: Entity): void {
     this._entities.push(unit);
   }
