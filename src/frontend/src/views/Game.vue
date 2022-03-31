@@ -9,9 +9,3 @@
 import GameScreen from "../components/GameScreen.vue";
 import GameTerminal from "../components/GameTerminal.vue";
 </script>
-
-<style scoped>
-input:focus {
-  outline: none;
-}
-</style>

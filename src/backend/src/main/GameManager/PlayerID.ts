@@ -1,7 +1,8 @@
 enum PlayerID {
+  NONE,
   ONE,
   TWO,
-  NONE,
+
 }
 
 export default PlayerID;
