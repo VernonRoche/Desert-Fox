@@ -13,6 +13,7 @@ export default class Player {
   private _supplyUnits: SupplyUnit[];
   private _refitPoints: RefitPoint[];
 
+
   constructor(
     id: PlayerID,
     units: AbstractUnit[],
@@ -31,4 +32,28 @@ export default class Player {
     const both: Entity[] = [...this._units, ...this._supplyUnits];
     return Boolean(both.find((e) => entity.getID() === e.getID()));
   }
+
+
+  getId(): PlayerID {
+    return this._id;
+  }
+
+  getUnits(): AbstractUnit[] {
+    return this._units;
+  }
+
+  getBases(): Base[] {
+    return this._bases;
+  }
+
+  getSupplyUnits(): SupplyUnit[] {
+    return this._supplyUnits;
+  }
+
+  getRefitPoints(): RefitPoint[] {
+    return this._refitPoints;
+  }
+
+
+
 }
