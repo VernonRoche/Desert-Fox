@@ -1,65 +1,111 @@
 <template>
-    <div id="game-terminal" class="flex flex-col w-full bg-black rounded">
-        <div id="terminal" class="text-white overflow-y-scroll h-full">
-            <!-- Besoin de changer le v-scroll-to mais fonctionne pour l'instant -->
-            <p v-scroll-to class="pl-4" v-for="(line, index) in lines" :key="index">
-                <span class="font-bold">{{ line.author }}</span>
-                - {{ line.data }}
-            </p>
-        </div>
-        <form
-            @submit.prevent="addLine"
-            class="border bg-transparent p-2 w-full pl-4 rounded text-white flex gap-1"
-        >
-            <span>></span>
-            <input
-                id="commandInput"
-                placeholder="Commande"
-                type="text"
-                v-model="terminalInput"
-                minlength="1"
-                class="bg-transparent w-full"
-            />
-        </form>
+  <div id="game-terminal" class="flex flex-col w-full bg-black rounded h-32">
+    <div id="terminal" class="text-white overflow-y-scroll h-full">
+      <!-- Besoin de changer le v-scroll-to mais fonctionne pour l'instant -->
+      <p v-for="(line, index) in lines" :key="index" v-scroll-to class="pl-4">
+        <span class="italic border-r pr-2 mr-2">{{ toFrenchDate(line.time) }}</span>
+        <span class="font-bold">{{ line.author }}</span>
+        - {{ line.data }}
+      </p>
     </div>
+    <form
+      class="border bg-transparent p-2 w-full pl-4 rounded text-white flex gap-1"
+      @submit.prevent="submitLine"
+    >
+      <span>></span>
+      <input
+        id="commandInput"
+        v-model="terminalInput"
+        placeholder="Commande"
+        type="text"
+        minlength="1"
+        class="bg-transparent w-full"
+      />
+    </form>
+  </div>
 </template>
 
-<script lang="ts" setup>import { onUnmounted, ref } from '@vue/runtime-dom';
-import ClientSocket from '../utils/ClientSocket';
+<script lang="ts" setup>
+import { onUnmounted, ref } from "@vue/runtime-dom";
+import ClientSocket from "../utils/ClientSocket";
 
 const terminalInput = ref("");
 
-const lines = ref([{ data: "Connexion au serveur...", author: "Game" }]);
+type Command = (args: string[]) => void;
+type Commands = Record<string, Command>;
+
+const commands: Commands = {
+  ping: () => socket.send("ping message", terminalInput.value),
+  exit: disconnectSocket,
+};
+
+const lines = ref<{ data: string; author: string; time: Date }[]>([]);
+
+addLine("Game", "Connexion au serveur...");
 
 const socket = new ClientSocket("localhost", 3001);
 
 socket.eventListener("connect", () => {
-    lines.value[0] = { data: "Vous êtes connecté au serveur", author: "Game" };
+  addLine("Game", "Vous êtes connecté au serveur");
+});
+
+socket.eventListener("pong message", (msg) => {
+  addLine("Game", msg);
 });
 
 function disconnectSocket() {
-    lines.value.push({ data: "Vous êtes à présent déconnecté du serveur", author: "Game" });
-    socket.disconnect();
-
+  addLine("Game", "Vous êtes à présent déconnecté du serveur");
+  socket.disconnect();
 }
 
-function addLine() {
-    if (!terminalInput.value) return;
-    lines.value.push({ data: terminalInput.value, author: "Vous" });
-
-    if (terminalInput.value.trim().toLowerCase() === "ping")
-        socket.send('ping message', terminalInput.value);
-
-    if (terminalInput.value.trim().toLowerCase() === "exit")
-        disconnectSocket();
-
-    terminalInput.value = "";
+function toFrenchDate(date: Date) {
+  return date.toLocaleDateString("fr-FR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+  });
 }
 
-socket.eventListener('pong message', (msg) => {
-    lines.value.push({ data: msg, author: "Game" });
-});
+function addLine(author: string, data: string) {
+  lines.value.push({ data, author, time: new Date() });
+}
+
+function doCommand() {
+  // separate string by spaces
+  const split = terminalInput.value
+    .trim()
+    .split(" ")
+    .filter((val) => val.length > 0);
+  // command is first word
+  const command = split[0];
+  // rest is arguments
+  const args = split.slice(1);
+  // if command exists
+  if (commands[command]) {
+    // execute it, and give it args, even if it is not used in the command
+    commands[command](args);
+  } else {
+    // else inform user that command doesn't exist
+    addLine("Game", `Commande inconnue`);
+  }
+}
+
+function submitLine() {
+  if (!terminalInput.value) return;
+  // add line in the terminal
+  addLine("Vous", terminalInput.value);
+  doCommand();
+  // reset input
+  terminalInput.value = "";
+}
 
 onUnmounted(disconnectSocket);
-
 </script>
+
+<style scoped>
+input:focus {
+  outline: none;
+}
+</style>
