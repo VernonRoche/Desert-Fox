@@ -103,3 +103,9 @@ function submitLine() {
 
 onUnmounted(disconnectSocket);
 </script>
+
+<style scoped>
+input:focus {
+  outline: none;
+}
+</style>
