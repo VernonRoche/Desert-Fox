@@ -48,4 +48,20 @@ export default class Game {
     originHex.removeUnit(unit);
     return true;
   }
+
+  getTurn(): Turn {
+    return this._turn;
+  }
+
+  getPlayer1(): Player {
+    return this._player1;
+  }
+
+  getPlayer2(): Player {
+    return this._player2;
+  }
+
+  getMap(): GameMap {
+    return this._map;
+  }
 }
