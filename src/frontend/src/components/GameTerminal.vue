@@ -39,6 +39,26 @@ const commands: Commands = {
   ping: () => socket.send("ping message", terminalInput.value),
   exit: disconnectSocket,
   message: (message: string[]) => socket.send("message", message.join(" ")),
+  move: (args: string[]) => {
+    let hasError = false;
+    if(isNaN(+args[0])){
+      addLine("Game", "Argument invalide, le premier argument doit être un numéro (identifiant d'une unité)")
+      hasError = true;
+    }
+    if(isNaN(+args[1])){
+      addLine("Game", "Argument invalide, le deuxième argument doit être un numéro (identifiant d'hexagone)")
+      hasError = true;
+    }
+    if(hasError) return;
+    socket.send("command", {
+      type: "move",
+      unitId: args[0],
+      hexId: args[1],
+    });
+  },
+  units: () => socket.send("command", {
+    type: "units",
+  }),
 };
 
 const lines = ref<{ data: string; author: string; time: Date }[]>([]);
