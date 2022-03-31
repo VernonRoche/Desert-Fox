@@ -12,7 +12,6 @@ export default class Game {
   private _player2: Player;
   private _map: GameMap;
 
-
   public constructor(map: GameMap, player1: Player, player2: Player) {
     this._turn = new Turn();
     this._player1 = player1;
@@ -35,27 +34,35 @@ export default class Game {
     const originHex = this._map.findHex(unit.currentPosition());
     // Get the owner of the destination hex to see if we can move there
     const currentOwner = (hex: Hex): PlayerID => {
-      if (destinationHex.units().length > 0) {
-        return this._player1.hasUnit(destinationHex.units()[0]) ? PlayerID.ONE : PlayerID.TWO;
-      } else if (destinationHex.supplyUnits().length > 0) {
-        return this._player1.hasUnit(destinationHex.supplyUnits()[0]) ? PlayerID.ONE : PlayerID.TWO;
+      if (hex.units().length > 0) {
+        return this._player1.hasUnit(hex.units()[0]) ? PlayerID.ONE : PlayerID.TWO;
+      } else if (hex.supplyUnits().length > 0) {
+        return this._player1.hasUnit(hex.supplyUnits()[0]) ? PlayerID.ONE : PlayerID.TWO;
       }
       return PlayerID.NONE;
     };
 
-    if (playerId != currentOwner(destinationHex)) return false;
+    if (playerId != currentOwner(destinationHex) && currentOwner(destinationHex) != PlayerID.NONE)
+      return false;
 
     if (!destinationHex.addUnit(unit)) return false;
     originHex.removeUnit(unit);
     return true;
   }
 
-
-  getInstance(): Game {
-    if (this == null) throw new Error("Error not game found !!");
-    return this;
-
+  getTurn(): Turn {
+    return this._turn;
   }
 
+  getPlayer1(): Player {
+    return this._player1;
+  }
 
+  getPlayer2(): Player {
+    return this._player2;
+  }
+
+  getMap(): GameMap {
+    return this._map;
+  }
 }
