@@ -20,6 +20,7 @@
         type="text"
         minlength="1"
         class="bg-transparent w-full"
+        @keyup.up="handleKeyUp"
       />
     </form>
   </div>
@@ -37,6 +38,7 @@ type Commands = Record<string, Command>;
 const commands: Commands = {
   ping: () => socket.send("ping message", terminalInput.value),
   exit: disconnectSocket,
+  message: (message: string[]) => socket.send("message", message.join(" ")),
 };
 
 const lines = ref<{ data: string; author: string; time: Date }[]>([]);
@@ -99,6 +101,13 @@ function submitLine() {
   doCommand();
   // reset input
   terminalInput.value = "";
+}
+
+function handleKeyUp() {
+  if (terminalInput.value) return;
+  const filtered = lines.value.filter((line) => line.author === "Vous");
+  console.log(filtered);
+  terminalInput.value = filtered[filtered.length - 1].data;
 }
 
 onUnmounted(disconnectSocket);
