@@ -125,6 +125,11 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.23.tgz#3b41a6e643589ac6442bdbd7a4a3ded62f33f7da"
   integrity sha512-UxDxWn7dl97rKVeVS61vErvw086aCYhDLyvRQZ5Rk65rZKepaFdm53GeqXaKBuOhED4e9uWq34IC3TdSdJJ2Gw==
 
+"@types/p5@^1.4.2":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@types/p5/-/p5-1.4.2.tgz#aee3142741254a38ab9a95038d5b777901a2be1e"
+  integrity sha512-tzJ2PdmeXlX8tidbA1/pQEhs0MHVWam0K4ux5ri0GrZXhBU3QrpTpSVzNaBDuo6KheryHdH8wR82x1nPvxo42g==
+
 "@types/parse-json@^4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@types/parse-json/-/parse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"
@@ -1547,6 +1552,11 @@ optionator@^0.9.1:
     prelude-ls "^1.2.1"
     type-check "^0.4.0"
     word-wrap "^1.2.3"
+
+p5@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/p5/-/p5-1.4.1.tgz#979739a576eb566225642b5d25cf7bb8945b70dd"
+  integrity sha512-3/X+qb0bK2Cg8nuZNpZZvzxkeUSRghOf0S+l8c+U8yIkUTVSbbcV0R8y96rx3InVBVhk8cH9kFC93VlZZElqSw==
 
 parent-module@^1.0.0:
   version "1.0.1"
