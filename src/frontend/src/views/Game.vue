@@ -6,12 +6,12 @@
 </template>
 
 <script lang="ts" setup>
-import GameScreen from '../components/GameScreen.vue';
-import GameTerminal from '../components/GameTerminal.vue';
+import GameScreen from "../components/GameScreen.vue";
+import GameTerminal from "../components/GameTerminal.vue";
 </script>
 
 <style scoped>
 input:focus {
-    outline: none;
+  outline: none;
 }
 </style>

@@ -2,15 +2,13 @@
   <NavBar />
   <main class="fullscreen">
     <h1 class="text-center">Bienvenue sur le frontend de Desert Fox</h1>
-    <router-view></router-view>
+    <router-view />
   </main>
 </template>
 
 <script lang="ts" setup>
-import NavBar from './components/NavBar.vue';
+import NavBar from "./components/NavBar.vue";
 </script>
-
-
 
 <style scoped>
 nav a.router-link-exact-active {
