@@ -51,8 +51,8 @@ export default class Game {
   }
 
 
-  public getInstance():Game{
-    if(this == null) throw  new Error("Error not game found !!");
+  getInstance(): Game {
+    if (this == null) throw new Error("Error not game found !!");
     return this;
 
   }

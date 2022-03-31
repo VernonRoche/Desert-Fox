@@ -34,23 +34,23 @@ export default class Player {
   }
 
 
-  get id(): PlayerID {
+  getId(): PlayerID {
     return this._id;
   }
 
-  get units(): AbstractUnit[] {
+  getUnits(): AbstractUnit[] {
     return this._units;
   }
 
-  get bases(): Base[] {
+  getBases(): Base[] {
     return this._bases;
   }
 
-  get supplyUnits(): SupplyUnit[] {
+  getSupplyUnits(): SupplyUnit[] {
     return this._supplyUnits;
   }
 
-  get refitPoints(): RefitPoint[] {
+  getRefitPoints(): RefitPoint[] {
     return this._refitPoints;
   }
 

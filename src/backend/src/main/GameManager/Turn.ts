@@ -4,39 +4,39 @@ enum Phase {
   INITIAL,
 
   //Strategic impulse
-  Event,
-  Air_Superiority,
-  Reiforcements,
-  Allocation,
-  Initiative,
-  
+  EVENT,
+  AIR_SUPERIORITY,
+  REIFORCEMENTS,
+  ALLOCATION,
+  INITIATIVE,
+
   //first player initial impulse
-  First_Player_Movement,
-  Second_Player_Reaction,
-  First_Player_Combat,
-  
+  FIRST_PLAYER_MOVEMENT,
+  SECOND_PLAYER_REACTION,
+  FIRST_PLAYER_COMBAT,
+
   //second player initial impulse
-  Second_Player_Movement,
-  First_Player_Reaction,
-  Second_Player_Combat,
+  SECOND_PLAYER_MOVEMENT,
+  FIRST_PLAYER_REACTION,
+  SECOND_PLAYER_COMBAT,
 
   //first player follow-on impulse
 
-  First_Player_Movement2,
-  Second_Player_Reaction2,
-  First_Player_Combat2,
+  FIRST_PLAYER_MOVEMENT2,
+  SECOND_PLAYER_REACTION2,
+  FIRST_PLAYER_COMBAT2,
 
   //second player follow-on impulse
 
-  Second_Player_Movement2,
-  First_Player_Reaction2,
-  Second_Player_Combat2,
-  
+  SECOND_PLAYER_MOVEMENT2,
+  FIRST_PLAYER_REACTION2,
+  SECOND_PLAYER_COMBAT2,
+
   //Administative impulse
 
-  Supply_Attrition,
-  Victory_Check,
-  Turn_Marker,
+  SUPPLY_ATTRITION,
+  VICTORY_CHECK,
+  TURN_MARKER,
   NONE,
 
 }
@@ -53,27 +53,27 @@ export default class Turn {
   }
 
 
-  get currentPhase(): Phase {
+  getCurrentPhase(): Phase {
     return this._currentPhase;
   }
 
-  get getcurrentPlayer(): PlayerID {
+  getCurrentPlayer(): PlayerID {
     return this._currentPlayer;
   }
 
-public  switchPlayer():void{
-  this._currentPlayer = (this._currentPlayer%2) +1 ;
-  if (this._currentPlayer == 2){
-    this._currentPhase = 1;
+  switchPlayer(): void {
+    this._currentPlayer = (this._currentPlayer % 2) + 1;
+    if (this._currentPlayer == 2) {
+      this._currentPhase = 1;
+    }
   }
-}
 
-public changePhase():void{
-  this._currentPhase = this._currentPhase + 1;
-  if (this.currentPhase == 21){
-    this._currentPhase = 1;
+  public changePhase(): void {
+    this._currentPhase = this._currentPhase + 1;
+    if (this.getCurrentPhase() == 21) {
+      this._currentPhase = 1;
+    }
   }
-}
 
 
 
