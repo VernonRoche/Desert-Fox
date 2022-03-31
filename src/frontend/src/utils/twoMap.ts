@@ -3,7 +3,7 @@ import { Polygon } from "two.js/src/shapes/polygon";
 const a = (2 * Math.PI) / 6;
 
 function drawEverything(two: Two) {
-  const r = 50;
+  const r = 10;
 
   for (let y = r; y + r * Math.sin(a) < two.height; y += r * Math.sin(a)) {
     for (
@@ -11,7 +11,7 @@ function drawEverything(two: Two) {
       x + r * (1 + Math.cos(a)) < two.width;
       x += r * (1 + Math.cos(a)), y += (-1) ** j++ * r * Math.sin(a)
     ) {
-      let polygon = drawHexagon(x, y, 50, "#FF0000");
+      const polygon = drawHexagon(x, y, r, "#FF0000");
     }
   }
 
@@ -28,14 +28,14 @@ function drawEverything(two: Two) {
       strokeWidth?: number;
     },
   ) {
-    let points: number[] = [];
+    const points: number[] = [];
     for (let i = 0; i < 6; i++) {
-      let px = x + side * Math.cos(a * i);
-      let py = y + side * Math.sin(a * i);
+      const px = x + side * Math.cos(a * i);
+      const py = y + side * Math.sin(a * i);
       points.push(px, py);
     }
 
-    let hexagon = two.makePath(
+    const hexagon = two.makePath(
       [
         new Two.Anchor(points[0], points[1], 0, 0, 0, 0, Two.Commands.line),
         new Two.Anchor(points[2], points[3], 0, 0, 0, 0, Two.Commands.line),
