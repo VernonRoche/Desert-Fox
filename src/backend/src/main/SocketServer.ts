@@ -42,7 +42,12 @@ export class SocketServer {
 
   private _commands: (player: Player) => Commands = (player: Player) => ({
     move: (args: MoveArgs) => {
-      const unit = player.getUnitById(+args.unitId);
+      const unitId = +args.unitId;
+      if(isNaN(unitId)) {
+        player.getSocket().emit("commandMessage", { error: "invalidunitid" });
+        return;
+      }
+      const unit = player.getUnitById(unitId);
       if (!unit) {
         player.getSocket().emit("commandMessage", { error: "invalidunit" });
         return;
