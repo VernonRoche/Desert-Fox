@@ -12,7 +12,6 @@ export default class Game {
   private _player2: Player;
   private _map: GameMap;
 
-
   public constructor(map: GameMap, player1: Player, player2: Player) {
     this._turn = new Turn();
     this._player1 = player1;
@@ -49,13 +48,4 @@ export default class Game {
     originHex.removeUnit(unit);
     return true;
   }
-
-
-  getInstance(): Game {
-    if (this == null) throw new Error("Error not game found !!");
-    return this;
-
-  }
-
-
 }
