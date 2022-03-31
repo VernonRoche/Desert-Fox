@@ -1,8 +1,8 @@
 <template>
-    <div id="game" class="flex flex-col gap-5 w-full">
-        <GameScreen />
-        <GameTerminal />
-    </div>
+  <div id="game" class="flex flex-col gap-5 w-full">
+    <GameScreen />
+    <GameTerminal />
+  </div>
 </template>
 
 <script lang="ts" setup>

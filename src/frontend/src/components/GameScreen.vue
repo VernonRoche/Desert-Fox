@@ -1,5 +1,5 @@
 <template>
-    <div id="gamescreen" ref="screen" class="border-2 h-screen border-black"></div>
+  <div id="gamescreen" ref="screen" class="border-2 h-screen border-black"></div>
 </template>
 
 <script lang="ts" setup>
@@ -9,12 +9,11 @@ import drawEverything from "../utils/twoMap";
 const screen = ref<null | HTMLDivElement>(null);
 
 onMounted(() => {
-    if (!screen.value) {
-        console.error("No gamescreen found");
-        return;
-    }
-    const two = new Two({fitted: true}).appendTo(screen.value);
-    drawEverything(two);
-
-})
+  if (!screen.value) {
+    console.error("No gamescreen found");
+    return;
+  }
+  const two = new Two({ fitted: true }).appendTo(screen.value);
+  drawEverything(two);
+});
 </script>
