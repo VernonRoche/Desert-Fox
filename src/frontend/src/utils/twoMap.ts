@@ -1,5 +1,17 @@
+import { traceDeprecation } from "process";
 import Two from "two.js";
 import { Anchor } from "two.js/src/anchor";
+
+const colors = {
+  clear: "#ece9c8",
+  rough: "#453925",
+  empty: "#32adeb",
+  sandSea: "#f2efba",
+  mountain: "5b4627",
+  oasis: "#019267",
+  marsh: "#96ceb4",
+  city: "#99a799",
+};
 
 function drawEverything(two: Two) {
   const r = 50;
@@ -13,7 +25,7 @@ function drawEverything(two: Two) {
 
   for (let y = r; y <= two.height; y += 2 * r + distHex2) {
     for (let x = r / 2; x <= two.width; x += distHex) {
-      drawHexagon(x, y, r, "#FF0000", id);
+      drawHexagon(x, y, r, colors["clear"], id);
       drawHexID(x, y, id);
       id++;
     }
@@ -26,7 +38,7 @@ function drawEverything(two: Two) {
 
   for (let y = 2 * r + distHex2 / 2; y <= two.height; y += 2 * r + distHex2) {
     for (let x = r / 2 + distHex / 2; x <= two.width; x += distHex) {
-      drawHexagon(x, y, r, "#FF0000", id);
+      drawHexagon(x, y, r, colors["clear"], id);
       drawHexID(x, y, id);
       id++;
     }
