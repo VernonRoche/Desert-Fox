@@ -60,11 +60,14 @@ export class SocketServer {
         player.getSocket().emit("commandMessage", { error: "invalidhex" });
         return;
       }
-      this._game?.moveUnit(player.getId(), unit, new HexID(x, y));
+      const successful = this._game?.moveUnit(player.getId(), unit, new HexID(x, y));
+      console.log("move was successful: ", successful);
     },
     units: () => {
       console.log("player (", player.getId(), ") has", player.getUnits().length, "units");
-      player.getSocket().emit("commandMessage", player.getUnits());
+      const playerUnits = player.getUnits();
+      console.log("player units:", playerUnits);
+      player.getSocket().emit("commandMessage", playerUnits);
     },
   });
 
