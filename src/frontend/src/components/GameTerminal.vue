@@ -1,5 +1,5 @@
 <template>
-    <div id="game-terminal" class="flex flex-col w-full bg-black rounded">
+    <div id="game-terminal" class="flex flex-col w-full bg-black rounded h-32">
         <div id="terminal" class="text-white overflow-y-scroll h-full">
             <!-- Besoin de changer le v-scroll-to mais fonctionne pour l'instant -->
             <p v-scroll-to class="pl-4" v-for="(line, index) in lines" :key="index">

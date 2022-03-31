@@ -1,5 +1,5 @@
 <template>
-    <div id="gamescreen" ref="screen" class="border-2 border-black"></div>
+    <div id="gamescreen" ref="screen" class="border-2 h-screen border-black"></div>
 </template>
 
 <script lang="ts" setup>
@@ -13,7 +13,7 @@ onMounted(() => {
         console.error("No gamescreen found");
         return;
     }
-    const two = new Two().appendTo(screen.value);
+    const two = new Two({fitted: true}).appendTo(screen.value);
     drawEverything(two);
 
 })
