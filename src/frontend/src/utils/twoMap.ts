@@ -7,28 +7,31 @@ function drawEverything(two: Two) {
   const distHex2 = Math.sin(Math.PI / 6) * r - -Math.sin(Math.PI / 6) * r;
   console.log(distHex);
   console.log(distHex2);
-  const id1 = 101;
-  const id2 = 201;
 
-  console.log(two.width);
-  console.log(two.height);
+  let id = 1;
+  let loop = 1;
 
   for (let y = r; y <= two.height; y += 2 * r + distHex2) {
     for (let x = r / 2; x <= two.width; x += distHex) {
-      drawHexagon(x, y, r, "#FF0000", id1);
-      //drawHexID(x, y, id1);
-      //id1++;
+      drawHexagon(x, y, r, "#FF0000", id);
+      drawHexID(x, y, id);
+      id++;
     }
-    //id1 += 100;
+    id = loop * 200 + 1;
+    loop++;
   }
+
+  id = 101;
+  loop = 1;
 
   for (let y = 2 * r + distHex2 / 2; y <= two.height; y += 2 * r + distHex2) {
     for (let x = r / 2 + distHex / 2; x <= two.width; x += distHex) {
-      drawHexagon(x, y, r, "#FF0000", id2);
-      //drawHexID(x, y ,id2);
-      //id2++;
+      drawHexagon(x, y, r, "#FF0000", id);
+      drawHexID(x, y, id);
+      id++;
     }
-    //id2 += 100;
+    id = 101 + loop * 200;
+    loop++;
   }
 
   two.update();
@@ -107,7 +110,7 @@ function drawEverything(two: Two) {
   function drawHexID(x: number, y: number, id: number) {
     const text = two.makeText(id.toString(), x, y);
     text._size = 10;
-    text.rotation = (Math.PI * 3) / 2;
+    text.rotation = (7 * Math.PI) / 4;
     text._baseline = "top";
   }
 }
