@@ -14,6 +14,14 @@ export default class HexID {
     return id;
   }
 
+  getX() {
+    return this._x;
+  }
+
+  getY() {
+    return this._y;
+  }
+
   toString() {
     return this.id();
   }

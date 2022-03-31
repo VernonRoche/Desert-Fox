@@ -27,7 +27,7 @@ export default abstract class Moveable implements Entity {
   }
 
   public place(hexId: HexID): void {
-    throw new Error("Method not implemented.");
+    this._currentPosition = new HexID(hexId.getX(), hexId.getY());
   }
 
   public remove(): void {
