@@ -22,6 +22,8 @@ export default class Game {
   // Checks if a move is possible and applies it.
   // Returns false if the move was not possible, true if move was succesful.
   public moveUnit(playerId: PlayerID, unit: AbstractUnit, destination: HexID): boolean {
+    // Get the owner of the destination hex to see if we can move there
+
     // Check if hexagon exists
     const destinationHex = this._map.findHex(destination);
     if (!destinationHex) return false;
@@ -32,18 +34,6 @@ export default class Game {
 
     // Check if move is possible
     const originHex = this._map.findHex(unit.currentPosition());
-    // Get the owner of the destination hex to see if we can move there
-    const currentOwner = (hex: Hex): PlayerID => {
-      if (hex.units().length > 0) {
-        return this._player1.hasUnit(hex.units()[0]) ? PlayerID.ONE : PlayerID.TWO;
-      } else if (hex.supplyUnits().length > 0) {
-        return this._player1.hasUnit(hex.supplyUnits()[0]) ? PlayerID.ONE : PlayerID.TWO;
-      }
-      return PlayerID.NONE;
-    };
-
-    if (playerId != currentOwner(destinationHex) && currentOwner(destinationHex) != PlayerID.NONE)
-      return false;
 
     if (!destinationHex.addUnit(unit)) return false;
     originHex.removeUnit(unit);
