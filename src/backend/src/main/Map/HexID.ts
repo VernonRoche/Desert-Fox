@@ -8,7 +8,7 @@ export default class HexID {
 
   public id() {
     function zeroIfNeeded(num: number) {
-      return (num > 10 ? "0" : "") + num;
+      return (num < 10 ? "0" : "") + num;
     }
     const id = zeroIfNeeded(this._x) + zeroIfNeeded(this._y);
     return id;
