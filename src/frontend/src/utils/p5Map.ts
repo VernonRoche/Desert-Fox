@@ -11,34 +11,75 @@ const colors = {
   marsh: "#96ceb4",
   city: "#99a799",
 };
-/*
-class Hexagon {
 
-  private x: number;
-  private y: number;
-  private r: number;
-  private name: string;
+class Unit {
+  private _type: string;
 
-  constructor(p5: P5, x: number, y: number, r: number, name: string) {
-    this.x = x;
-    this.y = y;
-    this.r = r;
-    this.name = name;
+  constructor(type: string) {
+    this._type = type;
   }
-  
-  render() {
-    p5.noFill();
-    p5.stroke(0);
-    //drawHexagon(p5, this.x, this.y, this.r);
-    p5.text(this.name, this.x, this.y);
-  }
-  
-  get distanceToMouse() {
-    return p5.dist(p5.mouseX, p5.mouseY, this.x, this.y);
+
+  render(p5: P5, x: number, y: number) {
+    drawUnits(p5, x, y);
   }
 }
-*/
-export default function drawHexMap(p5: P5, width: number, height: number) {
+
+class Hexagon {
+  private _p5: P5;
+  private _x: number;
+  private _y: number;
+  private _r: number;
+  private _id: number;
+  private _strokeColor: string;
+  private _strokeWidth: number;
+  private _units: Unit[] = [];
+
+  constructor(
+    p5: P5,
+    x: number,
+    y: number,
+    r: number,
+    id: number,
+    options?: { strokeColor?: string; strokeWidth?: number },
+  ) {
+    this._p5 = p5;
+    this._x = x;
+    this._y = y;
+    this._r = r;
+    this._id = id;
+    this._strokeColor = options?.strokeColor ?? colors["clear"];
+    this._strokeWidth = options?.strokeWidth ?? 2;
+  }
+
+  render() {
+    drawHexagon(
+      this._p5,
+      this._x,
+      this._y,
+      this._r,
+      colors["clear"],
+      this._id,
+      this._strokeColor,
+      this._strokeWidth,
+    );
+    drawHexID(this._p5, this._x, this._y, this._id);
+  }
+
+  distanceToMouse() {
+    return this._p5.dist(this._p5.mouseX, this._p5.mouseY, this._x, this._y);
+  }
+
+  addUnits(units: Unit[]) {
+    for (const unit of units) {
+      this._units.push(unit);
+      unit.render(this._p5, this._x, this._y);
+    }
+  }
+}
+
+export default function drawHexMap(p5: P5, width: number, height: number): Hexagon[] {
+  const hexagons: Hexagon[] = [];
+
   const r = 50;
   const distHex = Math.cos(Math.PI / 6) * r - -Math.cos(Math.PI / 6) * r;
   const distHex2 = Math.sin(Math.PI / 6) * r - -Math.sin(Math.PI / 6) * r;
@@ -48,8 +89,11 @@ export default function drawHexMap(p5: P5, width: number, height: number) {
 
   for (let y = r; y <= height; y += 2 * r + distHex2) {
     for (let x = r; x <= width; x += distHex) {
-      drawHexagon(p5, x, y, r, colors["clear"], id);
-      drawHexID(p5, x, y, id);
+      //drawHexagon(p5, x, y, r, colors["clear"], id);
+      const hex = new Hexagon(p5, x, y, r, id);
+      hex.render();
+      hexagons.push(hex);
+      //drawHexID(p5, x, y, id);
       id++;
     }
     id = loop * 200 + 1;
@@ -61,15 +105,27 @@ export default function drawHexMap(p5: P5, width: number, height: number) {
 
   for (let y = 2 * r + distHex2 / 2; y <= height; y += 2 * r + distHex2) {
     for (let x = r + distHex / 2; x <= width; x += distHex) {
-      drawHexagon(p5, x, y, r, colors["clear"], id);
-      drawHexID(p5, x, y, id);
+      //drawHexagon(p5, x, y, r, colors["clear"], id);
+      const hex = new Hexagon(p5, x, y, r, id);
+      hex.render();
+      hexagons.push(hex);
       id++;
     }
     id = 101 + loop * 200;
     loop++;
   }
 
+  /*
   drawUnits(p5, 50, 50);
+  const x = 50;
+  p5.translate(x,0)
+  drawUnits(p5, 50+x, 50);
+  */
+
+  const a: Unit[] = [new Unit("bblabla")];
+  hexagons[10].addUnits(a);
+
+  return hexagons;
 }
 
 function drawHexagon(
@@ -79,15 +135,13 @@ function drawHexagon(
   side: number,
   fill: string,
   id: number,
-  options?: {
-    strokeColor?: string;
-    strokeWidth?: number;
-  },
+  strokeColor: string,
+  strokeWidth: number,
 ) {
   p5.beginShape();
-  p5.strokeWeight(2);
+  p5.strokeWeight(strokeWidth);
   p5.stroke("black");
-  p5.fill("#ece9c8");
+  p5.fill(strokeColor);
   p5.vertex(x, y - side);
   p5.vertex(Math.cos(Math.PI / 6) * side + x, -Math.sin(Math.PI / 6) * side + y);
   p5.vertex(Math.cos(Math.PI / 6) * side + x, Math.sin(Math.PI / 6) * side + y);
@@ -102,7 +156,7 @@ function drawHexID(p5: P5, x: number, y: number, id: number) {
   drawText(p5, id, x, y);
 }
 
-function drawText(p5: P5, message: string | number, x: number, y: number): any {
+function drawText(p5: P5, message: string | number, x: number, y: number) {
   p5.push();
   p5.fill("black");
   p5.stroke("black");
