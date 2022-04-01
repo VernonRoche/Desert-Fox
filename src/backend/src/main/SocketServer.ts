@@ -3,7 +3,7 @@ import { Server, Socket } from "socket.io";
 import express, { Express } from "express";
 import Game from "./GameManager/Game";
 import GameMap from "./Map/GameMap";
-import Horse from "./Units/Horse";
+import Garrison from "./Units/Garrison";
 import Player from "./GameManager/Player";
 import HexID from "./Map/HexID";
 import AbstractUnit from "./Units/AbstractUnit";
@@ -111,13 +111,13 @@ export class SocketServer {
       this._sockets.push(socket);
       if (this._sockets.length >= 2 && !this._created) {
         //For Prototype Purposes
-        const horseHexId = new HexID(2, 2);
-        const horse = new Horse(id++, horseHexId, 1, 1);
-        units.push(horse);
+        const garrisonHexId = new HexID(2, 2);
+        const garrison = new Garrison(id++, garrisonHexId, 1, 1);
+        units.push(garrison);
 
         this._created = true;
         this._game = new Game(new GameMap([], "libya" as Maps), this._players[0], this._players[1]);
-        this._game.getMap().addUnit(horse);
+        this._game.getMap().addUnit(garrison);
         this.broadcast("gameCreated", this._game.getMap().toJSON());
       }
       this.applyRoutes(socket);
