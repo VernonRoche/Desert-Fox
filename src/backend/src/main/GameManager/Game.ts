@@ -12,7 +12,6 @@ export default class Game {
   private _player2: Player;
   private _map: GameMap;
 
-
   public constructor(map: GameMap, player1: Player, player2: Player) {
     this._turn = new Turn();
     this._player1 = player1;
@@ -23,6 +22,8 @@ export default class Game {
   // Checks if a move is possible and applies it.
   // Returns false if the move was not possible, true if move was succesful.
   public moveUnit(playerId: PlayerID, unit: AbstractUnit, destination: HexID): boolean {
+    // Get the owner of the destination hex to see if we can move there
+
     // Check if hexagon exists
     const destinationHex = this._map.findHex(destination);
     if (!destinationHex) return false;
@@ -33,29 +34,26 @@ export default class Game {
 
     // Check if move is possible
     const originHex = this._map.findHex(unit.currentPosition());
-    // Get the owner of the destination hex to see if we can move there
-    const currentOwner = (hex: Hex): PlayerID => {
-      if (destinationHex.units().length > 0) {
-        return this._player1.hasUnit(destinationHex.units()[0]) ? PlayerID.ONE : PlayerID.TWO;
-      } else if (destinationHex.supplyUnits().length > 0) {
-        return this._player1.hasUnit(destinationHex.supplyUnits()[0]) ? PlayerID.ONE : PlayerID.TWO;
-      }
-      return PlayerID.NONE;
-    };
-
-    if (playerId != currentOwner(destinationHex)) return false;
 
     if (!destinationHex.addUnit(unit)) return false;
     originHex.removeUnit(unit);
+    unit.place(destination);
     return true;
   }
 
-
-  getInstance(): Game {
-    if (this == null) throw new Error("Error not game found !!");
-    return this;
-
+  getTurn(): Turn {
+    return this._turn;
   }
 
+  getPlayer1(): Player {
+    return this._player1;
+  }
 
+  getPlayer2(): Player {
+    return this._player2;
+  }
+
+  getMap(): GameMap {
+    return this._map;
+  }
 }

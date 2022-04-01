@@ -1,0 +1,7658 @@
+[
+  {
+    "hexId": "0101",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0102",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0103",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0104",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0105",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0106",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0107",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0108",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0109",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0110",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0111",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0112",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0113",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0114",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0115",
+    "terrain": "oasis"
+  },
+  {
+    "hexId": "0116",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0117",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0118",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0119",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0120",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0121",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0122",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0123",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0124",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0125",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0126",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0127",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0128",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0129",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0130",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0131",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0132",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0133",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0134",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0135",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0136",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0137",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0138",
+    "terrain": "oasis"
+  },
+  {
+    "hexId": "0139",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0140",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0141",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0142",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0143",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0144",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0145",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0146",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0147",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0148",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0149",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0150",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0151",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0152",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0153",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0154",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0155",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0156",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0157",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0158",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0159",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0160",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0161",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0162",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0163",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0164",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0165",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0166",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0201",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0202",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0203",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0204",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0205",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0206",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0207",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0208",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0209",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0210",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0211",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0212",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0213",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0214",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0215",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0216",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0217",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0218",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0219",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0220",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0221",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0222",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0223",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0224",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0225",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0226",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0227",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0228",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0229",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0230",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0231",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0232",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0233",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0234",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0235",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0236",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0237",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0238",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0239",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0240",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0241",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0242",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0243",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0244",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0245",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0246",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0247",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0248",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0249",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0250",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0251",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0252",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0253",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0254",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0255",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0256",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0257",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0258",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0259",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0260",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0261",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0262",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0263",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0264",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0265",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0266",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0301",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0302",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0303",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0304",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0305",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0306",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0307",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0308",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0309",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0310",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0311",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0312",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0313",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0314",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0315",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0316",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0317",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0318",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0319",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0320",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0321",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0322",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0323",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0324",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0325",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0326",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0327",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0328",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0329",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0330",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0331",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0332",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0333",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0334",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0335",
+    "terrain": "oasis"
+  },
+  {
+    "hexId": "0336",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0337",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0338",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0339",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0340",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0341",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0342",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0343",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0344",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0345",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0346",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0347",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0348",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0349",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0350",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0351",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0352",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0353",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0354",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0355",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0356",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0357",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0358",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0359",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0360",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0361",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0362",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0363",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0364",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0365",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0366",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0401",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0402",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0403",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0404",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0405",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0406",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0407",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0408",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0409",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0410",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0411",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0412",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0413",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0414",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0415",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0416",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0417",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0418",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0419",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0420",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0421",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0422",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0423",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0424",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0425",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0426",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0427",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0428",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0429",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0430",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0431",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0432",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0433",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0434",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0435",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0436",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0437",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0438",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0439",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0440",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0441",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0442",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0443",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0444",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0445",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0446",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0447",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0448",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0449",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0450",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0451",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0452",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0453",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0454",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0455",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0456",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0457",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0458",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0459",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0460",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0461",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0462",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0463",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0464",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0465",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0466",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0501",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0502",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0503",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0504",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0505",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0506",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0507",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0508",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0509",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0510",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0511",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0512",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0513",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0514",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0515",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0516",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0517",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0518",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0519",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0520",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0521",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0522",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0523",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0524",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0525",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0526",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0527",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0528",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0529",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0530",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0531",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0532",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0533",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0534",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0535",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0536",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0537",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0538",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0539",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0540",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0541",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0542",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0543",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0544",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0545",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0546",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0547",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0548",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0549",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0550",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0551",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0552",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0553",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0554",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0555",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0556",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0557",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0558",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0559",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0560",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0561",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0562",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0563",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0564",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0565",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0566",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0601",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0602",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0603",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0604",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0605",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0606",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0607",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0608",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0609",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0610",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0611",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0612",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0613",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0614",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0615",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0616",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0617",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0618",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0619",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0620",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0621",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0622",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0623",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0624",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0625",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0626",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0627",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0628",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0629",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0630",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0631",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0632",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0633",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0634",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0635",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0636",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0637",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0638",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0639",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0640",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0641",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0642",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0643",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0644",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0645",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0646",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0647",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0648",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0649",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0650",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0651",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0652",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0653",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0654",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0655",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0656",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0657",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0658",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0659",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0660",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0661",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0662",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0663",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0664",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0665",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0666",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0701",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0702",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0703",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0704",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0705",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0706",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0707",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0708",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0709",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0710",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0711",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0712",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0713",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0714",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0715",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0716",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0717",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0718",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0719",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0720",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0721",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0722",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0723",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0724",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0725",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0726",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0727",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0728",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0729",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0730",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0731",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0732",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0733",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0734",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0735",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0736",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0737",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0738",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0739",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0740",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0741",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0742",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0743",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0744",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0745",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0746",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0747",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0748",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0749",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0750",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0751",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0752",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0753",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0754",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0755",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0756",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0757",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0758",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0759",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0760",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0761",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0762",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0763",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0764",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0765",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0766",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0801",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0802",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0803",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0804",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0805",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0806",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0807",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0808",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0809",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0810",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0811",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0812",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0813",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0814",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0815",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0816",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0817",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0818",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0819",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0820",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0821",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0822",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0823",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0824",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0825",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0826",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0827",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0828",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0829",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0830",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0831",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0832",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0833",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0834",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0835",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0836",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0837",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0838",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0839",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0840",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0841",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0842",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0843",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0844",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0845",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0846",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0847",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0848",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0849",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0850",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0851",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0852",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0853",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0854",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0855",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0856",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "0857",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0858",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0859",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0860",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0861",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0862",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0863",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0864",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0865",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0866",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0901",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0902",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0903",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0904",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0905",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0906",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0907",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0908",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0909",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0910",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0911",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0912",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0913",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0914",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0915",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0916",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0917",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0918",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0919",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0920",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0921",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0922",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0923",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0924",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0925",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0926",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0927",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0928",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0929",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0930",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0931",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0932",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0933",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0934",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0935",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0936",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0937",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0938",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0939",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0940",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0941",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0942",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0943",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0944",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0945",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0946",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0947",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0948",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0949",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0950",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0951",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0952",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0953",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0954",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0955",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0956",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "0957",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "0958",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0959",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0960",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0961",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0962",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0963",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0964",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0965",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "0966",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1001",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1002",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1003",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1004",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1005",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1006",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1007",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1008",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1009",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1010",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1011",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1012",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1013",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1014",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1015",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1016",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1017",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1018",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1019",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1020",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1021",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1022",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1023",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1024",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1025",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1026",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1027",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1028",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1029",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1030",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1031",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1032",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1033",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1034",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1035",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1036",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1037",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1038",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1039",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1040",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1041",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1042",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1043",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1044",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1045",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1046",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1047",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1048",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1049",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1050",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1051",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1052",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1053",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1054",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1055",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1056",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1057",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1058",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1059",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1060",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1061",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1062",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1063",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1064",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1065",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1066",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1101",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1102",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1103",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1104",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1105",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1106",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1107",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1108",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1109",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1110",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1111",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1112",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1113",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1114",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1115",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1116",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1117",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1118",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1119",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1120",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1121",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1122",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1123",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1124",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1125",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1126",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1127",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1128",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1129",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1130",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1131",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1132",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1133",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1134",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1135",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1136",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1137",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1138",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1139",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1140",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1141",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1142",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1143",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1144",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1145",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1146",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1147",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1148",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1149",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1150",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1151",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1152",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1153",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1154",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1155",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1156",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1157",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1158",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1159",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1160",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1161",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1162",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1163",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "1164",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "1165",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1166",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1201",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1202",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1203",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1204",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1205",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1206",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1207",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1208",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1209",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1210",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1211",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1212",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1213",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1214",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1215",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1216",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1217",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1218",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1219",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1220",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1221",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1222",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1223",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1224",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1225",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1226",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1227",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1228",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1229",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1230",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1231",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1232",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1233",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1234",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1235",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1236",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1237",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1238",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1239",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1240",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1241",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1242",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1243",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1244",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1245",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1246",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1247",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1248",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1249",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1250",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1251",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1252",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1253",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1254",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1255",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1256",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1257",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1258",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1259",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1260",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1261",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1262",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "1263",
+    "terrain": "sand sea"
+  },
+  {
+    "hexId": "1264",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1265",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1266",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1301",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1302",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1303",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1304",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1305",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1306",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1307",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1308",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1309",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1310",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1311",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1312",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1313",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1314",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1315",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1316",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1317",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1318",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1319",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1320",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1321",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1322",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1323",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1324",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1325",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1326",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1327",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1328",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1329",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1330",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1331",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1332",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1333",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1334",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1335",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1336",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1337",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1338",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1339",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1340",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1341",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1342",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1343",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1344",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1345",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1346",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1347",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1348",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1349",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1350",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1351",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1352",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1353",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1354",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1355",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1356",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1357",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1358",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1359",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1360",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1361",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1362",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1363",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1364",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1365",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1366",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1401",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1402",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1403",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1404",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1405",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1406",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1407",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1408",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1409",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1410",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1411",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1412",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1413",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1414",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1415",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1416",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1417",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1418",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1419",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1420",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1421",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1422",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1423",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1424",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1425",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1426",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1427",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1428",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1429",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1430",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1431",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1432",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1433",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1434",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1435",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1436",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1437",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1438",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1439",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1440",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1441",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1442",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1443",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1444",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1445",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1446",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1447",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1448",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1449",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1450",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1451",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1452",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1453",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1454",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1455",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1456",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1457",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1458",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1459",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1460",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1461",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1462",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1463",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1464",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1465",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1466",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1501",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1502",
+    "terrain": "empty"
+  },
+  {
+    "hexId": "1503",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1504",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1505",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1506",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1507",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1508",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1509",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1510",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1511",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1512",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1513",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1514",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1515",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1516",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1517",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1518",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1519",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1520",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1521",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1522",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1523",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1524",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1525",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1526",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1527",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1528",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1529",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1530",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1531",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1532",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1533",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1534",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1535",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1536",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1537",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1538",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1539",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1540",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1541",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1542",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1543",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1544",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1545",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1546",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1547",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1548",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1549",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1550",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1551",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1552",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1553",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1554",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1555",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1556",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1557",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1558",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1559",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1560",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1561",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1562",
+    "terrain": "rough"
+  },
+  {
+    "hexId": "1563",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1564",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1565",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1566",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1601",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1602",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1603",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1604",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1605",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1606",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1607",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1608",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1609",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1610",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1611",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1612",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1613",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1614",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1615",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1616",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1617",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1618",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1619",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1620",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1621",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1622",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1623",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1624",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1625",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1626",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1627",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1628",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1629",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1630",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1631",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1632",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1633",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1634",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1635",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1636",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1637",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1638",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1639",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1640",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1641",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1642",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1643",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1644",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1645",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1646",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1647",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1648",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1649",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1650",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1651",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1652",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1653",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1654",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1655",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1656",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1657",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1658",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1659",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1660",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1661",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1662",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1663",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1664",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1665",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1666",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1701",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1702",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1703",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1704",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1705",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1706",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1707",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1708",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1709",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1710",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1711",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1712",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1713",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1714",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1715",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1716",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1717",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1718",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1719",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1720",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1721",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1722",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1723",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1724",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1725",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1726",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1727",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1728",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1729",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1730",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1731",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1732",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1733",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1734",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1735",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1736",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1737",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1738",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1739",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1740",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1741",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1742",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1743",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1744",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1745",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1746",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1747",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1748",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1749",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1750",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1751",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1752",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1753",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1754",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1755",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1756",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1757",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1758",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1759",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1760",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1761",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1762",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1763",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1764",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1765",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1766",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1801",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1802",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1803",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1804",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1805",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1806",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1807",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1808",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1809",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1810",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1811",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1812",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1813",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1814",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1815",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1816",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1817",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1818",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1819",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1820",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1821",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1822",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1823",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1824",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1825",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1826",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1827",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1828",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1829",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1830",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1831",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1832",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1833",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1834",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1835",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1836",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1837",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1838",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1839",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1840",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1841",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1842",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1843",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1844",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1845",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1846",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1847",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1848",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1849",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1850",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1851",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1852",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1853",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1854",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1855",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1856",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1857",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1858",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1859",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1860",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1861",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1862",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1863",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1864",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1865",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1866",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1901",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1902",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1903",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1904",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1905",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1906",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1907",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1908",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1909",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1910",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1911",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1912",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1913",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1914",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1915",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1916",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1917",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1918",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1919",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1920",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1921",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1922",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1923",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1924",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1925",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1926",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1927",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1928",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1929",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1930",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1931",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1932",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1933",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1934",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1935",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1936",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1937",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1938",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1939",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1940",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1941",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1942",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1943",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1944",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1945",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1946",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1947",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1948",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1949",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1950",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1951",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1952",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1953",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1954",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1955",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1956",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1957",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1958",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1959",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1960",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1961",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1962",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1963",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1964",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1965",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "1966",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2001",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2002",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2003",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2004",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2005",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2006",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2007",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2008",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2009",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2010",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2011",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2012",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2013",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2014",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2015",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2016",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2017",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2018",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2019",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2020",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2021",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2022",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2023",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2024",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2025",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2026",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2027",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2028",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2029",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2030",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2031",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2032",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2033",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2034",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2035",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2036",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2037",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2038",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2039",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2040",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2041",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2042",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2043",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2044",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2045",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2046",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2047",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2048",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2049",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2050",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2051",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2052",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2053",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2054",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2055",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2056",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2057",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2058",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2059",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2060",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2061",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2062",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2063",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2064",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2065",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2066",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2101",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2102",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2103",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2104",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2105",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2106",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2107",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2108",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2109",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2110",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2111",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2112",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2113",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2114",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2115",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2116",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2117",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2118",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2119",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2120",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2121",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2122",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2123",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2124",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2125",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2126",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2127",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2128",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2129",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2130",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2131",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2132",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2133",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2134",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2135",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2136",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2137",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2138",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2139",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2140",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2141",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2142",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2143",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2144",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2145",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2146",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2147",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2148",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2149",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2150",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2151",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2152",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2153",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2154",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2155",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2156",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2157",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2158",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2159",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2160",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2161",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2162",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2163",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2164",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2165",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2166",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2201",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2202",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2203",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2204",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2205",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2206",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2207",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2208",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2209",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2210",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2211",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2212",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2213",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2214",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2215",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2216",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2217",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2218",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2219",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2220",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2221",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2222",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2223",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2224",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2225",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2226",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2227",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2228",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2229",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2230",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2231",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2232",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2233",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2234",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2235",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2236",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2237",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2238",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2239",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2240",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2241",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2242",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2243",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2244",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2245",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2246",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2247",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2248",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2249",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2250",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2251",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2252",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2253",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2254",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2255",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2256",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2257",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2258",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2259",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2260",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2261",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2262",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2263",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2264",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2265",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2266",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2301",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2302",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2303",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2304",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2305",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2306",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2307",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2308",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2309",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2310",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2311",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2312",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2313",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2314",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2315",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2316",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2317",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2318",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2319",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2320",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2321",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2322",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2323",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2324",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2325",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2326",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2327",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2328",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2329",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2330",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2331",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2332",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2333",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2334",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2335",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2336",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2337",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2338",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2339",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2340",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2341",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2342",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2343",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2344",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2345",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2346",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2347",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2348",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2349",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2350",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2351",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2352",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2353",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2354",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2355",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2356",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2357",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2358",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2359",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2360",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2361",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2362",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2363",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2364",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2365",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2366",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2401",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2402",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2403",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2404",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2405",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2406",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2407",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2408",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2409",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2410",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2411",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2412",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2413",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2414",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2415",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2416",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2417",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2418",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2419",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2420",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2421",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2422",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2423",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2424",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2425",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2426",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2427",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2428",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2429",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2430",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2431",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2432",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2433",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2434",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2435",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2436",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2437",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2438",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2439",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2440",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2441",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2442",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2443",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2444",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2445",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2446",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2447",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2448",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2449",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2450",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2451",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2452",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2453",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2454",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2455",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2456",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2457",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2458",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2459",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2460",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2461",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2462",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2463",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2464",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2465",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2466",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2501",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2502",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2503",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2504",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2505",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2506",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2507",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2508",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2509",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2510",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2511",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2512",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2513",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2514",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2515",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2516",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2517",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2518",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2519",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2520",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2521",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2522",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2523",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2524",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2525",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2526",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2527",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2528",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2529",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2530",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2531",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2532",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2533",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2534",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2535",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2536",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2537",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2538",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2539",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2540",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2541",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2542",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2543",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2544",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2545",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2546",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2547",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2548",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2549",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2550",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2551",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2552",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2553",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2554",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2555",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2556",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2557",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2558",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2559",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2560",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2561",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2562",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2563",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2564",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2565",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2566",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2601",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2602",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2603",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2604",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2605",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2606",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2607",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2608",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2609",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2610",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2611",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2612",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2613",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2614",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2615",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2616",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2617",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2618",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2619",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2620",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2621",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2622",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2623",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2624",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2625",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2626",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2627",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2628",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2629",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2630",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2631",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2632",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2633",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2634",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2635",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2636",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2637",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2638",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2639",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2640",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2641",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2642",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2643",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2644",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2645",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2646",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2647",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2648",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2649",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2650",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2651",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2652",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2653",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2654",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2655",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2656",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2657",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2658",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2659",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2660",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2661",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2662",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2663",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2664",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2665",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2666",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2701",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2702",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2703",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2704",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2705",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2706",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2707",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2708",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2709",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2710",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2711",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2712",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2713",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2714",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2715",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2716",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2717",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2718",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2719",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2720",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2721",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2722",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2723",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2724",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2725",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2726",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2727",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2728",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2729",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2730",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2731",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2732",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2733",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2734",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2735",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2736",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2737",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2738",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2739",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2740",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2741",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2742",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2743",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2744",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2745",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2746",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2747",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2748",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2749",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2750",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2751",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2752",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2753",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2754",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2755",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2756",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2757",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2758",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2759",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2760",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2761",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2762",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2763",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2764",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2765",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2766",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2801",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2802",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2803",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2804",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2805",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2806",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2807",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2808",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2809",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2810",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2811",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2812",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2813",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2814",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2815",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2816",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2817",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2818",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2819",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2820",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2821",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2822",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2823",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2824",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2825",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2826",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2827",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2828",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2829",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2830",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2831",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2832",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2833",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2834",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2835",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2836",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2837",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2838",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2839",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2840",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2841",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2842",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2843",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2844",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2845",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2846",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2847",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2848",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2849",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2850",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2851",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2852",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2853",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2854",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2855",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2856",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2857",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2858",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2859",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2860",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2861",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2862",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2863",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2864",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2865",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2866",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2901",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2902",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2903",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2904",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2905",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2906",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2907",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2908",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2909",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2910",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2911",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2912",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2913",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2914",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2915",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2916",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2917",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2918",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2919",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2920",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2921",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2922",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2923",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2924",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2925",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2926",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2927",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2928",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2929",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2930",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2931",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2932",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2933",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2934",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2935",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2936",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2937",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2938",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2939",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2940",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2941",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2942",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2943",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2944",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2945",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2946",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2947",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2948",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2949",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2950",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2951",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2952",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2953",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2954",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2955",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2956",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2957",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2958",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2959",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2960",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2961",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2962",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2963",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2964",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2965",
+    "terrain": "clear"
+  },
+  {
+    "hexId": "2966",
+    "terrain": "clear"
+  }
+]
