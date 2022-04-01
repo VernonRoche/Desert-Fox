@@ -28,7 +28,7 @@
 
 <script lang="ts" setup>
 import { onUnmounted, ref } from "@vue/runtime-dom";
-import initSocket from "../utils/ClientSocket";
+import socket from "../utils/ClientSocket";
 
 const terminalInput = ref("");
 
@@ -74,8 +74,6 @@ const commands: Commands = {
 const lines = ref<{ data: string; author: string; time: Date }[]>([]);
 
 addLine("Game", "Connexion au serveur...");
-
-const socket = initSocket("localhost", 3001);
 
 socket.on("connect", () => {
   addLine("Game", "Vous êtes connecté au serveur");

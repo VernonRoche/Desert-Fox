@@ -4,4 +4,6 @@ function initSocket(domain: string, port: number): Socket {
   return io(`http://${domain}:${port}`);
 }
 
-export default initSocket;
+const singleton = initSocket("localhost", 3001);
+
+export default singleton;
