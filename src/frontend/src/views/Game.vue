@@ -1,5 +1,5 @@
 <template>
-  <div id="game" class="flex flex-col gap-5 w-full">
+  <div id="game" class="flex h-full gap-5 w-full">
     <GameScreen />
     <GameTerminal />
   </div>

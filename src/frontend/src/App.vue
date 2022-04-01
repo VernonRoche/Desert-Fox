@@ -1,9 +1,10 @@
 <template>
-  <NavBar />
-  <main class="fullscreen">
-    <h1 class="text-center">Bienvenue sur le frontend de Desert Fox</h1>
-    <router-view />
-  </main>
+  <div id="container" class="fullscreen">
+    <NavBar class="h-12 mb-2" />
+    <main class="restofscreen">
+      <router-view />
+    </main>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -17,5 +18,9 @@ nav a.router-link-exact-active {
 
 .fullscreen {
   @apply h-screen w-screen;
+}
+
+.restofscreen {
+  height: calc(100vh - calc(3rem + 12px));
 }
 </style>

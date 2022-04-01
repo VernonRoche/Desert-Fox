@@ -1,5 +1,5 @@
 <template>
-  <div id="game-terminal" class="flex flex-col w-full bg-black rounded h-32">
+  <div id="game-terminal" class="h-full w-1/5 flex flex-col bg-black rounded">
     <div id="terminal" class="text-white overflow-y-scroll h-full">
       <!-- Besoin de changer le v-scroll-to mais fonctionne pour l'instant -->
       <p v-for="(line, index) in lines" :key="index" v-scroll-to class="pl-4">
@@ -28,7 +28,7 @@
 
 <script lang="ts" setup>
 import { onUnmounted, ref } from "@vue/runtime-dom";
-import ClientSocket from "../utils/ClientSocket";
+import socket from "../utils/ClientSocket";
 
 const terminalInput = ref("");
 
@@ -61,6 +61,9 @@ const commands: Commands = {
       unitId: args[0],
       hexId: args[1],
     });
+    socket.once("move", (...args: any[]) => {
+      addLine("Game", args.join(" "));
+    });
   },
   units: () =>
     socket.send("command", {
@@ -72,17 +75,15 @@ const lines = ref<{ data: string; author: string; time: Date }[]>([]);
 
 addLine("Game", "Connexion au serveur...");
 
-const socket = new ClientSocket("localhost", 3001);
-
-socket.eventListener("connect", () => {
+socket.on("connect", () => {
   addLine("Game", "Vous êtes connecté au serveur");
 });
 
-socket.eventListener("pong message", (msg) => {
+socket.on("pong message", (msg) => {
   addLine("Game", msg);
 });
 
-socket.eventListener("commandMessage", (resp: any) => {
+socket.on("commandMessage", (resp: any) => {
   if (resp.error) {
     addLine("Game", resp.error);
   } else {
@@ -102,6 +103,7 @@ function toFrenchDate(date: Date) {
     day: "numeric",
     hour: "numeric",
     minute: "numeric",
+    second: "numeric",
   });
 }
 

@@ -1,4 +1,3 @@
-import { traceDeprecation } from "process";
 import Two from "two.js";
 import { Anchor } from "two.js/src/anchor";
 
