@@ -38,20 +38,16 @@ enum Phase {
   VICTORY_CHECK,
   TURN_MARKER,
   NONE,
-
 }
 
 export default class Turn {
   private _currentPhase: Phase;
   private _currentPlayer: PlayerID;
 
-
-
   constructor() {
     this._currentPhase = Phase.INITIAL;
     this._currentPlayer = PlayerID.ONE;
   }
-
 
   getCurrentPhase(): Phase {
     return this._currentPhase;
@@ -63,8 +59,14 @@ export default class Turn {
 
   switchPlayer(): void {
     this._currentPlayer = (this._currentPlayer % 2) + 1;
-    if (this._currentPlayer == 2) {
+    if (this._currentPlayer == PlayerID.TWO) {
       this._currentPhase = 1;
+    }
+  }
+
+  public nextPhase(): void {
+    if (this.getCurrentPhase() == Phase.INITIAL) {
+      this._currentPhase = Phase.FIRST_PLAYER_MOVEMENT;
     }
   }
 
@@ -74,7 +76,4 @@ export default class Turn {
       this._currentPhase = 1;
     }
   }
-
-
-
 }
