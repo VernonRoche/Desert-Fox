@@ -1,8 +1,6 @@
 import PlayerID from "./PlayerID";
 
 enum Phase {
-  INITIAL,
-
   //Strategic impulse
   EVENT,
   AIR_SUPERIORITY,
@@ -45,7 +43,7 @@ export default class Turn {
   private _currentPlayer: PlayerID;
 
   constructor() {
-    this._currentPhase = Phase.INITIAL;
+    this._currentPhase = Phase.AIR_SUPERIORITY;
     this._currentPlayer = PlayerID.ONE;
   }
 
@@ -65,14 +63,14 @@ export default class Turn {
   }
 
   public nextPhase(): void {
-    if (this.getCurrentPhase() == Phase.INITIAL) {
+    if (this.getCurrentPhase() == Phase.AIR_SUPERIORITY) {
       this._currentPhase = Phase.FIRST_PLAYER_MOVEMENT;
     }
   }
 
   public changePhase(): void {
     this._currentPhase = this._currentPhase + 1;
-    if (this.getCurrentPhase() == 21) {
+    if (this.getCurrentPhase() == 20) {
       this._currentPhase = 1;
     }
   }

@@ -2,6 +2,9 @@ import AbstractUnit from "./AbstractUnit";
 import HexID from "../Map/HexID";
 
 export default class AntiTank extends AbstractUnit {
+  is_movement(): boolean {
+    throw new Error("Method not implemented.");
+  }
   refit(): void {
     throw new Error("Method not implemented.");
   }

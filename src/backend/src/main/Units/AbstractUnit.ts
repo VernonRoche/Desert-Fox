@@ -18,4 +18,5 @@ export default abstract class AbstractUnit extends Moveable {
   abstract overrun(hexId: HexID): void;
   abstract hasGeneralSupply(): boolean;
   abstract attack(hexId: HexID, combatSupply: boolean): void;
+  abstract is_movement(): boolean;
 }
