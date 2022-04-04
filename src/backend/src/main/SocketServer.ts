@@ -102,6 +102,7 @@ export class SocketServer {
     this.eventConnection((socket) => {
       if (this._sockets.length === 2) {
         socket.emit("commandMessage", { error: "full" });
+        socket.disconnect(true);
         return;
       }
 
