@@ -18,6 +18,12 @@ export default class Game {
     this._map = map;
   }
 
+  // check if a move is possible
+  // it does not apply move
+  // return true if can move
+  // return a string containing the reason if it cannot
+  // do not try if(canMove) since it will always be true
+  // check if(canMove === true)
   public canMove(playerId: PlayerID, unit: AbstractUnit, destination: HexID): true | string {
     const destinationHex = this._map.findHex(destination);
     if (!destinationHex) return "no destination";
