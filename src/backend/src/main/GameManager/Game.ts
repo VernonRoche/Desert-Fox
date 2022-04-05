@@ -4,7 +4,6 @@ import GameMap from "../Map/GameMap";
 import AbstractUnit from "../Units/AbstractUnit";
 import HexID from "../Map/HexID";
 import PlayerID from "./PlayerID";
-import Hex from "../Map/Hex";
 
 export default class Game {
   private _turn: Turn;
@@ -21,24 +20,23 @@ export default class Game {
 
   // Checks if a move is possible and applies it.
   // Returns false if the move was not possible, true if move was succesful.
-  public moveUnit(playerId: PlayerID, unit: AbstractUnit, destination: HexID): boolean {
+  public moveUnit(playerId: PlayerID, unit: AbstractUnit, destination: HexID): void {
     // Get the owner of the destination hex to see if we can move there
 
     // Check if hexagon exists
     const destinationHex = this._map.findHex(destination);
-    if (!destinationHex) return false;
+    if (!destinationHex) throw new Error("no destination");
 
     // Check if unit exists and that the player owns it
     const player: Player = playerId === PlayerID.ONE ? this._player1 : this._player2;
-    if (!player.hasUnit(unit)) return false;
+    if (!player.hasUnit(unit)) throw new Error("no unit");
 
     // Check if move is possible
     const originHex = this._map.findHex(unit.currentPosition());
 
-    if (!destinationHex.addUnit(unit)) return false;
+    destinationHex.addUnit(unit);
     originHex.removeUnit(unit);
     unit.place(destination);
-    return true;
   }
 
   getTurn(): Turn {
