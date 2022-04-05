@@ -1,4 +1,4 @@
-import {Turn} from "./Turn";
+import { Turn } from "./Turn";
 import Player from "./Player";
 import GameMap from "../Map/GameMap";
 import AbstractUnit from "../Units/AbstractUnit";
@@ -18,22 +18,31 @@ export default class Game {
     this._map = map;
   }
 
+  public canMove(playerId: PlayerID, unit: AbstractUnit, destination: HexID): true | string {
+    const destinationHex = this._map.findHex(destination);
+    if (!destinationHex) return "no destination";
+
+    // Check if unit exists and that the player owns it
+    const player: Player = playerId === PlayerID.ONE ? this._player1 : this._player2;
+    if (!player.hasUnit(unit)) return "no unit";
+
+    // Check if move is possible
+    return true;
+  }
+
   // Checks if a move is possible and applies it.
   // Returns false if the move was not possible, true if move was succesful.
   public moveUnit(playerId: PlayerID, unit: AbstractUnit, destination: HexID): void {
     // Get the owner of the destination hex to see if we can move there
 
-    // Check if hexagon exists
-    const destinationHex = this._map.findHex(destination);
-    if (!destinationHex) throw new Error("no destination");
-
-    // Check if unit exists and that the player owns it
-    const player: Player = playerId === PlayerID.ONE ? this._player1 : this._player2;
-    if (!player.hasUnit(unit)) throw new Error("no unit");
+    const canMove = this.canMove(playerId, unit, destination);
+    if (canMove !== true) {
+      throw new Error(`Cannot move unit: ${canMove}`);
+    }
 
     // Check if move is possible
     const originHex = this._map.findHex(unit.currentPosition());
-
+    const destinationHex = this._map.findHex(destination);
     destinationHex.addUnit(unit);
     originHex.removeUnit(unit);
     unit.place(destination);
