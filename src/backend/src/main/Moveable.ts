@@ -52,6 +52,14 @@ export default abstract class Moveable implements Entity {
     throw new Error("Method not implemented.");
   }
 
+  public getMovementPoints(): number {
+    return this._movementPoints;
+  }
+  
+  public getRemainingMovementPoints(): number {
+    return this._remainingMovementPoints;
+  }
+  
   public resetMovementPoints(): void {
     this._remainingMovementPoints = this._movementPoints;
   }

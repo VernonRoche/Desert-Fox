@@ -11,6 +11,7 @@ const height = 29;
 type JsonMap = {
   hexId: string;
   terrain: string;
+  units: string[];
 }[];
 export default class GameMap {
   private _entities: Entity[];
@@ -54,9 +55,12 @@ export default class GameMap {
   public toJSON(): string {
     const json: JsonMap = [];
     this._hexagons.forEach((hex) => {
+      let units: string[] = [];
+      hex.units().forEach((unit) => units.push(unit.toJson()))
       json.push({
         hexId: hex.getID(),
         terrain: hex.getTerrain(),
+        units: units
       });
     });
     return JSON.stringify(json);
