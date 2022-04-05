@@ -82,7 +82,7 @@ const statesWithUserInput = {
 
 }
 const TurnPhases = {
-    initial: 'event',
+    initial: 'air_superiority',
     states: {
         ...statesWithUserInput,
         supply_attrition: {
@@ -97,7 +97,7 @@ const TurnPhases = {
         },
         turn_marker: {
             on: {
-                NEXT : 'event'
+                NEXT : 'air_superiority'
             }
         },
         }
