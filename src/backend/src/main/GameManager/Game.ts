@@ -1,4 +1,4 @@
-import Turn from "./Turn";
+import {Turn} from "./Turn";
 import Player from "./Player";
 import GameMap from "../Map/GameMap";
 import AbstractUnit from "../Units/AbstractUnit";

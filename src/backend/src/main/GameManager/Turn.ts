@@ -38,7 +38,7 @@ enum Phase {
   NONE,
 }
 
-export default class Turn {
+export class Turn {
   private _currentPhase: Phase;
   private _currentPlayer: PlayerID;
 
@@ -75,3 +75,4 @@ export default class Turn {
     }
   }
 }
+ export default Phase;
