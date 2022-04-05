@@ -9,23 +9,6 @@ import HexID from "./Map/HexID";
 import AbstractUnit from "./Units/AbstractUnit";
 import Maps from "./Map/Maps";
 
-type BaseCommand = {
-  type: string;
-};
-
-type AllArgs = MoveArgs | AttackArgs;
-
-type MoveArgs = {
-  hexId?: string;
-  unitId?: string;
-};
-
-type AttackArgs = MoveArgs & {
-  combatSupply?: boolean;
-};
-
-type Commands = Record<string, (args: AllArgs) => void>;
-
 let id = 0;
 
 export class SocketServer {
@@ -37,43 +20,6 @@ export class SocketServer {
   private _game?: Game;
   private _players: Player[] = [];
   private _created = false;
-
-  private _commands: (player: Player) => Commands = (player: Player) => ({
-    move: (args: MoveArgs) => {
-      if (!args.unitId || !args.hexId) {
-        player.getSocket().emit("commandMessage", { error: "invalidargs" });
-        return;
-      }
-      const unitId = +args.unitId;
-      if (isNaN(unitId)) {
-        player.getSocket().emit("commandMessage", { error: "invalidunitid" });
-        return;
-      }
-      const unit = player.getUnitById(unitId);
-      if (!unit) {
-        player.getSocket().emit("commandMessage", { error: "invalidunit" });
-        return;
-      }
-      const x = +args.hexId.substring(2, 4);
-      const y = +args.hexId.substring(0, 2);
-      if (isNaN(x) || isNaN(y)) {
-        player.getSocket().emit("commandMessage", { error: "invalidhex" });
-        return;
-      }
-      try {
-        this._game?.moveUnit(player.getId(), unit, new HexID(x, y));
-        console.log("move was successful");
-      } catch (e) {
-        console.log("move was unsuccessful:", e);
-      }
-    },
-    units: () => {
-      console.log("player (", player.getId(), ") has", player.getUnits().length, "units");
-      const playerUnits = player.getUnits();
-      console.log("player units:", playerUnits);
-      player.getSocket().emit("commandMessage", playerUnits);
-    },
-  });
 
   constructor(listener: Express, clientPort: number, serverPort: number) {
     this._clientPort = clientPort;
@@ -161,7 +107,7 @@ export class SocketServer {
       this._socketServer.emit("message", data);
     });
 
-    socketClient.on("command", (data: (BaseCommand & AttackArgs)[]) => {
+    /* socketClient.on("command", (data: (BaseCommand & AttackArgs)[]) => {
       if (!this._game) {
         socketClient.emit("commandMessage", { error: "nogame" });
         return;
@@ -181,7 +127,10 @@ export class SocketServer {
       console.log(`User [${socketClient.id}] sent a command : ${request.type}`);
 
       this._socketServer.emit("commandMessage", { error: false });
-    });
+    }); */
+  }
+  getGame(): Game | undefined {
+    return this._game;
   }
 }
 
