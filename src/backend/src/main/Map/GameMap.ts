@@ -27,13 +27,17 @@ export default class GameMap {
       const x = +hexId.substring(2, 4);
       const y = +hexId.substring(0, 2);
       const validTerrain = validTerrains.includes(terrain);
-      if (terrain != "empty" && validTerrain) {
+      if (validTerrain) {
         const hexID = new HexID(x, y);
         const _terrain = new Terrain(terrain as TerrainTypes);
         const hex = new Hex(hexID, _terrain);
         this._hexagons.set(hexID.id(), hex);
       }
     });
+  }
+
+  public getHexes(): Map<string, Hex> {
+    return this._hexagons;
   }
 
   public findHex(hexId: HexID): Hex {
@@ -45,7 +49,7 @@ export default class GameMap {
     return hex;
   }
 
-  public getUnits(): Entity[] {
+  public getEntities(): Entity[] {
     return this._entities;
   }
 
@@ -56,16 +60,16 @@ export default class GameMap {
   public toJSON(): string {
     const json: JsonMap = [];
     this._hexagons.forEach((hex) => {
-      let units: {
+      const units: {
         id: number;
         currentPosition: HexID;
         movementPoints: number;
         remainingMovementPoints: number;
       }[] = [];
-      hex.units().forEach((unit) => units.push(unit.toJson()));
+      hex.getUnits().forEach((unit) => units.push(unit.toJson()));
       json.push({
-        hexId: hex.getID(),
-        terrain: hex.getTerrain(),
+        hexId: hex.getID().id(),
+        terrain: hex.getTerrain().terrainType,
         units: units,
       });
     });
