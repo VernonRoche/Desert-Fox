@@ -3,60 +3,6 @@ import HexID from "../Map/HexID";
 import webSocketServer, { SocketServer } from "../SocketServer";
 import Player from "./Player";
 
-type BaseCommand = {
-  type: string;
-};
-
-type AllArgs = MoveArgs | AttackArgs;
-
-type MoveArgs = {
-  hexId?: string;
-  unitId?: string;
-};
-
-type AttackArgs = MoveArgs & {
-  combatSupply?: boolean;
-};
-
-type Commands = Record<string, (args: AllArgs) => void>;
-
-const _commands: (player: Player) => Commands = (player: Player) => ({
-  move: (args: MoveArgs) => {
-    if (!args.unitId || !args.hexId) {
-      player.getSocket().emit("commandMessage", { error: "invalidargs" });
-      return;
-    }
-    const unitId = +args.unitId;
-    if (isNaN(unitId)) {
-      player.getSocket().emit("commandMessage", { error: "invalidunitid" });
-      return;
-    }
-    const unit = player.getUnitById(unitId);
-    if (!unit) {
-      player.getSocket().emit("commandMessage", { error: "invalidunit" });
-      return;
-    }
-    const x = +args.hexId.substring(2, 4);
-    const y = +args.hexId.substring(0, 2);
-    if (isNaN(x) || isNaN(y)) {
-      player.getSocket().emit("commandMessage", { error: "invalidhex" });
-      return;
-    }
-    try {
-      webSocketServer.getGame()?.moveUnit(player.getId(), unit, new HexID(x, y));
-      console.log("move was successful");
-    } catch (e) {
-      console.log("move was unsuccessful:", e);
-    }
-  },
-  units: () => {
-    console.log("player (", player.getId(), ") has", player.getUnits().length, "units");
-    const playerUnits = player.getUnits();
-    console.log("player units:", playerUnits);
-    player.getSocket().emit("commandMessage", playerUnits);
-  },
-});
-
 function throwError(error: string): () => void {
   return () => {
     throw new Error("invalid command for current phase : " + error);
@@ -79,9 +25,9 @@ function attack(args: any): void {
 }
 
 function importCommands(functions: ((args: any) => void)[]): any {
-  let result = {};
+  const result = {};
   Object.assign(result, commands);
-  for (let functioni of functions) {
+  for (const functioni of functions) {
     //@ts-expect-error playing with fire
     if (result[functioni.name]) result[functioni.name] = key;
   }
@@ -224,14 +170,29 @@ createMachine({
 
 const TurnMachine = createMachine(TurnPhases);
 const phaseService = interpret(TurnMachine)
-  .onTransition((state) => state.value)
+  .onTransition((state) => {
+    if (!(state.value.toString() in statesWithUserInput)) {
+      runPhaseActions(state.value.toString());
+    }
+  })
   .start();
 
-function runPhaseActions(actualPhase: string, args: any): void {
-  for (let command of statesWithUserInput[actualPhase].commands) {
-    if (command[args.type] && args.type === "move") {
-      // TO COMPLETE
+function runPhaseActions(actualPhase: string): void {
+  while (!(actualPhase in statesWithUserInput)) {
+    switch (actualPhase) {
+      case "air_superiority": //TODO
+        break;
+      case "supply_attrition": //TODO
+        break;
+      case "victory_check": //TODO
+        break;
+      case "turn_marker": //TODO
+        break;
+      default:
+        break;
     }
+    phaseService.send("NEXT");
+    webSocketServer.broadcast("auto", actualPhase);
   }
 }
 

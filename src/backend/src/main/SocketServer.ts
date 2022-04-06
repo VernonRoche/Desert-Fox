@@ -8,9 +8,80 @@ import Player from "./GameManager/Player";
 import HexID from "./Map/HexID";
 import AbstractUnit from "./Units/AbstractUnit";
 import Maps from "./Map/Maps";
+import phaseService from "./GameManager/StateMachine";
 
 let id = 0;
 
+type BaseCommand = {
+  type: string;
+};
+
+enum commandTypes {
+  move = "move",
+  attack = "attack",
+  select = "select",
+  train = "train",
+  activate = "activate",
+}
+type AllArgs = BaseCommand & (MoveArgs | AttackArgs);
+
+type MoveArgs = {
+  hexId?: string;
+  unitId?: string;
+};
+
+type AttackArgs = MoveArgs & {
+  combatSupply?: boolean;
+};
+
+type Commands = Record<string, (args: AllArgs) => void>;
+
+const _commands: (player: Player) => Commands = (player: Player) => ({
+  move: (args: MoveArgs & BaseCommand) => {
+    if (
+      (player.getId() === 0 &&
+        phaseService.state.value !== "first_player_movement" &&
+        phaseService.state.value !== "first_player_movement2") ||
+      (player.getId() === 1 &&
+        phaseService.state.value !== "second_player_movement" &&
+        phaseService.state.value !== "second_player_movement2")
+    ) {
+      player.getSocket().emit(args.type, { error: "turnerror" });
+    }
+    if (!args.unitId || !args.hexId) {
+      player.getSocket().emit(args.type, { error: "invalidargs" });
+      return;
+    }
+    const unitId = +args.unitId;
+    if (isNaN(unitId)) {
+      player.getSocket().emit(args.type, { error: "invalidunitid" });
+      return;
+    }
+    const unit = player.getUnitById(unitId);
+    if (!unit) {
+      player.getSocket().emit(args.type, { error: "invalidunit" });
+      return;
+    }
+    const x = +args.hexId.substring(2, 4);
+    const y = +args.hexId.substring(0, 2);
+    if (isNaN(x) || isNaN(y)) {
+      player.getSocket().emit(args.type, { error: "invalidhex" });
+      return;
+    }
+    try {
+      webSocketServer.getGame()?.moveUnit(player.getId(), unit, new HexID(x, y));
+      console.log("move was successful");
+    } catch (e) {
+      player.getSocket().emit(args.type, { error: "invalidmove" });
+    }
+  },
+  units: () => {
+    console.log("player (", player.getId(), ") has", player.getUnits().length, "units");
+    const playerUnits = player.getUnits();
+    console.log("player units:", playerUnits);
+    player.getSocket().emit("units", playerUnits);
+  },
+});
 export class SocketServer {
   private _httpServer: http.Server;
   private _socketServer: Server;
@@ -69,14 +140,15 @@ export class SocketServer {
 
         this._created = true;
         this._game = new Game(new GameMap([], "libya" as Maps), this._players[0], this._players[1]);
-        this._game.getMap().addUnit(garrison);
-        this.broadcast("gameCreated", this._game.getMap().toJSON());
+        const map = this._game.getMap();
+        map.addUnit(garrison);
+        this.broadcast("gameCreated", { map: map.toJSON(), entities: map.getEntities() });
       }
       this.applyRoutes(socket);
     });
   }
 
-  public broadcast(nameEvent: string, data: string | JSON): void {
+  public broadcast(nameEvent: string, data: any): void {
     this._socketServer.emit(nameEvent, data);
   }
 
@@ -109,6 +181,22 @@ export class SocketServer {
       console.log(`User [${socketClient.id}] sent a message : ${data}`);
       this._socketServer.emit("message", data);
     });
+    socketClient.on("command", (data: { type: commandTypes } & AllArgs) => {
+      if (!this._game) {
+        socketClient.emit(data.type, { error: "nogame" });
+        return;
+      }
+      const currentPlayer = this.getPlayerFromSocket(socketClient);
+      const request = data.type;
+      if (!_commands(currentPlayer)[request]) {
+        socketClient.emit(request, { error: "invalidcommand" });
+        return;
+      }
+      _commands(currentPlayer)[request](data);
+    });
+    socketClient.on("done", () => {
+      phaseService.send("NEXT");
+    });
 
     /* socketClient.on("command", (data: (BaseCommand & AttackArgs)[]) => {
       if (!this._game) {
@@ -134,6 +222,9 @@ export class SocketServer {
   }
   getGame(): Game | undefined {
     return this._game;
+  }
+  getPlayerFromSocket(socket: Socket): Player {
+    return this._players.find((player) => player.getSocket().id === socket.id) as Player;
   }
 }
 
