@@ -56,11 +56,11 @@ export default class GameMap {
     const json: JsonMap = [];
     this._hexagons.forEach((hex) => {
       let units: string[] = [];
-      hex.units().forEach((unit) => units.push(unit.toJson()))
+      hex.units().forEach((unit) => units.push(unit.toJson()));
       json.push({
         hexId: hex.getID(),
         terrain: hex.getTerrain(),
-        units: units
+        units: units,
       });
     });
     return JSON.stringify(json);

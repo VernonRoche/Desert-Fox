@@ -21,9 +21,11 @@ export default abstract class AbstractUnit extends Moveable {
   abstract attack(hexId: HexID, combatSupply: boolean): void;
   abstract is_movement(): boolean;
   toJson(): string {
-    return JSON.stringify({id: this.getID(),
+    return JSON.stringify({
+      id: this.getID(),
       currentPosition: this.currentPosition(),
       movementPoints: this.getMovementPoints(),
-      remainingMovementPoints: this.getRemainingMovementPoints()});
+      remainingMovementPoints: this.getRemainingMovementPoints(),
+    });
   }
 }
