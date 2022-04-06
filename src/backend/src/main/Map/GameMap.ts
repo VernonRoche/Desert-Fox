@@ -27,7 +27,7 @@ export default class GameMap {
       const x = +hexId.substring(2, 4);
       const y = +hexId.substring(0, 2);
       const validTerrain = validTerrains.includes(terrain);
-      if (terrain != "empty" && validTerrain) {
+      if (validTerrain) {
         const hexID = new HexID(x, y);
         const _terrain = new Terrain(terrain as TerrainTypes);
         const hex = new Hex(hexID, _terrain);
@@ -56,7 +56,7 @@ export default class GameMap {
   public toJSON(): string {
     const json: JsonMap = [];
     this._hexagons.forEach((hex) => {
-      let units: {
+      const units: {
         id: number;
         currentPosition: HexID;
         movementPoints: number;
