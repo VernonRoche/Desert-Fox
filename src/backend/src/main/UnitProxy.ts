@@ -2,6 +2,9 @@ import AbstractUnit from "./Units/AbstractUnit";
 import HexID from "./Map/HexID";
 
 export default class UnitProxy extends AbstractUnit {
+  is_movement(): boolean {
+    throw new Error("Method not implemented.");
+  }
   refit(): void {
     throw new Error("Method not implemented.");
   }

@@ -2,6 +2,9 @@ import AbstractUnit from "./AbstractUnit";
 import HexID from "../Map/HexID";
 
 export default class Garrison extends AbstractUnit {
+  is_movement(): boolean {
+    throw new Error("Method not implemented.");
+  }
   refit(): void {
     throw new Error("Method not implemented.");
   }
@@ -21,9 +24,6 @@ export default class Garrison extends AbstractUnit {
     throw new Error("Method not implemented.");
   }
   attack(hexId: HexID, combatSupply: boolean): void {
-    throw new Error("Method not implemented.");
-  }
-  getId(): number {
     throw new Error("Method not implemented.");
   }
 }

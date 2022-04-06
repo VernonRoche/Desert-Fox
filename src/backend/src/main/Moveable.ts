@@ -40,17 +40,24 @@ export default abstract class Moveable implements Entity {
 
   // Checks if there are remaining movement points left and if yes
   // then remove one movement point and update current hex position
-  public move(hexId: HexID): boolean {
+  public move(hexId: HexID): void {
     if (this._remainingMovementPoints <= 0) {
-      return false;
+      throw new Error("no movement points left");
     }
     this._currentPosition = hexId;
     this._remainingMovementPoints--;
-    return true;
   }
 
   public nightMove(hexId: HexID): void {
     throw new Error("Method not implemented.");
+  }
+
+  public getMovementPoints(): number {
+    return this._movementPoints;
+  }
+
+  public getRemainingMovementPoints(): number {
+    return this._remainingMovementPoints;
   }
 
   public resetMovementPoints(): void {
