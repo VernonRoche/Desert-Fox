@@ -17,10 +17,10 @@ class Pathfinder {
     while (nextNode !== start) {
       let minWeigth: number = Number.MAX_VALUE;
       let minNode: HexID = new HexID(-1, -1);
-      for (const i of this.nodes[nextNode.toString()].nodes) {
-        if (i.weight + this.nodes[i.nameOfVertex].weight < minWeigth) {
-          minWeigth = this.nodes[i.nameOfVertex].weight;
-          minNode = i.nameOfVertex;
+      for (const i of this.nodes[nextNode.toString()].neighbourNodes) {
+        if (i.weight + this.nodes[i.name.toString()].weight < minWeigth) {
+          minWeigth = this.nodes[i.name.toString()].weight;
+          minNode = i.name;
         }
       }
       arrayWithNode.push(minNode);
@@ -45,9 +45,9 @@ class Pathfinder {
       const sortedVisitedByWeight: string[] = Object.keys(nodes).sort(
         (a, b) => this.nodes[a].weight - this.nodes[b].weight,
       );
-      const currentVertex: PathfinderNode = this.nodes[sortedVisitedByWeight[0]];
-      for (const j of currentVertex.neighbourNodes) {
-        const calculateWeight: number = currentVertex.weight + j.weight;
+      const currentNode: PathfinderNode = this.nodes[sortedVisitedByWeight[0]];
+      for (const j of currentNode.neighbourNodes) {
+        const calculateWeight: number = currentNode.weight + j.weight;
         if (calculateWeight < this.nodes[j.name.toString()].weight) {
           this.nodes[j.name.toString()].weight = calculateWeight;
         }
