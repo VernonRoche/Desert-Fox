@@ -3,28 +3,11 @@ import { Server, Socket } from "socket.io";
 import express, { Express } from "express";
 import Game from "./GameManager/Game";
 import GameMap from "./Map/GameMap";
-import Horse from "./Units/Horse";
+import Garrison from "./Units/Garrison";
 import Player from "./GameManager/Player";
 import HexID from "./Map/HexID";
 import AbstractUnit from "./Units/AbstractUnit";
 import Maps from "./Map/Maps";
-
-type BaseCommand = {
-  type: string;
-};
-
-type AllArgs = MoveArgs | AttackArgs;
-
-type MoveArgs = {
-  hexId?: string;
-  unitId?: string;
-};
-
-type AttackArgs = MoveArgs & {
-  combatSupply?: boolean;
-};
-
-type Commands = Record<string, (args: AllArgs) => void>;
 
 let id = 0;
 
@@ -37,39 +20,6 @@ export class SocketServer {
   private _game?: Game;
   private _players: Player[] = [];
   private _created = false;
-
-  private _commands: (player: Player) => Commands = (player: Player) => ({
-    move: (args: MoveArgs) => {
-      if (!args.unitId || !args.hexId) {
-        player.getSocket().emit("commandMessage", { error: "invalidargs" });
-        return;
-      }
-      const unitId = +args.unitId;
-      if (isNaN(unitId)) {
-        player.getSocket().emit("commandMessage", { error: "invalidunitid" });
-        return;
-      }
-      const unit = player.getUnitById(unitId);
-      if (!unit) {
-        player.getSocket().emit("commandMessage", { error: "invalidunit" });
-        return;
-      }
-      const x = +args.hexId.substring(2, 4);
-      const y = +args.hexId.substring(0, 2);
-      if (isNaN(x) || isNaN(y)) {
-        player.getSocket().emit("commandMessage", { error: "invalidhex" });
-        return;
-      }
-      const successful = this._game?.moveUnit(player.getId(), unit, new HexID(x, y));
-      console.log("move was successful: ", successful);
-    },
-    units: () => {
-      console.log("player (", player.getId(), ") has", player.getUnits().length, "units");
-      const playerUnits = player.getUnits();
-      console.log("player units:", playerUnits);
-      player.getSocket().emit("commandMessage", playerUnits);
-    },
-  });
 
   constructor(listener: Express, clientPort: number, serverPort: number) {
     this._clientPort = clientPort;
@@ -102,6 +52,7 @@ export class SocketServer {
     this.eventConnection((socket) => {
       if (this._sockets.length === 2) {
         socket.emit("commandMessage", { error: "full" });
+        socket.disconnect(true);
         return;
       }
 
@@ -110,14 +61,15 @@ export class SocketServer {
       this._players.push(new Player(this._sockets.length, units, [], [], [], socket));
       this._sockets.push(socket);
       if (this._sockets.length >= 2 && !this._created) {
+        console.log("Game created");
         //For Prototype Purposes
-        const horseHexId = new HexID(2, 2);
-        const horse = new Horse(id++, horseHexId, 1, 1);
-        units.push(horse);
+        const garrisonHexId = new HexID(2, 2);
+        const garrison = new Garrison(id++, garrisonHexId, 1, 1);
+        units.push(garrison);
 
         this._created = true;
         this._game = new Game(new GameMap([], "libya" as Maps), this._players[0], this._players[1]);
-        this._game.getMap().addUnit(horse);
+        this._game.getMap().addUnit(garrison);
         this.broadcast("gameCreated", this._game.getMap().toJSON());
       }
       this.applyRoutes(socket);
@@ -140,15 +92,17 @@ export class SocketServer {
     socketClient.on("ping message", () => {
       socketClient.emit("pong message", "pong");
     });
-
-    const currentPlayer =
-      this._players[0].getSocket().id === socketClient.id ? this._players[0] : this._players[1]; // get player TODO: kristo t nul;
-
     socketClient.on("disconnect", () => {
       console.log(`User [${socketClient.id}] disconnected !`);
       // keep all sockets that have a different id than current
       // is pretty much just a remove
       this._sockets = this._sockets.filter((socket) => socket.id !== socketClient.id);
+      if (this._created) {
+        console.log("Game destroyed");
+        this._created = false;
+        this._players.filter((player) => player.getSocket().id !== socketClient.id);
+        this._game = undefined;
+      }
     });
 
     socketClient.on("message", (data: any) => {
@@ -156,7 +110,7 @@ export class SocketServer {
       this._socketServer.emit("message", data);
     });
 
-    socketClient.on("command", (data: (BaseCommand & AttackArgs)[]) => {
+    /* socketClient.on("command", (data: (BaseCommand & AttackArgs)[]) => {
       if (!this._game) {
         socketClient.emit("commandMessage", { error: "nogame" });
         return;
@@ -176,7 +130,10 @@ export class SocketServer {
       console.log(`User [${socketClient.id}] sent a command : ${request.type}`);
 
       this._socketServer.emit("commandMessage", { error: false });
-    });
+    }); */
+  }
+  getGame(): Game | undefined {
+    return this._game;
   }
 }
 

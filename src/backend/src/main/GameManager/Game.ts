@@ -1,10 +1,9 @@
-import Turn from "./Turn";
+import { Turn } from "./Turn";
 import Player from "./Player";
 import GameMap from "../Map/GameMap";
 import AbstractUnit from "../Units/AbstractUnit";
 import HexID from "../Map/HexID";
 import PlayerID from "./PlayerID";
-import Hex from "../Map/Hex";
 
 export default class Game {
   private _turn: Turn;
@@ -19,26 +18,40 @@ export default class Game {
     this._map = map;
   }
 
-  // Checks if a move is possible and applies it.
-  // Returns false if the move was not possible, true if move was succesful.
-  public moveUnit(playerId: PlayerID, unit: AbstractUnit, destination: HexID): boolean {
-    // Get the owner of the destination hex to see if we can move there
-
-    // Check if hexagon exists
+  // check if a move is possible
+  // it does not apply move
+  // return true if can move
+  // return a string containing the reason if it cannot
+  // do not try if(canMove) since it will always be true
+  // check if(canMove === true)
+  public canMove(playerId: PlayerID, unit: AbstractUnit, destination: HexID): true | string {
     const destinationHex = this._map.findHex(destination);
-    if (!destinationHex) return false;
+    if (!destinationHex) return "no destination";
 
     // Check if unit exists and that the player owns it
     const player: Player = playerId === PlayerID.ONE ? this._player1 : this._player2;
-    if (!player.hasUnit(unit)) return false;
+    if (!player.hasUnit(unit)) return "no unit";
+
+    // Check if move is possible
+    return true;
+  }
+
+  // Checks if a move is possible and applies it.
+  // Returns false if the move was not possible, true if move was succesful.
+  public moveUnit(playerId: PlayerID, unit: AbstractUnit, destination: HexID): void {
+    // Get the owner of the destination hex to see if we can move there
+
+    const canMove = this.canMove(playerId, unit, destination);
+    if (canMove !== true) {
+      throw new Error(`Cannot move unit: ${canMove}`);
+    }
 
     // Check if move is possible
     const originHex = this._map.findHex(unit.currentPosition());
-
-    if (!destinationHex.addUnit(unit)) return false;
+    const destinationHex = this._map.findHex(destination);
+    destinationHex.addUnit(unit);
     originHex.removeUnit(unit);
     unit.place(destination);
-    return true;
   }
 
   getTurn(): Turn {

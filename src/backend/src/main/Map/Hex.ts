@@ -2,6 +2,7 @@ import HexID from "./HexID";
 import AbstractUnit from "../Units/AbstractUnit";
 import Terrain from "./Terrain";
 import SupplyUnit from "../Infrastructure/SupplyUnit";
+import Entity from "../Entity";
 
 export default class Hex {
   private _hexId: HexID;
@@ -30,29 +31,29 @@ export default class Hex {
     return this._supplyUnits;
   }
 
-  // returns false if the move was illegal, true if the addition was succesful
-  public addUnit(unit: AbstractUnit): boolean {
-    if (this.isFull()) return false;
-    if (!unit.move(this._hexId)) return false;
-    // goes through the list of units and checks if the unit is already there
-    // by checking if any unit (u) has the same id as the unit we are trying to add
-    const alreadyHasUnit = !!this._units.find((u) => u.getID() === unit.getID());
-    if (alreadyHasUnit) return false;
-
-    unit.move(this._hexId);
-    this._units.push(unit);
-    return true;
+  hasUnit(unit: Entity): boolean {
+    return !!this._units.find((u) => u.getID() === unit.getID());
   }
 
-  public addSupplyUnit(unit: SupplyUnit): boolean {
-    if (!unit.move(this._hexId)) return false;
+  assertHasNotUnit(unit: Entity) {
+    if (this.hasUnit(unit)) throw new Error("unit already present");
+  }
+
+  // returns false if the move was illegal, true if the addition was succesful
+  public addUnit(unit: AbstractUnit): void {
+    if (this.isFull()) throw new Error("hex is full");
     // goes through the list of units and checks if the unit is already there
     // by checking if any unit (u) has the same id as the unit we are trying to add
-    const alreadyHasUnit = !!this._supplyUnits.find((u) => u.getID() === unit.getID());
-    if (alreadyHasUnit) return false;
+    this.assertHasNotUnit(unit);
+    unit.move(this._hexId);
+    this._units.push(unit);
+  }
 
+  public addSupplyUnit(unit: SupplyUnit): void {
+    // goes through the list of units and checks if the unit is already there
+    // by checking if any unit (u) has the same id as the unit we are trying to add
+    this.assertHasNotUnit(unit);
     this._supplyUnits.push(unit);
-    return true;
   }
 
   public removeUnit(unit: AbstractUnit) {
