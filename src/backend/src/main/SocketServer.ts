@@ -61,6 +61,7 @@ export class SocketServer {
       this._players.push(new Player(this._sockets.length, units, [], [], [], socket));
       this._sockets.push(socket);
       if (this._sockets.length >= 2 && !this._created) {
+        console.log("Game created");
         //For Prototype Purposes
         const garrisonHexId = new HexID(2, 2);
         const garrison = new Garrison(id++, garrisonHexId, 1, 1);
@@ -91,15 +92,17 @@ export class SocketServer {
     socketClient.on("ping message", () => {
       socketClient.emit("pong message", "pong");
     });
-
-    const currentPlayer =
-      this._players[0].getSocket().id === socketClient.id ? this._players[0] : this._players[1]; // get player TODO: kristo t nul;
-
     socketClient.on("disconnect", () => {
       console.log(`User [${socketClient.id}] disconnected !`);
       // keep all sockets that have a different id than current
       // is pretty much just a remove
       this._sockets = this._sockets.filter((socket) => socket.id !== socketClient.id);
+      if (this._created) {
+        console.log("Game destroyed");
+        this._created = false;
+        this._players.filter((player) => player.getSocket().id !== socketClient.id);
+        this._game = undefined;
+      }
     });
 
     socketClient.on("message", (data: any) => {
