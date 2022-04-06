@@ -36,6 +36,10 @@ export default class GameMap {
     });
   }
 
+  public getHexes(): Map<string, Hex> {
+    return this._hexagons;
+  }
+
   public findHex(hexId: HexID): Hex {
     const hex = this._hexagons.get(hexId.id());
 
@@ -56,7 +60,7 @@ export default class GameMap {
   public toJSON(): string {
     const json: JsonMap = [];
     this._hexagons.forEach((hex) => {
-      let units: {
+      const units: {
         id: number;
         currentPosition: HexID;
         movementPoints: number;
@@ -64,8 +68,8 @@ export default class GameMap {
       }[] = [];
       hex.units().forEach((unit) => units.push(unit.toJson()));
       json.push({
-        hexId: hex.getID(),
-        terrain: hex.getTerrain(),
+        hexId: hex.getID().id(),
+        terrain: hex.getTerrain().terrainType,
         units: units,
       });
     });

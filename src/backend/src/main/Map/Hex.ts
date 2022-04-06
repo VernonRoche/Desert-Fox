@@ -68,6 +68,10 @@ export default class Hex {
     });
   }
 
+  public getNeighbours(): Hex[] {
+    return this._connexions;
+  }
+
   public isNeighbour(neighbour: Hex): boolean {
     return this._connexions.includes(neighbour);
   }
@@ -76,11 +80,11 @@ export default class Hex {
     return this._units.length === this._HEX_CAPACITY;
   }
 
-  public getID(): string {
-    return this.hexId().id();
+  public getID(): HexID {
+    return this.hexId();
   }
 
-  public getTerrain(): string {
-    return this._terrain.terrainType;
+  public getTerrain(): Terrain {
+    return this._terrain;
   }
 }

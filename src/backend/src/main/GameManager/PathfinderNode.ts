@@ -5,10 +5,14 @@ class PathfinderNode {
   neighbourNodes: PathfinderNode[];
   weight: number;
 
-  constructor(theName: HexID, theNodes: PathfinderNode[], theWeight: number) {
+  constructor(theName: HexID, theWeight: number) {
     this.name = theName;
-    this.neighbourNodes = theNodes;
+    this.neighbourNodes = [];
     this.weight = theWeight;
+  }
+
+  public addNeighbourNode(node: PathfinderNode): void {
+    this.neighbourNodes.push(node);
   }
 }
 

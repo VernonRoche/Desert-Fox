@@ -4,18 +4,31 @@ import GameMap from "../Map/GameMap";
 import AbstractUnit from "../Units/AbstractUnit";
 import HexID from "../Map/HexID";
 import PlayerID from "./PlayerID";
+import Pathfinder from "./Pathfinder";
+import PathfinderNode from "./PathfinderNode";
 
 export default class Game {
   private _turn: Turn;
   private _player1: Player;
   private _player2: Player;
   private _map: GameMap;
+  private _pathfinder: Pathfinder;
 
   public constructor(map: GameMap, player1: Player, player2: Player) {
     this._turn = new Turn();
     this._player1 = player1;
     this._player2 = player2;
     this._map = map;
+    // Initialize Pathfinder
+    this._pathfinder = new Pathfinder();
+    for (const hex of map.getHexes().values()) {
+      const node: PathfinderNode = new PathfinderNode(hex.getID(), hex.getTerrain().getWeight());
+      for (const neighbour of hex.getNeighbours()) {
+        node.addNeighbourNode(
+          new PathfinderNode(neighbour.getID(), neighbour.getTerrain().getWeight()),
+        );
+      }
+    }
   }
 
   // check if a move is possible
