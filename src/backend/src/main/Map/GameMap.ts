@@ -49,7 +49,7 @@ export default class GameMap {
     return hex;
   }
 
-  public getUnits(): Entity[] {
+  public getEntities(): Entity[] {
     return this._entities;
   }
 
@@ -66,7 +66,7 @@ export default class GameMap {
         movementPoints: number;
         remainingMovementPoints: number;
       }[] = [];
-      hex.units().forEach((unit) => units.push(unit.toJson()));
+      hex.getUnits().forEach((unit) => units.push(unit.toJson()));
       json.push({
         hexId: hex.getID().id(),
         terrain: hex.getTerrain().terrainType,
