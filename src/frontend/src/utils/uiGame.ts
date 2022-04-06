@@ -14,7 +14,7 @@ const sketch = (p5: P5, gameMap: GameMap) => {
   p5.setup = () => {
     p5.createCanvas(width, height);
     p5.background(220);
-    /*map = */drawHexMap(p5, width - 100, height, gameMap);
+    /*map = */ drawHexMap(p5, width - 100, height, gameMap);
     const myunit = [new Unit("blabla")];
     /* map[26].addUnits(myunit);
     map[26].clearUnits(); */

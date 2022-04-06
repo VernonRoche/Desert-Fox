@@ -9,7 +9,6 @@ import sketch, { GameMap } from "../utils/uiGame";
 import socket from "../utils/ClientSocket";
 const screen = ref<undefined | HTMLElement>(undefined);
 
-
 onMounted(() => {
   socket.on("gameCreated", (gameMap: string) => {
     console.log("Game was created an map is", gameMap);
