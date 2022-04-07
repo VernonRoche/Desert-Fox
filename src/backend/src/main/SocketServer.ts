@@ -8,7 +8,7 @@ import Player from "./GameManager/Player";
 import HexID from "./Map/HexID";
 import AbstractUnit from "./Units/AbstractUnit";
 import Maps from "./Map/Maps";
-import phaseService from "./GameManager/StateMachine";
+import phaseService, { informUsers, webSocketServer } from "./GameManager/StateMachine";
 
 let id = 0;
 
@@ -82,7 +82,7 @@ const _commands: (player: Player) => Commands = (player: Player) => ({
     player.getSocket().emit("units", playerUnits);
   },
 });
-export class SocketServer {
+class SocketServer {
   private _httpServer: http.Server;
   private _socketServer: Server;
   private _sockets: Socket[] = [];
@@ -142,7 +142,7 @@ export class SocketServer {
         this._game = new Game(new GameMap([], "libya" as Maps), this._players[0], this._players[1]);
         const map = this._game.getMap();
         map.addUnit(garrison);
-        this.broadcast("gameCreated", { map: map.toJSON(), entities: map.getEntities() });
+        this.broadcast("gameCreated", { map: map.toJSON() });
       }
       this.applyRoutes(socket);
     });
@@ -196,37 +196,38 @@ export class SocketServer {
     });
     socketClient.on("done", () => {
       phaseService.send("NEXT");
+      informUsers(phaseService.state.value.toString(), this.getPlayers());
     });
 
-    /* socketClient.on("command", (data: (BaseCommand & AttackArgs)[]) => {
+    socketClient.on("command", (data: (BaseCommand & AttackArgs)[]) => {
       if (!this._game) {
         socketClient.emit("commandMessage", { error: "nogame" });
         return;
       }
 
       const request = data[0];
-
+      const currentPlayer = this.getPlayerFromSocket(socketClient);
       console.log("I received", request);
 
-      console.log(!this._commands(currentPlayer));
-
-      if (!this._commands(currentPlayer)[request.type]) {
+      if (!_commands(currentPlayer)[request.type]) {
         socketClient.emit("commandMessage", { error: "invalidcommand" });
         return;
       }
-      this._commands(currentPlayer)[request.type](request);
+      _commands(currentPlayer)[request.type](request);
       console.log(`User [${socketClient.id}] sent a command : ${request.type}`);
 
       this._socketServer.emit("commandMessage", { error: false });
-    }); */
+    });
   }
   getGame(): Game | undefined {
     return this._game;
+  }
+  getPlayers(): Player[] {
+    return this._players;
   }
   getPlayerFromSocket(socket: Socket): Player {
     return this._players.find((player) => player.getSocket().id === socket.id) as Player;
   }
 }
 
-const webSocketServer = new SocketServer(express(), 8000, 3001);
-export default webSocketServer;
+export default SocketServer;
