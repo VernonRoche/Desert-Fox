@@ -5,7 +5,6 @@ import AbstractUnit from "../Units/AbstractUnit";
 import HexID from "../Map/HexID";
 import PlayerID from "./PlayerID";
 import Pathfinder from "./Pathfinder";
-import PathfinderNode from "./PathfinderNode";
 
 export default class Game {
   private _turn: Turn;
@@ -20,15 +19,7 @@ export default class Game {
     this._player2 = player2;
     this._map = map;
     // Initialize Pathfinder
-    this._pathfinder = new Pathfinder();
-    for (const hex of map.getHexes().values()) {
-      const node: PathfinderNode = new PathfinderNode(hex.getID(), hex.getTerrain().getWeight());
-      for (const neighbour of hex.getNeighbours()) {
-        node.addNeighbourNode(
-          new PathfinderNode(neighbour.getID(), neighbour.getTerrain().getWeight()),
-        );
-      }
-    }
+    this._pathfinder = new Pathfinder(map);
   }
 
   // check if a move is possible

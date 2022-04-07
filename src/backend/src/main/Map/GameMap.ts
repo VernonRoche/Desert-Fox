@@ -5,6 +5,7 @@ import fs from "fs";
 import Maps from "./Maps";
 import Terrain, { TerrainTypes } from "./Terrain";
 import { unitJson } from "../Units/AbstractUnit";
+import Player from "../GameManager/Player";
 
 const width = 66;
 const height = 29;
@@ -78,5 +79,13 @@ export default class GameMap {
 
   public getUnitById(id: number): Entity | null {
     return this._entities.find((unit) => unit.getID() === id) ?? null;
+  }
+
+  public hexBelongsToPlayer(hexID: HexID, player: Player): boolean {
+    const hex = this.findHex(hexID);
+    if (hex.getUnits().length === 0) {
+      return true;
+    }
+    return hex.getUnits().some((unit) => player.hasUnit(unit));
   }
 }

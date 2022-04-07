@@ -1,14 +1,27 @@
 import HexID from "../Map/HexID";
 import PathfinderNode from "./PathfinderNode";
+import Player from "./Player";
+import GameMap from "../Map/GameMap";
 
 class Pathfinder {
-  nodes: any;
-  constructor() {
-    this.nodes = {};
+  private _nodes: any;
+  private _map: GameMap;
+  constructor(map: GameMap) {
+    this._nodes = {};
+    this._map = map;
+    for (const hex of map.getHexes().values()) {
+      const node: PathfinderNode = new PathfinderNode(hex.getID(), hex.getTerrain().getWeight());
+      for (const neighbour of hex.getNeighbours()) {
+        node.addNeighbourNode(
+          new PathfinderNode(neighbour.getID(), neighbour.getTerrain().getWeight()),
+        );
+      }
+      this._nodes[hex.getID().toString()] = node;
+    }
   }
 
   addNode(node: PathfinderNode): void {
-    this.nodes[node.name.toString()] = node;
+    this._nodes[node.name.toString()] = node;
   }
 
   findPointsOfShortestWay(start: HexID, finish: HexID): HexID[] {
@@ -17,9 +30,9 @@ class Pathfinder {
     while (nextNode !== start) {
       let minWeigth: number = Number.MAX_VALUE;
       let minNode: HexID = new HexID(-1, -1);
-      for (const i of this.nodes[nextNode.toString()].neighbourNodes) {
-        if (i.weight + this.nodes[i.name.toString()].weight < minWeigth) {
-          minWeigth = this.nodes[i.name.toString()].weight;
+      for (const i of this._nodes[nextNode.toString()].neighbourNodes) {
+        if (i.weight + this._nodes[i.name.toString()].weight < minWeigth) {
+          minWeigth = this._nodes[i.name.toString()].weight;
           minNode = i.name;
         }
       }
@@ -29,32 +42,39 @@ class Pathfinder {
     return arrayWithNode;
   }
 
-  findShortestWay(start: HexID, finish: HexID): { pathNodes: HexID[]; weight: number } {
+  findShortestWay(
+    start: HexID,
+    finish: HexID,
+    player: Player,
+  ): { pathNodes: HexID[]; weight: number } {
     const nodes: any = {};
 
-    for (const i in this.nodes) {
-      if (this.nodes[i].name === start) {
-        this.nodes[i].weight = 0;
+    for (const i in this._nodes) {
+      if (this._nodes[i].name === start) {
+        this._nodes[i].weight = 0;
       } else {
-        this.nodes[i].weight = Number.MAX_VALUE;
+        this._nodes[i].weight = Number.MAX_VALUE;
       }
-      nodes[this.nodes[i].name] = this.nodes[i].weight;
+      nodes[this._nodes[i].name] = this._nodes[i].weight;
     }
 
     while (Object.keys(nodes).length !== 0) {
       const sortedVisitedByWeight: string[] = Object.keys(nodes).sort(
-        (a, b) => this.nodes[a].weight - this.nodes[b].weight,
+        (a, b) => this._nodes[a].weight - this._nodes[b].weight,
       );
-      const currentNode: PathfinderNode = this.nodes[sortedVisitedByWeight[0]];
+      const currentNode: PathfinderNode = this._nodes[sortedVisitedByWeight[0]];
       for (const j of currentNode.neighbourNodes) {
-        const calculateWeight: number = currentNode.weight + j.weight;
-        if (calculateWeight < this.nodes[j.name.toString()].weight) {
-          this.nodes[j.name.toString()].weight = calculateWeight;
+        let calculateWeight: number = currentNode.weight + j.weight;
+        if (!this._map.hexBelongsToPlayer(j.name, player)) {
+          calculateWeight += 1000;
+        }
+        if (calculateWeight < this._nodes[j.name.toString()].weight) {
+          this._nodes[j.name.toString()].weight = calculateWeight;
         }
       }
       delete nodes[sortedVisitedByWeight[0]];
     }
-    const finishWeight: number = this.nodes[finish.toString()].weight;
+    const finishWeight: number = this._nodes[finish.toString()].weight;
     const arrayWithVertex: HexID[] = this.findPointsOfShortestWay(start, finish).reverse();
     arrayWithVertex.push(finish);
     return { pathNodes: arrayWithVertex, weight: finishWeight };
