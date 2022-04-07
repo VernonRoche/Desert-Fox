@@ -6,6 +6,7 @@ import GameMap from "../Map/GameMap";
 class Pathfinder {
   private _nodes: Map<string, PathfinderNode>;
   private _map: GameMap;
+
   constructor(map: GameMap) {
     this._nodes = new Map();
     this._map = map;

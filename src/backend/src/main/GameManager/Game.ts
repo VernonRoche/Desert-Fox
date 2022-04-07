@@ -30,14 +30,43 @@ export default class Game {
   // check if(canMove === true)
   public canMove(playerId: PlayerID, unit: AbstractUnit, destination: HexID): true | string {
     const destinationHex = this._map.findHex(destination);
-    if (!destinationHex) return "no destination";
+    if (!destinationHex) return "hex does not exist";
 
     // Check if unit exists and that the player owns it
     const player: Player = playerId === PlayerID.ONE ? this._player1 : this._player2;
-    if (!player.hasUnit(unit)) return "no unit";
+    if (!player.hasUnit(unit)) return "that unit does not exist";
+
+    // Check if the player owns the unit
+    if (!this._map.hexBelongsToPlayer(destination, player))
+      return "enemies are present in this hex";
+
+    // Check if the remaining movement points are enough by using Pathfinder
+    // Has to be proven, because now we take the weight of the Pathfinder result.
+    // Which may or may not represent the real cost in movement points.
+
+    const moveCost = this._pathfinder.findShortestWay(unit.currentPosition(), destination, player)[
+      "weight"
+    ];
+
+    if (moveCost > unit.getRemainingMovementPoints()) return "not enough movement points";
 
     // Check if move is possible
     return true;
+  }
+
+  // Checks all units of a player and returns the list of units that can move
+  public availableUnitsToMove(playerId: PlayerID): AbstractUnit[] {
+    const player: Player = playerId === PlayerID.ONE ? this._player1 : this._player2;
+    const availableUnits: AbstractUnit[] = [];
+    for (const unit of player.getUnits()) {
+      for (const neighbourHex of this._map.findHex(unit.currentPosition()).getNeighbours()) {
+        if (this.canMove(playerId, unit, neighbourHex.getID()) === true) {
+          availableUnits.push(unit);
+          break;
+        }
+      }
+    }
+    return availableUnits;
   }
 
   // Checks if a move is possible and applies it.

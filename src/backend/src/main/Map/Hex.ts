@@ -19,6 +19,7 @@ export default class Hex {
     this._connexions = [];
     this._terrain = terrain;
   }
+
   getUnits(): AbstractUnit[] {
     return this._units;
   }

@@ -1,10 +1,8 @@
 import express from "express";
-import { Socket } from "socket.io";
-import { createMachine, interpret, State } from "xstate";
+import { createMachine, interpret } from "xstate";
 import SocketServer from "../SocketServer";
 import Player from "./Player";
 import PlayerID from "./PlayerID";
-import { Turn } from "./Turn";
 
 const webSocketServer = new SocketServer(express(), 8000, 3001);
 export { webSocketServer };
@@ -26,6 +24,7 @@ const commands = {
 function move(args: any): void {
   //TODO
 }
+
 function attack(args: any): void {
   //TODO
 }
@@ -187,6 +186,7 @@ phaseService.onTransition((state) => {
     phaseService.send("NEXT");
   }
 });
+
 function runPhaseActions(actualPhase: string): void {
   switch (actualPhase) {
     case "air_superiority": //TODO
@@ -220,6 +220,7 @@ function runPhaseActions(actualPhase: string): void {
     }
   }
 }
+
 function sendToPlayers(
   players: Player[],
   nextMovePlayerId: PlayerID,
@@ -237,6 +238,7 @@ function sendToPlayers(
         .emit("phase", { phase: actualPhase, play: false, commands: [], auto: false });
   }
 }
+
 export function informUsers(currentPhase: string, players: Player[]): void {
   switch (currentPhase) {
     case "first_player_movement" ||
