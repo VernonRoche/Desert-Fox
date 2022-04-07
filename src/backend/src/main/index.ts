@@ -1,5 +1,5 @@
 import yargs from "yargs";
-import webSocketServer from "./SocketServer";
+import { webSocketServer } from "./GameManager/StateMachine";
 
 async function main() {
   const yargsOptions = yargs
