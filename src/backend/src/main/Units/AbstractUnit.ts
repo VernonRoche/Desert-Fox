@@ -29,8 +29,8 @@ export default abstract class AbstractUnit extends Moveable {
   abstract attack(hexId: HexID, combatSupply: boolean): void;
   toJson(): unitJson {
     return {
-      id: this.getID(),
-      currentPosition: this.currentPosition(),
+      id: this.getId(),
+      currentPosition: this.getCurrentPosition(),
       movementPoints: this.getMovementPoints(),
       remainingMovementPoints: this.getRemainingMovementPoints(),
     };

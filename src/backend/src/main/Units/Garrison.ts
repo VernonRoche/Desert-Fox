@@ -36,7 +36,4 @@ export default class Garrison extends AbstractUnit {
   attack(hexId: HexID, combatSupply: boolean): void {
     throw new Error("Method not implemented.");
   }
-  getId(): number {
-    return this.getID();
-  }
 }

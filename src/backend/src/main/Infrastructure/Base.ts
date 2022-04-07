@@ -5,12 +5,14 @@ export default class Base {
   private _received: boolean;
   private _primary: boolean;
   private _isActive: boolean;
+  private _id: number;
 
-  constructor(sent: boolean, received: boolean, primary: boolean, isActive: boolean) {
+  constructor(sent: boolean, received: boolean, primary: boolean, isActive: boolean, id: number) {
     this._sent = sent;
     this._received = received;
     this._primary = primary;
     this._isActive = isActive;
+    this._id = id;
   }
 
   send(embarkable: Embarkable, base: Base): void {
@@ -41,5 +43,9 @@ export default class Base {
 
   isActive(): boolean {
     return this._isActive;
+  }
+
+  getID(): number {
+    return this._id;
   }
 }
