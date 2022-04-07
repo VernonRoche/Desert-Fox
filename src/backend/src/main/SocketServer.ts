@@ -200,6 +200,7 @@ class SocketServer {
     });
 
     socketClient.on("command", (data: (BaseCommand & AttackArgs)[]) => {
+      //juste pour la commande units
       if (!this._game) {
         socketClient.emit("commandMessage", { error: "nogame" });
         return;

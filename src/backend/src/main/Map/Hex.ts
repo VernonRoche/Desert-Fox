@@ -28,7 +28,7 @@ export default class Hex {
   }
 
   hasUnit(unit: Entity): boolean {
-    return !!this._units.find((u) => u.getID() === unit.getID());
+    return !!this._units.find((u) => u.getId() === unit.getId());
   }
 
   assertHasNotUnit(unit: Entity) {

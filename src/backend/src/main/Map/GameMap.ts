@@ -4,7 +4,7 @@ import HexID from "./HexID";
 import fs from "fs";
 import Maps from "./Maps";
 import Terrain, { TerrainTypes } from "./Terrain";
-import { unitJson } from "../Units/AbstractUnit";
+import AbstractUnit, { unitJson } from "../Units/AbstractUnit";
 import Player from "../GameManager/Player";
 
 const width = 66;
@@ -54,8 +54,14 @@ export default class GameMap {
     return this._entities;
   }
 
-  public addUnit(unit: Entity): void {
+  public addEntity(unit: Entity): void {
     this._entities.push(unit);
+  }
+
+  public addUnit(unit: AbstractUnit): void {
+    const hex = this._hexagons.get(unit.getCurrentPosition().id());
+    if (hex) hex.addUnit(unit);
+    else throw new Error("incorrecthex");
   }
 
   public toJSON(): string {
@@ -68,6 +74,8 @@ export default class GameMap {
         remainingMovementPoints: number;
       }[] = [];
       hex.getUnits().forEach((unit) => units.push(unit.toJson()));
+      if (units.length > 0) console.log(units);
+      if (units.length > 0) console.log(units);
       json.push({
         hexId: hex.getID().id(),
         terrain: hex.getTerrain().terrainType,
@@ -78,7 +86,7 @@ export default class GameMap {
   }
 
   public getUnitById(id: number): Entity | null {
-    return this._entities.find((unit) => unit.getID() === id) ?? null;
+    return this._entities.find((unit) => unit.getId() === id) ?? null;
   }
 
   public hexBelongsToPlayer(hexID: HexID, player: Player): boolean {

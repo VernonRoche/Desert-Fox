@@ -51,7 +51,7 @@ export default class Game {
     }
 
     // Check if move is possible
-    const originHex = this._map.findHex(unit.currentPosition());
+    const originHex = this._map.findHex(unit.getCurrentPosition());
     const destinationHex = this._map.findHex(destination);
     destinationHex.addUnit(unit);
     originHex.removeUnit(unit);
