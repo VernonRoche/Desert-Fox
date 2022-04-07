@@ -18,6 +18,7 @@ export default abstract class Moveable implements Entity {
     this._remainingMovementPoints = remainingMovementPoints;
     this._id = id;
   }
+
   public getID(): number {
     return this._id;
   }

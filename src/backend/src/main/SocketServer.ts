@@ -1,6 +1,6 @@
 import http from "http";
 import { Server, Socket } from "socket.io";
-import express, { Express } from "express";
+import { Express } from "express";
 import Game from "./GameManager/Game";
 import GameMap from "./Map/GameMap";
 import Garrison from "./Units/Garrison";
@@ -23,6 +23,7 @@ enum commandTypes {
   train = "train",
   activate = "activate",
 }
+
 type AllArgs = BaseCommand & (MoveArgs | AttackArgs);
 
 type MoveArgs = {
@@ -82,6 +83,7 @@ const _commands: (player: Player) => Commands = (player: Player) => ({
     player.getSocket().emit("units", playerUnits);
   },
 });
+
 class SocketServer {
   private _httpServer: http.Server;
   private _socketServer: Server;
@@ -135,7 +137,7 @@ class SocketServer {
         console.log("Game created");
         //For Prototype Purposes
         const garrisonHexId = new HexID(2, 2);
-        const garrison = new Garrison(id++, garrisonHexId, 1, 1);
+        const garrison = new Garrison(id++, garrisonHexId, 1, 1, 2);
         units.push(garrison);
 
         this._created = true;
@@ -219,12 +221,15 @@ class SocketServer {
       this._socketServer.emit("commandMessage", { error: false });
     });
   }
+
   getGame(): Game | undefined {
     return this._game;
   }
+
   getPlayers(): Player[] {
     return this._players;
   }
+
   getPlayerFromSocket(socket: Socket): Player {
     return this._players.find((player) => player.getSocket().id === socket.id) as Player;
   }

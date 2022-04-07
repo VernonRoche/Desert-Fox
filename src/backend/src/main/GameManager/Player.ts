@@ -3,7 +3,6 @@ import AbstractUnit from "../Units/AbstractUnit";
 import Base from "../Infrastructure/Base";
 import SupplyUnit from "../Infrastructure/SupplyUnit";
 import RefitPoint from "../Infrastructure/RefitPoint";
-import Moveable from "../Moveable";
 import Entity from "../Entity";
 import { Socket } from "socket.io";
 
