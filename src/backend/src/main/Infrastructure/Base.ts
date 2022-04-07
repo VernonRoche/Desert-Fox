@@ -4,11 +4,13 @@ export default class Base {
   private _sent: boolean;
   private _received: boolean;
   private _primary: boolean;
+  private _isActive: boolean;
 
-  constructor(sent: boolean, received: boolean, primary: boolean) {
+  constructor(sent: boolean, received: boolean, primary: boolean, isActive: boolean) {
     this._sent = sent;
     this._received = received;
     this._primary = primary;
+    this._isActive = isActive;
   }
 
   send(embarkable: Embarkable, base: Base): void {
@@ -35,5 +37,9 @@ export default class Base {
   reset(): void {
     this._sent = false;
     this._received = false;
+  }
+
+  isActive(): boolean {
+    return this._isActive;
   }
 }

@@ -1,8 +1,14 @@
 import AbstractUnit from "./AbstractUnit";
 import HexID from "../Map/HexID";
+import Dice from "../GameManager/Dice";
 
 export default class Mechanized extends AbstractUnit {
-  is_movement(): boolean {
+  private _result: Dice = new Dice();
+
+  MoraleRating(): number {
+    throw new Error("Method not implemented.");
+  }
+  MovementAllowance(): number {
     throw new Error("Method not implemented.");
   }
   refit(): void {
@@ -15,7 +21,11 @@ export default class Mechanized extends AbstractUnit {
     throw new Error("Method not implemented.");
   }
   moraleCheck(): boolean {
-    throw new Error("Method not implemented.");
+    const result = this._result.getDice(1, 7) + this.MovementAllowance();
+    if (result >= 6) {
+      return false;
+    }
+    return true;
   }
   overrun(hexId: HexID): void {
     throw new Error("Method not implemented.");
@@ -27,6 +37,6 @@ export default class Mechanized extends AbstractUnit {
     throw new Error("Method not implemented.");
   }
   getId(): number {
-    throw new Error("Method not implemented.");
+    return this.getID();
   }
 }

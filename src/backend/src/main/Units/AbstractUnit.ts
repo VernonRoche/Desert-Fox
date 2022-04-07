@@ -18,6 +18,8 @@ export default abstract class AbstractUnit extends Moveable {
     super(id, currentPosition, movementPoints, remainingMovementPoints);
   }
 
+  abstract MovementAllowance(): number;
+  abstract MoraleRating(): number;
   abstract refit(): void;
   abstract train(): void;
   abstract reactionMove(hexId: HexID): void;
@@ -25,7 +27,6 @@ export default abstract class AbstractUnit extends Moveable {
   abstract overrun(hexId: HexID): void;
   abstract hasGeneralSupply(): boolean;
   abstract attack(hexId: HexID, combatSupply: boolean): void;
-  abstract is_movement(): boolean;
   toJson(): unitJson {
     return {
       id: this.getID(),
