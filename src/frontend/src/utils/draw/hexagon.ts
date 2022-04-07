@@ -1,5 +1,6 @@
 import P5 from "p5";
 import colors from "../constants/colors";
+import handlerHexPoints from "../constants/hexPoints";
 import drawText from "./text";
 
 export default function drawHexagon(
@@ -16,12 +17,10 @@ export default function drawHexagon(
   p5.strokeWeight(2);
   p5.fill(colors[typeTerrain]);
   p5.beginShape();
-  p5.vertex(x, y - r);
-  p5.vertex(Math.cos(Math.PI / 6) * r + x, -Math.sin(Math.PI / 6) * r + y);
-  p5.vertex(Math.cos(Math.PI / 6) * r + x, Math.sin(Math.PI / 6) * r + y);
-  p5.vertex(x, y + r);
-  p5.vertex(-Math.cos(Math.PI / 6) * r + x, Math.sin(Math.PI / 6) * r + y);
-  p5.vertex(-Math.cos(Math.PI / 6) * r + x, -Math.sin(Math.PI / 6) * r + y);
+  for (let i = 0; i < 6; i++) {
+    const hexPoints = handlerHexPoints(x, y, r, i);
+    p5.vertex(hexPoints.x, hexPoints.y);
+  }
   p5.endShape(p5.CLOSE);
 
   // ID
