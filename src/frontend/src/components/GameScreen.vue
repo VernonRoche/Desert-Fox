@@ -2,15 +2,7 @@
   <div
     id="gamescreen"
     ref="screen"
-    style="
-      width: 80vw;
-      height: 93vh;
-      cursor: grab;
-      overflow: auto;
-      scrollbar-color: rebeccapurple green;
-      scrollbar-width: thin;
-    "
-    class="border-2 h-full w-4/5 border-black"
+    class="border-2 h-full w-4/5 border-black cursor-grab overflow-auto"
   ></div>
 </template>
 
