@@ -9,10 +9,10 @@ import { Socket } from "socket.io";
 
 export default class Player {
   private _id: PlayerID;
-  private _units: AbstractUnit[];
-  private _bases: Base[];
-  private _supplyUnits: SupplyUnit[];
-  private _refitPoints: RefitPoint[];
+  private _units: Map<number, AbstractUnit>;
+  private _bases: Map<number, Base>;
+  private _supplyUnits: Map<number, SupplyUnit>;
+  private _refitPoints: Map<number, RefitPoint>;
   private _socket: Socket;
 
   constructor(
@@ -24,20 +24,19 @@ export default class Player {
     socket: Socket,
   ) {
     this._id = id;
-    this._units = units;
-    this._bases = bases;
-    this._supplyUnits = supplyUnits;
-    this._refitPoints = refitPoints;
+    this._units = new Map(units.map((u) => [u.getId(), u]));
+    this._bases = new Map(bases.map((b) => [b.getID(), b]));
+    this._supplyUnits = new Map(supplyUnits.map((s) => [s.getId(), s]));
+    this._refitPoints = new Map(refitPoints.map((r) => [r.getId(), r]));
     this._socket = socket;
   }
 
   public hasUnit(entity: Entity): boolean {
-    const both: Entity[] = [...this._units, ...this._supplyUnits];
-    return Boolean(both.find((e) => entity.getID() === e.getID()));
+    return this._units.has(entity.getId()) || this._supplyUnits.has(entity.getId());
   }
 
   getUnitById(id: number): AbstractUnit | null {
-    return this._units.find((u) => u.getID() === id) ?? null;
+    return this._units.get(id) ?? null;
   }
 
   getId(): PlayerID {
@@ -45,19 +44,19 @@ export default class Player {
   }
 
   getUnits(): AbstractUnit[] {
-    return this._units;
+    return Array.from(this._units.values());
   }
 
   getBases(): Base[] {
-    return this._bases;
+    return Array.from(this._bases.values());
   }
 
   getSupplyUnits(): SupplyUnit[] {
-    return this._supplyUnits;
+    return Array.from(this._supplyUnits.values());
   }
 
   getRefitPoints(): RefitPoint[] {
-    return this._refitPoints;
+    return Array.from(this._refitPoints.values());
   }
 
   getSocket(): Socket {
