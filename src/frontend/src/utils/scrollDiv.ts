@@ -5,7 +5,7 @@ export default function runScrollDiv(htmlDocument: Document, gameScreen: HTMLEle
 
   let pos = { top: 0, left: 0, x: 0, y: 0 };
 
-  const mouseMoveHandler = function (e: any) {
+  const mouseMoveHandler = function (e: MouseEvent) {
     // How far the mouse has been moved
     const dx = e.clientX - pos.x;
     const dy = e.clientY - pos.y;
@@ -23,7 +23,7 @@ export default function runScrollDiv(htmlDocument: Document, gameScreen: HTMLEle
     gameScreen.style.removeProperty("user-select");
   };
 
-  const mouseDownHandler = function (e: any) {
+  const mouseDownHandler = function (e: MouseEvent) {
     pos = {
       // The current scroll
       left: gameScreen.scrollLeft,
