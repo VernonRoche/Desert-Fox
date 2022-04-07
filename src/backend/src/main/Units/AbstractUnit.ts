@@ -41,7 +41,9 @@ export default abstract class AbstractUnit extends Moveable {
     }
     return dice + this._moraleRating <= 6;
   }
-
+  getMoraleRating(): number {
+    return this._moraleRating;
+  }
   toJson(): unitJson {
     return {
       id: this.getId(),

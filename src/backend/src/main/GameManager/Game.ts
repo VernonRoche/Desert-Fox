@@ -44,7 +44,7 @@ export default class Game {
     // Has to be proven, because now we take the weight of the Pathfinder result.
     // Which may or may not represent the real cost in movement points.
 
-    const moveCost = this._pathfinder.findShortestWay(unit.currentPosition(), destination, player)[
+    const moveCost = this._pathfinder.findShortestWay(unit.getCurrentPosition(), destination, player)[
       "weight"
     ];
 
@@ -59,7 +59,7 @@ export default class Game {
     const player: Player = playerId === PlayerID.ONE ? this._player1 : this._player2;
     const availableUnits: AbstractUnit[] = [];
     for (const unit of player.getUnits()) {
-      for (const neighbourHex of this._map.findHex(unit.currentPosition()).getNeighbours()) {
+      for (const neighbourHex of this._map.findHex(unit.getCurrentPosition()).getNeighbours()) {
         if (this.canMove(playerId, unit, neighbourHex.getID()) === true) {
           availableUnits.push(unit);
           break;
