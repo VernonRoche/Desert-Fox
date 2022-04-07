@@ -1,13 +1,34 @@
 import P5 from "p5";
 import drawHexMap from "./draw/hexMap";
+import dataMap from "./constants/map";
 
 export type GameMap = { hexId: string; terrain: string }[];
 
-const sketch = (p5: P5, gameMap: GameMap) => {
-  const width = p5.windowWidth * 1.2;
-  const height = p5.windowHeight * 1.9;
+const getSizeCanvas = (map: GameMap): number[] => {
+  let maxWidth = 0;
+  let maxHeight = 0;
 
-  //let map: Hexagon[];
+  for (const hexagon of map) {
+    const id = hexagon.hexId;
+    const y = Number(id.substring(0, 2));
+    const x = Number(id.substring(2, 4));
+
+    maxWidth = maxWidth < x ? x : maxWidth;
+    maxHeight = maxHeight < y ? y : maxHeight;
+  }
+
+  //Margin
+  const marginWidth = -100;
+  const marginHeight = -400;
+  const diameterHex = dataMap.raduisHexagon * 2;
+  maxWidth = maxWidth * diameterHex + marginWidth;
+  maxHeight = maxHeight * diameterHex + marginHeight;
+
+  return [maxWidth, maxHeight];
+};
+
+const sketch = (p5: P5, gameMap: GameMap) => {
+  const [width, height] = getSizeCanvas(gameMap);
 
   p5.setup = () => {
     p5.createCanvas(width, height);
