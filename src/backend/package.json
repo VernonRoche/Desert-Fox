@@ -10,8 +10,8 @@
     "test": "npm run compile && mocha js/test --recursive --exit",
     "dev": "nodemon --config nodemon.json src/main/index.ts",
     "format": "prettier --config .prettierrc \"src/**/*.ts\" --write",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
+    "lint": "eslint . --ext .ts src/**/*.ts",
+    "lint:fix": "eslint --ext .ts src/**/*.ts --fix",
     "fix": "npm run lint:fix && npm run format"
   },
   "devDependencies": {
