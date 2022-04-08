@@ -74,8 +74,6 @@ export default class GameMap {
         remainingMovementPoints: number;
       }[] = [];
       hex.getUnits().forEach((unit) => units.push(unit.toJson()));
-      if (units.length > 0) console.log(units);
-      if (units.length > 0) console.log(units);
       json.push({
         hexId: hex.getID().id(),
         terrain: hex.getTerrain().terrainType,

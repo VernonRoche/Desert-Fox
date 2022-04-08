@@ -176,6 +176,8 @@ class SocketServer {
         this._created = false;
         this._players.filter((player) => player.getSocket().id !== socketClient.id);
         this._game = undefined;
+        id = 0; 
+        phaseService.send("RESET");
       }
     });
 
