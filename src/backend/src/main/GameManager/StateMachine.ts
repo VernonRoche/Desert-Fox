@@ -1,61 +1,11 @@
-import { createMachine, interpret, State } from "xstate";
-import HexID from "../Map/HexID";
-import webSocketServer, { SocketServer } from "../SocketServer";
+import express from "express";
+import { createMachine, interpret } from "xstate";
+import SocketServer from "../SocketServer";
 import Player from "./Player";
+import PlayerID from "./PlayerID";
 
-type BaseCommand = {
-  type: string;
-};
-
-type AllArgs = MoveArgs | AttackArgs;
-
-type MoveArgs = {
-  hexId?: string;
-  unitId?: string;
-};
-
-type AttackArgs = MoveArgs & {
-  combatSupply?: boolean;
-};
-
-type Commands = Record<string, (args: AllArgs) => void>;
-
-const _commands: (player: Player) => Commands = (player: Player) => ({
-  move: (args: MoveArgs) => {
-    if (!args.unitId || !args.hexId) {
-      player.getSocket().emit("commandMessage", { error: "invalidargs" });
-      return;
-    }
-    const unitId = +args.unitId;
-    if (isNaN(unitId)) {
-      player.getSocket().emit("commandMessage", { error: "invalidunitid" });
-      return;
-    }
-    const unit = player.getUnitById(unitId);
-    if (!unit) {
-      player.getSocket().emit("commandMessage", { error: "invalidunit" });
-      return;
-    }
-    const x = +args.hexId.substring(2, 4);
-    const y = +args.hexId.substring(0, 2);
-    if (isNaN(x) || isNaN(y)) {
-      player.getSocket().emit("commandMessage", { error: "invalidhex" });
-      return;
-    }
-    try {
-      webSocketServer.getGame()?.moveUnit(player.getId(), unit, new HexID(x, y));
-      console.log("move was successful");
-    } catch (e) {
-      console.log("move was unsuccessful:", e);
-    }
-  },
-  units: () => {
-    console.log("player (", player.getId(), ") has", player.getUnits().length, "units");
-    const playerUnits = player.getUnits();
-    console.log("player units:", playerUnits);
-    player.getSocket().emit("commandMessage", playerUnits);
-  },
-});
+const webSocketServer = new SocketServer(express(), 8000, 3001);
+export { webSocketServer };
 
 function throwError(error: string): () => void {
   return () => {
@@ -74,16 +24,16 @@ const commands = {
 function move(args: any): void {
   //TODO
 }
+
 function attack(args: any): void {
   //TODO
 }
 
 function importCommands(functions: ((args: any) => void)[]): any {
-  let result = {};
+  const result: Record<string, (args: any) => void> = {};
   Object.assign(result, commands);
-  for (let functioni of functions) {
-    //@ts-expect-error playing with fire
-    if (result[functioni.name]) result[functioni.name] = key;
+  for (const functioni of functions) {
+    if (result[functioni.name]) result[functioni.name] = functioni;
   }
   return result;
 }
@@ -192,9 +142,14 @@ const statesWithUserInput: Record<string, any> = {
   },
 };
 const TurnPhases = {
-  initial: "air_superiority",
+  initial: "initial",
   states: {
     ...statesWithUserInput,
+    initial: {
+      on: {
+        NEXT: "air_superiority",
+      },
+    },
     air_superiority: {
       on: {
         NEXT: "reinforcements",
@@ -223,27 +178,110 @@ createMachine({
 });
 
 const TurnMachine = createMachine(TurnPhases);
-const phaseService = interpret(TurnMachine)
-  .onTransition((state) => state.value)
-  .start();
+const phaseService = interpret(TurnMachine).start();
+runPhaseActions(phaseService.state.value.toString());
+phaseService.onTransition((state) => {
+  if (!(state.value.toString() in statesWithUserInput)) {
+    runPhaseActions(state.value.toString());
+    phaseService.send("NEXT");
+  }
+});
 
-function runPhaseActions(actualPhase: string, args: any): void {
-  for (let command of statesWithUserInput[actualPhase].commands) {
-    if (command[args.type] && args.type === "move") {
-      // TO COMPLETE
+function runPhaseActions(actualPhase: string): void {
+  switch (actualPhase) {
+    case "air_superiority": //TODO
+      break;
+    case "supply_attrition": //TODO
+      break;
+    case "victory_check": //TODO
+      break;
+    case "turn_marker": //TODO
+      break;
+    default:
+      break;
+  }
+  if (actualPhase !== "initial")
+    webSocketServer.broadcast("phase", {
+      phase: actualPhase,
+      play: false,
+      commands: [],
+      auto: true,
+    });
+  if (actualPhase === "air_superiority") {
+    for (const player of webSocketServer.getPlayers()) {
+      if (player.getId() === PlayerID.ONE) {
+        player.getSocket().emit("phase", {
+          phase: "first_player_movement",
+          play: true,
+          commands: ["move"],
+          auto: false,
+        });
+      }
     }
   }
 }
 
-export default phaseService;
+function sendToPlayers(
+  players: Player[],
+  nextMovePlayerId: PlayerID,
+  actualPhase: string,
+  validCommands: string[],
+): void {
+  for (const player of players) {
+    if (player.getId() == nextMovePlayerId)
+      player
+        .getSocket()
+        .emit("phase", { phase: actualPhase, play: true, commands: validCommands, auto: false });
+    else
+      player
+        .getSocket()
+        .emit("phase", { phase: actualPhase, play: false, commands: [], auto: false });
+  }
+}
 
-webSocketServer.sockets.forEach((socket) => {
-  socket.addListener("nextphase", (args) => {
-    phaseService.send("NEXT");
-    //to skip phases with no user input
-    while (!(phaseService.state.value.toString() in statesWithUserInput)) {
-      phaseService.send("NEXT");
+export function informUsers(currentPhase: string, players: Player[]): void {
+  switch (currentPhase) {
+    case "first_player_movement" ||
+      "first_player_reaction" ||
+      "first_player_movement2" ||
+      "first_player_reaction2" ||
+      "first_player_combat2": {
+      sendToPlayers(players, PlayerID.ONE, currentPhase, ["move"]);
+      break;
     }
-    socket.emit("phase", phaseService.state.value);
-  });
-});
+    case "first_player_combat" || "first_player_combat2": {
+      sendToPlayers(players, PlayerID.ONE, currentPhase, ["attack"]);
+    }
+
+    case "second_player_movement" ||
+      "second_player_reaction" ||
+      "second_player_movement2" ||
+      "second_player_reaction2": {
+      sendToPlayers(players, PlayerID.TWO, currentPhase, ["move"]);
+      break;
+    }
+    case "second_player_combat" || "second_player_combat2": {
+      sendToPlayers(players, PlayerID.TWO, currentPhase, ["attack"]);
+      break;
+    }
+    case "reinforcements" || "initiative" || "allocation": {
+      const validCommands =
+        currentPhase === "reinforcements"
+          ? ["select"]
+          : currentPhase === "allocation"
+          ? ["activate", "train"]
+          : [];
+      webSocketServer.broadcast("phase", {
+        phase: currentPhase,
+        play: true,
+        commands: validCommands,
+        auto: false,
+      });
+      break;
+    }
+    default:
+      break;
+  }
+}
+
+export default phaseService;

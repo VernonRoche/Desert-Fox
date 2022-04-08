@@ -19,20 +19,17 @@ export default class Hex {
     this._connexions = [];
     this._terrain = terrain;
   }
-  public hexId(): HexID {
-    return this._hexId;
-  }
 
-  public units(): AbstractUnit[] {
+  getUnits(): AbstractUnit[] {
     return this._units;
   }
 
-  public supplyUnits(): SupplyUnit[] {
+  getSupplyUnits(): SupplyUnit[] {
     return this._supplyUnits;
   }
 
   hasUnit(unit: Entity): boolean {
-    return !!this._units.find((u) => u.getID() === unit.getID());
+    return !!this._units.find((u) => u.getId() === unit.getId());
   }
 
   assertHasNotUnit(unit: Entity) {
@@ -40,7 +37,7 @@ export default class Hex {
   }
 
   // returns false if the move was illegal, true if the addition was succesful
-  public addUnit(unit: AbstractUnit): void {
+  addUnit(unit: AbstractUnit): void {
     if (this.isFull()) throw new Error("hex is full");
     // goes through the list of units and checks if the unit is already there
     // by checking if any unit (u) has the same id as the unit we are trying to add
@@ -49,38 +46,42 @@ export default class Hex {
     this._units.push(unit);
   }
 
-  public addSupplyUnit(unit: SupplyUnit): void {
+  addSupplyUnit(unit: SupplyUnit): void {
     // goes through the list of units and checks if the unit is already there
     // by checking if any unit (u) has the same id as the unit we are trying to add
     this.assertHasNotUnit(unit);
     this._supplyUnits.push(unit);
   }
 
-  public removeUnit(unit: AbstractUnit) {
+  removeUnit(unit: AbstractUnit) {
     this._units.forEach((item, index) => {
       if (item === unit) this._units.splice(index, 1);
     });
   }
 
-  public removeSupplyUnit(unit: SupplyUnit) {
+  removeSupplyUnit(unit: SupplyUnit) {
     this._supplyUnits.forEach((item, index) => {
       if (item === unit) this._supplyUnits.splice(index, 1);
     });
   }
 
-  public isNeighbour(neighbour: Hex): boolean {
+  getNeighbours(): Hex[] {
+    return this._connexions;
+  }
+
+  isNeighbour(neighbour: Hex): boolean {
     return this._connexions.includes(neighbour);
   }
 
-  private isFull(): boolean {
+  isFull(): boolean {
     return this._units.length === this._HEX_CAPACITY;
   }
 
-  public getID(): string {
-    return this.hexId().id();
+  getID(): HexID {
+    return this._hexId;
   }
 
-  public getTerrain(): string {
-    return this._terrain.terrainType;
+  getTerrain(): Terrain {
+    return this._terrain;
   }
 }

@@ -37,7 +37,7 @@ describe("Game map test", function () {
     }
   });
   it("Invalid Hex should throw", function () {
-    let threw: boolean = false;
+    let threw = false;
     try {
       map.findHex(new HexID(90, 90));
     } catch (e) {
