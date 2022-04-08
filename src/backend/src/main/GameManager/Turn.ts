@@ -2,7 +2,6 @@ import PlayerID from "./PlayerID";
 
 enum Phase {
   //Strategic impulse
-  EVENT,
   AIR_SUPERIORITY,
   REIFORCEMENTS,
   ALLOCATION,
@@ -70,9 +69,10 @@ export class Turn {
 
   public changePhase(): void {
     this._currentPhase = this._currentPhase + 1;
-    if (this.getCurrentPhase() == 20) {
+    if (this.getCurrentPhase() == 19) {
       this._currentPhase = 1;
     }
   }
 }
+
 export default Phase;

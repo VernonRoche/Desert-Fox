@@ -1,5 +1,5 @@
 const dataMap = {
-  raduisHexagon: 50,
+  raduisHexagon: 40,
 };
 
 export default dataMap;
