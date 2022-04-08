@@ -35,6 +35,15 @@ const terminalInput = ref("");
 type Command = (args: string[]) => void;
 type Commands = Record<string, Command>;
 
+const help: Record<string, string> = {
+  ping: "Test de la connexion avec le serveur",
+  exit: "Termine la connexion avec le serveur",
+  help: "Affiche l'aide",
+  clear: "Efface le terminal",
+  units: "Récupère la liste de vos unités",
+  done: "Indique que vous terminez votre tour",
+};
+
 const commands: Commands = {
   ping: () => socket.send("ping message", terminalInput.value),
   exit: disconnectSocket,
@@ -69,6 +78,18 @@ const commands: Commands = {
     socket.send("command", {
       type: "units",
     }),
+  done: () => {
+    socket.emit("done");
+  },
+  // local commands
+  help: () => {
+    Object.keys(help).forEach((helpCommand) => {
+      addLine("Game", `${helpCommand} - ${help[helpCommand]}`);
+    });
+  },
+  clear: () => {
+    lines.value = [];
+  },
 };
 
 const lines = ref<{ data: string; author: string; time: Date }[]>([]);
@@ -88,6 +109,20 @@ socket.on("commandMessage", (resp: any) => {
     addLine("Game", resp.error);
   } else {
     addLine("Game", resp);
+  }
+});
+
+socket.on("phase", (resp: { phase: string; play: boolean; commands: string[]; auto: boolean }) => {
+  addLine("Game", `Phase de jeu : ${resp.phase}`);
+  if (resp.auto) {
+    // handle automatic phase
+    return;
+  }
+  addLine("Game", `Phase de jeu : ${resp.phase}`);
+  if (resp.play) {
+    addLine("Game", "Vous pouvez jouer les commandes suivantes: " + resp.commands.join(", "));
+  } else {
+    addLine("Game", "Vous ne pouvez pas jouer");
   }
 });
 

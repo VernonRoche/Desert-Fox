@@ -5,10 +5,11 @@ export default function drawText(
   x: number,
   y: number,
   message: string | number,
-  size = 12,
+  color = "black",
+  size = 10,
 ) {
   p5.push();
-  p5.fill("black");
+  p5.fill(color);
   p5.stroke("black");
   p5.strokeWeight(0);
   p5.textSize(size);
