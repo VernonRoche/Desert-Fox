@@ -145,6 +145,7 @@ class SocketServer {
         const map = this._game.getMap();
         map.addUnit(garrison);
         this.broadcast("gameCreated", { map: map.toJSON() });
+        phaseService.send("RESET");
       }
       this.applyRoutes(socket);
     });
@@ -177,7 +178,6 @@ class SocketServer {
         this._players.filter((player) => player.getSocket().id !== socketClient.id);
         this._game = undefined;
         id = 0; 
-        phaseService.send("RESET");
       }
     });
 
