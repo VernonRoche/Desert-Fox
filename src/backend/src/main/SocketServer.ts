@@ -125,6 +125,7 @@ class SocketServer {
     this.eventConnection((socket) => {
       if (this._sockets.length === 2) {
         socket.emit("commandMessage", { error: "full" });
+        console.log("socket disconnected because full :" , socket.id);
         socket.disconnect(true);
         return;
       }
@@ -144,7 +145,7 @@ class SocketServer {
         this._game = new Game(new GameMap([], "libya" as Maps), this._players[0], this._players[1]);
         const map = this._game.getMap();
         map.addUnit(garrison);
-        this.broadcast("gameCreated", { map: map.toJSON() });
+        this.broadcast("gameCreated", map.toJSON());
         phaseService.send("RESET");
       }
       this.applyRoutes(socket);
