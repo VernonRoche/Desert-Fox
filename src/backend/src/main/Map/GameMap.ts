@@ -74,8 +74,6 @@ export default class GameMap {
         remainingMovementPoints: number;
       }[] = [];
       hex.getUnits().forEach((unit) => units.push(unit.toJson()));
-      if (units.length > 0) console.log(units);
-      if (units.length > 0) console.log(units);
       json.push({
         hexId: hex.getID().id(),
         terrain: hex.getTerrain().terrainType,
@@ -95,5 +93,17 @@ export default class GameMap {
       return true;
     }
     return hex.getUnits().some((unit) => player.hasUnit(unit));
+  }
+
+  public hexIsInEnemyZoneOfControl(hexID: HexID, enemyPlayer: Player): boolean {
+    const hex = this.findHex(hexID);
+    for (const neighbour of hex.getNeighbours()) {
+      if (neighbour.getUnits().length > 0) {
+        if (neighbour.getUnits().some((unit) => enemyPlayer.hasUnit(unit))) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 }

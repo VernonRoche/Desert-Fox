@@ -22,7 +22,6 @@ onMounted(() => {
     }, screen.value);
   });
 
-  const idScreen = document.getElementById("gamescreen");
-  runScrollDiv(document, idScreen as HTMLElement);
+  runScrollDiv(document, screen.value as HTMLElement);
 });
 </script>
