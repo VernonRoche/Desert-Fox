@@ -1,3 +1,4 @@
+import { Console } from "console";
 import Dice from "../main/GameManager/Dice";
 import HexID from "../main/Map/HexID";
 import AbstractUnit from "../main/Units/AbstractUnit";
@@ -29,33 +30,6 @@ describe("unit is correct add", function () {
     if (unit[0].getMoraleRating() != 2) {
       throw new Error("MoraleRating not true");
     }
-  });
-
-  it("Invalid AbstractUnit should throw", function () {
-    return new Promise<void>((resolve, reject) => {
-      try {
-        const unit2: AbstractUnit[] = [];
-        garrison = new Garrison(id++, garrisonHexId, 1, 1, 3);
-        unit2.push(garrison);
-        if (unit2[0].getId() != id) {
-          reject("id not true");
-        }
-        if (unit2[0].getCurrentPosition() != garrisonHexId) {
-          reject("CurrentPosition not true");
-        }
-        if (unit2[0].getMovementPoints() != 1) {
-          reject("MovementPoints not true");
-        }
-        if (unit2[0].getRemainingMovementPoints() != 1) {
-          reject("RemainingMovementPoints not true");
-        }
-        if (unit2[0].getMoraleRating() != 2) {
-          reject("MoraleRating not true");
-        }
-      } catch (e) {
-        resolve();
-      }
-    });
   });
 
   it("dice is correct", function () {
