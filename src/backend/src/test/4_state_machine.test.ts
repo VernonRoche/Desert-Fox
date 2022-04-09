@@ -54,5 +54,4 @@ describe("State Machine tests", function () {
     }
   });
   testService.send("RESET");
-
 });

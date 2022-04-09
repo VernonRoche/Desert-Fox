@@ -1,5 +1,6 @@
 import yargs from "yargs";
-import { webSocketServer } from "./GameManager/StateMachine";
+import stateMachine from "./GameManager/StateMachine";
+import webSocketServer from "./SocketServer";
 
 async function main() {
   const yargsOptions = yargs
@@ -24,7 +25,7 @@ async function main() {
     return;
   }
 
-  webSocketServer.run();
+  webSocketServer.run(stateMachine);
 
   console.log("Client port needs to be:", webSocketServer.clientPort);
   console.log("Server port is:", webSocketServer.serverPort);

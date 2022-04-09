@@ -1,6 +1,7 @@
 import express from "express";
 import { io, Socket } from "socket.io-client";
-import SocketServer from "../main/SocketServer";
+import MachineState from "../main/GameManager/StateMachine";
+import { SocketServer } from "../main/SocketServer";
 
 function initSocket(port: number): Socket {
   return io(`http://localhost:${port}`);
@@ -28,26 +29,25 @@ describe("Socket server tests", function () {
         throw new Error("serverPort is not stored correctly");
       }
     });
-  });
+    it("Run webServer", function () {
+      socketServer.run(MachineState);
+    });
 
-  it("Run webServer", function () {
-    socketServer.run();
-  });
-
-  it("Initialize player 1 and connect", function () {
-    return new Promise<void>((resolve) => {
-      player1 = initSocket(CLIENT_PORT);
-      player1.on("connect", () => {
-        resolve();
+    it("Initialize player 1 and connect", function () {
+      return new Promise<void>((resolve) => {
+        player1 = initSocket(CLIENT_PORT);
+        player1.on("connect", () => {
+          resolve();
+        });
       });
     });
-  });
 
-  it("Initialize player 2 and connect", function () {
-    return new Promise<void>((resolve) => {
-      player2 = initSocket(CLIENT_PORT);
-      player2.on("connect", () => {
-        resolve();
+    it("Initialize player 2 and connect", function () {
+      return new Promise<void>((resolve) => {
+        player2 = initSocket(CLIENT_PORT);
+        player2.on("connect", () => {
+          resolve();
+        });
       });
     });
   });

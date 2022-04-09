@@ -1,18 +1,78 @@
-import express from "express";
 import { createMachine, interpret } from "xstate";
-import { check } from "yargs";
-import SocketServer from "../SocketServer";
+import HexID from "../Map/HexID";
+import webSocketServer, { SocketServer } from "../SocketServer";
 import Player from "./Player";
 import PlayerID from "./PlayerID";
-import { Turn } from "./Turn";
-
-export const webSocketServer = new SocketServer(express(), 8000, 3001);
 
 function throwError(error: string): () => void {
   return () => {
     throw new Error("invalid command for current phase : " + error);
   };
 }
+
+type BaseCommand = {
+  type: string;
+};
+
+type AllArgs = BaseCommand & (MoveArgs | AttackArgs);
+
+type MoveArgs = {
+  hexId?: string;
+  unitId?: string;
+};
+
+type AttackArgs = MoveArgs & {
+  combatSupply?: boolean;
+};
+
+type Commands = Record<string, (args: AllArgs) => void>;
+
+const _commands: (player: Player) => Commands = (player: Player) => ({
+  move: (args: MoveArgs & BaseCommand) => {
+    if (
+      (player.getId() === 0 &&
+        stateMachine.getPhaseService().state.value !== "first_player_movement" &&
+        stateMachine.getPhaseService().state.value !== "first_player_movement2") ||
+      (player.getId() === 1 &&
+        stateMachine.getPhaseService().state.value !== "second_player_movement" &&
+        stateMachine.getPhaseService().state.value !== "second_player_movement2")
+    ) {
+      player.getSocket().emit(args.type, { error: "turnerror" });
+    }
+    if (!args.unitId || !args.hexId) {
+      player.getSocket().emit(args.type, { error: "invalidargs" });
+      return;
+    }
+    const unitId = +args.unitId;
+    if (isNaN(unitId)) {
+      player.getSocket().emit(args.type, { error: "invalidunitid" });
+      return;
+    }
+    const unit = player.getUnitById(unitId);
+    if (!unit) {
+      player.getSocket().emit(args.type, { error: "invalidunit" });
+      return;
+    }
+    const x = +args.hexId.substring(2, 4);
+    const y = +args.hexId.substring(0, 2);
+    if (isNaN(x) || isNaN(y)) {
+      player.getSocket().emit(args.type, { error: "invalidhex" });
+      return;
+    }
+    try {
+      webSocketServer.getGame()?.moveUnit(player.getId(), unit, new HexID(x, y));
+      console.log("move was successful");
+    } catch (e) {
+      player.getSocket().emit(args.type, { error: "invalidmove" });
+    }
+  },
+  units: () => {
+    console.log("player (", player.getId(), ") has", player.getUnits().length, "units");
+    const playerUnits = player.getUnits();
+    console.log("player units:", playerUnits);
+    player.getSocket().emit("units", playerUnits);
+  },
+});
 
 const commands = {
   move: throwError("move"),
@@ -184,150 +244,161 @@ createMachine({
   ...TurnPhases,
 });
 
-const TurnMachine = createMachine(TurnPhases);
-const phaseService = interpret(TurnMachine).start();
-runPhaseActions(phaseService.state.value.toString());
-phaseService.onTransition((state) => {
-  if (!(state.value.toString() in statesWithUserInput)) {
-    runPhaseActions(state.value.toString());
-    console.log("phase : " + state.value.toString());
-    phaseService.send("NEXT");
-  }
-});
+export class StateMachine {
+  private phaseService;
 
-function runPhaseActions(actualPhase: string): void {
-  switch (actualPhase) {
-    case "air_superiority": //TODO
-      break;
-    case "supply_attrition": //TODO
-      break;
-    case "victory_check": //TODO
-      break;
-    case "turn_marker": //TODO
-      break;
-    default:
-      break;
-  }
-  if (actualPhase !== "initial")
-    webSocketServer.broadcast("phase", {
-      phase: actualPhase,
-      play: false,
-      commands: [],
-      auto: true,
-    });
-  if (actualPhase === "air_superiority") {
-    webSocketServer.broadcast("phase", {
-      phase: "first_player_movement",
-      play: true,
-      commands: ["move"],
-      auto: false,
+  constructor() {
+    const TurnMachine = createMachine(TurnPhases);
+    this.phaseService = interpret(TurnMachine).start();
+    this.runPhaseActions(this.phaseService.state.value.toString());
+    this.phaseService.onTransition((state) => {
+      if (!(state.value.toString() in statesWithUserInput)) {
+        this.runPhaseActions(state.value.toString());
+        console.log("phase : " + state.value.toString());
+        this.phaseService.send("NEXT");
+      }
     });
   }
-}
-
-let done: boolean[] = [false, false];
-export function reinitDoneTable(): void {
-  done = [false, false];
-}
-export function endTurn(player: Player): void {
-  if (
-    ["reinforcements", "initiative", "allocation"].includes(phaseService.state.value.toString())
-  ) {
-    if (done[0] && done[1]) {
-      done[0] = false;
-      done[1] = false;
-      phaseService.send("NEXT");
-      return;
+  runPhaseActions(actualPhase: string): void {
+    switch (actualPhase) {
+      case "air_superiority": //TODO
+        break;
+      case "supply_attrition": //TODO
+        break;
+      case "victory_check": //TODO
+        break;
+      case "turn_marker": //TODO
+        break;
+      default:
+        break;
     }
-    done[player.getId()] = true;
-  } else {
-    if (checkIfCorrectPlayer(phaseService.state.value.toString(), player.getId()))
-      phaseService.send("NEXT");
-    else throw new Error("wrongplayer");
+    if (actualPhase !== "initial")
+      webSocketServer.broadcast("phase", {
+        phase: actualPhase,
+        play: false,
+        commands: [],
+        auto: true,
+      });
+    if (actualPhase === "air_superiority") {
+      webSocketServer.broadcast("phase", {
+        phase: "first_player_movement",
+        play: true,
+        commands: ["move"],
+        auto: false,
+      });
+    }
   }
-}
 
-function sendToPlayers(
-  players: Player[],
-  nextMovePlayerId: PlayerID,
-  actualPhase: string,
-  validCommands: string[],
-): void {
-  for (const player of players) {
-    if (player.getId() == nextMovePlayerId)
-      player
-        .getSocket()
-        .emit("phase", { phase: actualPhase, play: true, commands: validCommands, auto: false });
-    else
-      player
-        .getSocket()
-        .emit("phase", { phase: actualPhase, play: false, commands: [], auto: false });
+  public done: boolean[] = [false, false];
+  reinitDoneTable(): void {
+    this.done = [false, false];
   }
-}
+  endTurn(player: Player): void {
+    if (
+      ["reinforcements", "initiative", "allocation"].includes(
+        this.phaseService.state.value.toString(),
+      )
+    ) {
+      if (this.done[0] && this.done[1]) {
+        this.done[0] = false;
+        this.done[1] = false;
+        this.phaseService.send("NEXT");
+        return;
+      }
+      this.done[player.getId()] = true;
+    } else {
+      if (this.checkIfCorrectPlayer(this.phaseService.state.value.toString(), player.getId()))
+        this.phaseService.send("NEXT");
+      else throw new Error("wrongplayer");
+    }
+  }
 
-function checkIfCorrectPlayer(
-  currentPhase: string,
-  playerId: PlayerID,
-): { correct: boolean; commands: string[] } {
-  switch (currentPhase) {
-    case "first_player_movement":
-    case "first_player_reaction":
-    case "first_player_movement2":
-    case "first_player_reaction2":
-    case "first_player_combat2": {
-      if (playerId === PlayerID.ONE) return { correct: true, commands: ["move"] };
-      break;
-    }
-    case "first_player_combat":
-    case "first_player_combat2": {
-      if (playerId === PlayerID.ONE) return { correct: true, commands: ["attack"] };
-      break;
-    }
-    case "second_player_movement":
-    case "second_player_reaction":
-    case "second_player_movement2":
-    case "second_player_reaction2": {
-      if (playerId === PlayerID.TWO) return { correct: true, commands: ["move"] };
-      break;
-    }
-    case "second_player_combat":
-    case "second_player_combat2": {
-      if (playerId === PlayerID.ONE) return { correct: true, commands: ["attack"] };
-      break;
-    }
-    case "reinforcements":
-      return { correct: true, commands: ["move"] };
-    case "initiative":
-      return { correct: true, commands: [] };
-    case "allocation":
-      return { correct: true, commands: ["train", "activate"] };
-    default:
-      return { correct: false, commands: [] };
-  }
-  return { correct: false, commands: [] };
-}
-export function informUsers(currentPhase: string, players: Player[]): void {
-  const correctPlayerId = checkIfCorrectPlayer(currentPhase, players[0].getId()).correct
-    ? players[0].getId()
-    : players[1].getId();
   sendToPlayers(
-    players,
-    correctPlayerId,
-    currentPhase,
-    checkIfCorrectPlayer(currentPhase, correctPlayerId).commands,
-  );
-  if (
-    currentPhase === "reinforcements" ||
-    currentPhase === "allocation" ||
-    currentPhase === "initiative"
-  ) {
-    webSocketServer.broadcast("phase", {
-      phase: currentPhase,
-      play: true,
-      commands: checkIfCorrectPlayer(currentPhase, players[0].getId()).commands, //Doesn't matter which player id it is
-      auto: false,
-    });
+    players: Player[],
+    nextMovePlayerId: PlayerID,
+    actualPhase: string,
+    validCommands: string[],
+  ): void {
+    for (const player of players) {
+      if (player.getId() == nextMovePlayerId)
+        player
+          .getSocket()
+          .emit("phase", { phase: actualPhase, play: true, commands: validCommands, auto: false });
+      else
+        player
+          .getSocket()
+          .emit("phase", { phase: actualPhase, play: false, commands: [], auto: false });
+    }
+  }
+
+  checkIfCorrectPlayer(
+    currentPhase: string,
+    playerId: PlayerID,
+  ): { correct: boolean; commands: string[] } {
+    switch (currentPhase) {
+      case "first_player_movement":
+      case "first_player_reaction":
+      case "first_player_movement2":
+      case "first_player_reaction2":
+      case "first_player_combat2": {
+        if (playerId === PlayerID.ONE) return { correct: true, commands: ["move"] };
+        break;
+      }
+      case "first_player_combat":
+      case "first_player_combat2": {
+        if (playerId === PlayerID.ONE) return { correct: true, commands: ["attack"] };
+        break;
+      }
+      case "second_player_movement":
+      case "second_player_reaction":
+      case "second_player_movement2":
+      case "second_player_reaction2": {
+        if (playerId === PlayerID.TWO) return { correct: true, commands: ["move"] };
+        break;
+      }
+      case "second_player_combat":
+      case "second_player_combat2": {
+        if (playerId === PlayerID.ONE) return { correct: true, commands: ["attack"] };
+        break;
+      }
+      case "reinforcements":
+        return { correct: true, commands: ["move"] };
+      case "initiative":
+        return { correct: true, commands: [] };
+      case "allocation":
+        return { correct: true, commands: ["train", "activate"] };
+      default:
+        return { correct: false, commands: [] };
+    }
+    return { correct: false, commands: [] };
+  }
+  informUsers(currentPhase: string, players: Player[]): void {
+    const correctPlayerId = this.checkIfCorrectPlayer(currentPhase, players[0].getId()).correct
+      ? players[0].getId()
+      : players[1].getId();
+    this.sendToPlayers(
+      players,
+      correctPlayerId,
+      currentPhase,
+      this.checkIfCorrectPlayer(currentPhase, correctPlayerId).commands,
+    );
+    if (
+      currentPhase === "reinforcements" ||
+      currentPhase === "allocation" ||
+      currentPhase === "initiative"
+    ) {
+      webSocketServer.broadcast("phase", {
+        phase: currentPhase,
+        play: true,
+        commands: this.checkIfCorrectPlayer(currentPhase, players[0].getId()).commands, //Doesn't matter which player id it is
+        auto: false,
+      });
+    }
+  }
+  getPhaseService(): any {
+    return this.phaseService;
   }
 }
 
-export default phaseService;
+const stateMachine = new StateMachine();
+export default stateMachine;

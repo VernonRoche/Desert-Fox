@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "clean": "rimraf js",
-    "compile": "npm run clean && tsc",
+    "compile": "tsc",
     "start": "npm run compile && node js/main",
     "test": "npm run compile && mocha js/test --recursive --exit",
     "dev": "nodemon --config nodemon.json src/main/index.ts",
