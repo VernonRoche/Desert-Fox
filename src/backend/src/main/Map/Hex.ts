@@ -69,6 +69,10 @@ export default class Hex {
     return this._connexions;
   }
 
+  addNeighbour(hex: Hex) {
+    this._connexions.push(hex);
+  }
+
   isNeighbour(neighbour: Hex): boolean {
     return this._connexions.includes(neighbour);
   }
