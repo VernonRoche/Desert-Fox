@@ -3,6 +3,7 @@ import { createMachine, interpret } from "xstate";
 import SocketServer from "../SocketServer";
 import Player from "./Player";
 import PlayerID from "./PlayerID";
+import { Turn } from "./Turn";
 
 const webSocketServer = new SocketServer(express(), 8000, 3001);
 export { webSocketServer };
@@ -171,7 +172,13 @@ const TurnPhases = {
       },
     },
   },
+  on:{
+    RESET: {
+      target: '.initial',
+    }
+  }
 };
+
 createMachine({
   id: "turn",
   ...TurnPhases,
@@ -183,6 +190,7 @@ runPhaseActions(phaseService.state.value.toString());
 phaseService.onTransition((state) => {
   if (!(state.value.toString() in statesWithUserInput)) {
     runPhaseActions(state.value.toString());
+    console.log("phase : " + state.value.toString());
     phaseService.send("NEXT");
   }
 });
