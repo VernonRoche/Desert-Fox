@@ -2,14 +2,6 @@ import AbstractUnit from "./Units/AbstractUnit";
 import HexID from "./Map/HexID";
 
 export default class UnitProxy extends AbstractUnit {
-  MoraleRating(): number {
-    throw new Error("Method not implemented.");
-  }
-
-  MovementAllowance(): number {
-    throw new Error("Method not implemented.");
-  }
-
   refit(): void {
     throw new Error("Method not implemented.");
   }
