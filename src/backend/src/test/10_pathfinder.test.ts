@@ -25,7 +25,7 @@ describe("Check if Pathfinder works correctly", function () {
   it("The weight returned should be the movement points cost", function () {
     const pathfinder = game.getPathfinder();
     const { weight } = pathfinder.findShortestWay(
-      new HexID(5, 5),
+      new HexID(5, 7),
       new HexID(5, 9),
       game.getPlayer1(),
     );
