@@ -125,7 +125,7 @@ class SocketServer {
     this.eventConnection((socket) => {
       if (this._sockets.length === 2) {
         socket.emit("commandMessage", { error: "full" });
-        console.log("socket disconnected because full :" , socket.id);
+        console.log("socket disconnected because full :", socket.id);
         socket.disconnect(true);
         return;
       }
@@ -178,7 +178,7 @@ class SocketServer {
         this._created = false;
         this._players.filter((player) => player.getSocket().id !== socketClient.id);
         this._game = undefined;
-        id = 0; 
+        id = 0;
       }
     });
 

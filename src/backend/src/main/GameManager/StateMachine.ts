@@ -172,11 +172,11 @@ const TurnPhases = {
       },
     },
   },
-  on:{
+  on: {
     RESET: {
-      target: '.initial',
-    }
-  }
+      target: ".initial",
+    },
+  },
 };
 
 createMachine({
