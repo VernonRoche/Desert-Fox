@@ -44,9 +44,11 @@ export default class Game {
     // Has to be proven, because now we take the weight of the Pathfinder result.
     // Which may or may not represent the real cost in movement points.
 
-    const moveCost = this._pathfinder.findShortestWay(unit.getCurrentPosition(), destination, player)[
-      "weight"
-    ];
+    const moveCost = this._pathfinder.findShortestWay(
+      unit.getCurrentPosition(),
+      destination,
+      player,
+    )["weight"];
 
     if (moveCost > unit.getRemainingMovementPoints()) return "not enough movement points";
 

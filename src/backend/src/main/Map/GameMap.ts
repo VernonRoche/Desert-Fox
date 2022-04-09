@@ -94,4 +94,16 @@ export default class GameMap {
     }
     return hex.getUnits().some((unit) => player.hasUnit(unit));
   }
+
+  public hexIsInEnemyZoneOfControl(hexID: HexID, enemyPlayer: Player): boolean {
+    const hex = this.findHex(hexID);
+    for (const neighbour of hex.getNeighbours()) {
+      if (neighbour.getUnits().length > 0) {
+        if (neighbour.getUnits().some((unit) => enemyPlayer.hasUnit(unit))) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 }
