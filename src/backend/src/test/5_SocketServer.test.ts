@@ -35,7 +35,7 @@ describe("Socket server tests", function () {
 
     it("Initialize player 1 and connect", function () {
       return new Promise<void>((resolve) => {
-        player1 = initSocket(CLIENT_PORT);
+        player1 = initSocket(SERVER_PORT);
         player1.on("connect", () => {
           resolve();
         });
@@ -44,7 +44,7 @@ describe("Socket server tests", function () {
 
     it("Initialize player 2 and connect", function () {
       return new Promise<void>((resolve) => {
-        player2 = initSocket(CLIENT_PORT);
+        player2 = initSocket(SERVER_PORT);
         player2.on("connect", () => {
           resolve();
         });
