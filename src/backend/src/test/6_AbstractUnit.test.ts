@@ -19,7 +19,6 @@ describe("unit is correct add", function () {
     }
     if (unit[0].getMovementPoints() != 1) {
       throw new Error("MovementPoints not true");
-
     }
     if (unit[0].getRemainingMovementPoints() != 1) {
       throw new Error("RemainingMovementPoints not true");
@@ -46,7 +45,6 @@ describe("unit is correct add", function () {
         }
         if (unit2[0].getMovementPoints() != 1) {
           reject("MovementPoints not true");
-
         }
         if (unit2[0].getRemainingMovementPoints() != 1) {
           reject("RemainingMovementPoints not true");
@@ -54,13 +52,11 @@ describe("unit is correct add", function () {
         if (unit2[0].getMoraleRating() != 2) {
           reject("MoraleRating not true");
         }
-
       } catch (e) {
         resolve();
       }
     });
   });
-
 
   it("dice is correct", function () {
     const diceRoll = Dice.rollDice();
@@ -83,7 +79,5 @@ describe("unit is correct add", function () {
     if (unitJson.remainingMovementPoints != unit[0].getRemainingMovementPoints()) {
       throw new Error("RemainingMovementPoints not true");
     }
-  }
-  );
-
+  });
 });
