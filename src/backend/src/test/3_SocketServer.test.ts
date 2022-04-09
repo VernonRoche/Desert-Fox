@@ -1,7 +1,7 @@
 import express from "express";
 import { io, Socket } from "socket.io-client";
 import MachineState from "../main/GameManager/StateMachine";
-import { SocketServer } from "../main/SocketServer";
+import webSocketServer, { SocketServer } from "../main/SocketServer";
 
 function initSocket(port: number): Socket {
   return io(`http://localhost:${port}`);
@@ -49,6 +49,9 @@ describe("Socket server tests", function () {
           resolve();
         });
       });
+    });
+    it("close server", function () {
+      socketServer["_httpServer"].close();
     });
   });
 });
