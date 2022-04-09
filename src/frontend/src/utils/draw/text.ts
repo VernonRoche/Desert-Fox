@@ -14,6 +14,7 @@ export default function drawText(
   p5.strokeWeight(0);
   p5.textSize(size);
   p5.textStyle("normal");
+  p5.textAlign(p5.CENTER);
   p5.text(message, x, y);
   p5.pop();
 }

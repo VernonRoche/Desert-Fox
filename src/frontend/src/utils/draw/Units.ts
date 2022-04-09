@@ -1,7 +1,8 @@
 import P5 from "p5";
+import handlerHexPoints from "../constants/hexPoints";
 import dataMap from "../constants/map";
 
-export default class Unit {
+/* export default class Unit {
   private _type: string;
   private _isDisplay = false;
 
@@ -30,4 +31,15 @@ export default class Unit {
     p5.rect(x - diff, y - diff, size, size);
     p5.pop();
   }
+} */
+
+export default function drawUnit(p5: P5, x: number, y: number, index: number) {
+  p5.push();
+
+  p5.fill("red");
+  const size = dataMap["raduisHexagon"] / 3;
+  const points = handlerHexPoints(x, y, size, index, true);
+  p5.circle(points.x, points.y, size);
+
+  p5.pop();
 }

@@ -2,7 +2,18 @@ import P5 from "p5";
 import drawHexMap from "./draw/hexMap";
 import dataMap from "./constants/map";
 
-export type GameMap = { hexId: string; terrain: string }[];
+export type GameMap = {
+  hexId: string;
+  terrain: string;
+  units: [
+    {
+      id: string;
+      currentPosition: { _x: number; _y: number };
+      movementPoints: number;
+      remainingMovementPoints: number;
+    },
+  ];
+}[];
 
 const getSizeCanvas = (map: GameMap): number[] => {
   let maxWidth = 0;
