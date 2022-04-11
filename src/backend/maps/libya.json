@@ -1921,7 +1921,7 @@
     },
     {
         "hexId": "1601",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "1602",
@@ -1929,7 +1929,7 @@
     },
     {
         "hexId": "1603",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "1604",
@@ -2049,11 +2049,11 @@
     },
     {
         "hexId": "1701",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "1702",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "1703",
@@ -2117,11 +2117,11 @@
     },
     {
         "hexId": "1718",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "1719",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "1720",
@@ -2149,7 +2149,7 @@
     },
     {
         "hexId": "1726",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "1727",
@@ -2177,11 +2177,11 @@
     },
     {
         "hexId": "1801",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "1802",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "1803",
@@ -2241,15 +2241,15 @@
     },
     {
         "hexId": "1817",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "1818",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "1819",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "1820",
@@ -2277,7 +2277,7 @@
     },
     {
         "hexId": "1826",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "1827",
@@ -2285,7 +2285,7 @@
     },
     {
         "hexId": "1828",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "1829",
@@ -2305,15 +2305,15 @@
     },
     {
         "hexId": "1901",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "1902",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "1903",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "1904",
@@ -2369,11 +2369,11 @@
     },
     {
         "hexId": "1917",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "1918",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "1919",
@@ -2413,7 +2413,7 @@
     },
     {
         "hexId": "1928",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "1929",
@@ -2433,11 +2433,11 @@
     },
     {
         "hexId": "2001",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2002",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2003",
@@ -2465,7 +2465,7 @@
     },
     {
         "hexId": "2009",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2010",
@@ -2489,15 +2489,15 @@
     },
     {
         "hexId": "2015",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2016",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2017",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2018",
@@ -2561,15 +2561,15 @@
     },
     {
         "hexId": "2101",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2102",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2103",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2104",
@@ -2589,11 +2589,11 @@
     },
     {
         "hexId": "2108",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2109",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2110",
@@ -2625,11 +2625,11 @@
     },
     {
         "hexId": "2117",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2118",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2119",
@@ -2641,7 +2641,7 @@
     },
     {
         "hexId": "2121",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2122",
@@ -2649,7 +2649,7 @@
     },
     {
         "hexId": "2123",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2124",
@@ -2677,31 +2677,31 @@
     },
     {
         "hexId": "2130",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2131",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2132",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2201",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2202",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2203",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2204",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2205",
@@ -2713,39 +2713,39 @@
     },
     {
         "hexId": "2207",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2208",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2209",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2210",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2211",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2212",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2213",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2214",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2215",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2216",
@@ -2753,7 +2753,7 @@
     },
     {
         "hexId": "2217",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2218",
@@ -2761,19 +2761,19 @@
     },
     {
         "hexId": "2219",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2220",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2221",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2222",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2223",
@@ -2789,11 +2789,11 @@
     },
     {
         "hexId": "2226",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2227",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2228",
@@ -2809,7 +2809,7 @@
     },
     {
         "hexId": "2231",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2232",
@@ -2817,19 +2817,19 @@
     },
     {
         "hexId": "2301",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2302",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2303",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2304",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2305",
@@ -2837,7 +2837,7 @@
     },
     {
         "hexId": "2306",
-        "terrain": "clear"
+        "terrain": "city"
     },
     {
         "hexId": "2307",
@@ -2845,63 +2845,63 @@
     },
     {
         "hexId": "2308",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2309",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2310",
-        "terrain": "clear"
+        "terrain": "mountain"
     },
     {
         "hexId": "2311",
-        "terrain": "clear"
+        "terrain": "mountain"
     },
     {
         "hexId": "2312",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2313",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2314",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2315",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2316",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2317",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2318",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2319",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2320",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2321",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2322",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2323",
@@ -2929,39 +2929,39 @@
     },
     {
         "hexId": "2329",
-        "terrain": "clear"
+        "terrain": "city"
     },
     {
         "hexId": "2330",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2331",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2332",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2401",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2402",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2403",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2404",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2405",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2406",
@@ -2969,59 +2969,59 @@
     },
     {
         "hexId": "2407",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2408",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2409",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2410",
-        "terrain": "clear"
+        "terrain": "mountain"
     },
     {
         "hexId": "2411",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2412",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2413",
-        "terrain": "clear"
+        "terrain": "mountain"
     },
     {
         "hexId": "2414",
-        "terrain": "clear"
+        "terrain": "mountain"
     },
     {
         "hexId": "2415",
-        "terrain": "clear"
+        "terrain": "mountain"
     },
     {
         "hexId": "2416",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2417",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2418",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2419",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2420",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2421",
@@ -3029,71 +3029,71 @@
     },
     {
         "hexId": "2422",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2423",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2424",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2425",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2426",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2427",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2428",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2429",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2430",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2431",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2432",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2501",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2502",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2503",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2504",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2505",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2506",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2507",
@@ -3105,47 +3105,47 @@
     },
     {
         "hexId": "2509",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2510",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2511",
-        "terrain": "clear"
+        "terrain": "mountain"
     },
     {
         "hexId": "2512",
-        "terrain": "clear"
+        "terrain": "mountain"
     },
     {
         "hexId": "2513",
-        "terrain": "clear"
+        "terrain": "mountain"
     },
     {
         "hexId": "2514",
-        "terrain": "clear"
+        "terrain": "mountain"
     },
     {
         "hexId": "2515",
-        "terrain": "clear"
+        "terrain": "mountain"
     },
     {
         "hexId": "2516",
-        "terrain": "clear"
+        "terrain": "mountain"
     },
     {
         "hexId": "2517",
-        "terrain": "clear"
+        "terrain": "mountain"
     },
     {
         "hexId": "2518",
-        "terrain": "clear"
+        "terrain": "mountain"
     },
     {
         "hexId": "2519",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2520",
@@ -3165,67 +3165,67 @@
     },
     {
         "hexId": "2524",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2525",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2526",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2527",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2528",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2529",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2530",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2531",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2532",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2601",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2602",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2603",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2604",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2605",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2606",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2607",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2608",
@@ -3237,43 +3237,43 @@
     },
     {
         "hexId": "2610",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2611",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2612",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2613",
-        "terrain": "clear"
+        "terrain": "mountain"
     },
     {
         "hexId": "2614",
-        "terrain": "clear"
+        "terrain": "mountain"
     },
     {
         "hexId": "2615",
-        "terrain": "clear"
+        "terrain": "mountain"
     },
     {
         "hexId": "2616",
-        "terrain": "clear"
+        "terrain": "mountain"
     },
     {
         "hexId": "2617",
-        "terrain": "clear"
+        "terrain": "mountain"
     },
     {
         "hexId": "2618",
-        "terrain": "clear"
+        "terrain": "mountain"
     },
     {
         "hexId": "2619",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2620",
@@ -3289,79 +3289,79 @@
     },
     {
         "hexId": "2623",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2624",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2625",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2626",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2627",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2628",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2629",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2630",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2631",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2632",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2701",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2702",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2703",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2704",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2705",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2706",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2707",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2708",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2709",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2710",
@@ -3369,43 +3369,43 @@
     },
     {
         "hexId": "2711",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2712",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2713",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2714",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2715",
-        "terrain": "clear"
+        "terrain": "mountain"
     },
     {
         "hexId": "2716",
-        "terrain": "clear"
+        "terrain": "mountain"
     },
     {
         "hexId": "2717",
-        "terrain": "clear"
+        "terrain": "mountain"
     },
     {
         "hexId": "2718",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2719",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2720",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2721",
@@ -3413,115 +3413,115 @@
     },
     {
         "hexId": "2722",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2723",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2724",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2725",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2726",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2727",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2728",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2729",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2730",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2731",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2732",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2801",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2802",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2803",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2804",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2805",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2806",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2807",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2808",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2809",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2810",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2811",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2812",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2813",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2814",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2815",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2816",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2817",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2818",
@@ -3529,7 +3529,7 @@
     },
     {
         "hexId": "2819",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2820",
@@ -3537,178 +3537,178 @@
     },
     {
         "hexId": "2821",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2822",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2823",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2824",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2825",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2826",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2827",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2828",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2829",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2830",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2831",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2832",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2901",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2902",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2903",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2904",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2905",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2906",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2907",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2908",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2909",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2910",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2911",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2912",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2913",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2914",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2915",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2916",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2917",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2918",
-        "terrain": "clear"
+        "terrain": "rough"
     },
     {
         "hexId": "2919",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2920",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2921",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2922",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2923",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2924",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2925",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2926",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2927",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2928",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2929",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2930",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2931",
-        "terrain": "clear"
+        "terrain": "empty"
     },
     {
         "hexId": "2932",
-        "terrain": "clear"
+        "terrain": "empty"
     }
 ]
