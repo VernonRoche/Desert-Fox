@@ -2,7 +2,7 @@ import P5 from "p5";
 import dataMap from "../constants/map";
 import { GameMap } from "../uiGame";
 import drawHexagon from "./hexagon";
-import drawUnit from "./Units";
+import drawUnit from "./units";
 
 export default function drawHexMap(p5: P5, gameMap: GameMap) /*: Hexagon[]*/ {
   let x, y;
