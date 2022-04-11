@@ -17,11 +17,12 @@ export default abstract class AbstractUnit extends Moveable {
   constructor(
     id: number,
     currentPosition: HexID,
-    movementPoints: number,
-    remainingMovementPoints: number,
     moraleRating: number,
+    combatFactor: number,
+    movementPoints: number,
+    lifePoints: number,
   ) {
-    super(id, currentPosition, movementPoints, remainingMovementPoints);
+    super(id, currentPosition, combatFactor, movementPoints, lifePoints);
     this._moraleRating = moraleRating;
   }
 

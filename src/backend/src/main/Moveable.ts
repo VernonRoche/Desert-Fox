@@ -4,18 +4,23 @@ import HexID from "./Map/HexID";
 export default abstract class Moveable implements Entity {
   private _currentPosition: HexID;
   private _movementPoints: number;
-  private _remainingMovementPoints: number;
   private _id: number;
+  private _combatFactor: number;
+  private _remainingMovementPoints: number;
+  private _lifePoints: number;
 
   constructor(
     id: number,
     currentPosition: HexID,
+    combatFactor: number,
     movementPoints: number,
-    remainingMovementPoints: number,
+    lifePoints: number,
   ) {
     this._currentPosition = currentPosition;
     this._movementPoints = movementPoints;
-    this._remainingMovementPoints = remainingMovementPoints;
+    this._remainingMovementPoints = movementPoints;
+    this._combatFactor = combatFactor;
+    this._lifePoints = lifePoints;
     this._id = id;
   }
   public getId(): number {

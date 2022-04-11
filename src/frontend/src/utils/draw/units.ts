@@ -16,7 +16,7 @@ export default function drawUnit(
   const size = dataMap["raduisHexagon"] / 3;
   const points = handlerHexPoints(x, y, size, index, true);
   p5.stroke(colorsPlayer[String(owned)]);
-  p5.fill(colorsUnit[type]);
+  p5.fill(colorsUnit[type] ?? "white");
   p5.circle(points.x, points.y, size);
 
   p5.pop();

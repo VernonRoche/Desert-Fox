@@ -1,0 +1,56 @@
+[
+    {
+        "type": "foot",
+        "id": "0",
+        "currentPosition": "0102",
+        "movementPoints": "12",
+        "combatFactor": "3",
+        "moraleRating": "3",
+        "lifePoints": "1"
+    },
+    {
+        "type": "foot",
+        "id": "1",
+        "currentPosition": "0203",
+        "movementPoints": "12",
+        "combatFactor": "3",
+        "moraleRating": "3",
+        "lifePoints": "1"
+    },
+    {
+        "type": "mechanized",
+        "id": "2",
+        "currentPosition": "0103",
+        "movementPoints": "14",
+        "combatFactor": "3",
+        "moraleRating": "3",
+        "lifePoints": "2"
+    },
+    {
+        "type": "motorized",
+        "id": "3",
+        "currentPosition": "0302",
+        "movementPoints": "20",
+        "combatFactor": "3",
+        "moraleRating": "3",
+        "lifePoints": "1"
+    },
+    {
+        "type": "mechanized",
+        "id": "4",
+        "currentPosition": "0303",
+        "movementPoints": "15",
+        "combatFactor": "3",
+        "moraleRating": "3",
+        "lifePoints": "2"
+    },
+    {
+        "type": "motorized",
+        "id": "5",
+        "currentPosition": "0304",
+        "movementPoints": "22",
+        "combatFactor": "3",
+        "moraleRating": "3",
+        "lifePoints": "1"
+    }
+]

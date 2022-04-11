@@ -9,7 +9,7 @@ describe("unit is correct add", function () {
   const id = 0;
   const unit: AbstractUnit[] = [];
   const garrisonHexId = new HexID(2, 2);
-  const garrison = new Garrison(id, garrisonHexId, 1, 1, 2);
+  const garrison = new Garrison(id, garrisonHexId, 3, 3, 12, 1);
   unit.push(garrison);
 
   it("AbstractUnit should be correct", function () {
@@ -19,7 +19,7 @@ describe("unit is correct add", function () {
     if (unit[0].getCurrentPosition() != garrisonHexId) {
       throw new Error("CurrentPosition not correct");
     }
-    if (unit[0].getMovementPoints() != 1) {
+    if (unit[0].getMovementPoints() != 12) {
       throw new Error("MovementPoints not correct");
     }
     if (unit[0].getRemainingMovementPoints() != 1) {
@@ -41,7 +41,7 @@ describe("unit is correct add", function () {
   });
 
   it("toJson is correct ", function () {
-    const unitJson = unit[0].toJson(new Player(PlayerID.ONE, unit, [], [], [], null as any));
+    const unitJson = unit[0].toJson(new Player(PlayerID.ONE, [], [], [], null as any));
     if (unitJson.id !== unit[0].getId()) {
       throw new Error("id not correct");
     }
@@ -57,7 +57,7 @@ describe("unit is correct add", function () {
     if (unitJson.type !== "Garrison") {
       throw new Error("type not correct");
     }
-    if (unitJson.owned !== true) {
+    if (unitJson.owned !== false) {
       throw new Error("owned not correct");
     }
   });
