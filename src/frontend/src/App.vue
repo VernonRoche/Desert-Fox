@@ -1,7 +1,7 @@
 <template>
   <div id="container" class="fullscreen flex flex-col">
     <NavBar class="h-12 mb-1" />
-    <main class="h-full w-full">
+    <main class="h-full">
       <router-view />
     </main>
   </div>

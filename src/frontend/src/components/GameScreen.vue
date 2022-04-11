@@ -2,7 +2,7 @@
   <div
     id="gamescreen"
     ref="screen"
-    class="border-2 h-full w-4/5 border-black cursor-grab overflow-auto"
+    class="border-2 max-h-full w-4/5 border-black cursor-grab overflow-scroll"
   ></div>
 </template>
 
@@ -25,3 +25,9 @@ onMounted(() => {
   runScrollDiv(document, screen.value as HTMLElement);
 });
 </script>
+
+<style scoped>
+canvas {
+  @apply h-full w-full;
+}
+</style>
