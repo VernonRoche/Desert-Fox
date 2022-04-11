@@ -1,7 +1,7 @@
 import { Socket } from "socket.io";
 import { createMachine, interpret } from "xstate";
 import HexID from "../Map/HexID";
-import webSocketServer, { SocketServer } from "../SocketServer";
+import webSocketServer from "../SocketServer";
 import Player from "./Player";
 import PlayerID from "./PlayerID";
 
@@ -76,9 +76,15 @@ const _commands: Commands = {
     console.log("player units:", playerUnits);
     player.getSocket().emit("units", playerUnits);
   },
-  attack: (player: Player, args: AttackArgs & BaseCommand) => {},
-  select: (player: Player, args: MoveArgs & BaseCommand) => {},
-  activate: (player: Player, args: MoveArgs & BaseCommand) => {},
+  attack: (_player: Player, _args: AttackArgs & BaseCommand) => {
+    //TODO
+  },
+  select: (_player: Player, _args: MoveArgs & BaseCommand) => {
+    //TODO
+  },
+  activate: (_player: Player, _args: MoveArgs & BaseCommand) => {
+    //TODO
+  },
 };
 
 const statesWithUserInput: Record<string, any> = {

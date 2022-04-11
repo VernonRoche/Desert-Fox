@@ -42,7 +42,10 @@ class Pathfinder {
     //loop through nodes
     while (true) {
       //get the shortest path so far from start to currentNode
-      const dist = smallestWeights.get(currentNode)!;
+      const dist = smallestWeights.get(currentNode);
+      if (!dist) {
+        throw new Error("No shortest path found");
+      }
 
       //iterate over current child's nodes and process
       const neighbourHexes = currentNode.getNeighbours();
@@ -74,7 +77,10 @@ class Pathfinder {
         //if we already have a distance to neighbourHex, compare with this distance
         if (prevNodes.has(neighbourHex)) {
           //get the recorded smallest distance
-          const altDist = smallestWeights.get(neighbourHex)!;
+          const altDist = smallestWeights.get(neighbourHex);
+          if (!altDist) {
+            throw new Error("No smallest distance found");
+          }
 
           //if this distance is better, update the smallest distance + prev node
           if (thisDist < altDist) {
@@ -97,7 +103,11 @@ class Pathfinder {
       }
 
       //pull the next node to visit, if any
-      currentNode = nodesToVisitQueue.shift()!;
+      const shift = nodesToVisitQueue.shift();
+      if (!shift) {
+        throw new Error("No next node found");
+      }
+      currentNode = shift;
     }
 
     //get the shortest path into an array
@@ -106,14 +116,20 @@ class Pathfinder {
     currentNode = endHex;
     while (currentNode !== startHex) {
       path.push(currentNode.getID());
-
-      currentNode = prevNodes.get(currentNode)!;
+      const prevNode = prevNodes.get(currentNode);
+      if (!prevNode) {
+        throw new Error("No prev node found");
+      }
+      currentNode = prevNode;
     }
     path.push(startHex.getID());
 
     //reverse the path so it starts with startHex
     path.reverse();
-    const cost = smallestWeights.get(endHex)!;
+    const cost = smallestWeights.get(endHex);
+    if (!cost) {
+      throw new Error("No cost found");
+    }
     return { hexPath: path, sumOfWeight: cost };
   }
 }
