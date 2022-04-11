@@ -2,6 +2,7 @@ import P5 from "p5";
 import dataMap from "../constants/map";
 import { GameMap } from "../uiGame";
 import drawHexagon from "./hexagon";
+import drawCaption from "./caption";
 import drawUnit from "./units";
 
 export default function drawHexMap(p5: P5, gameMap: GameMap) /*: Hexagon[]*/ {
@@ -35,11 +36,15 @@ export default function drawHexMap(p5: P5, gameMap: GameMap) /*: Hexagon[]*/ {
     //Units
     {
       const units = g.units;
+      let i = 0;
       for (const u of units) {
-        drawUnit(p5, x, y, 0, u.owned, u.type);
+        drawUnit(p5, x, y, i, u.owned, u.type);
+        i++;
       }
     }
   }
+
+  drawCaption(p5);
 
   function xPositionOddLine(_column: number) {
     return r + distHex / 2 + _column * distHex + marginLeft;

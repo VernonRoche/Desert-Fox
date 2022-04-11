@@ -10,7 +10,7 @@ export const colorsHexagon: { [index: string]: string } = {
 };
 
 export const colorsUnit: { [index: string]: string } = {
-  foot: " #2e4053", //à remplacer par foot
+  foot: " #2e4053",
   mechanized: "#7d3c98",
   motorized: "#d4ac0d",
 };
