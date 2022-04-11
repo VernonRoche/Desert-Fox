@@ -106,9 +106,6 @@ class Pathfinder {
     currentNode = endHex;
     while (currentNode !== startHex) {
       path.push(currentNode.getID());
-      console.log(
-        "Added node " + currentNode.getID() + " with a cost of " + smallestWeights.get(currentNode),
-      );
 
       currentNode = prevNodes.get(currentNode)!;
     }
@@ -117,7 +114,6 @@ class Pathfinder {
     //reverse the path so it starts with startHex
     path.reverse();
     const cost = smallestWeights.get(endHex)!;
-    console.log("Path built. The nodes are +" + path + " and the cost is " + cost);
     return { hexPath: path, sumOfWeight: cost };
   }
 }

@@ -48,11 +48,7 @@ describe("Check if Pathfinder works correctly", function () {
       game.getPlayer1(),
       game.getPlayer1().getUnitById(0),
     );
-    console.log(
-      "Enemy unit is at " + game.getPlayer2().getUnits()[0].getCurrentPosition().toString(),
-    );
     for (const node of hexPath) {
-      console.log("Hex: " + node.toString());
       if (node.toString() === new HexID(5, 8).toString()) {
         throw new Error("The pathfinder goes through enemy hex");
       }
