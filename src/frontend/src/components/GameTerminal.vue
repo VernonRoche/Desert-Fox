@@ -37,6 +37,7 @@
 
 <script lang="ts" setup>
 import { onUnmounted, ref } from "@vue/runtime-dom";
+import { Unit } from "../utils/constants/types";
 import socket from "../utils/ClientSocket";
 
 const terminalInput = ref("");
@@ -93,8 +94,25 @@ const commands: Commands = {
       type: "units",
     });
 
-    socket.once("units", (...args: any[]) => {
-      addLine("Game", args.join(" "));
+    socket.once("units", (resp: { error: string } & Unit[]) => {
+      console.log(resp);
+      if (resp.error) {
+        addLine("Game", resp.error);
+      } else {
+        addLine(
+          "Game",
+          resp
+            .map(
+              ({ _id, _lifePoints, _currentPosition, _remainingMovementPoints }) =>
+                `Unit ${_id} has ${_lifePoints} life point at hexId (${
+                  (_currentPosition._x < 10 ? "0" : "") + _currentPosition._x
+                }${
+                  (_currentPosition._y < 10 ? "0" : "") + _currentPosition._y
+                }) with ${_remainingMovementPoints} movement points`,
+            )
+            .join("\n"),
+        );
+      }
     });
   },
   done: () => {
