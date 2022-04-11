@@ -3,7 +3,6 @@ import Player from "./Player";
 import GameMap from "../Map/GameMap";
 import AbstractUnit from "../Units/AbstractUnit";
 import HexID from "../Map/HexID";
-import PlayerID from "./PlayerID";
 import Pathfinder from "./Pathfinder";
 
 export default class Game {
