@@ -12,14 +12,6 @@ import { StateMachine } from "./GameManager/StateMachine";
 
 let id = 0;
 
-enum commandTypes {
-  move = "move",
-  attack = "attack",
-  select = "select",
-  train = "train",
-  activate = "activate",
-}
-
 export class SocketServer {
   private _httpServer: http.Server;
   private _socketServer: Server;

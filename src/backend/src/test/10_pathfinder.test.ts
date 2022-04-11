@@ -1,4 +1,4 @@
-import Game from "../main/GameManager/Game";
+/* import Game from "../main/GameManager/Game";
 import GameMap from "../main/Map/GameMap";
 import HexID from "../main/Map/HexID";
 import Maps from "../main/Map/Maps";
@@ -64,3 +64,4 @@ describe("Check if Pathfinder works correctly", function () {
     }
   });
 });
+ */

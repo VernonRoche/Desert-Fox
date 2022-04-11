@@ -4,6 +4,14 @@ import webSocketServer, { SocketServer } from "../SocketServer";
 import Player from "./Player";
 import PlayerID from "./PlayerID";
 
+enum commandTypes {
+  move = "move",
+  attack = "attack",
+  select = "select",
+  train = "train",
+  activate = "activate",
+}
+
 function throwError(error: string): () => void {
   return () => {
     throw new Error("invalid command for current phase : " + error);

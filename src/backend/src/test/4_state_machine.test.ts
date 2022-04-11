@@ -1,5 +1,5 @@
 import { createMachine, interpret } from "xstate";
-import phaseService, { TurnPhases } from "../main/GameManager/StateMachine";
+import { TurnPhases } from "../main/GameManager/StateMachine";
 
 describe("State Machine tests", function () {
   const stateMachine = createMachine(TurnPhases);

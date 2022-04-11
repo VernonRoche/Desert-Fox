@@ -1,4 +1,3 @@
-import { Console } from "console";
 import Dice from "../main/GameManager/Dice";
 import Player from "../main/GameManager/Player";
 import PlayerID from "../main/GameManager/PlayerID";
@@ -7,10 +6,10 @@ import AbstractUnit from "../main/Units/AbstractUnit";
 import Garrison from "../main/Units/Garrison";
 
 describe("unit is correct add", function () {
-  let id = 0;
+  const id = 0;
   const unit: AbstractUnit[] = [];
   const garrisonHexId = new HexID(2, 2);
-  let garrison = new Garrison(id, garrisonHexId, 1, 1, 2);
+  const garrison = new Garrison(id, garrisonHexId, 1, 1, 2);
   unit.push(garrison);
 
   it("AbstractUnit should be correct", function () {
@@ -42,7 +41,7 @@ describe("unit is correct add", function () {
   });
 
   it("toJson is correct ", function () {
-    const unitJson = unit[0].toJson(new Player(PlayerID.ONE,unit,[],[],[],undefined as any));
+    const unitJson = unit[0].toJson(new Player(PlayerID.ONE, unit, [], [], [], null as any));
     if (unitJson.id !== unit[0].getId()) {
       throw new Error("id not correct");
     }
@@ -55,12 +54,11 @@ describe("unit is correct add", function () {
     if (unitJson.remainingMovementPoints !== unit[0].getRemainingMovementPoints()) {
       throw new Error("RemainingMovementPoints not correct");
     }
-    if(unitJson.type !== "Garrison"){
+    if (unitJson.type !== "Garrison") {
       throw new Error("type not correct");
     }
-    if(unitJson.owned !== true){
+    if (unitJson.owned !== true) {
       throw new Error("owned not correct");
     }
-    
   });
 });

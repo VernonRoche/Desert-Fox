@@ -98,7 +98,7 @@ export default class GameMap {
   public toJSON(player: Player): string {
     const json: JsonMap = [];
     this._hexagons.forEach((hex) => {
-      const units : unitJson[] = [];
+      const units: unitJson[] = [];
       hex.getUnits().forEach((unit) => units.push(unit.toJson(player)));
       json.push({
         hexId: hex.getID().id(),

@@ -9,7 +9,7 @@ export type unitJson = {
   currentPosition: HexID;
   movementPoints: number;
   remainingMovementPoints: number;
-  owned: boolean,
+  owned: boolean;
 };
 export default abstract class AbstractUnit extends Moveable {
   private _moraleRating: number;
@@ -54,7 +54,7 @@ export default abstract class AbstractUnit extends Moveable {
       currentPosition: this.getCurrentPosition(),
       movementPoints: this.getMovementPoints(),
       remainingMovementPoints: this.getRemainingMovementPoints(),
-      owned : player.hasUnit(this),
+      owned: player.hasUnit(this),
     };
   }
   abstract getType(): string;
