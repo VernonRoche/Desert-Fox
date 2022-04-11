@@ -85,8 +85,13 @@ const commands: Commands = {
       unitId: args[0],
       hexId: args[1],
     });
-    socket.once("move", (...args: any[]) => {
-      addLine("Game", args.join(" "));
+    socket.once("move", (args: any) => {
+      if (args.error) {
+        addLine("Game", args.error);
+      } else {
+        addLine("Game", `${args.unit.name} se déplace vers ${args.hex.name}`);
+      }
+      console.log(args);
     });
   },
   units: () => {
@@ -95,6 +100,9 @@ const commands: Commands = {
     });
 
     socket.once("units", (resp: { error: string } & Unit[]) => {
+      function addZeroIfNeeded(number: number) {
+        return number < 10 ? `0${number}` : number;
+      }
       console.log(resp);
       if (resp.error) {
         addLine("Game", resp.error);
@@ -104,11 +112,11 @@ const commands: Commands = {
           resp
             .map(
               ({ _id, _lifePoints, _currentPosition, _remainingMovementPoints }) =>
-                `Unit ${_id} has ${_lifePoints} life point at hexId (${
-                  (_currentPosition._x < 10 ? "0" : "") + _currentPosition._x
-                }${
-                  (_currentPosition._y < 10 ? "0" : "") + _currentPosition._y
-                }) with ${_remainingMovementPoints} movement points`,
+                `Unit ${_id} has ${_lifePoints} life point at hexId (${addZeroIfNeeded(
+                  _currentPosition._y,
+                )}${addZeroIfNeeded(
+                  _currentPosition._x,
+                )}) with ${_remainingMovementPoints} movement points`,
             )
             .join("\n"),
         );
