@@ -16,14 +16,10 @@ const screen = ref<undefined | HTMLElement>(undefined);
 
 onMounted(() => {
   socket.on("map", (gameMap: string) => {
-    const canvas = document.querySelector("canvas");
     console.log("Game was created an map is", gameMap);
-    new P5(
-      (p5) => {
-        sketch(p5, JSON.parse(gameMap) as GameMap);
-      },
-      canvas ? canvas : screen.value,
-    );
+    new P5((p5) => {
+      sketch(p5, JSON.parse(gameMap) as GameMap);
+    }, screen.value);
   });
 
   runScrollDiv(document, screen.value as HTMLElement);
