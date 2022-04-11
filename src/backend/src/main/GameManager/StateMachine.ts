@@ -64,7 +64,7 @@ const _commands: Commands = {
       return;
     }
     try {
-      webSocketServer.getGame()?.moveUnit(player.getId(), unit, new HexID(x, y));
+      webSocketServer.getGame()?.moveUnit(player, unit, new HexID(x, y));
       console.log("move was successful");
       player.getSocket().emit(args.type, { error: false });
     } catch (e) {
