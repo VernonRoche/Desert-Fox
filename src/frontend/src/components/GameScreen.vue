@@ -15,7 +15,7 @@ import socket from "../utils/ClientSocket";
 const screen = ref<undefined | HTMLElement>(undefined);
 
 onMounted(() => {
-  socket.on("gameCreated", (gameMap: string) => {
+  socket.on("map", (gameMap: string) => {
     console.log("Game was created an map is", gameMap);
     new P5((p5) => {
       sketch(p5, JSON.parse(gameMap) as GameMap);

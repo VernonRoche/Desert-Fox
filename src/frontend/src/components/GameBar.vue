@@ -13,7 +13,7 @@
 const gameCreated = ref(false);
 import { computed, ref } from "vue";
 import socket from "../utils/ClientSocket";
-socket.on("gameCreated", () => {
+socket.on("map", () => {
   gameCreated.value = true;
 });
 
@@ -30,10 +30,6 @@ const phaseSentence = computed(() => {
 });
 const turnSentence = computed(() => {
   return isPlaying.value ? "C'est à vous de jouer" : "C'est à l'adversaire de jouer";
-});
-
-socket.on("gameCreated", () => {
-  gameCreated.value = true;
 });
 
 socket.on("phase", (resp: { phase: string; play: boolean; commands: string[]; auto: boolean }) => {
