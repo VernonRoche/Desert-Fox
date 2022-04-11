@@ -16,10 +16,10 @@ type JsonMap = {
   units: unitJson[];
 }[];
 export default class GameMap {
-  private _entities: Entity[];
+  private _entities: Map<number, Entity>;
   private _hexagons: Map<string, Hex> = new Map();
 
-  constructor(entities: Entity[], mapName: Maps) {
+  constructor(entities: Map<number, Entity>, mapName: Maps) {
     this._entities = entities;
     const json = fs.readFileSync(`maps/${mapName}.json`, "utf8");
     const map: JsonMap = JSON.parse(json);
@@ -81,12 +81,12 @@ export default class GameMap {
     return hex;
   }
 
-  public getEntities(): Entity[] {
+  public getEntities(): Map<number, Entity> {
     return this._entities;
   }
 
   public addEntity(unit: Entity): void {
-    this._entities.push(unit);
+    this._entities.set(unit.getId(), unit);
   }
 
   public addUnit(unit: AbstractUnit): void {
@@ -109,8 +109,13 @@ export default class GameMap {
     return JSON.stringify(json);
   }
 
-  public getUnitById(id: number): Entity | null {
-    return this._entities.find((unit) => unit.getId() === id) ?? null;
+  public getUnitById(id: number): Entity {
+    const unit = this._entities.get(id);
+
+    if (!unit) {
+      throw new Error("Nonexisting entity");
+    }
+    return unit;
   }
 
   public hexBelongsToPlayer(hexID: HexID, player: Player): boolean {

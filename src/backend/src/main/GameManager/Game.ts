@@ -45,10 +45,10 @@ export default class Game {
     // Which may or may not represent the real cost in movement points.
 
     const { sumOfWeight } = this._pathfinder.findShortestWay(
-      this._map.findHex(unit.getCurrentPosition()),
-      this._map.findHex(destination),
+      unit.getCurrentPosition(),
+      destination,
       player,
-      false,
+      unit,
     );
 
     if (sumOfWeight > unit.getRemainingMovementPoints()) return "not enough movement points";
