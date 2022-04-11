@@ -155,7 +155,6 @@ socket.on("phase", (resp: { phase: string; play: boolean; commands: string[]; au
     // handle automatic phase
     return;
   }
-  addLine("Game", `Phase de jeu : ${resp.phase}`);
   if (resp.play) {
     addLine("Game", "Vous pouvez jouer les commandes suivantes: " + resp.commands.join(", "));
   } else {
