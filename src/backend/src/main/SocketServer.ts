@@ -60,15 +60,10 @@ export class SocketServer {
 
       console.log(`User [${socket.id}] connected !`);
       const units: AbstractUnit[] = [];
-      this._players.push(new Player(this._sockets.length, units, [], [], [], socket));
+      this._players.push(new Player(this._sockets.length, [], [], [], socket));
       this._sockets.push(socket);
       if (this._sockets.length >= 2 && !this._created) {
         console.log("Game created");
-        //For Prototype Purposes
-        const garrisonHexId = new HexID(2, 2);
-        const garrison = new Garrison(id++, garrisonHexId, 1, 1, 2);
-        units.push(garrison);
-
         this._created = true;
         this._game = new Game(
           new GameMap(new Map(), "libya" as Maps),
@@ -76,7 +71,6 @@ export class SocketServer {
           this._players[1],
         );
         const map = this._game.getMap();
-        map.addUnit(garrison);
         this.sockets.forEach((socket) => {
           socket.emit("gameCreated", map.toJSON(this.getPlayerFromSocket(socket)));
         });
