@@ -23,10 +23,10 @@ export type playerUnitJson = {
 
 export default class Player {
   private _id: PlayerID;
-  private _units: Map<number, AbstractUnit>;
-  private _bases: Map<number, Base>;
-  private _supplyUnits: Map<number, SupplyUnit>;
-  private _refitPoints: Map<number, RefitPoint>;
+  private _units: Map<string, AbstractUnit>;
+  private _bases: Map<string, Base>;
+  private _supplyUnits: Map<string, SupplyUnit>;
+  private _refitPoints: Map<string, RefitPoint>;
   private _socket: Socket;
 
   constructor(
@@ -41,14 +41,16 @@ export default class Player {
     id === PlayerID.ONE
       ? this.loadUnitsByFile("Player1Units")
       : this.loadUnitsByFile("Player2Units");
-    this._bases = new Map(bases.map((b) => [b.getID(), b]));
-    this._supplyUnits = new Map(supplyUnits.map((s) => [s.getId(), s]));
-    this._refitPoints = new Map(refitPoints.map((r) => [r.getId(), r]));
+    this._bases = new Map(bases.map((b) => [b.getID().toString(), b]));
+    this._supplyUnits = new Map(supplyUnits.map((s) => [s.getId().toString(), s]));
+    this._refitPoints = new Map(refitPoints.map((r) => [r.getId().toString(), r]));
     this._socket = socket;
   }
 
   public hasUnit(entity: Entity): boolean {
-    return this._units.has(entity.getId()) || this._supplyUnits.has(entity.getId());
+    return (
+      this._units.has(entity.getId().toString()) || this._supplyUnits.has(entity.getId().toString())
+    );
   }
 
   loadUnitsByFile(filename: string): void {
@@ -63,7 +65,7 @@ export default class Player {
       }
       if (unit.type === "mechanized")
         this._units.set(
-          unit.id,
+          unit.id.toString(),
           new Mechanized(
             unit.id,
             new HexID(x, y),
@@ -75,7 +77,7 @@ export default class Player {
         );
       else if (unit.type === "foot")
         this._units.set(
-          unit.id,
+          unit.id.toString(),
           new Foot(
             unit.id,
             new HexID(x, y),
@@ -87,7 +89,7 @@ export default class Player {
         );
       else if (unit.type === "motorized")
         this._units.set(
-          unit.id,
+          unit.id.toString(),
           new Motorized(
             unit.id,
             new HexID(x, y),
@@ -101,7 +103,9 @@ export default class Player {
     });
   }
   getUnitById(id: number): AbstractUnit {
-    const unit = this._units.get(id);
+    //console.log(this._units.forEach((u) => console.log(u.getId())));
+    let unit = this._units.get(id.toString());
+    console.log(this._units);
 
     if (!unit) {
       throw new Error("Nonexisting entity");

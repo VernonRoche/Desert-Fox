@@ -1,6 +1,5 @@
-/* import Game from "../main/GameManager/Game";
+import Game from "../main/GameManager/Game";
 import GameMap from "../main/Map/GameMap";
-import Mechanized from "../main/Units/Mechanized";
 import HexID from "../main/Map/HexID";
 import Maps from "../main/Map/Maps";
 import Player from "../main/GameManager/Player";
@@ -19,8 +18,8 @@ describe("Check if Pathfinder works correctly", function () {
     const allyPlayer = new Player(PlayerID.ONE, [], [], [], Socket.prototype);
     const enemyPlayer = new Player(PlayerID.TWO, [], [], [], Socket.prototype);
     const map = new GameMap(new Map(), "libya" as Maps);
-    map.findHex(hexIDAlly).addUnit(testUnitAlly);
-    map.findHex(hexIDEnemy).addUnit(testUnitEnemy);
+    //map.findHex(hexIDAlly).addUnit(testUnitAlly);
+    //map.findHex(hexIDEnemy).addUnit(testUnitEnemy);
     game = new Game(map, allyPlayer, enemyPlayer);
   });
 
@@ -55,4 +54,3 @@ describe("Check if Pathfinder works correctly", function () {
     }
   });
 });
- */
