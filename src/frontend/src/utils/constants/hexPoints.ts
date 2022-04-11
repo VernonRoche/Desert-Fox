@@ -8,7 +8,7 @@ export default function handlerHexPoints(
   index: number,
   unit?: boolean,
 ): { x: number; y: number } {
-  if (index < 0 || index > 5) throw new Error("index must be between 0 and 5");
+  //if (index < 0 || index > 5) throw new Error("index must be between 0 and 5");
 
   const hexPoints = hexPointsFromIndex(x, y, r, index);
 

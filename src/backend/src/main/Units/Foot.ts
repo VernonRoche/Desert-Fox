@@ -3,7 +3,7 @@ import HexID from "../Map/HexID";
 
 export default class Foot extends AbstractUnit {
   getType(): string {
-    return "Foot";
+    return "foot";
   }
   refit(): void {
     throw new Error("Method not implemented.");

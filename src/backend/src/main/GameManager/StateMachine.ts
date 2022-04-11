@@ -232,7 +232,12 @@ export class StateMachine {
         return;
       }
       this.runPlayerCommand(currentPlayer, request, data);
-      this.phaseService.send("commands.");
+      webSocketServer.sockets.forEach((socket) => {
+        socket.emit(
+          "map",
+          webSocketServer.getGame()?.getMap().toJSON(webSocketServer.getPlayerFromSocket(socket)),
+        );
+      });
     });
     socket.on("done", () => {
       console.log("done");
@@ -262,7 +267,7 @@ export class StateMachine {
       });
     if (actualPhase === "air_superiority") {
       webSocketServer.broadcast("phase", {
-        phase: "first_player_movement",
+        phase: "reinforcements",
         play: true,
         commands: ["move"],
         auto: false,

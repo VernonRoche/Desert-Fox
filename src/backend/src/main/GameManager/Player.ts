@@ -11,7 +11,7 @@ import Mechanized from "../Units/Mechanized";
 import Motorized from "../Units/Motorized";
 import Foot from "../Units/Foot";
 
-type unitJson = {
+export type playerUnitJson = {
   id: number;
   type: string;
   currentPosition: string;
@@ -54,7 +54,7 @@ export default class Player {
   loadUnitsByFile(filename: string): void {
     const json = fs.readFileSync("units/" + filename + ".json", "utf8");
     const map = JSON.parse(json);
-    map.forEach((unit: unitJson) => {
+    map.forEach((unit: playerUnitJson) => {
       const x = +unit.currentPosition.substring(2, 4);
       const y = +unit.currentPosition.substring(0, 2);
       if (isNaN(x) || isNaN(y)) {

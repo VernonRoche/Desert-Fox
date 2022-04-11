@@ -72,7 +72,7 @@ export class SocketServer {
         );
         const map = this._game.getMap();
         this.sockets.forEach((socket) => {
-          socket.emit("gameCreated", map.toJSON(this.getPlayerFromSocket(socket)));
+          socket.emit("map", map.toJSON(this.getPlayerFromSocket(socket)));
         });
         stateMachine.getPhaseService().send("RESET");
       }

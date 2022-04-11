@@ -68,4 +68,7 @@ export default abstract class Moveable implements Entity {
   public resetMovementPoints(): void {
     this._remainingMovementPoints = this._movementPoints;
   }
+  public getHexId(): HexID {
+    return this._currentPosition;
+  }
 }

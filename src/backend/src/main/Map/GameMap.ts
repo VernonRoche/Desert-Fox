@@ -5,7 +5,10 @@ import fs from "fs";
 import Maps from "./Maps";
 import Terrain, { TerrainTypes } from "./Terrain";
 import AbstractUnit, { unitJson } from "../Units/AbstractUnit";
-import Player from "../GameManager/Player";
+import Player, { playerUnitJson } from "../GameManager/Player";
+import Mechanized from "../Units/Mechanized";
+import Foot from "../Units/Foot";
+import Motorized from "../Units/Motorized";
 
 const width = 66;
 const height = 29;
@@ -24,6 +27,7 @@ export default class GameMap {
     const json = fs.readFileSync(`maps/${mapName}.json`, "utf8");
     const map: JsonMap = JSON.parse(json);
     const validTerrains = Object.values(TerrainTypes) as string[];
+    const units = this.loadUnits();
     map.forEach(({ hexId, terrain }) => {
       const x = +hexId.substring(2, 4);
       const y = +hexId.substring(0, 2);
@@ -32,6 +36,11 @@ export default class GameMap {
         const hexID = new HexID(x, y);
         const _terrain = new Terrain(terrain as TerrainTypes);
         const hex = new Hex(hexID, _terrain);
+        units.forEach((unit: AbstractUnit) => {
+          if (unit.getHexId().id() === hexID.id()) {
+            hex.addUnit(unit);
+          }
+        });
         this._hexagons.set(hexID.id(), hex);
       }
     });
@@ -66,6 +75,57 @@ export default class GameMap {
         }
       }
     }
+  }
+
+  loadUnits(): AbstractUnit[] {
+    const player1units = JSON.parse(fs.readFileSync("units/Player1Units.json", "utf8"));
+    const player2units = JSON.parse(fs.readFileSync("units/Player2Units.json", "utf8"));
+    const allUnitsJson: playerUnitJson[] = [...player1units, ...player2units];
+    const allUnits: AbstractUnit[] = [];
+
+    allUnitsJson.forEach((unit: playerUnitJson) => {
+      const x = +unit.currentPosition.substring(2, 4);
+      const y = +unit.currentPosition.substring(0, 2);
+      if (isNaN(x) || isNaN(y)) {
+        console.log("Error loading unit: " + unit.id + " " + unit.currentPosition);
+        throw new Error("Error loading unit: " + unit.id + " " + unit.currentPosition);
+      }
+      if (unit.type === "mechanized")
+        allUnits.push(
+          new Mechanized(
+            unit.id,
+            new HexID(x, y),
+            unit.moraleRating,
+            unit.combatFactor,
+            unit.movementPoints,
+            unit.lifePoints,
+          ),
+        );
+      else if (unit.type === "foot")
+        allUnits.push(
+          new Foot(
+            unit.id,
+            new HexID(x, y),
+            unit.moraleRating,
+            unit.combatFactor,
+            unit.movementPoints,
+            unit.lifePoints,
+          ),
+        );
+      else if (unit.type === "motorized")
+        allUnits.push(
+          new Motorized(
+            unit.id,
+            new HexID(x, y),
+            unit.moraleRating,
+            unit.combatFactor,
+            unit.movementPoints,
+            unit.lifePoints,
+          ),
+        );
+      else throw new Error("Unknown unit type: " + unit.type);
+    });
+    return allUnits;
   }
 
   public getHexes(): Map<string, Hex> {

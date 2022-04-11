@@ -3,7 +3,7 @@ import HexID from "../Map/HexID";
 
 export default class Mechanized extends AbstractUnit {
   getType(): string {
-    return "Mechanized";
+    return "mechanized";
   }
   refit(): void {
     throw new Error("Method not implemented.");
