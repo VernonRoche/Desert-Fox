@@ -22,14 +22,15 @@ const phases: Record<string, string> = {
 };
 
 const phase = ref("");
+const isPlaying = ref(false);
+
 const phaseSentence = computed(() => {
   const fullName = phases[phase.value];
-  return fullName ? fullName : "";
+  return fullName ? fullName : phase.value;
 });
 const turnSentence = computed(() => {
   return isPlaying.value ? "C'est à vous de jouer" : "C'est à l'adversaire de jouer";
 });
-const isPlaying = ref(false);
 
 socket.on("gameCreated", () => {
   gameCreated.value = true;
