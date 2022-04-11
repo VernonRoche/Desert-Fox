@@ -7,10 +7,12 @@ export type GameMap = {
   terrain: string;
   units: [
     {
-      id: string;
+      type: string;
+      id: number;
       currentPosition: { _x: number; _y: number };
       movementPoints: number;
       remainingMovementPoints: number;
+      owned: boolean;
     },
   ];
 }[];
