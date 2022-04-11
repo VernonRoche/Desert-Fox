@@ -3,20 +3,20 @@ import Player from "../main/GameManager/Player";
 import PlayerID from "../main/GameManager/PlayerID";
 import HexID from "../main/Map/HexID";
 import AbstractUnit from "../main/Units/AbstractUnit";
-import Garrison from "../main/Units/Garrison";
+import Foot from "../main/Units/Foot";
 
 describe("unit is correct add", function () {
   const id = 0;
   const unit: AbstractUnit[] = [];
-  const garrisonHexId = new HexID(2, 2);
-  const garrison = new Garrison(id, garrisonHexId, 3, 3, 12, 1);
-  unit.push(garrison);
+  const footHexId = new HexID(2, 2);
+  const foot = new Foot(id, footHexId, 3, 3, 12, 1);
+  unit.push(foot);
 
   it("AbstractUnit should be correct", function () {
     if (unit[0].getId() != id) {
       throw new Error("id not correct");
     }
-    if (unit[0].getCurrentPosition() != garrisonHexId) {
+    if (unit[0].getCurrentPosition() != footHexId) {
       throw new Error("CurrentPosition not correct");
     }
     if (unit[0].getMoraleRating() != 3) {
@@ -54,10 +54,10 @@ describe("unit is correct add", function () {
     if (unitJson.remainingMovementPoints !== unit[0].getRemainingMovementPoints()) {
       throw new Error("RemainingMovementPoints not correct");
     }
-    if (unitJson.type !== "Garrison") {
+    if (unitJson.type !== "foot") {
       throw new Error("type not correct");
     }
-    if (unitJson.owned !== false) {
+    if (unitJson.owned !== true) {
       throw new Error("owned not correct");
     }
   });

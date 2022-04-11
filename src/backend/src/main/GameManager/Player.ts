@@ -103,9 +103,7 @@ export default class Player {
     });
   }
   getUnitById(id: number): AbstractUnit {
-    //console.log(this._units.forEach((u) => console.log(u.getId())));
     let unit = this._units.get(id.toString());
-    console.log(this._units);
 
     if (!unit) {
       throw new Error("Nonexisting entity");

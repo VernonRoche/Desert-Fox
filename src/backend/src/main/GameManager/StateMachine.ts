@@ -66,14 +66,13 @@ const _commands: Commands = {
     try {
       webSocketServer.getGame()?.moveUnit(player.getId(), unit, new HexID(x, y));
       console.log("move was successful");
+      player.getSocket().emit(args.type, { error: false });
     } catch (e) {
       player.getSocket().emit(args.type, { error: "invalidmove" });
     }
   },
   units: (player: Player) => {
-    console.log("player (", player.getId(), ") has", player.getUnits().length, "units");
     const playerUnits = player.getUnits();
-    console.log("player units:", playerUnits);
     player.getSocket().emit("units", playerUnits);
   },
   attack: (player: Player, args: AttackArgs & BaseCommand) => {},
@@ -241,8 +240,8 @@ export class StateMachine {
     });
     socket.on("done", () => {
       console.log("done");
-      this.endTurn(webSocketServer.getPlayerFromSocket(socket));
-      this.informUsers(this.phaseService.state.value.toString(), webSocketServer.getPlayers());
+      if (this.endTurn(webSocketServer.getPlayerFromSocket(socket)))
+        this.informUsers(this.phaseService.state.value.toString(), webSocketServer.getPlayers());
     });
   }
   runPhaseActions(actualPhase: string): void {
@@ -297,24 +296,25 @@ export class StateMachine {
   reinitDoneTable(): void {
     this.done = [false, false];
   }
-  endTurn(player: Player): void {
+  endTurn(player: Player): boolean {
     if (
       ["reinforcements", "initiative", "allocation"].includes(
         this.phaseService.state.value.toString(),
       )
     ) {
-      if (this.done[0] && this.done[1]) {
-        this.done[0] = false;
-        this.done[1] = false;
-        this.phaseService.send("NEXT");
-        return;
-      }
       this.done[player.getId()] = true;
-    } else {
-      if (this.checkIfCorrectPlayer(this.phaseService.state.value.toString(), player.getId()))
+      if (this.done[0] && this.done[1]) {
+        this.reinitDoneTable();
         this.phaseService.send("NEXT");
-      else throw new Error("wrongplayer");
+        return true;
+      }
+    } else {
+      if (this.checkIfCorrectPlayer(this.phaseService.state.value.toString(), player.getId())) {
+        this.phaseService.send("NEXT");
+        return true;
+      } else throw new Error("wrongplayer");
     }
+    return false;
   }
 
   sendToPlayers(
