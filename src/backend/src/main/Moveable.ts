@@ -71,4 +71,10 @@ export default abstract class Moveable implements Entity {
   public getHexId(): HexID {
     return this._currentPosition;
   }
+  public getCombatFactor(): number {
+    return this._combatFactor;
+  }
+  public getLifePoints(): number {
+    return this._lifePoints;
+  }
 }
