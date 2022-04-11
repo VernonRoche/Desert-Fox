@@ -5,7 +5,8 @@
       <p v-for="(line, index) in lines" :key="index" v-scroll-to class="pl-4">
         <span class="italic border-r pr-2 mr-2">{{ toFrenchDate(line.time) }}</span>
         <span class="font-bold">{{ line.author }}</span>
-        - {{ line.data }}
+        - <span v-if="line.data">{{ line.data }}</span>
+        <span v-else class="italic text-sm text-gray-400">message vide</span>
       </p>
     </div>
     <form
@@ -31,6 +32,7 @@ import { onUnmounted, ref } from "@vue/runtime-dom";
 import socket from "../utils/ClientSocket";
 
 const terminalInput = ref("");
+const lines = ref<{ data: string; author: string; time: Date }[]>([]);
 
 type Command = (args: string[]) => void;
 type Commands = Record<string, Command>;
@@ -100,8 +102,6 @@ const commands: Commands = {
     lines.value = [];
   },
 };
-
-const lines = ref<{ data: string; author: string; time: Date }[]>([]);
 
 addLine("Game", "Connexion au serveur...");
 
