@@ -49,7 +49,7 @@ export class SocketServer {
     //For Prototype Purposes
 
     this.eventConnection((socket) => {
-      if (this._sockets.length === 2) {
+      if (this._sockets.length >= 2) {
         socket.emit("commandMessage", { error: "full" });
         console.log("socket disconnected because full :", socket.id);
         socket.disconnect(true);
@@ -57,8 +57,14 @@ export class SocketServer {
       }
 
       console.log(`User [${socket.id}] connected !`);
-      const units: AbstractUnit[] = [];
-      this._players.push(new Player(this._sockets.length, [], [], [], socket));
+      let playerId: number;
+      if (this._players.length >= 1) {
+        playerId = Math.abs(this._players[0].getId() - 1);
+      } else {
+        playerId = this._sockets.length;
+      }
+      this._players.push(new Player(playerId, [], [], [], socket));
+
       this._sockets.push(socket);
       if (this._sockets.length >= 2 && !this._created) {
         console.log("Game created");
@@ -103,9 +109,8 @@ export class SocketServer {
       if (this._created) {
         console.log("Game destroyed");
         this._created = false;
-        this._players.filter((player) => player.getSocket().id !== socketClient.id);
+        this._players = this._players.filter((player) => player.getSocket().id !== socketClient.id);
         this._game = undefined;
-        id = 0;
       }
     });
 
