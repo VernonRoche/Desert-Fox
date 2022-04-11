@@ -1,5 +1,5 @@
 import P5 from "p5";
-import colors from "../constants/colors";
+import { colorsHexagon } from "../constants/colors";
 import handlerHexPoints from "../constants/hexPoints";
 import drawText from "./text";
 
@@ -15,7 +15,7 @@ export default function drawHexagon(
 
   p5.stroke("black");
   p5.strokeWeight(2);
-  p5.fill(colors[typeTerrain]);
+  p5.fill(colorsHexagon[typeTerrain]);
   p5.beginShape();
   for (let i = 0; i < 6; i++) {
     const hexPoints = handlerHexPoints(x, y, r, i);

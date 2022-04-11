@@ -34,13 +34,9 @@ export default function drawHexMap(p5: P5, gameMap: GameMap) /*: Hexagon[]*/ {
     }
     //Units
     {
-      /*
-      {"hexId":"0202","terrain":"clear",
-      "units":[{"id":0,"currentPosition":{"_x":2,"_y":2},"movementPoints":1,"remainingMovementPoints":0}]},
-      */
-      const unit = g.units;
-      for (const u of unit) {
-        drawUnit(p5, x, y, Number(u.id));
+      const units = g.units;
+      for (const u of units) {
+        drawUnit(p5, x, y, u.id, u.owned, u.type);
       }
     }
   }
