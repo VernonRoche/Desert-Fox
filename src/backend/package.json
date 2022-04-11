@@ -12,7 +12,7 @@
     "format": "prettier --config .prettierrc \"src/**/*.ts\" --write",
     "lint": "eslint . --ext .ts src/**/*.ts",
     "lint:fix": "eslint --ext .ts src/**/*.ts --fix",
-    "fix": "npm run lint:fix && npm run format"
+    "fix": "npm run format && npm run lint:fix"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
