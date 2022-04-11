@@ -95,16 +95,11 @@ export default class GameMap {
     else throw new Error("incorrecthex");
   }
 
-  public toJSON(): string {
+  public toJSON(player: Player): string {
     const json: JsonMap = [];
     this._hexagons.forEach((hex) => {
-      const units: {
-        id: number;
-        currentPosition: HexID;
-        movementPoints: number;
-        remainingMovementPoints: number;
-      }[] = [];
-      hex.getUnits().forEach((unit) => units.push(unit.toJson()));
+      const units : unitJson[] = [];
+      hex.getUnits().forEach((unit) => units.push(unit.toJson(player)));
       json.push({
         hexId: hex.getID().id(),
         terrain: hex.getTerrain().terrainType,

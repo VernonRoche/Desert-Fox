@@ -2,6 +2,9 @@ import AbstractUnit from "./AbstractUnit";
 import HexID from "../Map/HexID";
 
 export default class SpecialForces extends AbstractUnit {
+  getType(): string {
+    return "SpecialForces";
+  }
   MovementAllowance(): number {
     throw new Error("Method not implemented.");
   }
