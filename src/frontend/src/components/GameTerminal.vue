@@ -2,18 +2,26 @@
   <div id="game-terminal" class="h-full w-1/5 flex flex-col bg-black rounded">
     <div id="terminal" class="text-white overflow-y-scroll h-full">
       <!-- Besoin de changer le v-scroll-to mais fonctionne pour l'instant -->
-      <p v-for="(line, index) in lines" :key="index" v-scroll-to class="pl-4">
-        <span class="italic border-r pr-2 mr-2">{{ toFrenchDate(line.time) }}</span>
-        <span class="font-bold">{{ line.author }}</span>
-        - <span v-if="line.data">{{ line.data }}</span>
-        <span v-else class="italic text-sm text-gray-400">message vide</span>
-      </p>
+      <div
+        v-for="(line, index) in lines"
+        :key="index"
+        v-scroll-to
+        class="pl-4 flex flex-col text-center whitespace-pre-line border-t border-white p-2"
+      >
+        <div>
+          <span class="italic border-r pr-2 mr-2">{{ toFrenchDate(line.time) }}</span>
+          <span class="font-bold">{{ line.author }}</span>
+        </div>
+        <div>
+          <span v-if="line.data">{{ line.data }}</span>
+          <span v-else class="italic text-sm text-gray-400">message vide</span>
+        </div>
+      </div>
     </div>
     <form
       class="border bg-transparent p-2 w-full pl-4 rounded text-white flex gap-1"
       @submit.prevent="submitLine"
     >
-      <span>></span>
       <input
         id="commandInput"
         v-model="terminalInput"
@@ -94,9 +102,11 @@ const commands: Commands = {
   },
   // local commands
   help: () => {
+    let result = "";
     Object.keys(help).forEach((helpCommand) => {
-      addLine("Game", `${helpCommand} - ${help[helpCommand]}`);
+      result += `${helpCommand} - ${help[helpCommand]}\n`;
     });
+    addLine("Game", result);
   },
   clear: () => {
     lines.value = [];
