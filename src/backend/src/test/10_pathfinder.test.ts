@@ -1,11 +1,11 @@
 import Game from "../main/GameManager/Game";
 import GameMap from "../main/Map/GameMap";
-import Mechanized from "../main/Units/Mechanized";
 import HexID from "../main/Map/HexID";
 import Maps from "../main/Map/Maps";
 import Player from "../main/GameManager/Player";
 import PlayerID from "../main/GameManager/PlayerID";
 import { Socket } from "socket.io";
+import Garrison from "../main/Units/Garrison";
 
 describe("Check if Pathfinder works correctly", function () {
   let game: Game;
@@ -13,8 +13,8 @@ describe("Check if Pathfinder works correctly", function () {
     const hexIDAlly = new HexID(5, 7);
     const hexIDEnemy = new HexID(5, 8);
 
-    const testUnitAlly = new Mechanized(0, hexIDAlly, 15, 15, 1);
-    const testUnitEnemy = new Mechanized(1, hexIDEnemy, 15, 15, 1);
+    const testUnitAlly = new Garrison(0, hexIDAlly, 15, 15, 1);
+    const testUnitEnemy = new Garrison(1, hexIDEnemy, 15, 15, 1);
 
     const allyPlayer = new Player(PlayerID.ONE, [testUnitAlly], [], [], [], Socket.prototype);
     const enemyPlayer = new Player(PlayerID.TWO, [testUnitEnemy], [], [], [], Socket.prototype);
