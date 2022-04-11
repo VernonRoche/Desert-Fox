@@ -5,7 +5,7 @@ import Maps from "../main/Map/Maps";
 describe("Game map test", function () {
   let map: GameMap;
   it("Instantiate map", function () {
-    map = new GameMap([], "libya" as Maps);
+    map = new GameMap(new Map(), "libya" as Maps);
   });
   it("Valid Hex should not throw", function () {
     const hexId = new HexID(1, 1);

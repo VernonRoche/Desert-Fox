@@ -49,15 +49,22 @@ const commands: Commands = {
   exit: disconnectSocket,
   message: (message: string[]) => socket.send("message", message.join(" ")),
   move: (args: string[]) => {
+    // check if arguments are valid
+    if (args.length !== 2) {
+      socket.send("message", "Mauvais nombre d'arguments (unitId, hexId)");
+      return;
+    }
+    const unitId = +args[0];
+    const hexId = +args[1];
     let hasError = false;
-    if (isNaN(+args[0])) {
+    if (isNaN(unitId)) {
       addLine(
         "Game",
         "Argument invalide, le premier argument doit être un numéro (identifiant d'une unité)",
       );
       hasError = true;
     }
-    if (isNaN(+args[1])) {
+    if (isNaN(hexId)) {
       addLine(
         "Game",
         "Argument invalide, le deuxième argument doit être un numéro (identifiant d'hexagone)",
@@ -65,6 +72,7 @@ const commands: Commands = {
       hasError = true;
     }
     if (hasError) return;
+    // end check
     socket.send("command", {
       type: "move",
       unitId: args[0],
@@ -74,10 +82,15 @@ const commands: Commands = {
       addLine("Game", args.join(" "));
     });
   },
-  units: () =>
+  units: () => {
     socket.send("command", {
       type: "units",
-    }),
+    });
+
+    socket.once("units", (...args: any[]) => {
+      addLine("Game", args.join(" "));
+    });
+  },
   done: () => {
     socket.emit("done");
   },
