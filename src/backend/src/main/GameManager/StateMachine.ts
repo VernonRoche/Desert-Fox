@@ -1,3 +1,4 @@
+import { Socket } from "socket.io";
 import { createMachine, interpret } from "xstate";
 import HexID from "../Map/HexID";
 import webSocketServer, { SocketServer } from "../SocketServer";
@@ -10,12 +11,7 @@ enum commandTypes {
   select = "select",
   train = "train",
   activate = "activate",
-}
-
-function throwError(error: string): () => void {
-  return () => {
-    throw new Error("invalid command for current phase : " + error);
-  };
+  units = "units",
 }
 
 type BaseCommand = {
@@ -33,10 +29,10 @@ type AttackArgs = MoveArgs & {
   combatSupply?: boolean;
 };
 
-type Commands = Record<string, (args: AllArgs) => void>;
+type Commands = Record<string, (player: Player, args: AllArgs) => void>;
 
-const _commands: (player: Player) => Commands = (player: Player) => ({
-  move: (args: MoveArgs & BaseCommand) => {
+const _commands: Commands = {
+  move: (player: Player, args: MoveArgs & BaseCommand) => {
     if (
       (player.getId() === 0 &&
         stateMachine.getPhaseService().state.value !== "first_player_movement" &&
@@ -74,140 +70,92 @@ const _commands: (player: Player) => Commands = (player: Player) => ({
       player.getSocket().emit(args.type, { error: "invalidmove" });
     }
   },
-  units: () => {
+  units: (player: Player) => {
     console.log("player (", player.getId(), ") has", player.getUnits().length, "units");
     const playerUnits = player.getUnits();
     console.log("player units:", playerUnits);
     player.getSocket().emit("units", playerUnits);
   },
-});
-
-const commands = {
-  move: throwError("move"),
-  attack: throwError("attack"),
-  select: throwError("select"),
-  train: throwError("train"),
-  activate: throwError("activate"),
+  attack: (player: Player, args: AttackArgs & BaseCommand) => {},
+  select: (player: Player, args: MoveArgs & BaseCommand) => {},
+  activate: (player: Player, args: MoveArgs & BaseCommand) => {},
 };
-
-function move(args: any): void {
-  //TODO
-}
-
-function attack(args: any): void {
-  //TODO
-}
-
-function importCommands(functions: ((args: any) => void)[]): any {
-  const result: Record<string, (args: any) => void> = {};
-  Object.assign(result, commands);
-  for (const functioni of functions) {
-    if (result[functioni.name]) result[functioni.name] = functioni;
-  }
-  return result;
-}
 
 const statesWithUserInput: Record<string, any> = {
   reinforcements: {
     on: {
       NEXT: "allocation",
     },
-    commands: importCommands([
-      function select(args: any): void {
-        //to complete
-      },
-    ]),
   },
   initiative: {
     on: {
       NEXT: "first_player_movement",
     },
-    commands: importCommands([]),
   },
   allocation: {
     on: {
       NEXT: "initiative",
     },
-    commands: importCommands([
-      function activate(args: any): void {
-        //to complete
-      },
-      function train(args: any): void {
-        //to complete
-      },
-    ]),
   },
   first_player_movement: {
     on: {
       NEXT: "second_player_reaction",
     },
-    commands: importCommands([move]),
   },
   second_player_reaction: {
     on: {
       NEXT: "first_player_combat",
     },
-    commands: importCommands([move]),
   },
   first_player_combat: {
     on: {
       NEXT: "second_player_movement",
     },
-    commands: importCommands([attack]),
   },
   second_player_movement: {
     on: {
       NEXT: "first_player_reaction",
     },
-    commands: importCommands([move]),
   },
   first_player_reaction: {
     on: {
       NEXT: "second_player_combat",
     },
-    commands: importCommands([move]),
   },
   second_player_combat: {
     on: {
       NEXT: "first_player_movement2",
     },
-    commands: importCommands([attack]),
   },
   first_player_movement2: {
     on: {
       NEXT: "second_player_reaction2",
     },
-    commands: importCommands([move]),
   },
   second_player_reaction2: {
     on: {
       NEXT: "first_player_combat2",
-      commands: importCommands([move]),
     },
   },
   first_player_combat2: {
     on: {
       NEXT: "second_player_movement2",
     },
-    commands: importCommands([attack]),
   },
   second_player_movement2: {
     on: {
       NEXT: "first_player_reaction2",
     },
-    commands: importCommands([move]),
   },
   first_player_reaction2: {
     on: {
       NEXT: "second_player_combat2",
     },
-    commands: importCommands([move]),
   },
   second_player_combat2: {
     on: {
       NEXT: "supply_attrition",
     },
-    commands: importCommands([attack]),
   },
 };
 export const TurnPhases = {
@@ -267,6 +215,31 @@ export class StateMachine {
       }
     });
   }
+  registerSocket(socket: Socket): void {
+    socket.on("command", (data: { type: commandTypes } & AllArgs) => {
+      if (!webSocketServer.getGame()) {
+        socket.emit(data.type, { error: "nogame" });
+        return;
+      }
+      const currentPlayer = webSocketServer.getPlayerFromSocket(socket);
+      const request = data.type;
+      if (!_commands[request]) {
+        socket.emit(request, { error: "invalidcommand" });
+        return;
+      }
+      if (request === "units") {
+        _commands[request](currentPlayer, data);
+        return;
+      }
+      this.runPlayerCommand(currentPlayer, request, data);
+      this.phaseService.send("commands.");
+    });
+    socket.on("done", () => {
+      console.log("done");
+      this.endTurn(webSocketServer.getPlayerFromSocket(socket));
+      this.informUsers(this.phaseService.state.value.toString(), webSocketServer.getPlayers());
+    });
+  }
   runPhaseActions(actualPhase: string): void {
     switch (actualPhase) {
       case "air_superiority": //TODO
@@ -295,6 +268,24 @@ export class StateMachine {
         auto: false,
       });
     }
+  }
+
+  runPlayerCommand(player: Player, command: string, args: any): void {
+    if (!_commands[command]) {
+      console.log("invalid command");
+      return;
+    }
+    if (
+      !this.checkIfCorrectPlayer(
+        this.phaseService.state.value.toString(),
+        player.getId(),
+      ).commands.includes(command)
+    ) {
+      // checks if the player is allowed to do the command
+      player.getSocket().emit(command, { error: "invalidturncommand" });
+      return;
+    }
+    _commands[command](player, args);
   }
 
   public done: boolean[] = [false, false];
@@ -370,7 +361,7 @@ export class StateMachine {
         break;
       }
       case "reinforcements":
-        return { correct: true, commands: ["move"] };
+        return { correct: true, commands: ["select"] };
       case "initiative":
         return { correct: true, commands: [] };
       case "allocation":
