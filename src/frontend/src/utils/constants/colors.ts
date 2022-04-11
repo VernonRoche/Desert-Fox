@@ -20,4 +20,4 @@ export const colorsPlayer: { [index: string]: string } = {
   false: "#a93226",
 };
 
-export const colorsSea: string = "#5499c7";
+export const colorsSea = "#5499c7";
