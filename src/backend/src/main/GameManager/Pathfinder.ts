@@ -1,6 +1,8 @@
 import Player from "./Player";
 import GameMap from "../Map/GameMap";
 import Hex from "../Map/Hex";
+import HexID from "../Map/HexID";
+import AbstractUnit from "../Units/AbstractUnit";
 
 class Pathfinder {
   private readonly _map: GameMap;
@@ -13,11 +15,13 @@ class Pathfinder {
    * Return an object which contains the path and sum of weights
    */
   public findShortestWay(
-    startHex: Hex,
-    endHex: Hex,
+    startHexID: HexID,
+    endHexID: HexID,
     player: Player,
-    isMotorized: boolean,
-  ): { hexPath: Hex[]; sumOfWeight: number } {
+    unit: AbstractUnit,
+  ): { hexPath: HexID[]; sumOfWeight: number } {
+    const startHex = this._map.findHex(startHexID);
+    const endHex = this._map.findHex(endHexID);
     //smallest weights between startHex and all the other nodes
     const smallestWeights = new Map<Hex, number>();
     //for convenience, mark distance from startHex to itself as 0
@@ -35,7 +39,6 @@ class Pathfinder {
     visitedNodes.add(startHex.getID().toString());
 
     let currentNode = startHex;
-    console.log("Starting to look for path");
     //loop through nodes
     while (true) {
       //get the shortest path so far from start to currentNode
@@ -43,11 +46,12 @@ class Pathfinder {
 
       //iterate over current child's nodes and process
       const neighbourHexes = currentNode.getNeighbours();
-
       for (const neighbourHex of neighbourHexes) {
         //add node to queue if not already visited
-        if (!visitedNodes.has(neighbourHex.getID().toString())) {
-          console.log("Added node " + neighbourHex.getID() + " to queue");
+        if (
+          !visitedNodes.has(neighbourHex.getID().toString()) &&
+          !nodesToVisitQueue.includes(neighbourHex)
+        ) {
           nodesToVisitQueue.push(neighbourHex);
         }
 
@@ -58,7 +62,7 @@ class Pathfinder {
           thisDist += 1000;
         }
         // check if we enter enemy zone of control
-        if (!isMotorized) {
+        if (!(unit.getType() === "Motorised")) {
           for (const potentialZOCHex of neighbourHex.getNeighbours()) {
             if (!this._map.hexBelongsToPlayer(potentialZOCHex.getID(), player)) {
               thisDist += 1;
@@ -86,7 +90,6 @@ class Pathfinder {
 
       //mark that we've visited this node
       visitedNodes.add(currentNode.getID().toString());
-      console.log("Marked the hex" + currentNode.getID() + "moving on to next");
 
       //exit if done
       if (nodesToVisitQueue.length === 0) {
@@ -95,25 +98,26 @@ class Pathfinder {
 
       //pull the next node to visit, if any
       currentNode = nodesToVisitQueue.shift()!;
-      console.log("Nodes to still visit " + nodesToVisitQueue.length);
-      //console.log("Current Node is now: " + currentNode.getID());
     }
 
     //get the shortest path into an array
-    const path: Hex[] = [];
+    const path: HexID[] = [];
 
     currentNode = endHex;
-    console.log("Building the path now");
     while (currentNode !== startHex) {
-      path.push(currentNode);
+      path.push(currentNode.getID());
+      console.log(
+        "Added node " + currentNode.getID() + " with a cost of " + smallestWeights.get(currentNode),
+      );
 
       currentNode = prevNodes.get(currentNode)!;
     }
-    path.push(startHex);
+    path.push(startHex.getID());
 
     //reverse the path so it starts with startHex
     path.reverse();
     const cost = smallestWeights.get(endHex)!;
+    console.log("Path built. The nodes are +" + path + " and the cost is " + cost);
     return { hexPath: path, sumOfWeight: cost };
   }
 }

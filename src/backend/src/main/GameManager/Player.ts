@@ -34,8 +34,13 @@ export default class Player {
     return this._units.has(entity.getId()) || this._supplyUnits.has(entity.getId());
   }
 
-  getUnitById(id: number): AbstractUnit | null {
-    return this._units.get(id) ?? null;
+  getUnitById(id: number): AbstractUnit {
+    const unit = this._units.get(id);
+
+    if (!unit) {
+      throw new Error("Nonexisting entity");
+    }
+    return unit;
   }
 
   getId(): PlayerID {

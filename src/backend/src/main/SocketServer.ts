@@ -70,7 +70,11 @@ export class SocketServer {
         units.push(garrison);
 
         this._created = true;
-        this._game = new Game(new GameMap([], "libya" as Maps), this._players[0], this._players[1]);
+        this._game = new Game(
+          new GameMap(new Map(), "libya" as Maps),
+          this._players[0],
+          this._players[1],
+        );
         const map = this._game.getMap();
         map.addUnit(garrison);
         this.sockets.forEach((socket) => {
