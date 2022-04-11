@@ -28,12 +28,11 @@ export default class Game {
   // return a string containing the reason if it cannot
   // do not try if(canMove) since it will always be true
   // check if(canMove === true)
-  public canMove(playerId: PlayerID, unit: AbstractUnit, destination: HexID): true | string {
+  public canMove(player: Player, unit: AbstractUnit, destination: HexID): true | string {
     const destinationHex = this._map.findHex(destination);
     if (!destinationHex) return "hex does not exist";
 
     // Check if unit exists and that the player owns it
-    const player: Player = playerId === PlayerID.ONE ? this._player1 : this._player2;
     if (!player.hasUnit(unit)) return "that unit does not exist";
 
     // Check if the player owns the unit
@@ -58,12 +57,11 @@ export default class Game {
   }
 
   // Checks all units of a player and returns the list of units that can move
-  public availableUnitsToMove(playerId: PlayerID): AbstractUnit[] {
-    const player: Player = playerId === PlayerID.ONE ? this._player1 : this._player2;
+  public availableUnitsToMove(player: Player): AbstractUnit[] {
     const availableUnits: AbstractUnit[] = [];
     for (const unit of player.getUnits()) {
       for (const neighbourHex of this._map.findHex(unit.getCurrentPosition()).getNeighbours()) {
-        if (this.canMove(playerId, unit, neighbourHex.getID()) === true) {
+        if (this.canMove(player, unit, neighbourHex.getID()) === true) {
           availableUnits.push(unit);
           break;
         }
@@ -74,13 +72,13 @@ export default class Game {
 
   // Checks if a move is possible and applies it.
   // Returns false if the move was not possible, true if move was succesful.
-  public moveUnit(playerId: PlayerID, unit: AbstractUnit, destination: HexID): void {
+  public moveUnit(player: Player, unit: AbstractUnit, destination: HexID): void {
     // Get the owner of the destination hex to see if we can move there
 
-    const canMove = this.canMove(playerId, unit, destination);
+    /*     const canMove = this.canMove(player, unit, destination);
     if (canMove !== true) {
       throw new Error(`Cannot move unit: ${canMove}`);
-    }
+    } */
 
     // Check if move is possible
     const originHex = this._map.findHex(unit.getCurrentPosition());
