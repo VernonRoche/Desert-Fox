@@ -45,15 +45,11 @@ const help: Record<string, string> = {
 };
 
 const commands: Commands = {
-  ping: () => socket.send("ping message", terminalInput.value),
+  ping: () => socket.emit("ping message", terminalInput.value),
   exit: disconnectSocket,
-  message: (message: string[]) => socket.send("message", message.join(" ")),
+  message: (message: string[]) => socket.emit("message", message.join(" ")),
   move: (args: string[]) => {
     // check if arguments are valid
-    if (args.length !== 2) {
-      socket.send("message", "Mauvais nombre d'arguments (unitId, hexId)");
-      return;
-    }
     const unitId = +args[0];
     const hexId = +args[1];
     let hasError = false;
@@ -73,7 +69,7 @@ const commands: Commands = {
     }
     if (hasError) return;
     // end check
-    socket.send("command", {
+    socket.emit("command", {
       type: "move",
       unitId: args[0],
       hexId: args[1],
@@ -83,7 +79,7 @@ const commands: Commands = {
     });
   },
   units: () => {
-    socket.send("command", {
+    socket.emit("command", {
       type: "units",
     });
 
