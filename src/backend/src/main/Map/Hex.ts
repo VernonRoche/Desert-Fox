@@ -54,9 +54,8 @@ export default class Hex {
   }
 
   removeUnit(unit: AbstractUnit) {
-    this._units.forEach((item, index) => {
-      if (item === unit) this._units.splice(index, 1);
-    });
+    // remove unit from this._units
+    this._units = this._units.filter((u) => u.getId() !== unit.getId());
   }
 
   removeSupplyUnit(unit: SupplyUnit) {
