@@ -3,11 +3,6 @@ import { io, Socket } from "socket.io-client";
 import MachineState from "../main/GameManager/StateMachine";
 import { SocketServer } from "../main/SocketServer";
 
-const save = console.log;
-console.log = () => {
-  // ignore
-};
-
 function initSocket(port: number): Socket {
   return io(`http://localhost:${port}`);
 }
@@ -147,7 +142,5 @@ describe("Socket server tests", function () {
 
   it("close server", function () {
     socketServer["_httpServer"].close();
-    // put back console log for next tests
-    console.log = save;
   });
 });
