@@ -104,7 +104,7 @@ describe("Socket server tests", function () {
         if (game) {
           throw new Error("Game is not stopped with player1 disconnection");
         }
-      }, 100);
+      }, 1000);
     });
     player1.disconnect();
   });
@@ -128,7 +128,7 @@ describe("Socket server tests", function () {
         if (game) {
           throw new Error("Game is not stopped with player2 disconnection");
         }
-      }, 100);
+      }, 1000);
     });
     player2.disconnect();
   });

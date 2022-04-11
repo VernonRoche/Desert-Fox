@@ -5,6 +5,7 @@ export enum TerrainTypes {
   SAND_SEA = "sand sea",
   CITY = "city",
   MARSH = "marsh",
+  MOUNTAIN = "mountain",
   EMPTY = "empty",
 }
 

@@ -19,3 +19,5 @@ export const colorsPlayer: { [index: string]: string } = {
   true: "#229954",
   false: "#a93226",
 };
+
+export const colorsSea: string = "#5499c7";

@@ -1,6 +1,7 @@
 import P5 from "p5";
 import drawHexMap from "./draw/hexMap";
 import dataMap from "./constants/map";
+import { colorsSea } from "./constants/colors";
 
 export type GameMap = {
   hexId: string;
@@ -45,7 +46,7 @@ const sketch = (p5: P5, gameMap: GameMap) => {
 
   p5.setup = () => {
     p5.createCanvas(width, height);
-    p5.background(220);
+    p5.background(colorsSea);
     drawHexMap(p5, gameMap);
   };
 

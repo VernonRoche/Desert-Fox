@@ -70,7 +70,11 @@ export class SocketServer {
         units.push(garrison);
 
         this._created = true;
-        this._game = new Game(new GameMap([], "libya" as Maps), this._players[0], this._players[1]);
+        this._game = new Game(
+          new GameMap(new Map(), "libya" as Maps),
+          this._players[0],
+          this._players[1],
+        );
         const map = this._game.getMap();
         map.addUnit(garrison);
         this.sockets.forEach((socket) => {
@@ -78,6 +82,7 @@ export class SocketServer {
         });
         stateMachine.getPhaseService().send("RESET");
       }
+      stateMachine.registerSocket(socket);
       this.applyRoutes(socket);
     });
   }
@@ -117,23 +122,7 @@ export class SocketServer {
       this._socketServer.emit("message", data);
     });
 
-    /* socketClient.on("command", (data: { type: commandTypes } & AllArgs) => {
-      if (!this._game) {
-        socketClient.emit(data.type, { error: "nogame" });
-        return;
-      }
-      const currentPlayer = this.getPlayerFromSocket(socketClient);
-      const request = data.type;
-      if (!_commands(currentPlayer)[request]) {
-        socketClient.emit(request, { error: "invalidcommand" });
-        return;
-      }
-      _commands(currentPlayer)[request](data);
-    });
-    socketClient.on("done", () => {
-      phaseService.send("NEXT");
-      informUsers(phaseService.state.value.toString(), this.getPlayers());
-    }); */
+    socketClient.on("command", (data: any) => console.log("Received command", data));
   }
 
   getGame(): Game | undefined {
