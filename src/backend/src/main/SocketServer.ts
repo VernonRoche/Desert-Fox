@@ -81,7 +81,9 @@ export class SocketServer {
         this._game = new Game(new GameMap([], "libya" as Maps), this._players[0], this._players[1]);
         const map = this._game.getMap();
         map.addUnit(garrison);
-        this.broadcast("gameCreated", map.toJSON());
+        this.sockets.forEach((socket) => {
+          socket.emit("gameCreated", map.toJSON(this.getPlayerFromSocket(socket)));
+        });
         stateMachine.getPhaseService().send("RESET");
       }
       this.applyRoutes(socket);
@@ -122,6 +124,7 @@ export class SocketServer {
       console.log(`User [${socketClient.id}] sent a message : ${data}`);
       this._socketServer.emit("message", data);
     });
+
     /* socketClient.on("command", (data: { type: commandTypes } & AllArgs) => {
       if (!this._game) {
         socketClient.emit(data.type, { error: "nogame" });
