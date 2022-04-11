@@ -1,6 +1,8 @@
 import Embarkable from "../Embarkable";
+import Entity from "../Entity";
+import HexID from "../Map/HexID";
 
-export default class Base {
+export default class Base implements Entity {
   private _sent: boolean;
   private _received: boolean;
   private _primary: boolean;
@@ -13,6 +15,15 @@ export default class Base {
     this._primary = primary;
     this._isActive = isActive;
     this._id = id;
+  }
+  place(hexId: HexID): void {
+    throw new Error("Method not implemented.");
+  }
+  remove(): void {
+    throw new Error("Method not implemented.");
+  }
+  getId(): number {
+    throw new Error("Method not implemented.");
   }
 
   send(embarkable: Embarkable, base: Base): void {
