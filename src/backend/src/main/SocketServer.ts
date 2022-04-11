@@ -1,6 +1,6 @@
 import http from "http";
 import { Server, Socket } from "socket.io";
-import { Express } from "express";
+import express, { Express } from "express";
 import Game from "./GameManager/Game";
 import GameMap from "./Map/GameMap";
 import Garrison from "./Units/Garrison";
@@ -8,83 +8,11 @@ import Player from "./GameManager/Player";
 import HexID from "./Map/HexID";
 import AbstractUnit from "./Units/AbstractUnit";
 import Maps from "./Map/Maps";
-import phaseService, { informUsers, webSocketServer } from "./GameManager/StateMachine";
+import { StateMachine } from "./GameManager/StateMachine";
 
 let id = 0;
 
-type BaseCommand = {
-  type: string;
-};
-
-enum commandTypes {
-  move = "move",
-  attack = "attack",
-  select = "select",
-  train = "train",
-  activate = "activate",
-}
-
-type AllArgs = BaseCommand & (MoveArgs | AttackArgs);
-
-type MoveArgs = {
-  hexId?: string;
-  unitId?: string;
-};
-
-type AttackArgs = MoveArgs & {
-  combatSupply?: boolean;
-};
-
-type Commands = Record<string, (args: AllArgs) => void>;
-
-const _commands: (player: Player) => Commands = (player: Player) => ({
-  move: (args: MoveArgs & BaseCommand) => {
-    if (
-      (player.getId() === 0 &&
-        phaseService.state.value !== "first_player_movement" &&
-        phaseService.state.value !== "first_player_movement2") ||
-      (player.getId() === 1 &&
-        phaseService.state.value !== "second_player_movement" &&
-        phaseService.state.value !== "second_player_movement2")
-    ) {
-      player.getSocket().emit(args.type, { error: "turnerror" });
-    }
-    if (!args.unitId || !args.hexId) {
-      player.getSocket().emit(args.type, { error: "invalidargs" });
-      return;
-    }
-    const unitId = +args.unitId;
-    if (isNaN(unitId)) {
-      player.getSocket().emit(args.type, { error: "invalidunitid" });
-      return;
-    }
-    const unit = player.getUnitById(unitId);
-    if (!unit) {
-      player.getSocket().emit(args.type, { error: "invalidunit" });
-      return;
-    }
-    const x = +args.hexId.substring(2, 4);
-    const y = +args.hexId.substring(0, 2);
-    if (isNaN(x) || isNaN(y)) {
-      player.getSocket().emit(args.type, { error: "invalidhex" });
-      return;
-    }
-    try {
-      webSocketServer.getGame()?.moveUnit(player.getId(), unit, new HexID(x, y));
-      console.log("move was successful");
-    } catch (e) {
-      player.getSocket().emit(args.type, { error: "invalidmove" });
-    }
-  },
-  units: () => {
-    console.log("player (", player.getId(), ") has", player.getUnits().length, "units");
-    const playerUnits = player.getUnits();
-    console.log("player units:", playerUnits);
-    player.getSocket().emit("units", playerUnits);
-  },
-});
-
-class SocketServer {
+export class SocketServer {
   private _httpServer: http.Server;
   private _socketServer: Server;
   private _sockets: Socket[] = [];
@@ -119,13 +47,13 @@ class SocketServer {
     return this._serverPort;
   }
 
-  public run(): void {
+  public run(stateMachine: StateMachine): void {
     //For Prototype Purposes
 
     this.eventConnection((socket) => {
       if (this._sockets.length === 2) {
         socket.emit("commandMessage", { error: "full" });
-        console.log("socket disconnected because full :" , socket.id);
+        console.log("socket disconnected because full :", socket.id);
         socket.disconnect(true);
         return;
       }
@@ -145,8 +73,10 @@ class SocketServer {
         this._game = new Game(new GameMap([], "libya" as Maps), this._players[0], this._players[1]);
         const map = this._game.getMap();
         map.addUnit(garrison);
-        this.broadcast("gameCreated", map.toJSON());
-        phaseService.send("RESET");
+        this.sockets.forEach((socket) => {
+          socket.emit("gameCreated", map.toJSON(this.getPlayerFromSocket(socket)));
+        });
+        stateMachine.getPhaseService().send("RESET");
       }
       this.applyRoutes(socket);
     });
@@ -178,7 +108,7 @@ class SocketServer {
         this._created = false;
         this._players.filter((player) => player.getSocket().id !== socketClient.id);
         this._game = undefined;
-        id = 0; 
+        id = 0;
       }
     });
 
@@ -186,7 +116,8 @@ class SocketServer {
       console.log(`User [${socketClient.id}] sent a message : ${data}`);
       this._socketServer.emit("message", data);
     });
-    socketClient.on("command", (data: { type: commandTypes } & AllArgs) => {
+
+    /* socketClient.on("command", (data: { type: commandTypes } & AllArgs) => {
       if (!this._game) {
         socketClient.emit(data.type, { error: "nogame" });
         return;
@@ -202,28 +133,7 @@ class SocketServer {
     socketClient.on("done", () => {
       phaseService.send("NEXT");
       informUsers(phaseService.state.value.toString(), this.getPlayers());
-    });
-
-    socketClient.on("command", (data: (BaseCommand & AttackArgs)[]) => {
-      //juste pour la commande units
-      if (!this._game) {
-        socketClient.emit("commandMessage", { error: "nogame" });
-        return;
-      }
-
-      const request = data[0];
-      const currentPlayer = this.getPlayerFromSocket(socketClient);
-      console.log("I received", request);
-
-      if (!_commands(currentPlayer)[request.type]) {
-        socketClient.emit("commandMessage", { error: "invalidcommand" });
-        return;
-      }
-      _commands(currentPlayer)[request.type](request);
-      console.log(`User [${socketClient.id}] sent a command : ${request.type}`);
-
-      this._socketServer.emit("commandMessage", { error: false });
-    });
+    }); */
   }
 
   getGame(): Game | undefined {
@@ -239,4 +149,5 @@ class SocketServer {
   }
 }
 
-export default SocketServer;
+const webSocketServer = new SocketServer(express(), 8000, 3001);
+export default webSocketServer;

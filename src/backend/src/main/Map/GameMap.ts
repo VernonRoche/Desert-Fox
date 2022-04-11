@@ -35,6 +35,37 @@ export default class GameMap {
         this._hexagons.set(hexID.id(), hex);
       }
     });
+    for (const hex of this._hexagons.values()) {
+      const x = hex.getID().getX();
+      const y = hex.getID().getY();
+      const getNeighbourCoordinates = function (x: number, y: number): HexID[] {
+        const neighbourList: HexID[] = [];
+        if (x % 2 == 0) {
+          neighbourList.push(new HexID(x - 1, y));
+          neighbourList.push(new HexID(x + 1, y));
+          neighbourList.push(new HexID(x, y - 1));
+          neighbourList.push(new HexID(x + 1, y + 1));
+          neighbourList.push(new HexID(x - 1, y + 1));
+          neighbourList.push(new HexID(x, y + 1));
+        } else {
+          neighbourList.push(new HexID(x, y - 1));
+          neighbourList.push(new HexID(x - 1, y));
+          neighbourList.push(new HexID(x + 1, y));
+          neighbourList.push(new HexID(x, y + 1));
+          neighbourList.push(new HexID(x - 1, y - 1));
+          neighbourList.push(new HexID(x + 1, y - 1));
+        }
+        return neighbourList;
+      };
+      for (const neighbour of getNeighbourCoordinates(x, y)) {
+        try {
+          const neighbourNode = this.findHex(neighbour);
+          hex.addNeighbour(neighbourNode);
+        } catch (e) {
+          continue;
+        }
+      }
+    }
   }
 
   public getHexes(): Map<string, Hex> {
@@ -64,16 +95,11 @@ export default class GameMap {
     else throw new Error("incorrecthex");
   }
 
-  public toJSON(): string {
+  public toJSON(player: Player): string {
     const json: JsonMap = [];
     this._hexagons.forEach((hex) => {
-      const units: {
-        id: number;
-        currentPosition: HexID;
-        movementPoints: number;
-        remainingMovementPoints: number;
-      }[] = [];
-      hex.getUnits().forEach((unit) => units.push(unit.toJson()));
+      const units: unitJson[] = [];
+      hex.getUnits().forEach((unit) => units.push(unit.toJson(player)));
       json.push({
         hexId: hex.getID().id(),
         terrain: hex.getTerrain().terrainType,

@@ -12,12 +12,14 @@ class Pathfinder {
     this._map = map;
     for (const hex of map.getHexes().values()) {
       const node: PathfinderNode = new PathfinderNode(hex.getID(), hex.getTerrain().getWeight());
+      //console.log(hex.getNeighbours());
       for (const neighbour of hex.getNeighbours()) {
         node.addNeighbourNode(
           new PathfinderNode(neighbour.getID(), neighbour.getTerrain().getWeight()),
         );
       }
       this._nodes.set(hex.getID().toString(), node);
+      //console.log(this._nodes);
     }
   }
 
@@ -59,6 +61,7 @@ class Pathfinder {
     for (const i in this._nodes) {
       const iNode = this._nodes.get(i);
       if (iNode) {
+        console.log("entered loop as " + iNode.name.toString());
         if (iNode.name === start) {
           iNode.weight = 0;
         } else {
@@ -97,10 +100,12 @@ class Pathfinder {
       if (finishNode) {
         const finishWeight: number = finishNode.weight;
         const arrayWithVertex: HexID[] = this.findPointsOfShortestWay(start, finish).reverse();
+        console.log("We found a path with weight " + finishWeight);
         arrayWithVertex.push(finish);
         return { pathNodes: arrayWithVertex, weight: finishWeight };
       }
     }
+    console.log("We found no path");
     return { pathNodes: [], weight: -1 };
   }
 }

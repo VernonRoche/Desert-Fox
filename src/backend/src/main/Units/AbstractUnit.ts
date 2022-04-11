@@ -1,12 +1,15 @@
 import HexID from "../Map/HexID";
 import Moveable from "../Moveable";
 import Dice from "../GameManager/Dice";
+import Player from "../GameManager/Player";
 
 export type unitJson = {
+  type: string;
   id: number;
   currentPosition: HexID;
   movementPoints: number;
   remainingMovementPoints: number;
+  owned: boolean;
 };
 export default abstract class AbstractUnit extends Moveable {
   private _moraleRating: number;
@@ -44,12 +47,15 @@ export default abstract class AbstractUnit extends Moveable {
   getMoraleRating(): number {
     return this._moraleRating;
   }
-  toJson(): unitJson {
+  toJson(player: Player): unitJson {
     return {
+      type: this.getType(),
       id: this.getId(),
       currentPosition: this.getCurrentPosition(),
       movementPoints: this.getMovementPoints(),
       remainingMovementPoints: this.getRemainingMovementPoints(),
+      owned: player.hasUnit(this),
     };
   }
+  abstract getType(): string;
 }

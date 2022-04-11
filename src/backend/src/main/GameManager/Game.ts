@@ -104,4 +104,8 @@ export default class Game {
   getMap(): GameMap {
     return this._map;
   }
+
+  getPathfinder(): Pathfinder {
+    return this._pathfinder;
+  }
 }
