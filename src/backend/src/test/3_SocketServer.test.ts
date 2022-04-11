@@ -3,6 +3,11 @@ import { io, Socket } from "socket.io-client";
 import MachineState from "../main/GameManager/StateMachine";
 import { SocketServer } from "../main/SocketServer";
 
+const save = console.log;
+console.log = () => {
+  // ignore
+};
+
 function initSocket(port: number): Socket {
   return io(`http://localhost:${port}`);
 }
@@ -116,7 +121,33 @@ describe("Socket server tests", function () {
     });
   });
 
+  it("Player2 disconnection should stop game", function () {
+    player2.on("disconnect", () => {
+      setTimeout(() => {
+        const game = socketServer.getGame();
+        if (game) {
+          throw new Error("Game is not stopped with player2 disconnection");
+        }
+      }, 100);
+    });
+    player2.disconnect();
+  });
+
+  it("Player2 connection should restart a new game", function () {
+    return new Promise<void>((resolve) => {
+      player2.connect();
+      player2.on("connect", () => {
+        resolve();
+        if (!socketServer.getGame()) {
+          throw new Error("Game is not restarted with player2 connection");
+        }
+      });
+    });
+  });
+
   it("close server", function () {
     socketServer["_httpServer"].close();
+    // put back console log for next tests
+    console.log = save;
   });
 });
