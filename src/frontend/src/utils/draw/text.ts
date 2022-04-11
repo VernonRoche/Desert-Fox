@@ -7,7 +7,7 @@ export default function drawText(
   message: string | number,
   color = "black",
   size = 10,
-  alignment : P5.HORIZ_ALIGN = "center",
+  alignment: P5.HORIZ_ALIGN = "center",
 ) {
   p5.push();
   p5.fill(color);
