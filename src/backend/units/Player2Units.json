@@ -1,7 +1,7 @@
 [
     {
         "type": "foot",
-        "id": "0",
+        "id": "6",
         "currentPosition": "2931",
         "movementPoints": "12",
         "combatFactor": "3",
@@ -10,7 +10,7 @@
     },
     {
         "type": "foot",
-        "id": "1",
+        "id": "7",
         "currentPosition": "2831",
         "movementPoints": "12",
         "combatFactor": "3",
@@ -19,7 +19,7 @@
     },
     {
         "type": "mechanized",
-        "id": "2",
+        "id": "8",
         "currentPosition": "2830",
         "movementPoints": "14",
         "combatFactor": "3",
@@ -28,7 +28,7 @@
     },
     {
         "type": "motorized",
-        "id": "3",
+        "id": "9",
         "currentPosition": "2930",
         "movementPoints": "20",
         "combatFactor": "3",
@@ -37,7 +37,7 @@
     },
     {
         "type": "mechanized",
-        "id": "4",
+        "id": "10",
         "currentPosition": "2731",
         "movementPoints": "15",
         "combatFactor": "3",
@@ -46,7 +46,7 @@
     },
     {
         "type": "motorized",
-        "id": "5",
+        "id": "11",
         "currentPosition": "2829",
         "movementPoints": "22",
         "combatFactor": "3",
