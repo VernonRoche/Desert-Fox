@@ -25,6 +25,6 @@ export default function drawHexagon(
 
   // ID
   if (typeTerrain === "mountain" || typeTerrain === "rough")
-    drawText(p5, x - 30, y, id.toString(), "white");
-  else drawText(p5, x - 30, y, id.toString(), "black");
+    drawText(p5, x, y, id.toString(), "white");
+  else drawText(p5, x, y, id.toString(), "black");
 }
