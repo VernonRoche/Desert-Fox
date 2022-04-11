@@ -68,4 +68,11 @@ export default abstract class Moveable implements Entity {
   public resetMovementPoints(): void {
     this._remainingMovementPoints = this._movementPoints;
   }
+
+  public getCombatFactor(): number {
+    return this._combatFactor;
+  }
+  public getLifePoints(): number {
+    return this._lifePoints;
+  }
 }

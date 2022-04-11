@@ -19,17 +19,17 @@ describe("unit is correct add", function () {
     if (unit[0].getCurrentPosition() != garrisonHexId) {
       throw new Error("CurrentPosition not correct");
     }
+    if (unit[0].getMoraleRating() != 3) {
+      throw new Error("MoraleRating not correct");
+    }
+    if (unit[0].getCombatFactor() != 3) {
+      throw new Error("CombatFactor not correct");
+    }
     if (unit[0].getMovementPoints() != 12) {
       throw new Error("MovementPoints not correct");
     }
-    if (unit[0].getRemainingMovementPoints() != 1) {
-      throw new Error("RemainingMovementPoints not correct");
-    }
-    if (unit[0].getMoraleRating() != 2) {
-      throw new Error("MoraleRating not correct");
-    }
-    if (unit[0].getMoraleRating() != 2) {
-      throw new Error("MoraleRating not correct");
+    if (unit[0].getLifePoints() != 1) {
+      throw new Error("LifePoints not correct");
     }
   });
 
