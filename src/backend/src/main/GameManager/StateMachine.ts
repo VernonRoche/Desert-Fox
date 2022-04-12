@@ -271,14 +271,14 @@ export class StateMachine {
       webSocketServer.broadcast("phase", {
         phase: actualPhase,
         play: false,
-        commands: [],
+        commands: ["select"],
         auto: true,
       });
     if (actualPhase === "air_superiority") {
       webSocketServer.broadcast("phase", {
         phase: "reinforcements",
         play: true,
-        commands: ["move"],
+        commands: ["select"],
         auto: false,
       });
     }
