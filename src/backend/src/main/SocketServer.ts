@@ -4,11 +4,8 @@ import express, { Express } from "express";
 import Game from "./GameManager/Game";
 import GameMap from "./Map/GameMap";
 import Player from "./GameManager/Player";
-import AbstractUnit from "./Units/AbstractUnit";
 import Maps from "./Map/Maps";
 import { StateMachine } from "./GameManager/StateMachine";
-
-let id = 0;
 
 export class SocketServer {
   private _httpServer: http.Server;
