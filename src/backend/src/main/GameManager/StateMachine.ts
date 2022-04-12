@@ -52,7 +52,13 @@ const _commands: Commands = {
       player.getSocket().emit(args.type, { error: "invalidunitid" });
       return;
     }
-    const unit = player.getUnitById(unitId);
+    let unit;
+    try {
+      unit = player.getUnitById(unitId);
+    } catch (e) {
+      player.getSocket().emit(args.type, { error: "invalidunitid" });
+      return;
+    }
     if (!unit) {
       player.getSocket().emit(args.type, { error: "invalidunit" });
       return;
@@ -178,7 +184,7 @@ export const TurnPhases = {
     },
     air_superiority: {
       on: {
-        NEXT: "reinforcements",
+        NEXT: "first_player_movement", // "reinforcements",
       },
     },
     supply_attrition: {
@@ -275,12 +281,25 @@ export class StateMachine {
         auto: true,
       });
     if (actualPhase === "air_superiority") {
-      webSocketServer.broadcast("phase", {
+      webSocketServer.sockets.forEach((socket) => {
+        const checkIfCorrectPlayer = this.checkIfCorrectPlayer(
+          "first_player_movement",
+          webSocketServer.getPlayerFromSocket(socket).getId(),
+        );
+        socket.emit("phase", {
+          phase: "first_player_movement",
+          play: checkIfCorrectPlayer.correct,
+          commands: checkIfCorrectPlayer.commands,
+          auto: false,
+        });
+      });
+      /* Ce qu'il faut mettre apres qu'on implemente reinforcements etc
+    webSocketServer.broadcast("phase", {
         phase: "reinforcements",
         play: true,
         commands: ["select"],
         auto: false,
-      });
+      });*/
     }
   }
 
