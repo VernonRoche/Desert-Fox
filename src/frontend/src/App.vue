@@ -5,3 +5,9 @@
     </main>
   </div>
 </template>
+
+<style scoped>
+.fullscreen {
+  @apply h-screen w-screen;
+}
+</style>
