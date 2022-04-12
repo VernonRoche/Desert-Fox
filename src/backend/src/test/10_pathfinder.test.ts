@@ -32,7 +32,7 @@ describe("Check if Pathfinder works correctly", function () {
       game.getPlayer1(),
       game.getPlayer1().getUnitById(1000),
     );
-    if (sumOfWeight !== 6) {
+    if (sumOfWeight !== 7) {
       throw new Error(
         "The weight returned is different from the movement cost. The returned weight is " +
           sumOfWeight,
