@@ -5,6 +5,7 @@ import Maps from "../main/Map/Maps";
 import Player from "../main/GameManager/Player";
 import PlayerID from "../main/GameManager/PlayerID";
 import { Socket } from "socket.io";
+import Mechanized from "../main/Units/Mechanized";
 
 describe("Check if Pathfinder works correctly", function () {
   let game: Game;
@@ -15,6 +16,12 @@ describe("Check if Pathfinder works correctly", function () {
     const enemyPlayer = new Player(PlayerID.TWO, [], [], [], Socket.prototype);
     const map = new GameMap(new Map(), "libya" as Maps);
     game = new Game(map, allyPlayer, enemyPlayer);
+    const enemyUnit = new Mechanized(1001, new HexID(8, 5), 3, 2, 15, 1);
+    const friendlyUnit = new Mechanized(1000, new HexID(7, 5), 3, 2, 15, 1);
+    allyPlayer.addUnit(friendlyUnit);
+    enemyPlayer.addUnit(enemyUnit);
+    game.getMap().findHex(start).addUnit(friendlyUnit);
+    game.getMap().findHex(new HexID(8, 5)).addUnit(enemyUnit);
   });
 
   it("The weight returned should be the movement points cost and finds shortest path", function () {
@@ -23,7 +30,7 @@ describe("Check if Pathfinder works correctly", function () {
       start,
       destination,
       game.getPlayer1(),
-      game.getPlayer1().getUnitById(6),
+      game.getPlayer1().getUnitById(1000),
     );
     if (sumOfWeight !== 6) {
       throw new Error(
@@ -39,7 +46,7 @@ describe("Check if Pathfinder works correctly", function () {
       start,
       destination,
       game.getPlayer1(),
-      game.getPlayer1().getUnitById(6),
+      game.getPlayer1().getUnitById(1000),
     );
     for (const node of hexPath) {
       if (node.toString() === new HexID(5, 8).toString()) {

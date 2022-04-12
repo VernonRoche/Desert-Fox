@@ -134,4 +134,8 @@ export default class Player {
   getSocket(): Socket {
     return this._socket;
   }
+
+  addUnit(unit: AbstractUnit): void {
+    this._units.set(unit.getId().toString(), unit);
+  }
 }
