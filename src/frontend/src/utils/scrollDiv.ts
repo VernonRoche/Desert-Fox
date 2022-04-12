@@ -1,4 +1,4 @@
-export default function runScrollDiv(htmlDocument: Document, gameScreen: HTMLElement) {
+export default function runScrollDiv(gameScreen: HTMLElement) {
   if (gameScreen === null) return;
   gameScreen.scrollTop = 100;
   gameScreen.scrollLeft = 150;
@@ -16,8 +16,8 @@ export default function runScrollDiv(htmlDocument: Document, gameScreen: HTMLEle
   };
 
   const mouseUpHandler = function () {
-    htmlDocument.removeEventListener("mousemove", mouseMoveHandler);
-    htmlDocument.removeEventListener("mouseup", mouseUpHandler);
+    gameScreen.removeEventListener("mousemove", mouseMoveHandler);
+    document.removeEventListener("mouseup", mouseUpHandler);
 
     gameScreen.style.cursor = "grab";
     gameScreen.style.removeProperty("user-select");
@@ -33,9 +33,9 @@ export default function runScrollDiv(htmlDocument: Document, gameScreen: HTMLEle
       y: e.clientY,
     };
 
-    htmlDocument.addEventListener("mousemove", mouseMoveHandler);
-    htmlDocument.addEventListener("mouseup", mouseUpHandler);
+    gameScreen.addEventListener("mousemove", mouseMoveHandler);
+    document.addEventListener("mouseup", mouseUpHandler);
   };
 
-  htmlDocument.addEventListener("mousedown", mouseDownHandler);
+  gameScreen.addEventListener("mousedown", mouseDownHandler);
 }
