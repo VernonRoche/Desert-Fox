@@ -103,10 +103,10 @@ export class SocketServer {
       // keep all sockets that have a different id than current
       // is pretty much just a remove
       this._sockets = this._sockets.filter((socket) => socket.id !== socketClient.id);
+      this._players = this._players.filter((player) => player.getSocket().id !== socketClient.id);
       if (this._created) {
         console.log("Game destroyed");
         this._created = false;
-        this._players = this._players.filter((player) => player.getSocket().id !== socketClient.id);
         this._game = undefined;
       }
     });
