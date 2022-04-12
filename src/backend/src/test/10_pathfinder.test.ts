@@ -39,7 +39,7 @@ describe("Check if Pathfinder works correctly", function () {
       );
     }
   });
-
+  
   it("Does not go through or enter enemy hex", function () {
     const pathfinder = game.getPathfinder();
     const { hexPath } = pathfinder.findShortestWay(

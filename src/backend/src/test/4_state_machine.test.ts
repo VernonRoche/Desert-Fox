@@ -74,7 +74,7 @@ describe("State Machine tests", function () {
       );
     }
   });
-  testService.send("RESET"); 
+  testService.send("RESET");
   /* correct tests
   testService.send("RESET");
   it("Testing the loop of phases", function () {
