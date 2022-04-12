@@ -57,9 +57,13 @@ const _commands: Commands = {
       player.getSocket().emit(args.type, { error: "invalidunit" });
       return;
     }
+    if (args.hexId.length !== 4) {
+      player.getSocket().emit(args.type, { error: "invalidhex" });
+      return;
+    }
     const x = +args.hexId.substring(2, 4);
     const y = +args.hexId.substring(0, 2);
-    if (isNaN(x) || isNaN(y)) {
+    if (isNaN(x) || isNaN(y) || args.hexId.length !== 4) {
       player.getSocket().emit(args.type, { error: "invalidhex" });
       return;
     }
