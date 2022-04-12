@@ -32,7 +32,7 @@ export default abstract class Moveable implements Entity {
   }
 
   public place(hexId: HexID): void {
-    this._currentPosition = new HexID(hexId.getX(), hexId.getY());
+    this._currentPosition = new HexID(hexId.getY(), hexId.getX());
   }
 
   public remove(): void {

@@ -68,7 +68,7 @@ export default class Player {
           unit.id.toString(),
           new Mechanized(
             unit.id,
-            new HexID(x, y),
+            new HexID(y, x),
             unit.moraleRating,
             unit.combatFactor,
             unit.movementPoints,
@@ -80,7 +80,7 @@ export default class Player {
           unit.id.toString(),
           new Foot(
             unit.id,
-            new HexID(x, y),
+            new HexID(y, x),
             unit.moraleRating,
             unit.combatFactor,
             unit.movementPoints,
@@ -92,7 +92,7 @@ export default class Player {
           unit.id.toString(),
           new Motorized(
             unit.id,
-            new HexID(x, y),
+            new HexID(y, x),
             unit.moraleRating,
             unit.combatFactor,
             unit.movementPoints,

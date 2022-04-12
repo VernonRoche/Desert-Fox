@@ -52,5 +52,14 @@
         "combatFactor": "3",
         "moraleRating": "3",
         "lifePoints": "1"
+    },
+    {
+        "type": "mechanized",
+        "id": "6",
+        "currentPosition": "0705",
+        "movementPoints": "16",
+        "combatFactor": "3",
+        "moraleRating": "1",
+        "lifePoints": "2"
     }
 ]

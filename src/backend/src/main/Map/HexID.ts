@@ -2,7 +2,7 @@ export default class HexID {
   private _x: number;
   private _y: number;
 
-  constructor(x: number, y: number) {
+  constructor(y: number, x: number) {
     this._x = x;
     this._y = y;
   }
