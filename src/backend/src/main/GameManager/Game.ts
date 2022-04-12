@@ -1,4 +1,3 @@
-import { Turn } from "./Turn";
 import Player from "./Player";
 import GameMap from "../Map/GameMap";
 import AbstractUnit from "../Units/AbstractUnit";
@@ -6,14 +5,12 @@ import HexID from "../Map/HexID";
 import Pathfinder from "./Pathfinder";
 
 export default class Game {
-  private _turn: Turn;
   private _player1: Player;
   private _player2: Player;
   private _map: GameMap;
   private _pathfinder: Pathfinder;
 
   public constructor(map: GameMap, player1: Player, player2: Player) {
-    this._turn = new Turn();
     this._player1 = player1;
     this._player2 = player2;
     this._map = map;
@@ -97,10 +94,6 @@ export default class Game {
     originHex.removeUnit(unit);
     unit.place(destination);
     unit.move(cost);
-  }
-
-  getTurn(): Turn {
-    return this._turn;
   }
 
   getPlayer1(): Player {
