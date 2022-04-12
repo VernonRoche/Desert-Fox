@@ -10,3 +10,18 @@ export type Unit = {
   _movementPoints: string;
   _remainingMovementPoints: string;
 };
+
+export type GameMap = {
+  hexId: string;
+  terrain: string;
+  units: [
+    {
+      type: string;
+      id: number;
+      currentPosition: { _x: number; _y: number };
+      movementPoints: number;
+      remainingMovementPoints: number;
+      owned: boolean;
+    },
+  ];
+}[];
