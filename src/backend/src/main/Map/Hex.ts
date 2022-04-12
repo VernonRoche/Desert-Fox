@@ -42,7 +42,7 @@ export default class Hex {
     // goes through the list of units and checks if the unit is already there
     // by checking if any unit (u) has the same id as the unit we are trying to add
     this.assertHasNotUnit(unit);
-    unit.move(this._hexId);
+    unit.place(this._hexId);
     this._units.push(unit);
   }
 

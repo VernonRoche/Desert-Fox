@@ -33,7 +33,7 @@ export default class GameMap {
       const y = +hexId.substring(0, 2);
       const validTerrain = validTerrains.includes(terrain);
       if (validTerrain) {
-        const hexID = new HexID(x, y);
+        const hexID = new HexID(y, x);
         const _terrain = new Terrain(terrain as TerrainTypes);
         const hex = new Hex(hexID, _terrain);
         units.forEach((unit: AbstractUnit) => {
@@ -50,19 +50,19 @@ export default class GameMap {
       const getNeighbourCoordinates = function (x: number, y: number): HexID[] {
         const neighbourList: HexID[] = [];
         if (x % 2 == 0) {
-          neighbourList.push(new HexID(x - 1, y));
-          neighbourList.push(new HexID(x + 1, y));
-          neighbourList.push(new HexID(x, y - 1));
-          neighbourList.push(new HexID(x + 1, y + 1));
-          neighbourList.push(new HexID(x - 1, y + 1));
-          neighbourList.push(new HexID(x, y + 1));
+          neighbourList.push(new HexID(y, x - 1));
+          neighbourList.push(new HexID(y, x + 1));
+          neighbourList.push(new HexID(y - 1, x));
+          neighbourList.push(new HexID(y + 1, x + 1));
+          neighbourList.push(new HexID(y + 1, x - 1));
+          neighbourList.push(new HexID(y + 1, x));
         } else {
-          neighbourList.push(new HexID(x, y - 1));
-          neighbourList.push(new HexID(x - 1, y));
-          neighbourList.push(new HexID(x + 1, y));
-          neighbourList.push(new HexID(x, y + 1));
-          neighbourList.push(new HexID(x - 1, y - 1));
-          neighbourList.push(new HexID(x + 1, y - 1));
+          neighbourList.push(new HexID(y - 1, x));
+          neighbourList.push(new HexID(y, x - 1));
+          neighbourList.push(new HexID(y, x + 1));
+          neighbourList.push(new HexID(y + 1, x));
+          neighbourList.push(new HexID(y - 1, x - 1));
+          neighbourList.push(new HexID(y - 1, x + 1));
         }
         return neighbourList;
       };
@@ -94,7 +94,7 @@ export default class GameMap {
         allUnits.push(
           new Mechanized(
             unit.id,
-            new HexID(x, y),
+            new HexID(y, x),
             unit.moraleRating,
             unit.combatFactor,
             unit.movementPoints,
@@ -105,7 +105,7 @@ export default class GameMap {
         allUnits.push(
           new Foot(
             unit.id,
-            new HexID(x, y),
+            new HexID(y, x),
             unit.moraleRating,
             unit.combatFactor,
             unit.movementPoints,
@@ -116,7 +116,7 @@ export default class GameMap {
         allUnits.push(
           new Motorized(
             unit.id,
-            new HexID(x, y),
+            new HexID(y, x),
             unit.moraleRating,
             unit.combatFactor,
             unit.movementPoints,

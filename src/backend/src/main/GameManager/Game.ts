@@ -27,7 +27,11 @@ export default class Game {
   // return a string containing the reason if it cannot
   // do not try if(canMove) since it will always be true
   // check if(canMove === true)
-  public canMove(player: Player, unit: AbstractUnit, destination: HexID): true | string {
+  public canMove(
+    player: Player,
+    unit: AbstractUnit,
+    destination: HexID,
+  ): { movePossible: boolean; cost: number } | string {
     const destinationHex = this._map.findHex(destination);
     if (!destinationHex) return "hex does not exist";
 
@@ -52,7 +56,7 @@ export default class Game {
     if (sumOfWeight > unit.getRemainingMovementPoints()) return "not enough movement points";
 
     // Check if move is possible
-    return true;
+    return { movePossible: true, cost: sumOfWeight };
   }
 
   // Checks all units of a player and returns the list of units that can move
@@ -60,7 +64,12 @@ export default class Game {
     const availableUnits: AbstractUnit[] = [];
     for (const unit of player.getUnits()) {
       for (const neighbourHex of this._map.findHex(unit.getCurrentPosition()).getNeighbours()) {
-        if (this.canMove(player, unit, neighbourHex.getID()) === true) {
+        const canMove = this.canMove(player, unit, neighbourHex.getID());
+        if (typeof canMove === "string") {
+          throw new Error(canMove);
+        }
+        const { movePossible } = canMove;
+        if (movePossible) {
           availableUnits.push(unit);
           break;
         }
@@ -72,12 +81,14 @@ export default class Game {
   // Checks if a move is possible and applies it.
   // Returns false if the move was not possible, true if move was succesful.
   public moveUnit(player: Player, unit: AbstractUnit, destination: HexID): void {
-    // Get the owner of the destination hex to see if we can move there
-
-    /*     const canMove = this.canMove(player, unit, destination);
-    if (canMove !== true) {
+    const canMove = this.canMove(player, unit, destination);
+    if (typeof canMove === "string") {
+      throw new Error(canMove);
+    }
+    const { movePossible, cost } = canMove;
+    if (!movePossible) {
       throw new Error(`Cannot move unit: ${canMove}`);
-    } */
+    }
 
     // Check if move is possible
     const originHex = this._map.findHex(unit.getCurrentPosition());
@@ -85,6 +96,7 @@ export default class Game {
     destinationHex.addUnit(unit);
     originHex.removeUnit(unit);
     unit.place(destination);
+    unit.move(cost);
   }
 
   getTurn(): Turn {
