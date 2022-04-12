@@ -17,6 +17,10 @@ const screen = ref<undefined | HTMLElement>(undefined);
 onMounted(() => {
   socket.on("map", (gameMap: string) => {
     console.log("Game was created an map is", gameMap);
+
+    const canvasExisted = document.getElementById("defaultCanvas0");
+    canvasExisted?.remove();
+
     new P5((p5) => {
       sketch(p5, JSON.parse(gameMap) as GameMap);
     }, screen.value);
