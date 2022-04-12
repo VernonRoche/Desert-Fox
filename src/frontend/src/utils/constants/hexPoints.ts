@@ -18,7 +18,7 @@ export default function handlerHexPoints(
 
   /* return the center between the two points */
   const center = { x: (hexPoints.x + x) / 2, y: (hexPoints.y + y) / 2 };
-  const diff = r;
+  const diff = r-5;
 
   const functions = [
     () => {

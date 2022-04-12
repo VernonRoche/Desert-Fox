@@ -1,11 +1,11 @@
 import P5 from "p5";
 import dataMap from "../constants/map";
-import { GameMap } from "../uiGame";
 import drawHexagon from "./hexagon";
 import drawCaption from "./caption";
 import drawUnit from "./units";
+import { GameMap } from "../constants/types";
 
-export default function drawHexMap(p5: P5, gameMap: GameMap) /*: Hexagon[]*/ {
+export default function drawHexMap(p5: P5, gameMap: GameMap) {
   let x, y;
   const r = dataMap["raduisHexagon"];
   const distHex = Math.cos(Math.PI / 6) * r - -Math.cos(Math.PI / 6) * r;
@@ -38,7 +38,7 @@ export default function drawHexMap(p5: P5, gameMap: GameMap) /*: Hexagon[]*/ {
       const units = g.units;
       let i = 0;
       for (const u of units) {
-        drawUnit(p5, x, y, i, u.owned, u.type);
+        drawUnit(p5, x, y, i, u.owned, u.type, u.id);
         i++;
       }
     }
