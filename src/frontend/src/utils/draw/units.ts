@@ -21,5 +21,5 @@ export default function drawUnit(
   p5.fill(colorsUnit[type] ?? "white");
   p5.circle(points.x, points.y, size);
   p5.pop();
-  drawText(p5, points.x, points.y+3, id, "white");
+  drawText(p5, points.x, points.y + 3, id, "white");
 }

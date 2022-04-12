@@ -9,9 +9,10 @@
 <script lang="ts" setup>
 import { onMounted, ref } from "vue";
 import P5 from "p5";
-import sketch, { GameMap } from "../utils/uiGame";
+import sketch from "../utils/uiGame";
 import runScrollDiv from "../utils/scrollDiv";
 import socket from "../utils/ClientSocket";
+import { GameMap } from "../utils/constants/types";
 const screen = ref<undefined | HTMLElement>(undefined);
 
 onMounted(() => {
@@ -26,12 +27,8 @@ onMounted(() => {
     }, screen.value);
   });
 
-  runScrollDiv(document, screen.value as HTMLElement);
+  runScrollDiv(screen.value as HTMLElement);
 });
 </script>
 
-<style scoped>
-canvas {
-  @apply h-full w-full;
-}
-</style>
+<style scoped></style>
