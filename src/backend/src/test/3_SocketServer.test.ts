@@ -104,6 +104,25 @@ describe("Socket server tests", function () {
     player1.disconnect();
   });
 
+  it("Only player2 should be remaining", function () {
+    const players = socketServer["_players"];
+    if (players.length !== 1) {
+      throw new Error("Player1 is not removed properly");
+    }
+    if (players[0].getSocket().id !== player2.id) {
+      throw new Error("Remaining player is not player2");
+    }
+
+    const sockets = socketServer["_sockets"];
+    if (sockets.length !== 1) {
+      throw new Error("Player1 socket is not removed properly");
+    }
+
+    if (sockets[0].id !== player2.id) {
+      throw new Error("Remaining socket is not player2");
+    }
+  });
+
   it("Player1 connection should restart a new game", function () {
     return new Promise<void>((resolve) => {
       player1.connect();
@@ -115,6 +134,8 @@ describe("Socket server tests", function () {
       });
     });
   });
+
+  // TODO: check both players are here and each player has the correct player id
 
   it("Player2 disconnection should stop game", function () {
     player2.on("disconnect", () => {
