@@ -1,5 +1,7 @@
 <template>
-  <div class="bg-gradient-to-bl from-blue-300 to-violet-700 p-2 text-white font-bold">
+  <div
+    class="bg-gradient-to-bl from-blue-300 to-violet-700 p-2 text-white font-bold fixed z-10 w-4/5"
+  >
     <div v-if="gameCreated" class="flex justify-around items-center">
       <h1>Phase actuelle: {{ phaseSentence }}</h1>
       <h1>{{ turnSentence }}</h1>

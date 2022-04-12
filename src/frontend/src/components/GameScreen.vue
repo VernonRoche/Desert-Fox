@@ -2,7 +2,7 @@
   <div
     id="gamescreen"
     ref="screen"
-    class="border-2 max-h-full w-4/5 border-black cursor-grab overflow-scroll"
+    class="h-full w-4/5 border-black cursor-grab overflow-hidden"
   ></div>
 </template>
 
@@ -26,9 +26,12 @@ onMounted(() => {
       sketch(p5, JSON.parse(gameMap) as GameMap);
     }, screen.value);
   });
-
   runScrollDiv(screen.value as HTMLElement);
 });
 </script>
 
-<style scoped></style>
+<style>
+#gamescreen > canvas {
+  top: 0;
+}
+</style>
