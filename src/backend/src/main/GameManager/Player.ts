@@ -41,7 +41,7 @@ export default class Player {
     id === PlayerID.ONE
       ? this.loadUnitsByFile("Player1Units")
       : this.loadUnitsByFile("Player2Units");
-    this._bases = new Map(bases.map((b) => [b.getID().toString(), b]));
+    this._bases = new Map(bases.map((b) => [b.getId().toString(), b]));
     this._supplyUnits = new Map(supplyUnits.map((s) => [s.getId().toString(), s]));
     this._refitPoints = new Map(refitPoints.map((r) => [r.getId().toString(), r]));
     this._socket = socket;

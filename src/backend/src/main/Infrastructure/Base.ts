@@ -23,7 +23,7 @@ export default class Base implements Entity {
     throw new Error("Method not implemented.");
   }
   getId(): number {
-    throw new Error("Method not implemented.");
+    return this._id;
   }
 
   send(embarkable: Embarkable, base: Base): void {
@@ -54,9 +54,5 @@ export default class Base implements Entity {
 
   isActive(): boolean {
     return this._isActive;
-  }
-
-  getID(): number {
-    return this._id;
   }
 }
