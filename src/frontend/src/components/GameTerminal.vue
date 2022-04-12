@@ -39,6 +39,7 @@
 import { onUnmounted, ref } from "@vue/runtime-dom";
 import { Unit } from "../utils/constants/types";
 import socket from "../utils/ClientSocket";
+import { moveErrors } from "../utils/constants/errorExplanation";
 
 const terminalInput = ref("");
 const lines = ref<{ data: string; author: string; time: Date }[]>([]);
@@ -85,13 +86,13 @@ const commands: Commands = {
       unitId: args[0],
       hexId: args[1],
     });
-    socket.once("move", (args: any) => {
-      if (args.error) {
-        addLine("Game", args.error);
+    socket.once("move", (resp: { error: string | false }) => {
+      if (resp.error) {
+        addLine("Game", moveErrors[resp.error] ?? resp.error);
       } else {
-        addLine("Game", `${args.unit.name} se déplace vers ${args.hex.name}`);
+        addLine("Game", `L'unitée ${args[0]} s'est déplacée sur le hex ${args[1]}`);
       }
-      console.log(args);
+      console.log(resp);
     });
   },
   units: () => {
@@ -99,28 +100,24 @@ const commands: Commands = {
       type: "units",
     });
 
-    socket.once("units", (resp: { error: string } & Unit[]) => {
+    socket.once("units", (resp: Unit[]) => {
       function addZeroIfNeeded(number: number) {
         return number < 10 ? `0${number}` : number;
       }
       console.log(resp);
-      if (resp.error) {
-        addLine("Game", resp.error);
-      } else {
-        addLine(
-          "Game",
-          resp
-            .map(
-              ({ _id, _lifePoints, _currentPosition, _remainingMovementPoints }) =>
-                `Unit ${_id} has ${_lifePoints} life point at hexId (${addZeroIfNeeded(
-                  _currentPosition._y,
-                )}${addZeroIfNeeded(
-                  _currentPosition._x,
-                )}) with ${_remainingMovementPoints} movement points`,
-            )
-            .join("\n"),
-        );
-      }
+      addLine(
+        "Game",
+        resp
+          .map(
+            ({ _id, _lifePoints, _currentPosition, _remainingMovementPoints }) =>
+              `Unit ${_id} has ${_lifePoints} life point at hexId (${addZeroIfNeeded(
+                _currentPosition._y,
+              )}${addZeroIfNeeded(
+                _currentPosition._x,
+              )}) with ${_remainingMovementPoints} movement points`,
+          )
+          .join("\n"),
+      );
     });
   },
   done: () => {
@@ -149,7 +146,7 @@ socket.on("pong message", (msg) => {
   addLine("Game", msg);
 });
 
-socket.on("commandMessage", (resp: any) => {
+socket.on("commandMessage", (resp: { error: string } & string) => {
   if (resp.error) {
     addLine("Game", resp.error);
   } else {
@@ -168,6 +165,10 @@ socket.on("phase", (resp: { phase: string; play: boolean; commands: string[]; au
   } else {
     addLine("Game", "Vous ne pouvez pas jouer");
   }
+});
+
+socket.on("gameDestroyed", () => {
+  addLine("Game", "La partie a été interrompue");
 });
 
 function disconnectSocket() {

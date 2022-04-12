@@ -15,6 +15,10 @@ import socket from "../utils/ClientSocket";
 import { GameMap } from "../utils/constants/types";
 const screen = ref<undefined | HTMLElement>(undefined);
 
+socket.on("gameDestroyed", () => {
+  document.querySelector("canvas")?.remove();
+});
+
 onMounted(() => {
   socket.on("map", (gameMap: string) => {
     console.log("Game was created an map is", gameMap);

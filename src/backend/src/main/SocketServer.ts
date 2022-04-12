@@ -108,6 +108,7 @@ export class SocketServer {
         console.log("Game destroyed");
         this._created = false;
         this._game = undefined;
+        this.broadcast("gameDestroyed", {});
       }
     });
 
