@@ -155,7 +155,6 @@ socket.on("commandMessage", (resp: { error: string } & string) => {
 });
 
 socket.on("phase", (resp: { phase: string; play: boolean; commands: string[]; auto: boolean }) => {
-  addLine("Game", `Phase de jeu : ${resp.phase}`);
   if (resp.auto) {
     // handle automatic phase
     return;
