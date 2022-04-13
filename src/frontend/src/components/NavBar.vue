@@ -1,5 +1,5 @@
 <template>
-  <nav class="flex gap-1 justify-around w-screen pt-1">
+  <nav class="flex gap-1 justify-around w-screen">
     <router-link
       v-for="route in routes"
       :key="route.path"

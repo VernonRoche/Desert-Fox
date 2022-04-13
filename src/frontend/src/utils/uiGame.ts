@@ -1,8 +1,8 @@
 import P5 from "p5";
 import drawHexMap from "./draw/hexMap";
 import dataMap from "./constants/map";
-
-export type GameMap = { hexId: string; terrain: string }[];
+import { colorsSea } from "./constants/colors";
+import { GameMap } from "./constants/types";
 
 const getSizeCanvas = (map: GameMap): number[] => {
   let maxWidth = 0;
@@ -32,7 +32,7 @@ const sketch = (p5: P5, gameMap: GameMap) => {
 
   p5.setup = () => {
     p5.createCanvas(width, height);
-    p5.background(220);
+    p5.background(colorsSea);
     drawHexMap(p5, gameMap);
   };
 

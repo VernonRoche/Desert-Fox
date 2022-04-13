@@ -4,18 +4,23 @@ import HexID from "./Map/HexID";
 export default abstract class Moveable implements Entity {
   private _currentPosition: HexID;
   private _movementPoints: number;
-  private _remainingMovementPoints: number;
   private _id: number;
+  private _combatFactor: number;
+  private _remainingMovementPoints: number;
+  private _lifePoints: number;
 
   constructor(
     id: number,
     currentPosition: HexID,
+    combatFactor: number,
     movementPoints: number,
-    remainingMovementPoints: number,
+    lifePoints: number,
   ) {
     this._currentPosition = currentPosition;
     this._movementPoints = movementPoints;
-    this._remainingMovementPoints = remainingMovementPoints;
+    this._remainingMovementPoints = movementPoints;
+    this._combatFactor = combatFactor;
+    this._lifePoints = lifePoints;
     this._id = id;
   }
   public getId(): number {
@@ -27,7 +32,7 @@ export default abstract class Moveable implements Entity {
   }
 
   public place(hexId: HexID): void {
-    this._currentPosition = new HexID(hexId.getX(), hexId.getY());
+    this._currentPosition = new HexID(hexId.getY(), hexId.getX());
   }
 
   public remove(): void {
@@ -38,14 +43,9 @@ export default abstract class Moveable implements Entity {
     throw new Error("Method not implemented.");
   }
 
-  // Checks if there are remaining movement points left and if yes
-  // then remove one movement point and update current hex position
-  public move(hexId: HexID): void {
-    if (this._remainingMovementPoints <= 0) {
-      throw new Error("no movement points left");
-    }
-    this._currentPosition = hexId;
-    this._remainingMovementPoints--;
+  // Remove movementPoints passed as parameter
+  public move(movementPoints: number): void {
+    this._remainingMovementPoints -= movementPoints;
   }
 
   public nightMove(hexId: HexID): void {
@@ -62,5 +62,14 @@ export default abstract class Moveable implements Entity {
 
   public resetMovementPoints(): void {
     this._remainingMovementPoints = this._movementPoints;
+  }
+  public getHexId(): HexID {
+    return this._currentPosition;
+  }
+  public getCombatFactor(): number {
+    return this._combatFactor;
+  }
+  public getLifePoints(): number {
+    return this._lifePoints;
   }
 }

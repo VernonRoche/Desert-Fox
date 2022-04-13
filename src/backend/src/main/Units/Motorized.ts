@@ -2,6 +2,9 @@ import AbstractUnit from "./AbstractUnit";
 import HexID from "../Map/HexID";
 
 export default class Motorized extends AbstractUnit {
+  getType(): string {
+    return "motorized";
+  }
   refit(): void {
     throw new Error("Method not implemented.");
   }

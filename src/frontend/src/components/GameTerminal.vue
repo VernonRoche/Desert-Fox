@@ -2,17 +2,26 @@
   <div id="game-terminal" class="h-full w-1/5 flex flex-col bg-black rounded">
     <div id="terminal" class="text-white overflow-y-scroll h-full">
       <!-- Besoin de changer le v-scroll-to mais fonctionne pour l'instant -->
-      <p v-for="(line, index) in lines" :key="index" v-scroll-to class="pl-4">
-        <span class="italic border-r pr-2 mr-2">{{ toFrenchDate(line.time) }}</span>
-        <span class="font-bold">{{ line.author }}</span>
-        - {{ line.data }}
-      </p>
+      <div
+        v-for="(line, index) in lines"
+        :key="index"
+        v-scroll-to
+        class="pl-4 flex flex-col text-center whitespace-pre-line border-t border-white p-2"
+      >
+        <div>
+          <span class="italic border-r pr-2 mr-2">{{ toFrenchDate(line.time) }}</span>
+          <span class="font-bold">{{ line.author }}</span>
+        </div>
+        <div>
+          <span v-if="line.data">{{ line.data }}</span>
+          <span v-else class="italic text-sm text-gray-400">message vide</span>
+        </div>
+      </div>
     </div>
     <form
       class="border bg-transparent p-2 w-full pl-4 rounded text-white flex gap-1"
       @submit.prevent="submitLine"
     >
-      <span>></span>
       <input
         id="commandInput"
         v-model="terminalInput"
@@ -28,36 +37,44 @@
 
 <script lang="ts" setup>
 import { onUnmounted, ref } from "@vue/runtime-dom";
+import { Unit } from "../utils/constants/types";
 import socket from "../utils/ClientSocket";
+import { moveErrors } from "../utils/constants/errorExplanation";
 
 const terminalInput = ref("");
+const lines = ref<{ data: string; author: string; time: Date }[]>([]);
 
 type Command = (args: string[]) => void;
 type Commands = Record<string, Command>;
 
 const help: Record<string, string> = {
   ping: "Test de la connexion avec le serveur",
-  exit: "Termine la connexion avec le serveur",
   help: "Affiche l'aide",
   clear: "Efface le terminal",
+  move: "Cela prend un index d'unité et un index de Hexagon et fait bouger l'unité sur le Hexagon. Exemple : move 3 0208",
   units: "Récupère la liste de vos unités",
   done: "Indique que vous terminez votre tour",
+  exit: "Termine la connexion avec le serveur",
+
 };
 
 const commands: Commands = {
-  ping: () => socket.send("ping message", terminalInput.value),
+  ping: () => socket.emit("ping message", terminalInput.value),
   exit: disconnectSocket,
-  message: (message: string[]) => socket.send("message", message.join(" ")),
+  message: (message: string[]) => socket.emit("message", message.join(" ")),
   move: (args: string[]) => {
+    // check if arguments are valid
+    const unitId = +args[0];
+    const hexId = +args[1];
     let hasError = false;
-    if (isNaN(+args[0])) {
+    if (isNaN(unitId)) {
       addLine(
         "Game",
         "Argument invalide, le premier argument doit être un numéro (identifiant d'une unité)",
       );
       hasError = true;
     }
-    if (isNaN(+args[1])) {
+    if (isNaN(hexId)) {
       addLine(
         "Game",
         "Argument invalide, le deuxième argument doit être un numéro (identifiant d'hexagone)",
@@ -65,34 +82,61 @@ const commands: Commands = {
       hasError = true;
     }
     if (hasError) return;
-    socket.send("command", {
+    // end check
+    socket.emit("command", {
       type: "move",
       unitId: args[0],
       hexId: args[1],
     });
-    socket.once("move", (...args: any[]) => {
-      addLine("Game", args.join(" "));
+    socket.once("move", (resp: { error: string | false }) => {
+      if (resp.error) {
+        addLine("Game", moveErrors[resp.error] ?? resp.error);
+      } else {
+        addLine("Game", `L'unitée ${args[0]} s'est déplacée sur le hex ${args[1]}`);
+      }
+      console.log(resp);
     });
   },
-  units: () =>
-    socket.send("command", {
+  units: () => {
+    socket.emit("command", {
       type: "units",
-    }),
+    });
+
+    socket.once("units", (resp: Unit[]) => {
+      function addZeroIfNeeded(number: number) {
+        return number < 10 ? `0${number}` : number;
+      }
+      console.log(resp);
+      addLine(
+        "Game",
+        resp
+          .map(
+            ({ _id, _lifePoints, _currentPosition, _remainingMovementPoints }) =>
+              `Unit ${_id} has ${_lifePoints} life point at hexId (${addZeroIfNeeded(
+                _currentPosition._y,
+              )}${addZeroIfNeeded(
+                _currentPosition._x,
+              )}) with ${_remainingMovementPoints} movement points`,
+          )
+          .join("\n"),
+      );
+    });
+  },
   done: () => {
     socket.emit("done");
   },
   // local commands
   help: () => {
+    let result = "";
     Object.keys(help).forEach((helpCommand) => {
-      addLine("Game", `${helpCommand} - ${help[helpCommand]}`);
+      result += `${helpCommand} - ${help[helpCommand]}\n`;
     });
+    addLine("Game", result);
   },
   clear: () => {
     lines.value = [];
   },
 };
-
-const lines = ref<{ data: string; author: string; time: Date }[]>([]);
 
 addLine("Game", "Connexion au serveur...");
 
@@ -104,7 +148,7 @@ socket.on("pong message", (msg) => {
   addLine("Game", msg);
 });
 
-socket.on("commandMessage", (resp: any) => {
+socket.on("commandMessage", (resp: { error: string } & string) => {
   if (resp.error) {
     addLine("Game", resp.error);
   } else {
@@ -113,17 +157,19 @@ socket.on("commandMessage", (resp: any) => {
 });
 
 socket.on("phase", (resp: { phase: string; play: boolean; commands: string[]; auto: boolean }) => {
-  addLine("Game", `Phase de jeu : ${resp.phase}`);
   if (resp.auto) {
     // handle automatic phase
     return;
   }
-  addLine("Game", `Phase de jeu : ${resp.phase}`);
   if (resp.play) {
     addLine("Game", "Vous pouvez jouer les commandes suivantes: " + resp.commands.join(", "));
   } else {
     addLine("Game", "Vous ne pouvez pas jouer");
   }
+});
+
+socket.on("gameDestroyed", () => {
+  addLine("Game", "La partie a été interrompue");
 });
 
 function disconnectSocket() {

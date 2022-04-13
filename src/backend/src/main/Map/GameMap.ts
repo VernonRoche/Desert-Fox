@@ -5,7 +5,10 @@ import fs from "fs";
 import Maps from "./Maps";
 import Terrain, { TerrainTypes } from "./Terrain";
 import AbstractUnit, { unitJson } from "../Units/AbstractUnit";
-import Player from "../GameManager/Player";
+import Player, { playerUnitJson } from "../GameManager/Player";
+import Mechanized from "../Units/Mechanized";
+import Foot from "../Units/Foot";
+import Motorized from "../Units/Motorized";
 
 const width = 66;
 const height = 29;
@@ -16,25 +19,113 @@ type JsonMap = {
   units: unitJson[];
 }[];
 export default class GameMap {
-  private _entities: Entity[];
+  private _entities: Map<number, Entity>;
   private _hexagons: Map<string, Hex> = new Map();
 
-  constructor(entities: Entity[], mapName: Maps) {
+  constructor(entities: Map<number, Entity>, mapName: Maps) {
     this._entities = entities;
     const json = fs.readFileSync(`maps/${mapName}.json`, "utf8");
     const map: JsonMap = JSON.parse(json);
     const validTerrains = Object.values(TerrainTypes) as string[];
+    const units = this.loadUnits();
     map.forEach(({ hexId, terrain }) => {
       const x = +hexId.substring(2, 4);
       const y = +hexId.substring(0, 2);
       const validTerrain = validTerrains.includes(terrain);
       if (validTerrain) {
-        const hexID = new HexID(x, y);
+        const hexID = new HexID(y, x);
         const _terrain = new Terrain(terrain as TerrainTypes);
         const hex = new Hex(hexID, _terrain);
+        units.forEach((unit: AbstractUnit) => {
+          if (unit.getHexId().id() === hexID.id()) {
+            hex.addUnit(unit);
+          }
+        });
         this._hexagons.set(hexID.id(), hex);
       }
     });
+    for (const hex of this._hexagons.values()) {
+      const x = hex.getID().getX();
+      const y = hex.getID().getY();
+      const getNeighbourCoordinates = function (x: number, y: number): HexID[] {
+        const neighbourList: HexID[] = [];
+        if (x % 2 == 0) {
+          neighbourList.push(new HexID(y, x - 1));
+          neighbourList.push(new HexID(y, x + 1));
+          neighbourList.push(new HexID(y - 1, x));
+          neighbourList.push(new HexID(y + 1, x + 1));
+          neighbourList.push(new HexID(y + 1, x - 1));
+          neighbourList.push(new HexID(y + 1, x));
+        } else {
+          neighbourList.push(new HexID(y - 1, x));
+          neighbourList.push(new HexID(y, x - 1));
+          neighbourList.push(new HexID(y, x + 1));
+          neighbourList.push(new HexID(y + 1, x));
+          neighbourList.push(new HexID(y - 1, x - 1));
+          neighbourList.push(new HexID(y - 1, x + 1));
+        }
+        return neighbourList;
+      };
+      for (const neighbour of getNeighbourCoordinates(x, y)) {
+        try {
+          const neighbourNode = this.findHex(neighbour);
+          hex.addNeighbour(neighbourNode);
+        } catch (e) {
+          continue;
+        }
+      }
+    }
+  }
+
+  loadUnits(): AbstractUnit[] {
+    const player1units = JSON.parse(fs.readFileSync("units/Player1Units.json", "utf8"));
+    const player2units = JSON.parse(fs.readFileSync("units/Player2Units.json", "utf8"));
+    const allUnitsJson: playerUnitJson[] = [...player1units, ...player2units];
+    const allUnits: AbstractUnit[] = [];
+
+    allUnitsJson.forEach((unit: playerUnitJson) => {
+      const x = +unit.currentPosition.substring(2, 4);
+      const y = +unit.currentPosition.substring(0, 2);
+      if (isNaN(x) || isNaN(y)) {
+        console.log("Error loading unit: " + unit.id + " " + unit.currentPosition);
+        throw new Error("Error loading unit: " + unit.id + " " + unit.currentPosition);
+      }
+      if (unit.type === "mechanized")
+        allUnits.push(
+          new Mechanized(
+            unit.id,
+            new HexID(y, x),
+            unit.moraleRating,
+            unit.combatFactor,
+            unit.movementPoints,
+            unit.lifePoints,
+          ),
+        );
+      else if (unit.type === "foot")
+        allUnits.push(
+          new Foot(
+            unit.id,
+            new HexID(y, x),
+            unit.moraleRating,
+            unit.combatFactor,
+            unit.movementPoints,
+            unit.lifePoints,
+          ),
+        );
+      else if (unit.type === "motorized")
+        allUnits.push(
+          new Motorized(
+            unit.id,
+            new HexID(y, x),
+            unit.moraleRating,
+            unit.combatFactor,
+            unit.movementPoints,
+            unit.lifePoints,
+          ),
+        );
+      else throw new Error("Unknown unit type: " + unit.type);
+    });
+    return allUnits;
   }
 
   public getHexes(): Map<string, Hex> {
@@ -50,12 +141,12 @@ export default class GameMap {
     return hex;
   }
 
-  public getEntities(): Entity[] {
+  public getEntities(): Map<number, Entity> {
     return this._entities;
   }
 
   public addEntity(unit: Entity): void {
-    this._entities.push(unit);
+    this._entities.set(unit.getId(), unit);
   }
 
   public addUnit(unit: AbstractUnit): void {
@@ -64,16 +155,11 @@ export default class GameMap {
     else throw new Error("incorrecthex");
   }
 
-  public toJSON(): string {
+  public toJSON(player: Player): string {
     const json: JsonMap = [];
     this._hexagons.forEach((hex) => {
-      const units: {
-        id: number;
-        currentPosition: HexID;
-        movementPoints: number;
-        remainingMovementPoints: number;
-      }[] = [];
-      hex.getUnits().forEach((unit) => units.push(unit.toJson()));
+      const units: unitJson[] = [];
+      hex.getUnits().forEach((unit) => units.push(unit.toJson(player)));
       json.push({
         hexId: hex.getID().id(),
         terrain: hex.getTerrain().terrainType,
@@ -83,8 +169,13 @@ export default class GameMap {
     return JSON.stringify(json);
   }
 
-  public getUnitById(id: number): Entity | null {
-    return this._entities.find((unit) => unit.getId() === id) ?? null;
+  public getUnitById(id: number): Entity {
+    const unit = this._entities.get(id);
+
+    if (!unit) {
+      throw new Error("Nonexisting entity");
+    }
+    return unit;
   }
 
   public hexBelongsToPlayer(hexID: HexID, player: Player): boolean {

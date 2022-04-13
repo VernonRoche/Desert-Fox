@@ -25,4 +25,7 @@ export default class Airborne extends AbstractUnit {
   attack(hexId: HexID, combatSupply: boolean): void {
     throw new Error("Method not implemented.");
   }
+  getType(): string {
+    return "Airborne";
+  }
 }

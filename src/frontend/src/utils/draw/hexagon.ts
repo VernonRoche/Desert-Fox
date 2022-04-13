@@ -1,5 +1,5 @@
 import P5 from "p5";
-import colors from "../constants/colors";
+import { colorsHexagon } from "../constants/colors";
 import handlerHexPoints from "../constants/hexPoints";
 import drawText from "./text";
 
@@ -15,7 +15,7 @@ export default function drawHexagon(
 
   p5.stroke("black");
   p5.strokeWeight(2);
-  p5.fill(colors[typeTerrain]);
+  p5.fill(colorsHexagon[typeTerrain] ?? "white");
   p5.beginShape();
   for (let i = 0; i < 6; i++) {
     const hexPoints = handlerHexPoints(x, y, r, i);
@@ -25,6 +25,6 @@ export default function drawHexagon(
 
   // ID
   if (typeTerrain === "mountain" || typeTerrain === "rough")
-    drawText(p5, x - 30, y, id.toString(), "white");
-  else drawText(p5, x - 30, y, id.toString(), "black");
+    drawText(p5, x, y, id.toString(), "white");
+  else drawText(p5, x, y, id.toString(), "black");
 }

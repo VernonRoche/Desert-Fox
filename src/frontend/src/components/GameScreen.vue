@@ -2,26 +2,40 @@
   <div
     id="gamescreen"
     ref="screen"
-    class="border-2 h-full w-4/5 border-black cursor-grab overflow-auto"
+    class="h-full w-4/5 border-black cursor-grab overflow-hidden"
   ></div>
 </template>
 
 <script lang="ts" setup>
 import { onMounted, ref } from "vue";
 import P5 from "p5";
-import sketch, { GameMap } from "../utils/uiGame";
+import sketch from "../utils/uiGame";
 import runScrollDiv from "../utils/scrollDiv";
 import socket from "../utils/ClientSocket";
+import { GameMap } from "../utils/constants/types";
 const screen = ref<undefined | HTMLElement>(undefined);
 
+socket.on("gameDestroyed", () => {
+  document.querySelector("canvas")?.remove();
+});
+
 onMounted(() => {
-  socket.on("gameCreated", (gameMap: string) => {
+  socket.on("map", (gameMap: string) => {
     console.log("Game was created an map is", gameMap);
+
+    const canvasExisted = document.getElementById("defaultCanvas0");
+    canvasExisted?.remove();
+
     new P5((p5) => {
       sketch(p5, JSON.parse(gameMap) as GameMap);
     }, screen.value);
   });
-
-  runScrollDiv(document, screen.value as HTMLElement);
+  runScrollDiv(screen.value as HTMLElement);
 });
 </script>
+
+<style>
+#gamescreen > canvas {
+  top: 0;
+}
+</style>

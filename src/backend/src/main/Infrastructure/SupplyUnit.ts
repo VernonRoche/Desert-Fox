@@ -9,10 +9,12 @@ export default class SupplyUnit extends Moveable {
     id: number,
     item: Embarkable,
     currentPosition: HexID,
+    moraleRating: number,
+    combatFactor: number,
     movementPoints: number,
-    remainingMovementPoints: number,
+    lifePoints: number,
   ) {
-    super(id, currentPosition, movementPoints, remainingMovementPoints);
+    super(id, currentPosition, combatFactor, movementPoints, lifePoints);
     this._item = item;
   }
 

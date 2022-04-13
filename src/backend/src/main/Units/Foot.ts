@@ -1,9 +1,9 @@
 import AbstractUnit from "./AbstractUnit";
 import HexID from "../Map/HexID";
 
-export default class AntiTank extends AbstractUnit {
+export default class Foot extends AbstractUnit {
   getType(): string {
-    return "AntiTank";
+    return "foot";
   }
   refit(): void {
     throw new Error("Method not implemented.");
