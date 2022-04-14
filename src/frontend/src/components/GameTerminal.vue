@@ -28,7 +28,7 @@
         placeholder="Commande"
         type="text"
         minlength="1"
-        class="bg-transparent w-full"
+        class="bg-transparent w-full outline-none"
         @keyup.up="handleKeyUp"
       />
     </form>
@@ -229,9 +229,3 @@ function handleKeyUp() {
 
 onUnmounted(disconnectSocket);
 </script>
-
-<style scoped>
-input:focus {
-  outline: none;
-}
-</style>
