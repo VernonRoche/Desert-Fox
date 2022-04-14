@@ -51,11 +51,10 @@ const help: Record<string, string> = {
   ping: "Test de la connexion avec le serveur",
   help: "Affiche l'aide",
   clear: "Efface le terminal",
-  move: "Cela prend un index d'unité et un index de Hexagon et fait bouger l'unité sur le Hexagon. Exemple : move 3 0208",
+  move: "La commande prend un identifiant d'unité et un identifiant d'hexagone et fait bouger l'unité sur l'hexagone. Exemple : move 3 0208",
   units: "Récupère la liste de vos unités",
   done: "Indique que vous terminez votre tour",
   exit: "Termine la connexion avec le serveur",
-
 };
 
 const commands: Commands = {
