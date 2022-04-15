@@ -1,7 +1,7 @@
 import { TerrainTypes } from "../main/Map/Terrain";
 import CombatSimulator, { DamageResult, MoraleResult } from "../main/GameManager/CombatSimulator";
 
-describe("Check if Pathfinder works correctly", function () {
+describe("Check if combat simulator works correctly", function () {
   it("Morale results should be correct", function () {
     let morale = 4;
     let terrain = TerrainTypes.ROUGH;
