@@ -428,7 +428,7 @@ export class StateMachine {
       });
     }
   }
-  getPhaseService(): any {
+  getPhaseService() {
     return this.phaseService;
   }
 }
