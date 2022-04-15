@@ -1,5 +1,3 @@
-import PlayerID from "./PlayerID";
-
 enum Phase {
   //Strategic impulse
   AIR_SUPERIORITY,
