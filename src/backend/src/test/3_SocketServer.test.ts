@@ -1,6 +1,6 @@
 import express from "express";
 import { io, Socket } from "socket.io-client";
-import MachineState from "../main/GameManager/StateMachine";
+import { StateMachine } from "../main/GameManager/StateMachine";
 import { SocketServer } from "../main/SocketServer";
 
 function initSocket(port: number): Socket {
@@ -29,7 +29,7 @@ describe("Socket server tests", function () {
     }
   });
   it("Run webServer", function () {
-    socketServer.run(MachineState);
+    socketServer.run(new StateMachine());
   });
 
   it("Initialize player 1 and connect", function () {
