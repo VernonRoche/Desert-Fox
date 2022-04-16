@@ -48,9 +48,30 @@ export class SocketServer {
     return this._serverPort;
   }
 
+  private createGame(stateMachine: StateMachine): void {
+    if (this.isVerbose) console.log("Game created");
+    this._created = true;
+    this._game = new Game(
+      new GameMap(new Map(), "libya" as Maps),
+      this._players[0],
+      this._players[1],
+    );
+    const map = this._game.getMap();
+    this.sockets.forEach((socket) => {
+      socket.emit("map", map.toJSON(this.getPlayerFromSocket(socket)));
+    });
+    stateMachine.getPhaseService().send("RESET");
+  }
+
+  private destroyGame() {
+    if (this.isVerbose) console.log("Game destroyed");
+    this._created = false;
+    this._game = undefined;
+    this.broadcast("gameDestroyed", {});
+  }
+
   public run(stateMachine: StateMachine): void {
     //For Prototype Purposes
-
     this.eventConnection((socket) => {
       if (this._sockets.length >= 2) {
         socket.emit("commandMessage", { error: "full" });
@@ -70,18 +91,7 @@ export class SocketServer {
 
       this._sockets.push(socket);
       if (this._sockets.length >= 2 && !this._created) {
-        if (this.isVerbose) console.log("Game created");
-        this._created = true;
-        this._game = new Game(
-          new GameMap(new Map(), "libya" as Maps),
-          this._players[0],
-          this._players[1],
-        );
-        const map = this._game.getMap();
-        this.sockets.forEach((socket) => {
-          socket.emit("map", map.toJSON(this.getPlayerFromSocket(socket)));
-        });
-        stateMachine.getPhaseService().send("RESET");
+        this.createGame(stateMachine);
       }
       stateMachine.registerSocket(socket);
       this.applyRoutes(socket);
@@ -111,10 +121,7 @@ export class SocketServer {
       this._sockets = this._sockets.filter((socket) => socket.id !== socketClient.id);
       this._players = this._players.filter((player) => player.getSocket().id !== socketClient.id);
       if (this._created) {
-        if (this.isVerbose) console.log("Game destroyed");
-        this._created = false;
-        this._game = undefined;
-        this.broadcast("gameDestroyed", {});
+        this.destroyGame();
       }
     });
 
