@@ -38,9 +38,7 @@ export default class Player {
   ) {
     this._id = id;
     this._units = new Map();
-    id === PlayerID.ONE
-      ? this.loadUnitsByFile("Player1Units")
-      : this.loadUnitsByFile("Player2Units");
+    id === PlayerID.ONE ? this.loadUnitsByFile("player1") : this.loadUnitsByFile("player2");
     this._bases = new Map(bases.map((b) => [b.getId().toString(), b]));
     this._supplyUnits = new Map(supplyUnits.map((s) => [s.getId().toString(), s]));
     this._refitPoints = new Map(refitPoints.map((r) => [r.getId().toString(), r]));

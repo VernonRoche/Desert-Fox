@@ -78,8 +78,8 @@ export default class GameMap {
   }
 
   loadUnits(): AbstractUnit[] {
-    const player1units = JSON.parse(fs.readFileSync("units/Player1Units.json", "utf8"));
-    const player2units = JSON.parse(fs.readFileSync("units/Player2Units.json", "utf8"));
+    const player1units = JSON.parse(fs.readFileSync("units/player1.json", "utf8"));
+    const player2units = JSON.parse(fs.readFileSync("units/player2.json", "utf8"));
     const allUnitsJson: playerUnitJson[] = [...player1units, ...player2units];
     const allUnits: AbstractUnit[] = [];
 
