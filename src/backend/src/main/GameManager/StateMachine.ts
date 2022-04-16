@@ -75,7 +75,7 @@ const _commands: Commands = {
     }
     try {
       webSocketServer.getGame()?.moveUnit(player, unit, new HexID(y, x));
-      console.log("move was successful");
+      if (stateMachine.isVerbose) console.log("move was successful");
       player.getSocket().emit(args.type, { error: false });
     } catch (e) {
       player.getSocket().emit(args.type, { error: "invalidmove" });
@@ -217,19 +217,26 @@ createMachine({
 
 export class StateMachine {
   private phaseService;
+  private _verbose;
 
-  constructor() {
+  constructor(verbose = true) {
+    this._verbose = verbose;
     const TurnMachine = createMachine(TurnPhases);
     this.phaseService = interpret(TurnMachine).start();
     this.runPhaseActions(this.phaseService.state.value.toString());
     this.phaseService.onTransition((state) => {
       if (!(state.value.toString() in statesWithUserInput)) {
         this.runPhaseActions(state.value.toString());
-        console.log("phase : " + state.value.toString());
+        if (this.isVerbose) console.log("phase : " + state.value.toString());
         this.phaseService.send("NEXT");
       }
     });
   }
+
+  get isVerbose() {
+    return this._verbose;
+  }
+
   registerSocket(socket: Socket): void {
     socket.on("command", (data: { type: commandTypes } & AllArgs) => {
       if (!webSocketServer.getGame()) {
@@ -255,7 +262,7 @@ export class StateMachine {
       });
     });
     socket.on("done", () => {
-      console.log("done");
+      if (this.isVerbose) console.log("done");
       if (this.endTurn(webSocketServer.getPlayerFromSocket(socket)))
         this.informUsers(this.phaseService.state.value.toString(), webSocketServer.getPlayers());
     });
@@ -305,7 +312,7 @@ export class StateMachine {
 
   runPlayerCommand(player: Player, command: string, args: any): void {
     if (!_commands[command]) {
-      console.log("invalid command");
+      if (this.isVerbose) console.log("invalid command");
       return;
     }
     if (

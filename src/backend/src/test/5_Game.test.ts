@@ -31,8 +31,8 @@ describe("Game tests", function () {
   const player2 = initSocket(SERVER_PORT);
   let stateMachine: StateMachine;
   it("Initialize socket server", function () {
-    socketServer = new SocketServer(express(), CLIENT_PORT, SERVER_PORT);
-    stateMachine = new StateMachine();
+    socketServer = new SocketServer(express(), CLIENT_PORT, SERVER_PORT, false);
+    stateMachine = new StateMachine(false);
     socketServer.run(stateMachine);
   });
 
@@ -73,7 +73,7 @@ describe("Game tests", function () {
 
   it("First player moves a valid unit", function () {
     return new Promise<void>((resolve, reject) => {
-      player1.emit("command", { type: "move", unitId: 0, hexId: "0102" });
+      player1.emit("command", { type: "move", unitId: "0", hexId: "0102" });
       player1.on("move", (resp: { error: string | false }) => {
         if (resp.error) {
           reject(new Error("Move error: " + resp.error));

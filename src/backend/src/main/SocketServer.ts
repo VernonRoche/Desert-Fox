@@ -16,8 +16,10 @@ export class SocketServer {
   private _game?: Game;
   private _players: Player[] = [];
   private _created = false;
+  private _verbose;
 
-  constructor(listener: Express, clientPort: number, serverPort: number) {
+  constructor(listener: Express, clientPort: number, serverPort: number, verbose = true) {
+    this._verbose = verbose;
     this._clientPort = clientPort;
     this._serverPort = serverPort;
     this._httpServer = http.createServer(listener);
@@ -28,6 +30,10 @@ export class SocketServer {
     });
 
     this._httpServer.listen(serverPort);
+  }
+
+  get isVerbose() {
+    return this._verbose;
   }
 
   public get sockets(): Socket[] {
@@ -48,12 +54,12 @@ export class SocketServer {
     this.eventConnection((socket) => {
       if (this._sockets.length >= 2) {
         socket.emit("commandMessage", { error: "full" });
-        console.log("socket disconnected because full :", socket.id);
+        if (this.isVerbose) console.log("socket disconnected because full :", socket.id);
         socket.disconnect(true);
         return;
       }
 
-      console.log(`User [${socket.id}] connected !`);
+      if (this.isVerbose) console.log(`User [${socket.id}] connected !`);
       let playerId: number;
       if (this._players.length >= 1) {
         playerId = Math.abs(this._players[0].getId() - 1);
@@ -64,7 +70,7 @@ export class SocketServer {
 
       this._sockets.push(socket);
       if (this._sockets.length >= 2 && !this._created) {
-        console.log("Game created");
+        if (this.isVerbose) console.log("Game created");
         this._created = true;
         this._game = new Game(
           new GameMap(new Map(), "libya" as Maps),
@@ -99,13 +105,13 @@ export class SocketServer {
       socketClient.emit("pong message", "pong");
     });
     socketClient.on("disconnect", () => {
-      console.log(`User [${socketClient.id}] disconnected !`);
+      if (this.isVerbose) console.log(`User [${socketClient.id}] disconnected !`);
       // keep all sockets that have a different id than current
       // is pretty much just a remove
       this._sockets = this._sockets.filter((socket) => socket.id !== socketClient.id);
       this._players = this._players.filter((player) => player.getSocket().id !== socketClient.id);
       if (this._created) {
-        console.log("Game destroyed");
+        if (this.isVerbose) console.log("Game destroyed");
         this._created = false;
         this._game = undefined;
         this.broadcast("gameDestroyed", {});
@@ -113,11 +119,13 @@ export class SocketServer {
     });
 
     socketClient.on("message", (data: any) => {
-      console.log(`User [${socketClient.id}] sent a message : ${data}`);
+      if (this.isVerbose) console.log(`User [${socketClient.id}] sent a message : ${data}`);
       this._socketServer.emit("message", data);
     });
 
-    socketClient.on("command", (data: any) => console.log("Received command", data));
+    socketClient.on("command", (data: any) => {
+      if (this.isVerbose) console.log("Received command", data);
+    });
   }
 
   getGame(): Game | undefined {
