@@ -8,6 +8,7 @@
     "compile": "tsc",
     "start": "npm run compile && node js/main",
     "test": "npm run compile && mocha js/test --recursive --exit",
+    "test:custom": "npm run compile && mocha js/test/5_Game.test.js --exit",
     "dev": "nodemon --config nodemon.json src/main/index.ts",
     "format": "prettier --config .prettierrc \"src/**/*.ts\" --write",
     "lint": "eslint . --ext .ts src/**/*.ts",
