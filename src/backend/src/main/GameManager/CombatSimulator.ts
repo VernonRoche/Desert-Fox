@@ -2,21 +2,21 @@
 import { TerrainTypes } from "../Map/Terrain";
 import Dice from "./Dice";
 
-enum MoraleResult {
-  NONE,
-  M,
-  D,
-  W,
-  R,
+export enum MoraleResult {
+  NONE = "NONE",
+  M = "M",
+  D = "D",
+  W = "W",
+  R = "R",
 }
 
-enum DamageResult {
-  NONE,
-  Q,
-  H,
-  E,
-  X,
-  XX,
+export enum DamageResult {
+  NONE = "NONE",
+  Q = "Q",
+  H = "H",
+  E = "E",
+  X = "X",
+  XX = "XX",
 }
 
 // First table in combat results table.
@@ -187,11 +187,17 @@ export default class CombatSimulator {
     numberOfAttackers: number,
     numberOfDefenders: number,
     morale: number,
+    supplied: boolean,
+    rolldice = true,
   ): {
     attacker: { damage: DamageResult; morale: MoraleResult };
     defender: { damage: DamageResult; morale: MoraleResult };
   } {
-    const diceRoll = Dice.rollDice();
+    let diceRoll = 0;
+    if (rolldice) {
+      diceRoll = Dice.rollDice();
+    }
+
     // Remove 1 from morale to get the accurate index in the table
     morale--;
 
@@ -208,8 +214,10 @@ export default class CombatSimulator {
     const ratio = numberOfAttackers / numberOfDefenders;
     const columnIndex =
       ratioTable[ratioIndex].findIndex((ratioInTable) => ratioInTable === ratio) + diceRoll;
+
+    const attackerSupplied = supplied ? 0 : 1;
     return {
-      attacker: attackerResultsTable[morale][columnIndex],
+      attacker: attackerResultsTable[attackerSupplied][columnIndex],
       defender: defenderResultsTable[morale][columnIndex],
     };
   }
