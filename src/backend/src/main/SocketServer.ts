@@ -5,7 +5,7 @@ import Game from "./GameManager/Game";
 import GameMap from "./Map/GameMap";
 import Player from "./GameManager/Player";
 import Maps from "./Map/Maps";
-import { StateMachine } from "./GameManager/StateMachine";
+import stateMachine, { StateMachine } from "./GameManager/StateMachine";
 
 export class SocketServer {
   private _httpServer: http.Server;
@@ -60,7 +60,7 @@ export class SocketServer {
     this.sockets.forEach((socket) => {
       socket.emit("map", map.toJSON(this.getPlayerFromSocket(socket)));
     });
-    stateMachine.getPhaseService().send("RESET");
+    stateMachine.startMachine();
   }
 
   private destroyGame() {
@@ -68,6 +68,7 @@ export class SocketServer {
     this._created = false;
     this._game = undefined;
     this.broadcast("gameDestroyed", {});
+    stateMachine.stopMachine();
   }
 
   public run(stateMachine: StateMachine): void {

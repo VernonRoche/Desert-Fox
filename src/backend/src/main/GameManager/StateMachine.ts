@@ -145,7 +145,11 @@ export class StateMachine {
   constructor(verbose = true) {
     this._verbose = verbose;
     const TurnMachine = createMachine(TurnPhases);
-    this.phaseService = interpret(TurnMachine).start();
+    this.phaseService = interpret(TurnMachine);
+    
+  }
+  startMachine(): void {
+    this.phaseService.start();
     this.runPhaseActions(this.phaseService.state.value.toString());
     this.phaseService.onTransition((state) => {
       if (!(state.value.toString() in statesWithUserInput)) {
@@ -156,6 +160,9 @@ export class StateMachine {
     });
   }
 
+  stopMachine() {
+    this.phaseService.stop();
+  }
   get isVerbose() {
     return this._verbose;
   }
