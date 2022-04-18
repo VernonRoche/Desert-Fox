@@ -43,6 +43,7 @@ import { moveErrors } from "../utils/constants/errorExplanation";
 
 const terminalInput = ref("");
 const lines = ref<{ data: string; author: string; time: Date }[]>([]);
+const currentPlay = ref<boolean>(false);
 
 type Command = (args: string[]) => void;
 type Commands = Record<string, Command>;
@@ -162,8 +163,10 @@ socket.on("phase", (resp: { phase: string; play: boolean; commands: string[]; au
   }
   if (resp.play) {
     addLine("Game", "Vous pouvez jouer les commandes suivantes: " + resp.commands.join(", "));
+    currentPlay.value = true;
   } else {
     addLine("Game", "Vous ne pouvez pas jouer");
+    currentPlay.value = false;
   }
 });
 
@@ -202,6 +205,13 @@ function doCommand() {
   // rest is arguments
   const args = split.slice(1);
   // if command exists
+  if (command !== "units" && !currentPlay.value) {
+    addLine(
+      "Game",
+      "Vous ne pouvez pas jouer, la seule commande que vous pouvez effectuer est la commande units. Attendez la fin de la phase de jeu",
+    );
+    return;
+  }
   if (commands[command]) {
     // execute it, and give it args, even if it is not used in the command
     commands[command](args);
