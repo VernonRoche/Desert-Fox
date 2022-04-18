@@ -1,6 +1,6 @@
 import Player from "./Player";
 import GameMap from "../Map/GameMap";
-import AbstractUnit from "../Units/AbstractUnit";
+import Unit from "../Units/Unit";
 import HexID from "../Map/HexID";
 import Pathfinder from "./Pathfinder";
 
@@ -26,7 +26,7 @@ export default class Game {
   // check if(canMove === true)
   public canMove(
     player: Player,
-    unit: AbstractUnit,
+    unit: Unit,
     destination: HexID,
   ): { movePossible: boolean; cost: number } | string {
     const destinationHex = this._map.findHex(destination);
@@ -57,8 +57,8 @@ export default class Game {
   }
 
   // Checks all units of a player and returns the list of units that can move
-  public availableUnitsToMove(player: Player): AbstractUnit[] {
-    const availableUnits: AbstractUnit[] = [];
+  public availableUnitsToMove(player: Player): Unit[] {
+    const availableUnits: Unit[] = [];
     for (const unit of player.getUnits()) {
       for (const neighbourHex of this._map.findHex(unit.getCurrentPosition()).getNeighbours()) {
         const canMove = this.canMove(player, unit, neighbourHex.getID());
@@ -77,7 +77,7 @@ export default class Game {
 
   // Checks if a move is possible and applies it.
   // Returns false if the move was not possible, true if move was succesful.
-  public moveUnit(player: Player, unit: AbstractUnit, destination: HexID): void {
+  public moveUnit(player: Player, unit: Unit, destination: HexID): void {
     const canMove = this.canMove(player, unit, destination);
     if (typeof canMove === "string") {
       throw new Error(canMove);

@@ -1,10 +1,11 @@
-import AbstractUnit from "./AbstractUnit";
 import HexID from "../Map/HexID";
+import AbstractUnit from "./AbstractUnit";
 
 export default class Foot extends AbstractUnit {
   getType(): string {
     return "foot";
   }
+
   refit(): void {
     throw new Error("Method not implemented.");
   }

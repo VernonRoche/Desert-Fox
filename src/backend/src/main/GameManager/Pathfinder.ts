@@ -2,7 +2,7 @@ import Player from "./Player";
 import GameMap from "../Map/GameMap";
 import Hex from "../Map/Hex";
 import HexID from "../Map/HexID";
-import AbstractUnit from "../Units/AbstractUnit";
+import Unit from "../Units/Unit";
 
 class Pathfinder {
   private readonly _map: GameMap;
@@ -10,6 +10,7 @@ class Pathfinder {
   constructor(map: GameMap) {
     this._map = map;
   }
+
   /**
    * Find the shortest path
    * Return an object which contains the path and sum of weights
@@ -18,7 +19,7 @@ class Pathfinder {
     startHexID: HexID,
     endHexID: HexID,
     player: Player,
-    unit: AbstractUnit,
+    unit: Unit,
   ): { hexPath: HexID[]; sumOfWeight: number } {
     const startHex = this._map.findHex(startHexID);
     const endHex = this._map.findHex(endHexID);

@@ -1,59 +1,99 @@
-import AbstractUnit from "./Units/AbstractUnit";
+import Unit, { unitJson } from "./Units/Unit";
 import HexID from "./Map/HexID";
+import Player from "./GameManager/Player";
 
-export default class UnitProxy extends AbstractUnit {
-  getType(): string {
-    throw new Error("Method not implemented.");
+export default class UnitProxy implements Unit {
+  private unit: Unit;
+
+  constructor(unit: Unit) {
+    this.unit = unit;
   }
+
+  getType(): string {
+    return this.unit.getType();
+  }
+
   refit(): void {
-    throw new Error("Method not implemented.");
+    return this.unit.refit();
   }
 
   train(): void {
-    throw new Error("Method not implemented.");
+    return this.unit.train();
   }
 
   reactionMove(hexId: HexID): void {
-    throw new Error("Method not implemented.");
+    return this.unit.reactionMove(hexId);
   }
 
   moraleCheck(): boolean {
-    throw new Error("Method not implemented.");
+    return this.unit.moraleCheck();
   }
 
   overrun(hexId: HexID): void {
-    throw new Error("Method not implemented.");
+    return this.unit.overrun(hexId);
   }
 
   hasGeneralSupply(): boolean {
-    throw new Error("Method not implemented.");
+    return this.unit.hasGeneralSupply();
   }
 
   attack(hexId: HexID, combatSupply: boolean): void {
-    throw new Error("Method not implemented.");
+    return this.unit.attack(hexId, combatSupply);
   }
 
   getId(): number {
-    throw new Error("Method not implemented.");
+    return this.unit.getId();
   }
 
   public place(hexId: HexID): void {
-    throw new Error("Method not implemented.");
+    return this.unit.place(hexId);
   }
 
   public remove(): void {
-    throw new Error("Method not implemented.");
+    return this.unit.remove();
   }
 
   public possibleMoves(): HexID[] {
-    throw new Error("Method not implemented.");
+    return this.unit.possibleMoves();
   }
 
   public nightMove(hexId: HexID): void {
-    throw new Error("Method not implemented.");
+    return this.unit.nightMove(hexId);
   }
 
   public resetMovementPoints(): void {
-    throw new Error("Method not implemented.");
+    return this.unit.resetMovementPoints();
+  }
+
+  getCombatFactor(): number {
+    return this.unit.getCombatFactor();
+  }
+
+  getCurrentPosition(): HexID {
+    return this.unit.getCurrentPosition();
+  }
+
+  getLifePoints(): number {
+    return this.unit.getLifePoints();
+  }
+
+  getMoraleRating(): number {
+    return this.unit.getMoraleRating();
+  }
+
+  getMovementPoints(): number {
+    return this.unit.getMovementPoints();
+  }
+
+  getRemainingMovementPoints(): number {
+    return this.unit.getRemainingMovementPoints();
+  }
+
+  move(movementPoints: number): void {
+    this.unit.move(movementPoints);
+  }
+
+  toJson(player: Player): unitJson {
+    return this.unit.toJson(player);
   }
 }

@@ -267,6 +267,7 @@ export class StateMachine {
         this.informUsers(this.phaseService.state.value.toString(), webSocketServer.getPlayers());
     });
   }
+
   runPhaseActions(actualPhase: string): void {
     switch (actualPhase) {
       case "air_superiority": //TODO
@@ -329,9 +330,11 @@ export class StateMachine {
   }
 
   public done: boolean[] = [false, false];
+
   reinitDoneTable(): void {
     this.done = [false, false];
   }
+
   endTurn(player: Player): boolean {
     if (
       ["reinforcements", "initiative", "allocation"].includes(
@@ -412,6 +415,7 @@ export class StateMachine {
     }
     return { correct: false, commands: [] };
   }
+
   informUsers(currentPhase: string, players: Player[]): void {
     const correctPlayerId = this.checkIfCorrectPlayer(currentPhase, players[0].getId()).correct
       ? players[0].getId()
@@ -435,6 +439,7 @@ export class StateMachine {
       });
     }
   }
+
   getPhaseService() {
     return this.phaseService;
   }

@@ -1,12 +1,12 @@
 import HexID from "./HexID";
-import AbstractUnit from "../Units/AbstractUnit";
+import Unit from "../Units/Unit";
 import Terrain from "./Terrain";
 import SupplyUnit from "../Infrastructure/SupplyUnit";
 import Entity from "../Entity";
 
 export default class Hex {
   private _hexId: HexID;
-  private _units: AbstractUnit[];
+  private _units: Unit[];
   private _supplyUnits: SupplyUnit[];
   private _connexions: Hex[]; // To be later replaced with HexNeighbour
   private _terrain: Terrain;
@@ -20,7 +20,7 @@ export default class Hex {
     this._terrain = terrain;
   }
 
-  getUnits(): AbstractUnit[] {
+  getUnits(): Unit[] {
     return this._units;
   }
 
@@ -37,7 +37,7 @@ export default class Hex {
   }
 
   // returns false if the move was illegal, true if the addition was succesful
-  addUnit(unit: AbstractUnit): void {
+  addUnit(unit: Unit): void {
     if (this.isFull()) throw new Error("hex is full");
     // goes through the list of units and checks if the unit is already there
     // by checking if any unit (u) has the same id as the unit we are trying to add
@@ -53,7 +53,7 @@ export default class Hex {
     this._supplyUnits.push(unit);
   }
 
-  removeUnit(unit: AbstractUnit) {
+  removeUnit(unit: Unit) {
     // remove unit from this._units
     this._units = this._units.filter((u) => u.getId() !== unit.getId());
   }

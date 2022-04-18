@@ -16,12 +16,15 @@ export default class Base implements Entity {
     this._isActive = isActive;
     this._id = id;
   }
+
   place(hexId: HexID): void {
     throw new Error("Method not implemented.");
   }
+
   remove(): void {
     throw new Error("Method not implemented.");
   }
+
   getId(): number {
     return this._id;
   }

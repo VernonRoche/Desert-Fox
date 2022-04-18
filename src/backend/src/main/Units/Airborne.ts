@@ -1,5 +1,5 @@
-import AbstractUnit from "./AbstractUnit";
 import HexID from "../Map/HexID";
+import AbstractUnit from "./AbstractUnit";
 
 export default class Airborne extends AbstractUnit {
   refit(): void {
@@ -25,6 +25,7 @@ export default class Airborne extends AbstractUnit {
   attack(hexId: HexID, combatSupply: boolean): void {
     throw new Error("Method not implemented.");
   }
+
   getType(): string {
     return "Airborne";
   }

@@ -1,5 +1,5 @@
 import PlayerID from "./PlayerID";
-import AbstractUnit from "../Units/AbstractUnit";
+import Unit from "../Units/Unit";
 import Base from "../Infrastructure/Base";
 import SupplyUnit from "../Infrastructure/SupplyUnit";
 import RefitPoint from "../Infrastructure/RefitPoint";
@@ -23,7 +23,7 @@ export type playerUnitJson = {
 
 export default class Player {
   private _id: PlayerID;
-  private _units: Map<string, AbstractUnit>;
+  private _units: Map<string, Unit>;
   private _bases: Map<string, Base>;
   private _supplyUnits: Map<string, SupplyUnit>;
   private _refitPoints: Map<string, RefitPoint>;
@@ -100,7 +100,8 @@ export default class Player {
       else throw new Error("Unknown unit type: " + unit.type);
     });
   }
-  getUnitById(id: number): AbstractUnit {
+
+  getUnitById(id: number): Unit {
     const unit = this._units.get(id.toString());
 
     if (!unit) {
@@ -113,7 +114,7 @@ export default class Player {
     return this._id;
   }
 
-  getUnits(): AbstractUnit[] {
+  getUnits(): Unit[] {
     return Array.from(this._units.values());
   }
 
@@ -133,7 +134,7 @@ export default class Player {
     return this._socket;
   }
 
-  addUnit(unit: AbstractUnit): void {
+  addUnit(unit: Unit): void {
     this._units.set(unit.getId().toString(), unit);
   }
 }

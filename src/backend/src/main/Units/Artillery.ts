@@ -1,10 +1,11 @@
-import AbstractUnit from "./AbstractUnit";
 import HexID from "../Map/HexID";
+import AbstractUnit from "./AbstractUnit";
 
 export default class Artillery extends AbstractUnit {
   getType(): string {
     return "Artillery";
   }
+
   refit(): void {
     throw new Error("Method not implemented.");
   }

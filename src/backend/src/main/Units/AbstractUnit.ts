@@ -1,17 +1,15 @@
 import HexID from "../Map/HexID";
-import Moveable from "../Moveable";
 import Dice from "../GameManager/Dice";
 import Player from "../GameManager/Player";
+import Unit, { unitJson } from "./Unit";
 
-export type unitJson = {
-  type: string;
-  id: number;
-  currentPosition: HexID;
-  movementPoints: number;
-  remainingMovementPoints: number;
-  owned: boolean;
-};
-export default abstract class AbstractUnit extends Moveable {
+export default abstract class AbstractUnit implements Unit {
+  private _currentPosition: HexID;
+  private _movementPoints: number;
+  private _id: number;
+  private _combatFactor: number;
+  private _remainingMovementPoints: number;
+  private _lifePoints: number;
   private _moraleRating: number;
 
   constructor(
@@ -22,7 +20,12 @@ export default abstract class AbstractUnit extends Moveable {
     movementPoints: number,
     lifePoints: number,
   ) {
-    super(id, currentPosition, combatFactor, movementPoints, lifePoints);
+    this._currentPosition = currentPosition;
+    this._movementPoints = movementPoints;
+    this._remainingMovementPoints = movementPoints;
+    this._combatFactor = combatFactor;
+    this._lifePoints = lifePoints;
+    this._id = id;
     this._moraleRating = moraleRating;
   }
 
@@ -45,9 +48,11 @@ export default abstract class AbstractUnit extends Moveable {
     }
     return dice + this._moraleRating <= 6;
   }
+
   getMoraleRating(): number {
     return this._moraleRating;
   }
+
   toJson(player: Player): unitJson {
     return {
       type: this.getType(),
@@ -58,5 +63,59 @@ export default abstract class AbstractUnit extends Moveable {
       owned: player.hasUnit(this),
     };
   }
+
   abstract getType(): string;
+
+  public getId(): number {
+    return this._id;
+  }
+
+  public getCurrentPosition() {
+    return this._currentPosition;
+  }
+
+  public place(hexId: HexID): void {
+    this._currentPosition = new HexID(hexId.getY(), hexId.getX());
+  }
+
+  public remove(): void {
+    throw new Error("Method not implemented.");
+  }
+
+  public possibleMoves(): HexID[] {
+    throw new Error("Method not implemented.");
+  }
+
+  // Remove movementPoints passed as parameter
+  public move(movementPoints: number): void {
+    this._remainingMovementPoints -= movementPoints;
+  }
+
+  public nightMove(hexId: HexID): void {
+    throw new Error("Method not implemented.");
+  }
+
+  public getMovementPoints(): number {
+    return this._movementPoints;
+  }
+
+  public getRemainingMovementPoints(): number {
+    return this._remainingMovementPoints;
+  }
+
+  public resetMovementPoints(): void {
+    this._remainingMovementPoints = this._movementPoints;
+  }
+
+  public getHexId(): HexID {
+    return this._currentPosition;
+  }
+
+  public getCombatFactor(): number {
+    return this._combatFactor;
+  }
+
+  public getLifePoints(): number {
+    return this._lifePoints;
+  }
 }

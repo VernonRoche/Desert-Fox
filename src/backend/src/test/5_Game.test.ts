@@ -1,7 +1,7 @@
 import { io, Socket } from "socket.io-client";
 import stateMachine from "../main/GameManager/StateMachine";
 import webSocketServer, { SocketServer } from "../main/SocketServer";
-import AbstractUnit from "../main/Units/AbstractUnit";
+import Unit from "../main/Units/Unit";
 
 function closeServer(server: SocketServer) {
   server["_httpServer"].close();
@@ -54,7 +54,7 @@ describe("Game tests", function () {
   it("get player1 units", async function () {
     return new Promise<void>((resolve, reject) => {
       player1.emit("command", { type: "units" });
-      player1.on("units", (units: AbstractUnit[] & { error: string }) => {
+      player1.on("units", (units: Unit[] & { error: string }) => {
         if (units.error) {
           throw new Error("No units, got: " + units.error);
         }
@@ -69,7 +69,7 @@ describe("Game tests", function () {
   it("get player2 units", async function () {
     return new Promise<void>((resolve, reject) => {
       player2.emit("command", { type: "units" });
-      player2.on("units", (units: AbstractUnit[] & { error: string }) => {
+      player2.on("units", (units: Unit[] & { error: string }) => {
         if (units.error) {
           throw new Error("No units, got: " + units.error);
         }

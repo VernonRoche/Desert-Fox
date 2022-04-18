@@ -4,6 +4,7 @@ import path from "path";
 describe("Check files in src folder", function () {
   it("They should all be .ts files", function () {
     const notTsFiles: string[] = [];
+
     function checkFolder(folderPath: string) {
       const files = fs.readdirSync(folderPath);
       files.forEach((file) => {
@@ -18,6 +19,7 @@ describe("Check files in src folder", function () {
         }
       });
     }
+
     checkFolder("./src");
     if (notTsFiles.length > 0) {
       throw new Error(`The following files are not .ts files: [${notTsFiles.join(", ")}]`);
@@ -26,6 +28,7 @@ describe("Check files in src folder", function () {
 
   it("Files containing class should be capitalized", function () {
     const notCapitalizedFiles: string[] = [];
+
     function checkFolder(folderPath: string) {
       const files = fs.readdirSync(folderPath);
       files.forEach((file) => {
@@ -41,6 +44,7 @@ describe("Check files in src folder", function () {
         }
       });
     }
+
     checkFolder("./src/main");
     if (notCapitalizedFiles.length > 0) {
       throw new Error(

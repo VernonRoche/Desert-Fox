@@ -4,7 +4,7 @@ import HexID from "./HexID";
 import fs from "fs";
 import Maps from "./Maps";
 import Terrain, { TerrainTypes } from "./Terrain";
-import AbstractUnit, { unitJson } from "../Units/AbstractUnit";
+import Unit, { unitJson } from "../Units/Unit";
 import Player, { playerUnitJson } from "../GameManager/Player";
 import Mechanized from "../Units/Mechanized";
 import Foot from "../Units/Foot";
@@ -36,8 +36,8 @@ export default class GameMap {
         const hexID = new HexID(y, x);
         const _terrain = new Terrain(terrain as TerrainTypes);
         const hex = new Hex(hexID, _terrain);
-        units.forEach((unit: AbstractUnit) => {
-          if (unit.getHexId().id() === hexID.id()) {
+        units.forEach((unit: Unit) => {
+          if (unit.getCurrentPosition().id() === hexID.id()) {
             hex.addUnit(unit);
           }
         });
@@ -77,11 +77,11 @@ export default class GameMap {
     }
   }
 
-  loadUnits(): AbstractUnit[] {
+  loadUnits(): Unit[] {
     const player1units = JSON.parse(fs.readFileSync("units/player1.json", "utf8"));
     const player2units = JSON.parse(fs.readFileSync("units/player2.json", "utf8"));
     const allUnitsJson: playerUnitJson[] = [...player1units, ...player2units];
-    const allUnits: AbstractUnit[] = [];
+    const allUnits: Unit[] = [];
 
     allUnitsJson.forEach((unit: playerUnitJson) => {
       const x = +unit.currentPosition.substring(2, 4);
@@ -149,7 +149,7 @@ export default class GameMap {
     this._entities.set(unit.getId(), unit);
   }
 
-  public addUnit(unit: AbstractUnit): void {
+  public addUnit(unit: Unit): void {
     const hex = this._hexagons.get(unit.getCurrentPosition().id());
     if (hex) hex.addUnit(unit);
     else throw new Error("incorrecthex");

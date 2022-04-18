@@ -2,17 +2,17 @@ import Dice from "../main/GameManager/Dice";
 import Player from "../main/GameManager/Player";
 import PlayerID from "../main/GameManager/PlayerID";
 import HexID from "../main/Map/HexID";
-import AbstractUnit from "../main/Units/AbstractUnit";
+import Unit from "../main/Units/Unit";
 import Foot from "../main/Units/Foot";
 
 describe("unit is correct add", function () {
   const id = 0;
-  const unit: AbstractUnit[] = [];
+  const unit: Unit[] = [];
   const footHexId = new HexID(2, 2);
   const foot = new Foot(id, footHexId, 3, 3, 12, 1);
   unit.push(foot);
 
-  it("AbstractUnit should be correct", function () {
+  it("Unit should be correct", function () {
     if (unit[0].getId() != id) {
       throw new Error("id not correct");
     }
@@ -57,7 +57,7 @@ describe("unit is correct add", function () {
     if (unitJson.type !== "foot") {
       throw new Error("type not correct");
     }
-    if (unitJson.owned !== true) {
+    if (!unitJson.owned) {
       throw new Error("owned not correct");
     }
   });

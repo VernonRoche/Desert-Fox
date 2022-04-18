@@ -4,5 +4,6 @@ export default interface Entity {
   place(hexId: HexID): void;
 
   remove(): void;
+
   getId(): number;
 }
