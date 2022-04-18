@@ -2,7 +2,31 @@ import fs from "fs";
 import path from "path";
 
 describe("Check files in src folder", function () {
-  it("They should all be .ts or .json files", function () {
+  it("They should all be .ts  files in src/main", function () {
+    const notTsFiles: string[] = [];
+
+    function checkFolder(folderPath: string) {
+      const files = fs.readdirSync(folderPath);
+      files.forEach((file) => {
+        const filePath = path.join(folderPath, file);
+        const stat = fs.statSync(filePath);
+        if (stat.isDirectory()) {
+          checkFolder(filePath);
+        } else {
+          if (path.extname(filePath) !== ".ts") {
+            notTsFiles.push(filePath);
+          }
+        }
+      });
+    }
+
+    checkFolder("./src/main");
+    if (notTsFiles.length > 0) {
+      throw new Error(`The following files are not .ts  files: [${notTsFiles.join(", ")}]`);
+    }
+  });
+
+  it("They should all be .ts or .json files in src/test ", function () {
     const notTsFiles: string[] = [];
 
     function checkFolder(folderPath: string) {
@@ -20,7 +44,7 @@ describe("Check files in src folder", function () {
       });
     }
 
-    checkFolder("./src");
+    checkFolder("./src/test");
     if (notTsFiles.length > 0) {
       throw new Error(`The following files are not .ts or .json files: [${notTsFiles.join(", ")}]`);
     }
