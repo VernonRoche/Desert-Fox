@@ -5,7 +5,7 @@ import Game from "./GameManager/Game";
 import GameMap from "./Map/GameMap";
 import Player from "./GameManager/Player";
 import Maps from "./Map/Maps";
-import stateMachine, { StateMachine } from "./GameManager/StateMachine";
+import stateMachine, { MaxTurns, StateMachine } from "./GameManager/StateMachine/StateMachine";
 
 export class SocketServer {
   private _httpServer: http.Server;
@@ -60,6 +60,7 @@ export class SocketServer {
     this.sockets.forEach((socket) => {
       socket.emit("map", map.toJSON(this.getPlayerFromSocket(socket)));
     });
+    webSocketServer.broadcast("turn", { current: 1, total: MaxTurns });
     stateMachine.startMachine();
   }
 

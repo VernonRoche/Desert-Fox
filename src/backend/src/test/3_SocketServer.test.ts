@@ -1,6 +1,6 @@
 import express from "express";
 import { io, Socket } from "socket.io-client";
-import { StateMachine } from "../main/GameManager/StateMachine";
+import { StateMachine } from "../main/GameManager/StateMachine/StateMachine";
 import { SocketServer } from "../main/SocketServer";
 
 function initSocket(port: number): Socket {

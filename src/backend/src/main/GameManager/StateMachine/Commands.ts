@@ -1,16 +1,16 @@
-import HexID from "../Map/HexID";
-import webSocketServer from "../SocketServer";
-import Player from "./Player";
+import HexID from "../../Map/HexID";
+import webSocketServer from "../../SocketServer";
+import Player from "../Player";
 import stateMachine from "./StateMachine";
 
 export enum commandTypes {
-    move = "move",
-    attack = "attack",
-    select = "select",
-    train = "train",
-    activate = "activate",
-    units = "units",
-  }
+  move = "move",
+  attack = "attack",
+  select = "select",
+  train = "train",
+  activate = "activate",
+  units = "units",
+}
 
 type BaseCommand = {
   type: string;

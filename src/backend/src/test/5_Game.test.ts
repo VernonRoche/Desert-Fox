@@ -1,5 +1,5 @@
 import { io, Socket } from "socket.io-client";
-import stateMachine from "../main/GameManager/StateMachine";
+import stateMachine from "../main/GameManager/StateMachine/StateMachine";
 import webSocketServer, { SocketServer } from "../main/SocketServer";
 import Unit from "../main/Units/Unit";
 

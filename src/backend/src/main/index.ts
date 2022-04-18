@@ -1,5 +1,5 @@
 import yargs from "yargs";
-import stateMachine from "./GameManager/StateMachine";
+import stateMachine from "./GameManager/StateMachine/StateMachine";
 import webSocketServer from "./SocketServer";
 
 async function main() {
