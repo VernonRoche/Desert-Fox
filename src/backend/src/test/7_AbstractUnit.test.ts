@@ -61,4 +61,26 @@ describe("unit is correct add", function () {
       throw new Error("owned not correct");
     }
   });
+
+  it("toJson is not correct ", function () {
+    return new Promise<void>((resolve, reject) => {
+      const unitJson = unit[0].toJson(new Player(PlayerID.NONE, [], [], [], null as any));
+      if (unitJson.id !== PlayerID.ONE) {
+        reject(new Error("id not correct"));
+      }
+      if (unitJson.currentPosition !== unit[0].getCurrentPosition()) {
+        reject(new Error("CurrentPosition not correct"));
+      }
+      if (unitJson.movementPoints !== unit[0].getMovementPoints()) {
+        reject(new Error("MovementPoints not correct"));
+      }
+      if (unitJson.remainingMovementPoints !== unit[0].getRemainingMovementPoints()) {
+        reject(new Error("RemainingMovementPoints not correct"));
+      }
+      if (unitJson.type !== "foot") {
+        reject(new Error("type not correct"));
+      }
+      resolve();
+    });
+  });
 });
