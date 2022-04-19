@@ -13,12 +13,14 @@ describe("Socket server tests", function () {
     resetIds();
   });
   let socketServer: SocketServer;
+  let stateMachine: StateMachine;
   let player1: Socket;
   let player2: Socket;
   const CLIENT_PORT = 5050;
   const SERVER_PORT = 5000;
   it("Initialize socket server", function () {
-    socketServer = new SocketServer(express(), CLIENT_PORT, SERVER_PORT);
+    socketServer = new SocketServer(CLIENT_PORT, SERVER_PORT, false);
+    stateMachine = new StateMachine(socketServer, false);
   });
 
   it("webServer stores correctly clientPort", function () {
@@ -33,7 +35,7 @@ describe("Socket server tests", function () {
     }
   });
   it("Run webServer", function () {
-    socketServer.run(new StateMachine(socketServer));
+    socketServer.run(stateMachine);
   });
 
   it("Initialize player 1 and connect", function () {
