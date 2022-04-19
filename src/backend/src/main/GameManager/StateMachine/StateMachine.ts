@@ -212,8 +212,6 @@ export class StateMachine {
         return { correct: true, commands: ["select"] };
       case "initiative":
         return { correct: true, commands: [] };
-      case "allocation":
-        return { correct: true, commands: ["train", "activate"] };
       default:
         return { correct: false, commands: [] };
     }
@@ -230,11 +228,7 @@ export class StateMachine {
       currentPhase,
       this.checkIfCorrectPlayer(currentPhase, correctPlayerId).commands,
     );
-    if (
-      currentPhase === "reinforcements" ||
-      currentPhase === "allocation" ||
-      currentPhase === "initiative"
-    ) {
+    if (currentPhase === "reinforcements" || currentPhase === "initiative") {
       this.socketServer.broadcast("phase", {
         phase: currentPhase,
         play: true,
