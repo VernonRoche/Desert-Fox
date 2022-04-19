@@ -24,7 +24,7 @@ describe("Game tests", function () {
   const SERVER_PORT = 5001;
 
   it("Initialize server", function () {
-    server = new SocketServer(CLIENT_PORT, SERVER_PORT, true);
+    server = new SocketServer(CLIENT_PORT, SERVER_PORT, false);
     stateMachine = new StateMachine(server, false);
     server.run(stateMachine);
   });
