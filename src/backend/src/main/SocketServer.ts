@@ -1,10 +1,8 @@
 import http from "http";
 import { Server, Socket } from "socket.io";
-import express, { Express } from "express";
+import express from "express";
 import Game from "./GameManager/Game";
-import GameMap from "./Map/GameMap";
 import Player from "./GameManager/Player";
-import Maps from "./Map/Maps";
 import stateMachine, { MaxTurns, StateMachine } from "./GameManager/StateMachine/StateMachine";
 import { resetIds } from "./idManager";
 
@@ -19,11 +17,11 @@ export class SocketServer {
   private _created = false;
   private _verbose;
 
-  constructor(listener: Express, clientPort: number, serverPort: number, verbose = true) {
+  constructor(clientPort: number, serverPort: number, verbose = true) {
     this._verbose = verbose;
     this._clientPort = clientPort;
     this._serverPort = serverPort;
-    this._httpServer = http.createServer(listener);
+    this._httpServer = http.createServer(express());
     this._socketServer = new Server(this._httpServer, {
       cors: {
         origin: "http://localhost:" + clientPort,
@@ -52,10 +50,7 @@ export class SocketServer {
   private createGame(stateMachine: StateMachine): void {
     if (this.isVerbose) console.log("Game created");
     this._created = true;
-    this._game = new Game(
-      this._players[0],
-      this._players[1],
-    );
+    this._game = new Game(this._players[0], this._players[1]);
 
     const map = this._game.getMap();
     this.sockets.forEach((socket) => {
@@ -161,5 +156,5 @@ export class SocketServer {
   }
 }
 
-const webSocketServer = new SocketServer(express(), 8000, 3001);
+const webSocketServer = new SocketServer(8000, 3001);
 export default webSocketServer;
