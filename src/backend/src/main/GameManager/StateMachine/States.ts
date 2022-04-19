@@ -9,17 +9,12 @@ type State = {
 export const statesWithUserInput: Record<string, State> = {
   reinforcements: {
     on: {
-      NEXT: "allocation",
+      NEXT: "initiative",
     },
   },
   initiative: {
     on: {
       NEXT: "first_player_movement",
-    },
-  },
-  allocation: {
-    on: {
-      NEXT: "initiative",
     },
   },
   first_player_movement: {

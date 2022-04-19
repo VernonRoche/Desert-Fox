@@ -98,4 +98,7 @@ export default class Player {
   removeUnit(defenderUnit: Unit) {
     this._units.delete(defenderUnit.getId().toString());
   }
+  removeDump(dump: Dump) {
+    if (this.hasEntity(dump)) this._dumps.delete(dump.getId().toString());
+  }
 }

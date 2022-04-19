@@ -7,7 +7,7 @@ import Terrain, { TerrainTypes } from "./Terrain";
 import Unit, { unitJson } from "../Units/Unit";
 import Player from "../GameManager/Player";
 import { baseJson } from "../Infrastructure/Base";
-import { dumpJson } from "../Infrastructure/Dump";
+import Dump, { dumpJson } from "../Infrastructure/Dump";
 import { supplyUnitJson } from "../Infrastructure/SupplyUnit";
 const width = 66;
 const height = 29;
@@ -103,6 +103,9 @@ export default class GameMap {
     const hex = this._hexagons.get(unit.getCurrentPosition().id());
     if (hex) hex.addUnit(unit);
     else throw new Error("incorrecthex");
+  }
+  removeDump(dump: Dump) {
+    this._entities.delete(dump.getId().toString());
   }
 
   public toJSON(player: Player): string {

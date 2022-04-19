@@ -139,6 +139,8 @@ export default class Game {
             this._player1,
           ).sumOfWeight <= DUMP_RANGE
         ) {
+          this._map.removeDump(dump);
+          player.removeDump(dump);
           found = true;
           break;
         }
@@ -153,42 +155,50 @@ export default class Game {
     const player1Dumps = this._player1.getDumps();
     const player1Units = this._player1.getUnits();
     const player1Supplies = this._player1.getSupplyUnits();
-    player1Units.forEach((unit) =>
-      this.checkUnitSupplies(
-        this._player1,
-        [unit],
-        player1Bases,
-        player1Dumps,
-        player1Supplies.filter(
-          (supplyUnit) =>
-            this._pathfinder.findShortestWay(
-              unit.getCurrentPosition(),
-              supplyUnit.getCurrentPosition(),
-              this._player1,
-            ).sumOfWeight <= SUPPLYUNIT_RANGE,
-        ),
-      ),
-    );
+    player1Units.forEach((unit) => {
+      if (
+        !this.checkUnitSupplies(
+          this._player1,
+          [unit],
+          player1Bases,
+          player1Dumps,
+          player1Supplies.filter(
+            (supplyUnit) =>
+              this._pathfinder.findShortestWay(
+                unit.getCurrentPosition(),
+                supplyUnit.getCurrentPosition(),
+                this._player1,
+              ).sumOfWeight <= SUPPLYUNIT_RANGE,
+          ),
+        )
+      ) {
+        // apply disrupted
+      }
+    });
     const player2Bases = this._player2.getBases();
     const player2Dumps = this._player2.getDumps();
     const player2Units = this._player2.getUnits();
     const player2Supplies = this._player2.getSupplyUnits();
-    player2Units.forEach((unit) =>
-      this.checkUnitSupplies(
-        this._player2,
-        [unit],
-        player2Bases,
-        player2Dumps,
-        player2Supplies.filter(
-          (supplyUnit) =>
-            this._pathfinder.findShortestWay(
-              unit.getCurrentPosition(),
-              supplyUnit.getCurrentPosition(),
-              this._player1,
-            ).sumOfWeight <= SUPPLYUNIT_RANGE,
-        ),
-      ),
-    );
+    player2Units.forEach((unit) => {
+      if (
+        !this.checkUnitSupplies(
+          this._player2,
+          [unit],
+          player2Bases,
+          player2Dumps,
+          player2Supplies.filter(
+            (supplyUnit) =>
+              this._pathfinder.findShortestWay(
+                unit.getCurrentPosition(),
+                supplyUnit.getCurrentPosition(),
+                this._player1,
+              ).sumOfWeight <= SUPPLYUNIT_RANGE,
+          ),
+        )
+      ) {
+        // apply disrupted
+      }
+    });
   }
 
   public attackHex(attackers: Unit[], destination: HexID): void {
