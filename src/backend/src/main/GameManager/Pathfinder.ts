@@ -2,7 +2,7 @@ import Player from "./Player";
 import GameMap from "../Map/GameMap";
 import Hex from "../Map/Hex";
 import HexID from "../Map/HexID";
-import Unit from "../Units/Unit";
+import { TerrainTypes } from "../Map/Terrain";
 
 class Pathfinder {
   private readonly _map: GameMap;
@@ -19,7 +19,8 @@ class Pathfinder {
     startHexID: HexID,
     endHexID: HexID,
     player: Player,
-    unit: Unit,
+    unitType = "foot",
+    supplyCheck = false,
   ): { hexPath: HexID[]; sumOfWeight: number } {
     const startHex = this._map.findHex(startHexID);
     const endHex = this._map.findHex(endHexID);
@@ -57,16 +58,28 @@ class Pathfinder {
         }
 
         //check the distance from startHex to currentNode + thisNode
-        let thisDist = dist + neighbourHex.getTerrain().getWeight();
+        let thisDist;
+        if (!supplyCheck) thisDist = dist + neighbourHex.getTerrain().getWeight();
+        // checking if it's mountain for supply units
+        else
+          thisDist =
+            dist + (neighbourHex.getTerrain().terrainType === TerrainTypes.MOUNTAIN ? 1000 : 1);
         //check if we are moving through enemy hex
         if (!this._map.hexBelongsToPlayer(neighbourHex.getID(), player)) {
           thisDist += 1000;
         }
         // check if we enter enemy zone of control
-        if (!(unit.getType() === "Motorised")) {
+        if (!supplyCheck && !(unitType === "motorized")) {
           for (const potentialZOCHex of neighbourHex.getNeighbours()) {
             if (!this._map.hexBelongsToPlayer(potentialZOCHex.getID(), player)) {
               thisDist += 1;
+              break;
+            }
+          }
+        } else if (supplyCheck) {
+          for (const potentialZOCHex of neighbourHex.getNeighbours()) {
+            if (!this._map.hexBelongsToPlayer(potentialZOCHex.getID(), player)) {
+              thisDist += 1000;
               break;
             }
           }

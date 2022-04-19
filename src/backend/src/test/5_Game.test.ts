@@ -1,5 +1,6 @@
 import { io, Socket } from "socket.io-client";
 import stateMachine from "../main/GameManager/StateMachine/StateMachine";
+import { resetIds } from "../main/idManager";
 import webSocketServer, { SocketServer } from "../main/SocketServer";
 import Unit from "../main/Units/Unit";
 
@@ -12,7 +13,10 @@ function initSocket(port = 3001): Socket {
 }
 
 describe("Game tests", function () {
-  this.timeout(500);
+  this.afterAll(() => {
+    resetIds();
+  });
+  this.timeout(2000);
   let player1: Socket;
   let player2: Socket;
 

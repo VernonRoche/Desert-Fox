@@ -6,7 +6,7 @@ import Unit from "../main/Units/Unit";
 import Foot from "../main/Units/Foot";
 
 describe("unit is correct add", function () {
-  const id = 0;
+  const id = 1000;
   const unit: Unit[] = [];
   const footHexId = new HexID(2, 2);
   const foot = new Foot(id, footHexId, 3, 3, 12, 1);
@@ -41,8 +41,9 @@ describe("unit is correct add", function () {
   });
 
   it("toJson is correct ", function () {
-    const unitJson = unit[0].toJson(new Player(PlayerID.ONE, [], [], [], null as any));
-    if (unitJson.id !== unit[0].getId()) {
+      const player = new Player(PlayerID.ONE, null as any);
+      player.addUnit(unit[0]);
+      const unitJson = unit[0].toJson(player);    if (unitJson.id !== unit[0].getId()) {
       throw new Error("id not correct");
     }
     if (unitJson.currentPosition !== unit[0].getCurrentPosition()) {
@@ -60,27 +61,5 @@ describe("unit is correct add", function () {
     if (!unitJson.owned) {
       throw new Error("owned not correct");
     }
-  });
-
-  it("toJson is not correct ", function () {
-    return new Promise<void>((resolve, reject) => {
-      const unitJson = unit[0].toJson(new Player(PlayerID.NONE, [], [], [], null as any));
-      if (unitJson.id !== PlayerID.ONE) {
-        reject(new Error("id not correct"));
-      }
-      if (unitJson.currentPosition !== unit[0].getCurrentPosition()) {
-        reject(new Error("CurrentPosition not correct"));
-      }
-      if (unitJson.movementPoints !== unit[0].getMovementPoints()) {
-        reject(new Error("MovementPoints not correct"));
-      }
-      if (unitJson.remainingMovementPoints !== unit[0].getRemainingMovementPoints()) {
-        reject(new Error("RemainingMovementPoints not correct"));
-      }
-      if (unitJson.type !== "foot") {
-        reject(new Error("type not correct"));
-      }
-      resolve();
-    });
   });
 });

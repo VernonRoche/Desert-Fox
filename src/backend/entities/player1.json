@@ -1,0 +1,69 @@
+{
+    "units": [
+        {
+            "type": "foot",
+            "currentPosition": "0102",
+            "movementPoints": "12",
+            "combatFactor": "3",
+            "moraleRating": "3",
+            "lifePoints": "1"
+        },
+        {
+            "type": "foot",
+            "currentPosition": "0203",
+            "movementPoints": "12",
+            "combatFactor": "3",
+            "moraleRating": "3",
+            "lifePoints": "1"
+        },
+        {
+            "type": "mechanized",
+            "currentPosition": "0103",
+            "movementPoints": "14",
+            "combatFactor": "3",
+            "moraleRating": "3",
+            "lifePoints": "2"
+        },
+        {
+            "type": "motorized",
+            "currentPosition": "0302",
+            "movementPoints": "20",
+            "combatFactor": "3",
+            "moraleRating": "3",
+            "lifePoints": "1"
+        },
+        {
+            "type": "mechanized",
+            "currentPosition": "0303",
+            "movementPoints": "15",
+            "combatFactor": "3",
+            "moraleRating": "3",
+            "lifePoints": "2"
+        },
+        {
+            "type": "motorized",
+            "currentPosition": "0304",
+            "movementPoints": "22",
+            "combatFactor": "3",
+            "moraleRating": "3",
+            "lifePoints": "1"
+        }
+    ],
+    "bases": [
+        {
+            "currentPosition": "0102",
+            "primary": true
+        }
+    ],
+    "dumps": [
+        {
+            "currentPosition": "0405"
+        }
+    ],
+    "supplyUnits": [
+        {
+            "currentPosition" : "0205",
+            "movementPoints" : "12"
+        }
+    ]
+}

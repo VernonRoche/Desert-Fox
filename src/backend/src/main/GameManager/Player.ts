@@ -5,43 +5,24 @@ import SupplyUnit from "../Infrastructure/SupplyUnit";
 import RefitPoint from "../Infrastructure/RefitPoint";
 import Entity from "../Entity";
 import { Socket } from "socket.io";
-import fs from "fs";
-import HexID from "../Map/HexID";
-import Mechanized from "../Units/Mechanized";
-import Motorized from "../Units/Motorized";
-import Foot from "../Units/Foot";
-
-export type playerUnitJson = {
-  id: number;
-  type: string;
-  currentPosition: string;
-  movementPoints: number;
-  combatFactor: number;
-  moraleRating: number;
-  lifePoints: number;
-};
+import Dump from "../Infrastructure/Dump";
 
 export default class Player {
   private _id: PlayerID;
   private _units: Map<string, Unit>;
   private _bases: Map<string, Base>;
+  private _dumps: Map<string, Dump>;
   private _supplyUnits: Map<string, SupplyUnit>;
   private _refitPoints: Map<string, RefitPoint>;
   private _socket: Socket;
 
-  constructor(
-    id: PlayerID,
-    bases: Base[],
-    supplyUnits: SupplyUnit[],
-    refitPoints: RefitPoint[],
-    socket: Socket,
-  ) {
+  constructor(id: PlayerID, socket: Socket) {
     this._id = id;
     this._units = new Map();
-    id === PlayerID.ONE ? this.loadUnitsByFile("player1") : this.loadUnitsByFile("player2");
-    this._bases = new Map(bases.map((b) => [b.getId().toString(), b]));
-    this._supplyUnits = new Map(supplyUnits.map((s) => [s.getId().toString(), s]));
-    this._refitPoints = new Map(refitPoints.map((r) => [r.getId().toString(), r]));
+    this._bases = new Map();
+    this._dumps = new Map();
+    this._supplyUnits = new Map();
+    this._refitPoints = new Map();
     this._socket = socket;
   }
 
@@ -51,55 +32,6 @@ export default class Player {
     );
   }
 
-  loadUnitsByFile(filename: string): void {
-    const json = fs.readFileSync("units/" + filename + ".json", "utf8");
-    const map = JSON.parse(json);
-    map.forEach((unit: playerUnitJson) => {
-      const x = +unit.currentPosition.substring(2, 4);
-      const y = +unit.currentPosition.substring(0, 2);
-      if (isNaN(x) || isNaN(y)) {
-        console.log("Error loading unit: " + unit.id + " " + unit.currentPosition);
-        throw new Error("Error loading unit: " + unit.id + " " + unit.currentPosition);
-      }
-      if (unit.type === "mechanized")
-        this._units.set(
-          unit.id.toString(),
-          new Mechanized(
-            unit.id,
-            new HexID(y, x),
-            unit.moraleRating,
-            unit.combatFactor,
-            unit.movementPoints,
-            unit.lifePoints,
-          ),
-        );
-      else if (unit.type === "foot")
-        this._units.set(
-          unit.id.toString(),
-          new Foot(
-            unit.id,
-            new HexID(y, x),
-            unit.moraleRating,
-            unit.combatFactor,
-            unit.movementPoints,
-            unit.lifePoints,
-          ),
-        );
-      else if (unit.type === "motorized")
-        this._units.set(
-          unit.id.toString(),
-          new Motorized(
-            unit.id,
-            new HexID(y, x),
-            unit.moraleRating,
-            unit.combatFactor,
-            unit.movementPoints,
-            unit.lifePoints,
-          ),
-        );
-      else throw new Error("Unknown unit type: " + unit.type);
-    });
-  }
 
   getUnitById(id: number): Unit {
     const unit = this._units.get(id.toString());
@@ -121,6 +53,9 @@ export default class Player {
   getBases(): Base[] {
     return Array.from(this._bases.values());
   }
+  getDumps(): Dump[] {
+    return Array.from(this._dumps.values());
+  }
 
   getSupplyUnits(): SupplyUnit[] {
     return Array.from(this._supplyUnits.values());
@@ -136,5 +71,17 @@ export default class Player {
 
   addUnit(unit: Unit): void {
     this._units.set(unit.getId().toString(), unit);
+  }
+  addBase(base: Base): void {
+    this._bases.set(base.getId().toString(), base);
+  }
+  addDump(dump: Dump): void {
+    this._dumps.set(dump.getId().toString(), dump);
+  }
+  addSupplyUnit(supplyUnit: SupplyUnit): void {
+    this._supplyUnits.set(supplyUnit.getId().toString(), supplyUnit);
+  }
+  addRefitPoint(refitPoint: RefitPoint): void {
+    this._refitPoints.set(refitPoint.getId().toString(), refitPoint);
   }
 }

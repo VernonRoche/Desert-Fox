@@ -6,6 +6,7 @@ import GameMap from "./Map/GameMap";
 import Player from "./GameManager/Player";
 import Maps from "./Map/Maps";
 import stateMachine, { MaxTurns, StateMachine } from "./GameManager/StateMachine/StateMachine";
+import { resetIds } from "./idManager";
 
 export class SocketServer {
   private _httpServer: http.Server;
@@ -52,10 +53,10 @@ export class SocketServer {
     if (this.isVerbose) console.log("Game created");
     this._created = true;
     this._game = new Game(
-      new GameMap(new Map(), "libya" as Maps),
       this._players[0],
       this._players[1],
     );
+
     const map = this._game.getMap();
     this.sockets.forEach((socket) => {
       socket.emit("map", map.toJSON(this.getPlayerFromSocket(socket)));
@@ -89,7 +90,7 @@ export class SocketServer {
       } else {
         playerId = this._sockets.length;
       }
-      this._players.push(new Player(playerId, [], [], [], socket));
+      this._players.push(new Player(playerId, socket));
 
       this._sockets.push(socket);
       if (this._sockets.length >= 2 && !this._created) {
@@ -124,6 +125,7 @@ export class SocketServer {
       this._players = this._players.filter((player) => player.getSocket().id !== socketClient.id);
       if (this._created) {
         this.destroyGame();
+        resetIds();
       }
     });
 

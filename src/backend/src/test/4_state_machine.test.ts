@@ -1,7 +1,11 @@
 import { createMachine, interpret } from "xstate";
 import { TurnPhases } from "../main/GameManager/StateMachine/States";
+import { resetIds } from "../main/idManager";
 
 describe("State Machine tests", function () {
+  this.afterAll(() => {
+    resetIds();
+  });
   const stateMachine = createMachine(TurnPhases);
   const testService = interpret(stateMachine).start();
   it("Testing initialization", function () {

@@ -6,16 +6,19 @@ import Player from "../main/GameManager/Player";
 import PlayerID from "../main/GameManager/PlayerID";
 import { Socket } from "socket.io";
 import Mechanized from "../main/Units/Mechanized";
+import { resetIds } from "../main/idManager";
 
 describe("Check if Pathfinder works correctly", function () {
+  this.afterAll(() => {
+    resetIds();
+  });
   let game: Game;
   const start = new HexID(7, 5);
   const destination = new HexID(9, 5);
   beforeEach(function () {
-    const allyPlayer = new Player(PlayerID.ONE, [], [], [], Socket.prototype);
-    const enemyPlayer = new Player(PlayerID.TWO, [], [], [], Socket.prototype);
-    const map = new GameMap(new Map(), "libya" as Maps);
-    game = new Game(map, allyPlayer, enemyPlayer);
+    const allyPlayer = new Player(PlayerID.ONE, Socket.prototype);
+    const enemyPlayer = new Player(PlayerID.TWO, Socket.prototype);
+    game = new Game( allyPlayer, enemyPlayer);
     const enemyUnit = new Mechanized(1001, new HexID(8, 5), 3, 2, 15, 1);
     const friendlyUnit = new Mechanized(1000, new HexID(7, 5), 3, 2, 15, 1);
     allyPlayer.addUnit(friendlyUnit);
@@ -30,7 +33,7 @@ describe("Check if Pathfinder works correctly", function () {
       start,
       destination,
       game.getPlayer1(),
-      game.getPlayer1().getUnitById(1000),
+      game.getPlayer1().getUnitById(1000).getType(),
     );
     if (sumOfWeight !== 7) {
       throw new Error(
@@ -46,7 +49,7 @@ describe("Check if Pathfinder works correctly", function () {
       start,
       destination,
       game.getPlayer1(),
-      game.getPlayer1().getUnitById(1000),
+      game.getPlayer1().getUnitById(1000).getType(),
     );
     for (const node of hexPath) {
       if (node.toString() === new HexID(5, 8).toString()) {

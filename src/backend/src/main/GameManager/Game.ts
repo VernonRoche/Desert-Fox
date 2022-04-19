@@ -3,19 +3,32 @@ import GameMap from "../Map/GameMap";
 import Unit from "../Units/Unit";
 import HexID from "../Map/HexID";
 import Pathfinder from "./Pathfinder";
+import Base from "../Infrastructure/Base";
+import Moveable from "../Moveable";
+import Dump from "../Infrastructure/Dump";
+import { BaseJson, UnitJson } from "../jsonTypes";
+import { getNewId } from "../idManager";
+import Mechanized from "../Units/Mechanized";
+import Foot from "../Units/Foot";
+import Motorized from "../Units/Motorized";
+import Maps from "../Map/Maps";
+import { loadEntitiesAndMap } from "./EntityLoader";
 
+const BASE_RANGE = 14;
+const SUPPLYUNIT_RANGE = 7;
+const DUMP_RANGE = 7;
 export default class Game {
   private _player1: Player;
   private _player2: Player;
   private _map: GameMap;
   private _pathfinder: Pathfinder;
 
-  public constructor(map: GameMap, player1: Player, player2: Player) {
+  public constructor(player1: Player, player2: Player) {
     this._player1 = player1;
     this._player2 = player2;
-    this._map = map;
+    this._map = new GameMap(Maps.LIBYA ,loadEntitiesAndMap(this));
+    this._pathfinder = new Pathfinder(this._map);
     // Initialize Pathfinder
-    this._pathfinder = new Pathfinder(map);
   }
 
   // check if a move is possible
@@ -47,7 +60,7 @@ export default class Game {
       unit.getCurrentPosition(),
       destination,
       player,
-      unit,
+      unit.getType(),
     );
 
     if (sumOfWeight > unit.getRemainingMovementPoints()) return "not enough movement points";
@@ -74,6 +87,7 @@ export default class Game {
     }
     return availableUnits;
   }
+  
 
   // Checks if a move is possible and applies it.
   // Returns false if the move was not possible, true if move was succesful.
@@ -95,6 +109,93 @@ export default class Game {
     unit.place(destination);
     unit.move(cost);
   }
+  checkUnitSupplies(
+    player: Player,
+    units: Moveable[],
+    bases: Base[],
+    dumps: Dump[],
+    supplyUnits: Moveable[],
+  ): boolean {
+    let found = false;
+    for (const unit of units) {
+      for (const base of bases) {
+        // check if unit is connected to base
+        if (
+          this._pathfinder.findShortestWay(
+            unit.getCurrentPosition(),
+            base.getCurrentPosition(),
+            this._player1,
+          ).sumOfWeight <= BASE_RANGE
+        ) {
+          found = true;
+          break;
+        }
+      }
+    }
+    if (found) return true;
+    for (const unit of units) {
+      for (const dump of dumps) {
+        // check if unit is connected to dump
+        if (
+          this._pathfinder.findShortestWay(
+            unit.getCurrentPosition(),
+            dump.getCurrentPosition(),
+            
+            this._player1,
+          ).sumOfWeight <= DUMP_RANGE
+        ) {
+
+          found = true;
+          break;
+        }
+      }
+    }
+    if (found) return true;
+    return this.checkUnitSupplies(player, supplyUnits, bases, dumps, []);
+  }
+
+  checkSupplies() {
+    const player1Bases = this._player1.getBases();
+    const player1Dumps = this._player1.getDumps();
+    const player1Units = this._player1.getUnits();
+    const player1Supplies = this._player1.getSupplyUnits();
+    player1Units.forEach((unit) =>
+      this.checkUnitSupplies(
+        this._player1,
+        [unit],
+        player1Bases,
+        player1Dumps,
+        player1Supplies.filter(
+          (supplyUnit) =>
+            this._pathfinder.findShortestWay(
+              unit.getCurrentPosition(),
+              supplyUnit.getCurrentPosition(),
+              this._player1,
+            ).sumOfWeight <= SUPPLYUNIT_RANGE,
+        ),
+      ),
+    );
+    const player2Bases = this._player2.getBases();
+    const player2Dumps = this._player2.getDumps();
+    const player2Units = this._player2.getUnits();
+    const player2Supplies = this._player2.getSupplyUnits();
+    player2Units.forEach((unit) =>
+      this.checkUnitSupplies(
+        this._player2,
+        [unit],
+        player2Bases,
+        player2Dumps,
+        player2Supplies.filter(
+          (supplyUnit) =>
+            this._pathfinder.findShortestWay(
+              unit.getCurrentPosition(),
+              supplyUnit.getCurrentPosition(),
+              this._player1,
+            ).sumOfWeight <= SUPPLYUNIT_RANGE,
+        ),
+      ),
+    );
+  }
 
   getPlayer1(): Player {
     return this._player1;
@@ -111,4 +212,5 @@ export default class Game {
   getPathfinder(): Pathfinder {
     return this._pathfinder;
   }
+
 }

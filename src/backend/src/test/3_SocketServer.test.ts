@@ -1,6 +1,7 @@
 import express from "express";
 import { io, Socket } from "socket.io-client";
 import { StateMachine } from "../main/GameManager/StateMachine/StateMachine";
+import { resetIds } from "../main/idManager";
 import { SocketServer } from "../main/SocketServer";
 
 function initSocket(port: number): Socket {
@@ -8,6 +9,9 @@ function initSocket(port: number): Socket {
 }
 
 describe("Socket server tests", function () {
+  this.afterAll(() => {
+    resetIds();
+  });
   let socketServer: SocketServer;
   let player1: Socket;
   let player2: Socket;
@@ -99,7 +103,7 @@ describe("Socket server tests", function () {
         if (game) {
           throw new Error("Game is not stopped with player1 disconnection");
         }
-      }, 1000);
+      }, 2000);
     });
     player1.disconnect();
   });
@@ -144,7 +148,7 @@ describe("Socket server tests", function () {
         if (game) {
           throw new Error("Game is not stopped with player2 disconnection");
         }
-      }, 1000);
+      }, 2000);
     });
     player2.disconnect();
   });

@@ -1,7 +1,11 @@
 import { TerrainTypes } from "../main/Map/Terrain";
 import CombatSimulator, { DamageResult, MoraleResult } from "../main/GameManager/CombatSimulator";
+import { resetIds } from "../main/idManager";
 
 describe("Check if combat simulator works correctly", function () {
+  this.afterAll(() => {
+    resetIds();
+  });
   it("Morale results should be correct", function () {
     let morale = 4;
     let terrain = TerrainTypes.ROUGH;

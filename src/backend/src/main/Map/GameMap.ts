@@ -5,11 +5,7 @@ import fs from "fs";
 import Maps from "./Maps";
 import Terrain, { TerrainTypes } from "./Terrain";
 import Unit, { unitJson } from "../Units/Unit";
-import Player, { playerUnitJson } from "../GameManager/Player";
-import Mechanized from "../Units/Mechanized";
-import Foot from "../Units/Foot";
-import Motorized from "../Units/Motorized";
-
+import Player from "../GameManager/Player";
 const width = 66;
 const height = 29;
 
@@ -19,15 +15,14 @@ type JsonMap = {
   units: unitJson[];
 }[];
 export default class GameMap {
-  private _entities: Map<number, Entity>;
+  private _entities: Map<string, Entity>;
   private _hexagons: Map<string, Hex> = new Map();
 
-  constructor(entities: Map<number, Entity>, mapName: Maps) {
+  constructor( mapName: Maps, entities: Map<string, Entity> ) {
     this._entities = entities;
     const json = fs.readFileSync(`maps/${mapName}.json`, "utf8");
     const map: JsonMap = JSON.parse(json);
     const validTerrains = Object.values(TerrainTypes) as string[];
-    const units = this.loadUnits();
     map.forEach(({ hexId, terrain }) => {
       const x = +hexId.substring(2, 4);
       const y = +hexId.substring(0, 2);
@@ -36,9 +31,9 @@ export default class GameMap {
         const hexID = new HexID(y, x);
         const _terrain = new Terrain(terrain as TerrainTypes);
         const hex = new Hex(hexID, _terrain);
-        units.forEach((unit: Unit) => {
-          if (unit.getCurrentPosition().id() === hexID.id()) {
-            hex.addUnit(unit);
+        entities.forEach((entity: Entity) => {
+          if (entity.getCurrentPosition().id() === hexID.id()) {
+            hex.addEntity(entity);
           }
         });
         this._hexagons.set(hexID.id(), hex);
@@ -77,56 +72,7 @@ export default class GameMap {
     }
   }
 
-  loadUnits(): Unit[] {
-    const player1units = JSON.parse(fs.readFileSync("units/player1.json", "utf8"));
-    const player2units = JSON.parse(fs.readFileSync("units/player2.json", "utf8"));
-    const allUnitsJson: playerUnitJson[] = [...player1units, ...player2units];
-    const allUnits: Unit[] = [];
-
-    allUnitsJson.forEach((unit: playerUnitJson) => {
-      const x = +unit.currentPosition.substring(2, 4);
-      const y = +unit.currentPosition.substring(0, 2);
-      if (isNaN(x) || isNaN(y)) {
-        console.log("Error loading unit: " + unit.id + " " + unit.currentPosition);
-        throw new Error("Error loading unit: " + unit.id + " " + unit.currentPosition);
-      }
-      if (unit.type === "mechanized")
-        allUnits.push(
-          new Mechanized(
-            unit.id,
-            new HexID(y, x),
-            unit.moraleRating,
-            unit.combatFactor,
-            unit.movementPoints,
-            unit.lifePoints,
-          ),
-        );
-      else if (unit.type === "foot")
-        allUnits.push(
-          new Foot(
-            unit.id,
-            new HexID(y, x),
-            unit.moraleRating,
-            unit.combatFactor,
-            unit.movementPoints,
-            unit.lifePoints,
-          ),
-        );
-      else if (unit.type === "motorized")
-        allUnits.push(
-          new Motorized(
-            unit.id,
-            new HexID(y, x),
-            unit.moraleRating,
-            unit.combatFactor,
-            unit.movementPoints,
-            unit.lifePoints,
-          ),
-        );
-      else throw new Error("Unknown unit type: " + unit.type);
-    });
-    return allUnits;
-  }
+  
 
   public getHexes(): Map<string, Hex> {
     return this._hexagons;
@@ -141,12 +87,12 @@ export default class GameMap {
     return hex;
   }
 
-  public getEntities(): Map<number, Entity> {
+  public getEntities(): Map<string, Entity> {
     return this._entities;
   }
 
   public addEntity(unit: Entity): void {
-    this._entities.set(unit.getId(), unit);
+    this._entities.set(unit.getId().toString(), unit);
   }
 
   public addUnit(unit: Unit): void {
@@ -170,7 +116,7 @@ export default class GameMap {
   }
 
   public getUnitById(id: number): Entity {
-    const unit = this._entities.get(id);
+    const unit = this._entities.get(id.toString());
 
     if (!unit) {
       throw new Error("Nonexisting entity");
