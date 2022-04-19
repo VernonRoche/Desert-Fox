@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "clean": "rimraf js",
-    "compile": "tsc",
+    "compile": "npm run clean && tsc",
     "start": "npm run compile && node js/main",
     "test": "npm run compile && nyc --reporter=text-summary --reporter=lcov mocha js/test --recursive --exit",
     "test:custom": "npm run compile && mocha js/test/5_Game.test.js --exit",
