@@ -1,6 +1,12 @@
 import { assign } from "xstate";
 
-export const statesWithUserInput: Record<string, any> = {
+type State = {
+  on: {
+    NEXT: string;
+  };
+};
+
+export const statesWithUserInput: Record<string, State> = {
   reinforcements: {
     on: {
       NEXT: "allocation",

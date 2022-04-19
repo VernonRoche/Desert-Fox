@@ -7,7 +7,7 @@
     "clean": "rimraf js",
     "compile": "tsc",
     "start": "npm run compile && node js/main",
-    "test": "npm run compile && mocha js/test --recursive --exit",
+    "test": "npm run compile && nyc mocha js/test --recursive --exit",
     "test:custom": "npm run compile && mocha js/test/5_Game.test.js --exit",
     "dev": "nodemon --config nodemon.json src/main/index.ts",
     "format": "prettier --config .prettierrc \"src/**/*.ts\" --write",
@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "express": "^4.17.3",
+    "nyc": "^15.1.0",
     "socket.io": "^4.4.1",
     "xstate": "^4.30.6",
     "yargs": "^17.3.1"
