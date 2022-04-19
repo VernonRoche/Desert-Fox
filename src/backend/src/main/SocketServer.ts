@@ -60,7 +60,7 @@ export class SocketServer {
     this.sockets.forEach((socket) => {
       socket.emit("map", map.toJSON(this.getPlayerFromSocket(socket)));
     });
-    webSocketServer.broadcast("turn", { current: 1, total: MaxTurns });
+    this.broadcast("turn", { current: 1, total: MaxTurns });
     stateMachine.startMachine();
   }
 

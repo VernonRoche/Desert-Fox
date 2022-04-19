@@ -1,21 +1,22 @@
-import { Server, Socket } from "socket.io";
-import { actions, assign, createMachine, interpret } from "xstate";
-import webSocketServer from "../../SocketServer";
+import { Socket } from "socket.io";
+import { createMachine, interpret } from "xstate";
+import webSocketServer, { SocketServer } from "../../SocketServer";
 import { AllArgs, commandTypes, _commands } from "./Commands";
 import Player from "../Player";
 import PlayerID from "../PlayerID";
 import { statesWithUserInput, TurnPhases } from "./States";
-
 export const MaxTurns = 38;
 
 export class StateMachine {
   private phaseService;
   private _verbose;
+  private socketServer: SocketServer;
 
-  constructor(verbose = true) {
+  constructor(socketServer: SocketServer, verbose = true) {
     this._verbose = verbose;
     const TurnMachine = createMachine(TurnPhases);
     this.phaseService = interpret(TurnMachine);
+    this.socketServer = socketServer;
   }
   startMachine(): void {
     this.phaseService.start();
@@ -38,11 +39,11 @@ export class StateMachine {
 
   registerSocket(socket: Socket): void {
     socket.on("command", (data: { type: commandTypes } & AllArgs) => {
-      if (!webSocketServer.getGame()) {
+      if (!this.socketServer.getGame()) {
         socket.emit(data.type, { error: "nogame" });
         return;
       }
-      const currentPlayer = webSocketServer.getPlayerFromSocket(socket);
+      const currentPlayer = this.socketServer.getPlayerFromSocket(socket);
       const request = data.type;
       if (!_commands[request]) {
         socket.emit(request, { error: "invalidcommand" });
@@ -53,17 +54,20 @@ export class StateMachine {
         return;
       }
       this.runPlayerCommand(currentPlayer, request, data);
-      webSocketServer.sockets.forEach((socket) => {
+      this.socketServer.sockets.forEach((socket) => {
         socket.emit(
           "map",
-          webSocketServer.getGame()?.getMap().toJSON(webSocketServer.getPlayerFromSocket(socket)),
+          this.socketServer
+            .getGame()
+            ?.getMap()
+            .toJSON(this.socketServer.getPlayerFromSocket(socket)),
         );
       });
     });
     socket.on("done", () => {
       if (this.isVerbose) console.log("done");
-      if (this.endTurn(webSocketServer.getPlayerFromSocket(socket)))
-        this.informUsers(this.phaseService.state.value.toString(), webSocketServer.getPlayers());
+      if (this.endTurn(this.socketServer.getPlayerFromSocket(socket)))
+        this.informUsers(this.phaseService.state.value.toString(), this.socketServer.getPlayers());
     });
   }
 
@@ -77,12 +81,12 @@ export class StateMachine {
         if (this.phaseService.state.context.turn === 38 || false) {
           // replace false with the test
           this.phaseService.stop();
-          webSocketServer.broadcast("game_over", { winner: "player" });
+          this.socketServer.broadcast("game_over", { winner: "player" });
         }
         break;
       case "turn_marker": //TODO
         this.phaseService.send("INC");
-        webSocketServer.broadcast("turn", {
+        this.socketServer.broadcast("turn", {
           current: this.phaseService.state.context.turn,
           total: MaxTurns,
         });
@@ -91,17 +95,17 @@ export class StateMachine {
         break;
     }
     if (actualPhase !== "initial")
-      webSocketServer.broadcast("phase", {
+      this.socketServer.broadcast("phase", {
         phase: actualPhase,
         play: false,
         commands: ["select"],
         auto: true,
       });
     if (actualPhase === "air_superiority") {
-      webSocketServer.sockets.forEach((socket) => {
+      this.socketServer.sockets.forEach((socket) => {
         const checkIfCorrectPlayer = this.checkIfCorrectPlayer(
           "first_player_movement",
-          webSocketServer.getPlayerFromSocket(socket).getId(),
+          this.socketServer.getPlayerFromSocket(socket).getId(),
         );
         socket.emit("phase", {
           phase: "first_player_movement",
@@ -111,7 +115,7 @@ export class StateMachine {
         });
       });
       /* Ce qu'il faut mettre apres qu'on implemente reinforcements etc
-    webSocketServer.broadcast("phase", {
+    this.socketServer.broadcast("phase", {
         phase: "reinforcements",
         play: true,
         commands: ["select"],
@@ -240,7 +244,7 @@ export class StateMachine {
       currentPhase === "allocation" ||
       currentPhase === "initiative"
     ) {
-      webSocketServer.broadcast("phase", {
+      this.socketServer.broadcast("phase", {
         phase: currentPhase,
         play: true,
         commands: this.checkIfCorrectPlayer(currentPhase, players[0].getId()).commands, //Doesn't matter which player id it is
@@ -254,5 +258,5 @@ export class StateMachine {
   }
 }
 
-const stateMachine = new StateMachine();
+const stateMachine = new StateMachine(webSocketServer);
 export default stateMachine;
