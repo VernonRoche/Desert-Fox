@@ -102,11 +102,14 @@ const commands: Commands = {
       type: "units",
     });
 
-    socket.once("units", (resp: Unit[]) => {
+    socket.once("units", (resp: Unit[] & { error: "nogame" }) => {
       function addZeroIfNeeded(number: number) {
         return number < 10 ? `0${number}` : number;
       }
-      console.log(resp);
+      if (resp.error /*  === "nogame" */) {
+        addLine("Game", "La partie n'est pas lancée");
+        return;
+      }
       addLine(
         "Game",
         resp
