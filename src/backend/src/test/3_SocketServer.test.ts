@@ -35,7 +35,7 @@ describe("Socket server tests", function () {
   it("Initialize player 1 and connect", function () {
     return new Promise<void>((resolve) => {
       player1 = initSocket(SERVER_PORT);
-      player1.on("connect", () => {
+      player1.once("connect", () => {
         resolve();
       });
     });
@@ -44,7 +44,7 @@ describe("Socket server tests", function () {
   it("Initialize player 2 and connect", function () {
     return new Promise<void>((resolve) => {
       player2 = initSocket(SERVER_PORT);
-      player2.on("connect", () => {
+      player2.once("connect", () => {
         resolve();
       });
     });
@@ -53,7 +53,7 @@ describe("Socket server tests", function () {
   it("Try to connect a 3rd player", function () {
     const player3 = initSocket(SERVER_PORT);
     return new Promise<void>((resolve, reject) => {
-      player3.on("connect", () => {
+      player3.once("connect", () => {
         setTimeout(() => {
           if (player3.connected) {
             reject(new Error("Player 3 connected but should have been disconnected by server"));
@@ -107,7 +107,7 @@ describe("Socket server tests", function () {
   });
 
   it("Player1 disconnection should stop game", function () {
-    player1.on("disconnect", () => {
+    player1.once("disconnect", () => {
       setTimeout(() => {
         const game = socketServer.getGame();
         if (game) {
@@ -140,7 +140,7 @@ describe("Socket server tests", function () {
   it("Player1 connection should restart a new game", function () {
     return new Promise<void>((resolve) => {
       player1.connect();
-      player1.on("connect", () => {
+      player1.once("connect", () => {
         resolve();
         if (!socketServer.getGame()) {
           throw new Error("Game is not restarted with player1 connection");
@@ -152,7 +152,7 @@ describe("Socket server tests", function () {
   // TODO: check both players are here and each player has the correct player id
 
   it("Player2 disconnection should stop game", function () {
-    player2.on("disconnect", () => {
+    player2.once("disconnect", () => {
       setTimeout(() => {
         const game = socketServer.getGame();
         if (game) {
@@ -166,7 +166,7 @@ describe("Socket server tests", function () {
   it("Player2 connection should restart a new game", function () {
     return new Promise<void>((resolve) => {
       player2.connect();
-      player2.on("connect", () => {
+      player2.once("connect", () => {
         resolve();
         if (!socketServer.getGame()) {
           throw new Error("Game is not restarted with player2 connection");
@@ -184,6 +184,15 @@ describe("Socket server tests", function () {
         }
         resolve();
       });
+    });
+  });
+
+  it("Player1 sends a message to player2", function () {
+    player1.emit("message", "Hello player2");
+    player2.once("message", (arg: string) => {
+      if (arg !== "Hello player2") {
+        throw new Error("Player1 can't send a message to player2");
+      }
     });
   });
 
