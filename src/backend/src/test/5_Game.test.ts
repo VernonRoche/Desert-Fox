@@ -1,7 +1,7 @@
 import { io, Socket } from "socket.io-client";
-import stateMachine from "../main/GameManager/StateMachine/StateMachine";
+import { StateMachine } from "../main/GameManager/StateMachine/StateMachine";
 import { resetIds } from "../main/idManager";
-import webSocketServer, { SocketServer } from "../main/SocketServer";
+import { SocketServer } from "../main/SocketServer";
 import Unit from "../main/Units/Unit";
 
 function closeServer(server: SocketServer) {
@@ -17,10 +17,18 @@ describe("Game tests", function () {
     resetIds();
   });
   this.timeout(2000);
+  let server: SocketServer;
+  let stateMachine: StateMachine;
   let player1: Socket;
   let player2: Socket;
+  const CLIENT_PORT = 5051;
+  const SERVER_PORT = 5001;
 
-  webSocketServer.run(stateMachine);
+  it("Initialize server", function () {
+    server = new SocketServer(CLIENT_PORT, SERVER_PORT, false);
+    stateMachine = new StateMachine(server, false);
+    server.run(stateMachine);
+  });
 
   it("Initialize player1", async function () {
     return new Promise<void>((resolve) => {
@@ -43,14 +51,14 @@ describe("Game tests", function () {
   });
 
   it("Game should be started", async function () {
-    if (!webSocketServer.getGame()) {
+    if (!server.getGame()) {
       throw new Error(
         "Game is not started with 2 players " +
           player1.connected +
           " " +
           player2.connected +
           " " +
-          webSocketServer.getGame(),
+          server.getGame(),
       );
     }
   });
@@ -136,6 +144,6 @@ describe("Game tests", function () {
   });
 
   it("Close server", function () {
-    closeServer(webSocketServer);
+    closeServer(server);
   });
 });
