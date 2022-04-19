@@ -1,24 +1,29 @@
 import Embarkable from "../Embarkable";
 import Entity from "../Entity";
 import HexID from "../Map/HexID";
+import Dump from "./Dump";
+
+export type baseJson = {
+  currentPosition: string;
+  primary: boolean;
+  owned: boolean;
+};
 
 export default class Base implements Entity {
-  private _sent: boolean;
-  private _received: boolean;
+  private _currentPosition: HexID;
+  private _sent = false;
+  private _received = false;
   private _primary: boolean;
-  private _isActive: boolean;
   private _id: number;
+  private dumps: Dump[] = [];
 
-  constructor(sent: boolean, received: boolean, primary: boolean, isActive: boolean, id: number) {
-    this._sent = sent;
-    this._received = received;
+  constructor(hexId: HexID, primary: boolean, id: number) {
     this._primary = primary;
-    this._isActive = isActive;
     this._id = id;
+    this._currentPosition = hexId;
   }
-
-  place(hexId: HexID): void {
-    throw new Error("Method not implemented.");
+  getType(): string {
+    return "base";
   }
 
   remove(): void {
@@ -28,19 +33,20 @@ export default class Base implements Entity {
   getId(): number {
     return this._id;
   }
-
-  send(embarkable: Embarkable, base: Base): void {
-    if (this._sent) {
-      throw new Error("Already sent");
-    }
+  sent(): void {
     this._sent = true;
   }
 
+  received(): void {
+    this._received = true;
+  }
+
+  removeDump(dump: Dump): void {
+    this.dumps = this.dumps.filter((d) => d.getId() !== dump.getId());
+  }
   canSend(): boolean {
     return this._sent;
   }
-
-  //TODO: ajouter une méthode receive ?
 
   canReceive(): boolean {
     return this._received;
@@ -55,7 +61,11 @@ export default class Base implements Entity {
     this._received = false;
   }
 
-  isActive(): boolean {
-    return this._isActive;
+  getCurrentPosition() {
+    return this._currentPosition;
   }
+  place(hexId: HexID): void {
+    this._currentPosition = new HexID(hexId.getY(), hexId.getX());
+  }
+
 }

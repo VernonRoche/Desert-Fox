@@ -2,19 +2,26 @@ import Embarkable from "../Embarkable";
 import HexID from "../Map/HexID";
 import Moveable from "../Moveable";
 
+export type supplyUnitJson = {
+  currentPosition: string;
+  movementPoints: number;
+  owned: boolean;
+};
 export default class SupplyUnit implements Moveable {
-  private _item: Embarkable;
+  private _item: Embarkable[] = [];
   private _currentPosition: HexID;
   private _movementPoints: number;
   private _id: number;
   private _remainingMovementPoints: number;
 
-  constructor(id: number, item: Embarkable, currentPosition: HexID, movementPoints: number) {
+  constructor(id: number, currentPosition: HexID, movementPoints: number) {
     this._id = id;
-    this._item = item;
     this._currentPosition = currentPosition;
     this._movementPoints = movementPoints;
     this._remainingMovementPoints = movementPoints;
+  }
+  getType(): string {
+    return "supplyunit";
   }
 
   getId(): number {

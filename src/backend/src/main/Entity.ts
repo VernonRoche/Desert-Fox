@@ -6,4 +6,8 @@ export default interface Entity {
   remove(): void;
 
   getId(): number;
+
+  getType(): string;
+  
+  getCurrentPosition(): HexID;
 }

@@ -3,11 +3,15 @@ import Unit from "../Units/Unit";
 import Terrain from "./Terrain";
 import SupplyUnit from "../Infrastructure/SupplyUnit";
 import Entity from "../Entity";
+import Base from "../Infrastructure/Base";
+import Dump from "../Infrastructure/Dump";
 
 export default class Hex {
   private _hexId: HexID;
   private _units: Unit[];
   private _supplyUnits: SupplyUnit[];
+  private _bases: Base[];
+  private _dumps: Dump[];
   private _connexions: Hex[]; // To be later replaced with HexNeighbour
   private _terrain: Terrain;
   private _HEX_CAPACITY = 6;
@@ -15,6 +19,8 @@ export default class Hex {
   constructor(hexId: HexID, terrain: Terrain) {
     this._hexId = hexId;
     this._units = [];
+    this._bases = [];
+    this._dumps = [];
     this._supplyUnits = [];
     this._connexions = [];
     this._terrain = terrain;
@@ -44,6 +50,33 @@ export default class Hex {
     this.assertHasNotUnit(unit);
     unit.place(this._hexId);
     this._units.push(unit);
+  }
+
+  addEntity(entity: Entity): void {
+    if (entity.getType() === "motorized" || entity.getType() === "foot" || entity.getType() === "mechanized") {
+      this.addUnit(entity as Unit);
+    } else if (entity.getType() === "supply") {
+      this.addSupplyUnit(entity as SupplyUnit);
+    }
+    else if (entity.getType() === "base") {
+      this.addBase(entity as Base);
+    }
+    else if (entity.getType() === "dump") {
+      this.addDump(entity as Dump);
+    }
+    
+  }
+
+  addBase(base: Base) {
+    // only 1 base per hex
+    if(this._bases.length > 0) throw new Error("base already present");
+    this._bases.push(base);
+  }
+
+  addDump(dump: Dump) {
+    // only 1 dumb per hex(for now)
+    if(this._dumps.length > 0) throw new Error("dump already present");
+    this._dumps.push(dump);
   }
 
   addSupplyUnit(unit: SupplyUnit): void {
