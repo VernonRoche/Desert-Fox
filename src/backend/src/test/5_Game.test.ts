@@ -15,7 +15,6 @@ describe("Game tests", function () {
   this.afterAll(() => {
     resetIds();
   });
-  this.timeout(2000);
   let server: SocketServer;
   let stateMachine: StateMachine;
   let player1: Socket;
