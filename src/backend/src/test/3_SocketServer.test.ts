@@ -29,7 +29,7 @@ describe("Socket server tests", function () {
     }
   });
   it("Run webServer", function () {
-    socketServer.run(new StateMachine());
+    socketServer.run(new StateMachine(socketServer));
   });
 
   it("Initialize player 1 and connect", function () {
