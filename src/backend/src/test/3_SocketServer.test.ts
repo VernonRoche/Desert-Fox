@@ -50,6 +50,20 @@ describe("Socket server tests", function () {
     });
   });
 
+  it("Try to connect a 3rd player", function () {
+    const player3 = initSocket(SERVER_PORT);
+    return new Promise<void>((resolve, reject) => {
+      player3.on("connect", () => {
+        setTimeout(() => {
+          if (player3.connected) {
+            reject(new Error("Player 3 connected but should have been disconnected by server"));
+          }
+          resolve();
+        }, 500);
+      });
+    });
+  });
+
   it("Game should be started", function () {
     if (!socketServer.getGame()) {
       throw new Error("Game is not started with 2 players");
@@ -157,6 +171,18 @@ describe("Socket server tests", function () {
         if (!socketServer.getGame()) {
           throw new Error("Game is not restarted with player2 connection");
         }
+      });
+    });
+  });
+
+  it("Player1 can ping server", function () {
+    return new Promise<void>((resolve, reject) => {
+      player1.emit("ping message");
+      player1.once("pong message", (resp: "pong") => {
+        if (resp !== "pong") {
+          reject(new Error("Player1 can't ping server"));
+        }
+        resolve();
       });
     });
   });
