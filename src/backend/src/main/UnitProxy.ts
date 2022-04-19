@@ -33,12 +33,12 @@ export default class UnitProxy implements Unit {
     return this.unit.overrun(hexId);
   }
 
-  hasGeneralSupply(): boolean {
-    return this.unit.hasGeneralSupply();
+  hasAttacked(): boolean {
+    return this.unit.hasAttacked();
   }
 
-  attack(hexId: HexID, combatSupply: boolean): void {
-    return this.unit.attack(hexId, combatSupply);
+  removeLifePoints(lifePoints: number): void {
+    return this.unit.removeLifePoints(lifePoints);
   }
 
   getId(): number {

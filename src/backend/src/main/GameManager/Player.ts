@@ -137,4 +137,8 @@ export default class Player {
   addUnit(unit: Unit): void {
     this._units.set(unit.getId().toString(), unit);
   }
+
+  removeUnit(defenderUnit: Unit) {
+    this._units.delete(defenderUnit.getId().toString());
+  }
 }

@@ -11,6 +11,7 @@ export default abstract class AbstractUnit implements Unit {
   private _remainingMovementPoints: number;
   private _lifePoints: number;
   private _moraleRating: number;
+  private _hasAttacked: boolean;
 
   constructor(
     id: number,
@@ -27,6 +28,7 @@ export default abstract class AbstractUnit implements Unit {
     this._lifePoints = lifePoints;
     this._id = id;
     this._moraleRating = moraleRating;
+    this._hasAttacked = false;
   }
 
   abstract refit(): void;
@@ -37,9 +39,13 @@ export default abstract class AbstractUnit implements Unit {
 
   abstract overrun(hexId: HexID): void;
 
-  abstract hasGeneralSupply(): boolean;
+  hasAttacked(): boolean {
+    return this._hasAttacked;
+  }
 
-  abstract attack(hexId: HexID, combatSupply: boolean): void;
+  removeLifePoints(lifePoints: number): void {
+    this._lifePoints -= lifePoints;
+  }
 
   moraleCheck(): boolean {
     const dice = Dice.rollDice();
