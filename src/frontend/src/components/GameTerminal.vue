@@ -56,6 +56,7 @@ const help: Record<string, string> = {
   units: "Récupère la liste de vos unités",
   done: "Indique que vous terminez votre tour",
   exit: "Termine la connexion avec le serveur",
+  message: "Envoie un message à votre adversaire. Exemple: message Bonjour",
 };
 
 const commands: Commands = {
