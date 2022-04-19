@@ -6,13 +6,9 @@ import Pathfinder from "./Pathfinder";
 import Base from "../Infrastructure/Base";
 import Moveable from "../Moveable";
 import Dump from "../Infrastructure/Dump";
-import { BaseJson, UnitJson } from "../jsonTypes";
-import { getNewId } from "../idManager";
-import Mechanized from "../Units/Mechanized";
-import Foot from "../Units/Foot";
-import Motorized from "../Units/Motorized";
-import Maps from "../Map/Maps";
 import { loadEntitiesAndMap } from "./EntityLoader";
+import CombatSimulator, { DamageResult, MoraleResult } from "./CombatSimulator";
+import Maps from "../Map/Maps";
 
 const BASE_RANGE = 14;
 const SUPPLYUNIT_RANGE = 7;
@@ -195,6 +191,222 @@ export default class Game {
         ),
       ),
     );
+  }
+
+  public attackHex(attackers: Unit[], destination: HexID): void {
+    // Check if the attackers are at least 1 unit
+    if (attackers.length < 1) {
+      throw new Error("No attackers");
+    }
+
+    const destinationHex = this._map.findHex(destination);
+    const originHex = this._map.findHex(attackers[0].getCurrentPosition());
+    if (!destinationHex) {
+      throw new Error(`Hex ${destination} does not exist.`);
+    }
+    let attackerPlayer: Player;
+    // Player 1 attacks
+    if (this._map.hexBelongsToPlayer(attackers[0].getCurrentPosition(), this._player1)) {
+      if (this._map.hexBelongsToPlayer(destination, this._player2)) {
+        attackerPlayer = this._player1;
+      } else {
+        throw new Error(`Hex ${destination} does not have enemies for Player 1.`);
+      }
+    }
+    // Player 2 attacks
+    else {
+      if (this._map.hexBelongsToPlayer(destination, this._player1)) {
+        attackerPlayer = this._player2;
+      } else {
+        throw new Error(`Hex ${destination} does not have enemies for Player 2.`);
+      }
+    }
+    const defenderPlayer = attackerPlayer === this._player1 ? this._player2 : this._player1;
+
+    // Check if the unit is in range
+    if (!destinationHex.getNeighbours().includes(originHex)) {
+      throw new Error(`Unit ${attackers[0].getId()} is not in range of hex ${destination}.`);
+    }
+
+    // Get combat results
+    let result = CombatSimulator.combatResult(
+      destinationHex.getTerrain().terrainType,
+      attackers.length,
+      destinationHex.getUnits().length,
+      1,
+      false,
+    );
+
+    // Get total hp of defenders and attacker supplies
+    let lifePointsLost = 0;
+    const defenderLifePoints = [0, 0, 0, 0, 0];
+    const attackerSupplies = new Map<number, boolean>();
+    for (const defender of destinationHex.getUnits()) {
+      defenderLifePoints[defender.getMoraleRating()] += defender.getLifePoints();
+    }
+    for (const attacker of attackers) {
+      // TO IMPLEMENT USING SUPPLY PATHFINDER
+      attackerSupplies.set(attacker.getId(), true);
+    }
+
+    // Determine combat results for defenders
+    for (let i = 2; i <= 5; i++) {
+      switch (result["defender"]["damage"]) {
+        case DamageResult.E:
+          break;
+        case DamageResult.H:
+          defenderLifePoints[i] = Math.round(defenderLifePoints[i] * 0.5);
+          break;
+        case DamageResult.Q:
+          defenderLifePoints[i] = Math.round(defenderLifePoints[i] * 0.25);
+          break;
+        case DamageResult.NONE:
+          break;
+        default:
+          throw new Error(`Unknown damage result: ${result["defender"]["damage"]}`);
+      }
+      // Apply damage results to defender units
+      for (const defenderUnit of destinationHex.getUnits()) {
+        if (defenderUnit.getMoraleRating() === i) {
+          switch (result["defender"]["damage"]) {
+            case DamageResult.E:
+              defenderPlayer.removeUnit(defenderUnit);
+              destinationHex.removeUnit(defenderUnit);
+              break;
+            case DamageResult.H || DamageResult.Q:
+              if (defenderUnit.getLifePoints() === 2 && defenderLifePoints[i] >= 2) {
+                defenderPlayer.removeUnit(defenderUnit);
+                destinationHex.removeUnit(defenderUnit);
+                defenderLifePoints[i] -= 2;
+                lifePointsLost += 2;
+              } else if (defenderLifePoints[i] >= 1) {
+                defenderUnit.removeLifePoints(1);
+                if (defenderUnit.getLifePoints() === 0) {
+                  defenderPlayer.removeUnit(defenderUnit);
+                  destinationHex.removeUnit(defenderUnit);
+                }
+                defenderLifePoints[i] -= 1;
+                lifePointsLost += 1;
+              }
+              break;
+            case DamageResult.NONE:
+              break;
+            default:
+              throw new Error(`Unknown damage result: ${result["defender"]["damage"]}`);
+          }
+        }
+      }
+      // Apply morale results to defender units
+      for (const defenderUnit of destinationHex.getUnits()) {
+        if (defenderUnit.getMoraleRating() === i) {
+          switch (result["defender"]["morale"]) {
+            case MoraleResult.M:
+              if (!defenderUnit.moraleCheck()) {
+                for (const hexNeighbour of destinationHex.getNeighbours()) {
+                  if (
+                    this._map.hexBelongsToPlayer(hexNeighbour.getID(), defenderPlayer) &&
+                    hexNeighbour.getUnits().length === 0
+                  ) {
+                    this.moveUnit(defenderPlayer, defenderUnit, hexNeighbour.getID());
+                    break;
+                  }
+                }
+              }
+              break;
+            case MoraleResult.D:
+              // DISRUPT UNIT
+              break;
+            case MoraleResult.W || MoraleResult.R:
+              for (const hexNeighbour of destinationHex.getNeighbours()) {
+                if (
+                  this._map.hexBelongsToPlayer(hexNeighbour.getID(), defenderPlayer) &&
+                  hexNeighbour.getUnits().length === 0
+                ) {
+                  this.moveUnit(defenderPlayer, defenderUnit, hexNeighbour.getID());
+                  break;
+                }
+              }
+              // DISRUPT UNIT
+              break;
+            case MoraleResult.NONE:
+              break;
+            default:
+              throw new Error(`Unknown morale result: ${result["defender"]["morale"]}`);
+          }
+        }
+      }
+      result = CombatSimulator.combatResult(
+        destinationHex.getTerrain().terrainType,
+        attackers.length,
+        destinationHex.getUnits().length,
+        i,
+        false,
+      );
+    }
+
+    // Determine combat results for attackers
+    if (result["attacker"]["damage"] === DamageResult.X) {
+      lifePointsLost = lifePointsLost / 2;
+    }
+    for (const attacker of attackers) {
+      switch (result["attacker"]["damage"]) {
+        case DamageResult.XX || DamageResult.X:
+          if (attacker.getLifePoints() === 2 && lifePointsLost >= 2) {
+            attackerPlayer.removeUnit(attacker);
+            originHex.removeUnit(attacker);
+            lifePointsLost -= 2;
+          } else if (lifePointsLost >= 1) {
+            attacker.removeLifePoints(1);
+            if (attacker.getLifePoints() === 0) {
+              attackerPlayer.removeUnit(attacker);
+              originHex.removeUnit(attacker);
+            }
+            lifePointsLost -= 1;
+          }
+          break;
+        case DamageResult.NONE:
+          break;
+        default:
+          throw new Error(`Unknown damage result: ${result["attacker"]["damage"]}`);
+      }
+    }
+    // Apply morale results to attacker units
+    for (const attacker of attackers) {
+      switch (result["defender"]["morale"]) {
+        case MoraleResult.M:
+          if (!attacker.moraleCheck()) {
+            for (const hexNeighbour of originHex.getNeighbours()) {
+              if (
+                this._map.hexBelongsToPlayer(hexNeighbour.getID(), attackerPlayer) &&
+                hexNeighbour.getUnits().length === 0
+              ) {
+                this.moveUnit(attackerPlayer, attacker, hexNeighbour.getID());
+                break;
+              }
+            }
+          }
+          break;
+        case MoraleResult.D:
+          // DISRUPT UNIT
+          break;
+        case MoraleResult.W || MoraleResult.R:
+          for (const hexNeighbour of originHex.getNeighbours()) {
+            if (
+              this._map.hexBelongsToPlayer(hexNeighbour.getID(), attackerPlayer) &&
+              hexNeighbour.getUnits().length === 0
+            ) {
+              this.moveUnit(attackerPlayer, attacker, hexNeighbour.getID());
+              break;
+            }
+          }
+          // DISRUPT UNIT
+          break;
+        case MoraleResult.NONE:
+          break;
+        default:
+          throw new Error(`Unknown morale result: ${result["defender"]["morale"]}`);
+      }
+    }
   }
 
   getPlayer1(): Player {

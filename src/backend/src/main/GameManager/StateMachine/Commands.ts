@@ -31,14 +31,7 @@ type Commands = Record<string, (player: Player, args: AllArgs) => void>;
 
 export const _commands: Commands = {
   move: (player: Player, args: MoveArgs & BaseCommand) => {
-    if (
-      (player.getId() === 0 &&
-        stateMachine.getPhaseService().state.value !== "first_player_movement" &&
-        stateMachine.getPhaseService().state.value !== "first_player_movement2") ||
-      (player.getId() === 1 &&
-        stateMachine.getPhaseService().state.value !== "second_player_movement" &&
-        stateMachine.getPhaseService().state.value !== "second_player_movement2")
-    ) {
+    if (!stateMachine.checkIfCorrectPlayer(stateMachine.getPhase(), player.getId())) {
       player.getSocket().emit(args.type, { error: "turnerror" });
     }
     if (!args.unitId || !args.hexId) {

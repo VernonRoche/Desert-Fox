@@ -91,12 +91,7 @@ describe("Game tests", function () {
       player1.on("move", (resp: { error: string | false }) => {
         if (resp.error) {
           if (resp.error === "invalidturncommand") {
-            reject(
-              new Error(
-                "Invalid turn command, phase is " +
-                  stateMachine.getPhaseService().state.value.toString(),
-              ),
-            );
+            reject(new Error("Invalid turn command, phase is " + stateMachine.getPhase()));
           }
           reject(new Error("Move error: " + resp.error));
         }
@@ -130,12 +125,7 @@ describe("Game tests", function () {
         player2.on("move", (resp: { error: string | false }) => {
           if (resp.error) {
             if (resp.error === "invalidturncommand") {
-              reject(
-                new Error(
-                  "Invalid turn command, phase is " +
-                    stateMachine.getPhaseService().state.value.toString(),
-                ),
-              );
+              reject(new Error("Invalid turn command, phase is " + stateMachine.getPhase()));
             }
             reject(new Error("Move error:" + resp.error));
           }

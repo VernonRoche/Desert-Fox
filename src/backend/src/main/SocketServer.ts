@@ -129,12 +129,21 @@ export class SocketServer {
       }
     });
 
-    socketClient.on("message", (data: any) => {
-      if (this.isVerbose) console.log(`User [${socketClient.id}] sent a message : ${data}`);
-      this._socketServer.emit("message", data);
+    socketClient.on("message", (data: string) => {
+      const otherPlayerSocket = this._sockets.find((socket) => socket.id !== socketClient.id);
+      if (!otherPlayerSocket) {
+        return;
+      }
+      if (this.isVerbose)
+        console.log(
+          `User [${socketClient.id}, Player ${
+            this.getPlayerFromSocket(socketClient).getId() + 1
+          }] sent a message : ${data}`,
+        );
+      otherPlayerSocket.emit("message", data);
     });
 
-    socketClient.on("command", (data: any) => {
+    socketClient.on("command", (data: { type: string }) => {
       if (this.isVerbose) console.log("Received command", data);
     });
   }

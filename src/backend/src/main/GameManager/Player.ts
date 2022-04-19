@@ -84,4 +84,7 @@ export default class Player {
   addRefitPoint(refitPoint: RefitPoint): void {
     this._refitPoints.set(refitPoint.getId().toString(), refitPoint);
   }
+  removeUnit(defenderUnit: Unit) {
+    this._units.delete(defenderUnit.getId().toString());
+  }
 }

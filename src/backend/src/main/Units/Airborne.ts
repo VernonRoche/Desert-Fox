@@ -18,11 +18,11 @@ export default class Airborne extends AbstractUnit {
     throw new Error("Method not implemented.");
   }
 
-  hasGeneralSupply(): boolean {
+  hasAttacked(): boolean {
     throw new Error("Method not implemented.");
   }
 
-  attack(hexId: HexID, combatSupply: boolean): void {
+  removeLifePoints(lifePoints = 0): void {
     throw new Error("Method not implemented.");
   }
 

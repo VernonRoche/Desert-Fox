@@ -203,3 +203,89 @@ abstract Foot extends AbstractUnit
 class Heavy extends Foot
 class Light extends Foot
 @enduml
+
+/////////////// V4 ///////////////
+@startuml
+skinparam classAttributeIconSize 0
+interface Entity{
++place(HexID id): void
++remove(): void
+}
+
+interface Embarkable{
++embark(): void
++disembark(): void
+}
+
+abstract Moveable{
+-HexID currentPosition
+-uint movementPoints
+-uint remainingMovementPoints
++possibleMoves(): List<HexID>
++move(HexID id): void
++nightMove(HexID id): void
++retreat(HexID id): void
++resetMovementPoints(): void
+}
+
+class Base{
++send(Embarkable, Base): void
++canSend(): boolean
++canReceive(): boolean
++isPrimary(): boolean
++reset(): void
+}
+
+abstract AbstractUnit{
+-boolean sent
+-boolean received
+-boolean primary
+}
+
+class SupplyUnit{
+-Embarkable item
+-boolean sent
+-boolean received
+-boolean primary
++embark(Embarkable item): void
++disembark(): void
++createBase(): void
++hasItem(): boolean
++capture(): boolean
+}
+
+interface AttackUnit{
++refit(): void
++train(): void
++reactionMove(HexID id): void
++moraleCheck(): boolean
++overrun(HexID id): void
++hasGeneralSupply(): boolean
++attack(HexID id, boolean combatSupply): void
+}
+
+interface Embarkable extends Entity
+class RefitPoints implements Embarkable
+class Dump implements Embarkable
+
+interface Moveable extends Entity
+interface AttackUnit extends Moveable
+
+abstract AbstractUnit extends AttackUnit
+
+class Base implements Entity    
+
+class Foot extends AbstractUnit
+class Motorized extends AbstractUnit
+class Mechanized extends AbstractUnit
+
+abstract UnitDecorator implements AttackUnit
+UnitDecorator o-- AttackUnit
+class DisruptedDecorator extends UnitDecorator
+class DepletedDecorator extends UnitDecorator
+
+class UnitProxy implements AttackUnit
+UnitProxy --> UnitDecorator : delegate
+
+class SupplyUnit implements Moveable
+@enduml

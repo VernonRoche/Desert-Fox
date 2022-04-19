@@ -56,6 +56,7 @@ const help: Record<string, string> = {
   units: "Récupère la liste de vos unités",
   done: "Indique que vous terminez votre tour",
   exit: "Termine la connexion avec le serveur",
+  message: "Envoie un message à votre adversaire. Exemple: message Bonjour",
 };
 
 const commands: Commands = {
@@ -147,6 +148,10 @@ socket.on("connect", () => {
   addLine("Game", "Vous êtes connecté au serveur");
 });
 
+socket.on("message", (message: string) => {
+  addLine("Adversaire", message);
+});
+
 socket.on("pong message", (msg) => {
   addLine("Game", msg);
 });
@@ -208,13 +213,6 @@ function doCommand() {
   // rest is arguments
   const args = split.slice(1);
   // if command exists
-  if (command !== "units" && !currentPlay.value) {
-    addLine(
-      "Game",
-      "Vous ne pouvez pas jouer, la seule commande que vous pouvez effectuer est la commande units. Attendez la fin de la phase de jeu",
-    );
-    return;
-  }
   if (commands[command]) {
     // execute it, and give it args, even if it is not used in the command
     commands[command](args);

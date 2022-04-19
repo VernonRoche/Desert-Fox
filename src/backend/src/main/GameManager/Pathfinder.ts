@@ -44,7 +44,10 @@ class Pathfinder {
     //loop through nodes
     while (true) {
       //get the shortest path so far from start to currentNode
-      const dist = smallestWeights.get(currentNode)!;
+      const dist = smallestWeights.get(currentNode);
+      if (dist === undefined) {
+        throw new Error("dist is undefined");
+      }
 
       //iterate over current child's nodes and process
       const neighbourHexes = currentNode.getNeighbours();
@@ -88,7 +91,10 @@ class Pathfinder {
         //if we already have a distance to neighbourHex, compare with this distance
         if (prevNodes.has(neighbourHex)) {
           //get the recorded smallest distance
-          const altDist = smallestWeights.get(neighbourHex)!;
+          const altDist = smallestWeights.get(neighbourHex);
+          if (altDist === undefined) {
+            throw new Error("altDist is undefined");
+          }
 
           //if this distance is better, update the smallest distance + prev node
           if (thisDist < altDist) {
@@ -111,7 +117,11 @@ class Pathfinder {
       }
 
       //pull the next node to visit, if any
-      currentNode = nodesToVisitQueue.shift()!;
+      const temp = nodesToVisitQueue.shift();
+      if (temp === undefined) {
+        throw new Error("nodes to visit is empty");
+      }
+      currentNode = temp;
     }
 
     //get the shortest path into an array
@@ -121,13 +131,20 @@ class Pathfinder {
     while (currentNode !== startHex) {
       path.push(currentNode.getID());
 
-      currentNode = prevNodes.get(currentNode)!;
+      const temp = prevNodes.get(currentNode);
+      if (temp === undefined) {
+        throw new Error("current node is undefined");
+      }
+      currentNode = temp;
     }
     path.push(startHex.getID());
 
     //reverse the path so it starts with startHex
     path.reverse();
-    const cost = smallestWeights.get(endHex)!;
+    const cost = smallestWeights.get(endHex);
+    if (cost === undefined) {
+      throw new Error("cost is undefined");
+    }
     return { hexPath: path, sumOfWeight: cost };
   }
 }
