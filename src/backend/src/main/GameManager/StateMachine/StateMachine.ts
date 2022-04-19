@@ -20,7 +20,7 @@ export class StateMachine {
   }
   startMachine(): void {
     this.phaseService.start();
-    this.runPhaseActions(this.phaseService.state.value.toString());
+    this.runPhaseActions(this.getPhase());
     this.phaseService.onTransition((state) => {
       if (!(state.value.toString() in statesWithUserInput)) {
         this.runPhaseActions(state.value.toString());
@@ -67,7 +67,7 @@ export class StateMachine {
     socket.on("done", () => {
       if (this.isVerbose) console.log("done");
       if (this.endTurn(this.socketServer.getPlayerFromSocket(socket)))
-        this.informUsers(this.phaseService.state.value.toString(), this.socketServer.getPlayers());
+        this.informUsers(this.getPhase(), this.socketServer.getPlayers());
     });
   }
 
@@ -129,12 +129,7 @@ export class StateMachine {
       if (this.isVerbose) console.log("invalid command");
       return;
     }
-    if (
-      !this.checkIfCorrectPlayer(
-        this.phaseService.state.value.toString(),
-        player.getId(),
-      ).commands.includes(command)
-    ) {
+    if (!this.checkIfCorrectPlayer(this.getPhase(), player.getId()).commands.includes(command)) {
       // checks if the player is allowed to do the command
       player.getSocket().emit(command, { error: "invalidturncommand" });
       return;
@@ -149,11 +144,7 @@ export class StateMachine {
   }
 
   endTurn(player: Player): boolean {
-    if (
-      ["reinforcements", "initiative", "allocation"].includes(
-        this.phaseService.state.value.toString(),
-      )
-    ) {
+    if (["reinforcements", "initiative", "allocation"].includes(this.getPhase())) {
       this.done[player.getId()] = true;
       if (this.done[0] && this.done[1]) {
         this.reinitDoneTable();
@@ -161,7 +152,7 @@ export class StateMachine {
         return true;
       }
     } else {
-      if (this.checkIfCorrectPlayer(this.phaseService.state.value.toString(), player.getId())) {
+      if (this.checkIfCorrectPlayer(this.getPhase(), player.getId())) {
         this.phaseService.send("NEXT");
         return true;
       } else throw new Error("wrongplayer");
@@ -255,6 +246,10 @@ export class StateMachine {
 
   getPhaseService() {
     return this.phaseService;
+  }
+
+  getPhase() {
+    return this.phaseService.state.value.toString();
   }
 }
 
