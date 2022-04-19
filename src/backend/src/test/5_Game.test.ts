@@ -8,7 +8,7 @@ function closeServer(server: SocketServer) {
   server["_httpServer"].close();
 }
 
-function initSocket(port = 3001): Socket {
+function initSocket(port = 5001): Socket {
   return io(`http://localhost:${port}`);
 }
 
@@ -25,7 +25,7 @@ describe("Game tests", function () {
   const SERVER_PORT = 5001;
 
   it("Initialize server", function () {
-    server = new SocketServer(CLIENT_PORT, SERVER_PORT, false);
+    server = new SocketServer(CLIENT_PORT, SERVER_PORT, true);
     stateMachine = new StateMachine(server, false);
     server.run(stateMachine);
   });

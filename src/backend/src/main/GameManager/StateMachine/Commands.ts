@@ -1,7 +1,7 @@
 import HexID from "../../Map/HexID";
 import webSocketServer from "../../SocketServer";
 import Player from "../Player";
-import stateMachine from "./StateMachine";
+import { StateMachine } from "./StateMachine";
 
 export enum commandTypes {
   move = "move",
@@ -27,10 +27,10 @@ type AttackArgs = MoveArgs & {
   combatSupply?: boolean;
 };
 
-type Commands = Record<string, (player: Player, args: AllArgs) => void>;
+type Commands = Record<string, (stateMachine: StateMachine, player: Player, args: AllArgs) => void>;
 
 export const _commands: Commands = {
-  move: (player: Player, args: MoveArgs & BaseCommand) => {
+  move: (stateMachine: StateMachine, player: Player, args: MoveArgs & BaseCommand) => {
     if (!stateMachine.checkIfCorrectPlayer(stateMachine.getPhase(), player.getId())) {
       player.getSocket().emit(args.type, { error: "turnerror" });
     }
@@ -72,17 +72,17 @@ export const _commands: Commands = {
       player.getSocket().emit(args.type, { error: "invalidmove" });
     }
   },
-  units: (player: Player) => {
+  units: (stateMachine: StateMachine, player: Player) => {
     const playerUnits = player.getUnits();
     player.getSocket().emit("units", playerUnits);
   },
-  attack: (_player: Player, _args: AttackArgs & BaseCommand) => {
+  attack: (stateMachine: StateMachine, _player: Player, _args: AttackArgs & BaseCommand) => {
     //TODO
   },
-  select: (_player: Player, _args: MoveArgs & BaseCommand) => {
+  select: (stateMachine: StateMachine, _player: Player, _args: MoveArgs & BaseCommand) => {
     //TODO
   },
-  activate: (_player: Player, _args: MoveArgs & BaseCommand) => {
+  activate: (stateMachine: StateMachine, _player: Player, _args: MoveArgs & BaseCommand) => {
     //TODO
   },
 };

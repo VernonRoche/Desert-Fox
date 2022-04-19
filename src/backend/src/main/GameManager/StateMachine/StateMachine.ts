@@ -50,7 +50,7 @@ export class StateMachine {
         return;
       }
       if (request === "units") {
-        _commands[request](currentPlayer, data);
+        _commands[request](this, currentPlayer, data);
         return;
       }
       this.runPlayerCommand(currentPlayer, request, data);
@@ -134,7 +134,7 @@ export class StateMachine {
       player.getSocket().emit(command, { error: "invalidturncommand" });
       return;
     }
-    _commands[command](player, args);
+    _commands[command](this, player, args);
   }
 
   public done: boolean[] = [false, false];
