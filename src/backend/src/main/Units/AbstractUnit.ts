@@ -107,10 +107,6 @@ export default abstract class AbstractUnit implements Unit {
     this._remainingMovementPoints = this._movementPoints;
   }
 
-  public getHexId(): HexID {
-    return this._currentPosition;
-  }
-
   public getCombatFactor(): number {
     return this._combatFactor;
   }
