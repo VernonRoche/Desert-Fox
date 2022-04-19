@@ -1,9 +1,11 @@
 import Embarkable from "../Embarkable";
+import Player from "../GameManager/Player";
 import HexID from "../Map/HexID";
 import Moveable from "../Moveable";
 
 export type supplyUnitJson = {
-  currentPosition: string;
+  id: number;
+  currentPosition: HexID;
   movementPoints: number;
   owned: boolean;
 };
@@ -21,7 +23,7 @@ export default class SupplyUnit implements Moveable {
     this._remainingMovementPoints = movementPoints;
   }
   getType(): string {
-    return "supplyunit";
+    return "supply";
   }
 
   getId(): number {
@@ -82,5 +84,14 @@ export default class SupplyUnit implements Moveable {
 
   public capture(): boolean {
     throw new Error("Method not implemented.");
+  }
+
+  toJson(player: Player): supplyUnitJson {
+    return {
+      id: this.getId(),
+      currentPosition: this.getCurrentPosition(),
+      movementPoints: this.getMovementPoints(),
+      owned: player.hasEntity(this),
+    };
   }
 }

@@ -6,6 +6,9 @@ import Maps from "./Maps";
 import Terrain, { TerrainTypes } from "./Terrain";
 import Unit, { unitJson } from "../Units/Unit";
 import Player from "../GameManager/Player";
+import { baseJson } from "../Infrastructure/Base";
+import { dumpJson } from "../Infrastructure/Dump";
+import { supplyUnitJson } from "../Infrastructure/SupplyUnit";
 const width = 66;
 const height = 29;
 
@@ -13,12 +16,15 @@ type JsonMap = {
   hexId: string;
   terrain: string;
   units: unitJson[];
+  bases: baseJson[];
+  dumps: dumpJson[];
+  supplyUnits: supplyUnitJson[];
 }[];
 export default class GameMap {
   private _entities: Map<string, Entity>;
   private _hexagons: Map<string, Hex> = new Map();
 
-  constructor( mapName: Maps, entities: Map<string, Entity> ) {
+  constructor(mapName: Maps, entities: Map<string, Entity>) {
     this._entities = entities;
     const json = fs.readFileSync(`maps/${mapName}.json`, "utf8");
     const map: JsonMap = JSON.parse(json);
@@ -72,8 +78,6 @@ export default class GameMap {
     }
   }
 
-  
-
   public getHexes(): Map<string, Hex> {
     return this._hexagons;
   }
@@ -105,11 +109,21 @@ export default class GameMap {
     const json: JsonMap = [];
     this._hexagons.forEach((hex) => {
       const units: unitJson[] = [];
+      const bases: baseJson[] = [];
+      const dumps: dumpJson[] = [];
+      const supplyUnits: supplyUnitJson[] = [];
       hex.getUnits().forEach((unit) => units.push(unit.toJson(player)));
+      hex.getBases().forEach((base) => bases.push(base.toJson(player)));
+      hex.getDumps().forEach((dump) => dumps.push(dump.toJson(player)));
+      hex.getSupplyUnits().forEach((supplyUnit) => supplyUnits.push(supplyUnit.toJson(player)));
+
       json.push({
         hexId: hex.getID().id(),
         terrain: hex.getTerrain().terrainType,
         units: units,
+        bases: bases,
+        dumps: dumps,
+        supplyUnits: supplyUnits,
       });
     });
     return JSON.stringify(json);
@@ -129,14 +143,14 @@ export default class GameMap {
     if (hex.getUnits().length === 0) {
       return true;
     }
-    return hex.getUnits().some((unit) => player.hasUnit(unit));
+    return hex.getUnits().some((unit) => player.hasEntity(unit));
   }
 
   public hexIsInEnemyZoneOfControl(hexID: HexID, enemyPlayer: Player): boolean {
     const hex = this.findHex(hexID);
     for (const neighbour of hex.getNeighbours()) {
       if (neighbour.getUnits().length > 0) {
-        if (neighbour.getUnits().some((unit) => enemyPlayer.hasUnit(unit))) {
+        if (neighbour.getUnits().some((unit) => enemyPlayer.hasEntity(unit))) {
           return true;
         }
       }

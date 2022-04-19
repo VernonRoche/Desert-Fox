@@ -9,7 +9,7 @@ describe("Game map test", function () {
   });
   let map: GameMap;
   it("Instantiate map", function () {
-    map = new GameMap( "libya" as Maps, new Map());
+    map = new GameMap("libya" as Maps, new Map());
   });
   it("Valid Hex should not throw", function () {
     const hexId = new HexID(1, 1);

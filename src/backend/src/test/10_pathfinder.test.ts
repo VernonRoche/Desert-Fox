@@ -18,7 +18,7 @@ describe("Check if Pathfinder works correctly", function () {
   beforeEach(function () {
     const allyPlayer = new Player(PlayerID.ONE, Socket.prototype);
     const enemyPlayer = new Player(PlayerID.TWO, Socket.prototype);
-    game = new Game( allyPlayer, enemyPlayer);
+    game = new Game(allyPlayer, enemyPlayer);
     const enemyUnit = new Mechanized(1001, new HexID(8, 5), 3, 2, 15, 1);
     const friendlyUnit = new Mechanized(1000, new HexID(7, 5), 3, 2, 15, 1);
     allyPlayer.addUnit(friendlyUnit);

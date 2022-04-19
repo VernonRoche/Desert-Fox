@@ -22,7 +22,7 @@ export default class Game {
   public constructor(player1: Player, player2: Player) {
     this._player1 = player1;
     this._player2 = player2;
-    this._map = new GameMap(Maps.LIBYA ,loadEntitiesAndMap(this));
+    this._map = new GameMap(Maps.LIBYA, loadEntitiesAndMap(this));
     this._pathfinder = new Pathfinder(this._map);
     // Initialize Pathfinder
   }
@@ -42,7 +42,7 @@ export default class Game {
     if (!destinationHex) return "hex does not exist";
 
     // Check if unit exists and that the player owns it
-    if (!player.hasUnit(unit)) return "that unit does not exist";
+    if (!player.hasEntity(unit)) return "that unit does not exist";
 
     // Check if the player owns the unit
     if (!this._map.hexBelongsToPlayer(destination, player))
@@ -83,7 +83,6 @@ export default class Game {
     }
     return availableUnits;
   }
-  
 
   // Checks if a move is possible and applies it.
   // Returns false if the move was not possible, true if move was succesful.
@@ -136,11 +135,10 @@ export default class Game {
           this._pathfinder.findShortestWay(
             unit.getCurrentPosition(),
             dump.getCurrentPosition(),
-            
+
             this._player1,
           ).sumOfWeight <= DUMP_RANGE
         ) {
-
           found = true;
           break;
         }
@@ -424,5 +422,4 @@ export default class Game {
   getPathfinder(): Pathfinder {
     return this._pathfinder;
   }
-
 }

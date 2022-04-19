@@ -1,8 +1,8 @@
 let id = 0;
 
 export function getNewId() {
-    return id++;
+  return id++;
 }
-export function resetIds(){
-    id = 0;
+export function resetIds() {
+  id = 0;
 }

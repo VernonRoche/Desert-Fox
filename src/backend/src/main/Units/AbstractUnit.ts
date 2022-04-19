@@ -66,7 +66,7 @@ export default abstract class AbstractUnit implements Unit {
       currentPosition: this.getCurrentPosition(),
       movementPoints: this.getMovementPoints(),
       remainingMovementPoints: this.getRemainingMovementPoints(),
-      owned: player.hasUnit(this),
+      owned: player.hasEntity(this),
     };
   }
 

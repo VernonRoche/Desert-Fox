@@ -52,10 +52,7 @@ export class SocketServer {
   private createGame(stateMachine: StateMachine): void {
     if (this.isVerbose) console.log("Game created");
     this._created = true;
-    this._game = new Game(
-      this._players[0],
-      this._players[1],
-    );
+    this._game = new Game(this._players[0], this._players[1]);
 
     const map = this._game.getMap();
     this.sockets.forEach((socket) => {

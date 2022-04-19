@@ -33,6 +33,12 @@ export default class Hex {
   getSupplyUnits(): SupplyUnit[] {
     return this._supplyUnits;
   }
+  getBases(): Base[] {
+    return this._bases;
+  }
+  getDumps(): Dump[] {
+    return this._dumps;
+  }
 
   hasUnit(unit: Entity): boolean {
     return !!this._units.find((u) => u.getId() === unit.getId());
@@ -53,29 +59,30 @@ export default class Hex {
   }
 
   addEntity(entity: Entity): void {
-    if (entity.getType() === "motorized" || entity.getType() === "foot" || entity.getType() === "mechanized") {
+    if (
+      entity.getType() === "motorized" ||
+      entity.getType() === "foot" ||
+      entity.getType() === "mechanized"
+    ) {
       this.addUnit(entity as Unit);
     } else if (entity.getType() === "supply") {
       this.addSupplyUnit(entity as SupplyUnit);
-    }
-    else if (entity.getType() === "base") {
+    } else if (entity.getType() === "base") {
       this.addBase(entity as Base);
-    }
-    else if (entity.getType() === "dump") {
+    } else if (entity.getType() === "dump") {
       this.addDump(entity as Dump);
     }
-    
   }
 
   addBase(base: Base) {
     // only 1 base per hex
-    if(this._bases.length > 0) throw new Error("base already present");
+    if (this._bases.length > 0) throw new Error("base already present");
     this._bases.push(base);
   }
 
   addDump(dump: Dump) {
     // only 1 dumb per hex(for now)
-    if(this._dumps.length > 0) throw new Error("dump already present");
+    if (this._dumps.length > 0) throw new Error("dump already present");
     this._dumps.push(dump);
   }
 

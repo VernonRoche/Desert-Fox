@@ -1,10 +1,11 @@
 import Embarkable from "../Embarkable";
 import Entity from "../Entity";
+import Player from "../GameManager/Player";
 import HexID from "../Map/HexID";
 
-
 export type dumpJson = {
-  currentPosition: string;
+  id: number;
+  currentPosition: HexID;
   owned: boolean;
 };
 
@@ -30,7 +31,6 @@ export default class Dump implements Embarkable {
     throw new Error("Method not implemented.");
   }
 
-  
   getId(): number {
     return this._id;
   }
@@ -42,4 +42,11 @@ export default class Dump implements Embarkable {
     this._currentPosition = new HexID(hexId.getY(), hexId.getX());
   }
 
+  toJson(player: Player): dumpJson {
+    return {
+      id: this.getId(),
+      currentPosition: this.getCurrentPosition(),
+      owned: player.hasEntity(this),
+    };
+  }
 }

@@ -1,10 +1,12 @@
 import Embarkable from "../Embarkable";
 import Entity from "../Entity";
+import Player from "../GameManager/Player";
 import HexID from "../Map/HexID";
 import Dump from "./Dump";
 
 export type baseJson = {
-  currentPosition: string;
+  id: number;
+  currentPosition: HexID;
   primary: boolean;
   owned: boolean;
 };
@@ -68,4 +70,12 @@ export default class Base implements Entity {
     this._currentPosition = new HexID(hexId.getY(), hexId.getX());
   }
 
+  toJson(player: Player): baseJson {
+    return {
+      id: this.getId(),
+      currentPosition: this.getCurrentPosition(),
+      primary: this._primary,
+      owned: player.hasEntity(this),
+    };
+  }
 }

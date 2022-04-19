@@ -26,12 +26,23 @@ export default class Player {
     this._socket = socket;
   }
 
-  public hasUnit(entity: Entity): boolean {
-    return (
-      this._units.has(entity.getId().toString()) || this._supplyUnits.has(entity.getId().toString())
-    );
+  hasEntity(entity: Entity): boolean {
+    let check = false;
+    if (
+      entity.getType() === "motorized" ||
+      entity.getType() === "foot" ||
+      entity.getType() === "mechanized"
+    ) {
+      check = this._units.has(entity.getId().toString());
+    } else if (entity.getType() === "supply") {
+      check = this._supplyUnits.has(entity.getId().toString());
+    } else if (entity.getType() === "base") {
+      check = this._bases.has(entity.getId().toString());
+    } else if (entity.getType() === "dump") {
+      check = this._dumps.has(entity.getId().toString());
+    }
+    return check;
   }
-
 
   getUnitById(id: number): Unit {
     const unit = this._units.get(id.toString());

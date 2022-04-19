@@ -39,7 +39,7 @@ describe("Player Test", function () {
 
   it("hasUnit test", function () {
     player.addUnit(foot);
-    if (!player.hasUnit(foot)) {
+    if (!player.hasEntity(foot)) {
       throw new Error("hasUnit not correct");
     }
   });

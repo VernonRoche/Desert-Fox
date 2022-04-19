@@ -8,6 +8,6 @@ export default interface Entity {
   getId(): number;
 
   getType(): string;
-  
+
   getCurrentPosition(): HexID;
 }

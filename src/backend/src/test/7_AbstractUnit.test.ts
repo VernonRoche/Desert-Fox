@@ -41,9 +41,10 @@ describe("unit is correct add", function () {
   });
 
   it("toJson is correct ", function () {
-      const player = new Player(PlayerID.ONE, null as any);
-      player.addUnit(unit[0]);
-      const unitJson = unit[0].toJson(player);    if (unitJson.id !== unit[0].getId()) {
+    const player = new Player(PlayerID.ONE, null as any);
+    player.addUnit(unit[0]);
+    const unitJson = unit[0].toJson(player);
+    if (unitJson.id !== unit[0].getId()) {
       throw new Error("id not correct");
     }
     if (unitJson.currentPosition !== unit[0].getCurrentPosition()) {
