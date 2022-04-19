@@ -18,6 +18,11 @@ import { Unit } from "../utils/constants/types";
 
 const phases: Record<string, string> = {
   player_movement: "Phase de déplacement",
+  player_reaction: "Phase de réaction",
+  player_combat: "Phase de combat",
+  reinforcements: "Renforts",
+  initiative: "Initiative",
+  allocation: "Activation des bases",
 };
 
 const gameCreated = ref(false);
@@ -59,7 +64,7 @@ const turnSentence = computed(() => {
 });
 
 socket.on("phase", (resp: { phase: string; play: boolean; commands: string[]; auto: boolean }) => {
-  phase.value = resp.phase.replaceAll("first_", "").replaceAll("second_", "");
+  phase.value = resp.phase.replaceAll("first_", "").replaceAll("second_", "").replaceAll("2", "");
   isPlaying.value = resp.play;
 });
 
