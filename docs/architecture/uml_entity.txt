@@ -236,8 +236,10 @@ class Base{
 +reset(): void
 }
 
-abstract AttackUnit{
-
+abstract AbstractUnit{
+-boolean sent
+-boolean received
+-boolean primary
 }
 
 class SupplyUnit{
@@ -252,7 +254,7 @@ class SupplyUnit{
 +capture(): boolean
 }
 
-interface Units{
+interface AttackUnit{
 +refit(): void
 +train(): void
 +reactionMove(HexID id): void
@@ -267,22 +269,22 @@ class RefitPoints implements Embarkable
 class Dump implements Embarkable
 
 interface Moveable extends Entity
-interface Units extends Moveable
+interface AttackUnit extends Moveable
 
-abstract AttackUnit extends Units
+abstract AbstractUnit extends AttackUnit
 
-class Base implements Entity
+class Base implements Entity    
 
-class Foot extends AttackUnit
-class Motorized extends AttackUnit
-class Mechanized extends AttackUnit
+class Foot extends AbstractUnit
+class Motorized extends AbstractUnit
+class Mechanized extends AbstractUnit
 
-abstract UnitDecorator implements Units
-UnitDecorator o-- Units
+abstract UnitDecorator implements AttackUnit
+UnitDecorator o-- AttackUnit
 class DisruptedDecorator extends UnitDecorator
 class DepletedDecorator extends UnitDecorator
 
-class UnitProxy implements Units
+class UnitProxy implements AttackUnit
 UnitProxy --> UnitDecorator : delegate
 
 class SupplyUnit implements Moveable

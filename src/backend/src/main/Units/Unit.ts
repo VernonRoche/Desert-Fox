@@ -19,9 +19,9 @@ export default interface Unit extends Moveable {
 
   overrun(hexId: HexID): void;
 
-  hasGeneralSupply(): boolean;
+  hasAttacked(): boolean;
 
-  attack(hexId: HexID, combatSupply: boolean): void;
+  removeLifePoints(lifePoints: number): void;
 
   moraleCheck(): boolean;
 
