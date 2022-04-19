@@ -77,8 +77,6 @@ export class SocketServer {
         socket.disconnect(true);
         return;
       }
-      console.log("BLABLABAL");
-
       if (this.isVerbose) console.log(`User [${socket.id}] connected !`);
       let playerId: number;
       if (this._players.length >= 1) {
