@@ -8,11 +8,10 @@ function closeServer(server: SocketServer) {
   server["_httpServer"].close();
 }
 
-function initSocket(port = 5001): Socket {
-  return io(`http://localhost:${port}`);
-}
-
 describe("Game tests", function () {
+  function initSocket(): Socket {
+    return io(`http://localhost:${SERVER_PORT}`);
+  }
   this.afterAll(() => {
     resetIds();
   });
