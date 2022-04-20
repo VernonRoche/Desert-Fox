@@ -5,10 +5,8 @@ import { StateMachine } from "./StateMachine";
 export enum commandTypes {
   move = "move",
   attack = "attack",
-  select = "select",
-  train = "train",
-  activate = "activate",
   units = "units",
+  hex = "hex",
 }
 
 type BaseCommand = {

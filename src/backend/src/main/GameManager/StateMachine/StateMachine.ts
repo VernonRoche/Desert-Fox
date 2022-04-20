@@ -61,7 +61,7 @@ export class StateMachine {
         socket.emit(request, { error: "invalidcommand" });
         return;
       }
-      if (request === "units") {
+      if (request === "units" || request === "hex") {
         _commands[request](this, currentPlayer, data);
         return;
       }
