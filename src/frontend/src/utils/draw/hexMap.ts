@@ -67,7 +67,6 @@ export default function drawHexMap(p5: P5, gameMap: GameMap) {
     {
       const suppplyUnits = g.supplyUnits;
       for (const s of suppplyUnits) {
-        console.log(s);
         drawSupplyUnit(p5, x, y, s.owned);
       }
     }
