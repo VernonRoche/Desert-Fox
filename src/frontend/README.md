@@ -1,11 +1,50 @@
-# Vue 3 + Typescript + Vite
+# Frontend Desert Fox
 
-This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Environnement
 
-## Recommended IDE Setup
+- [node.js](https://nodejs.org/) 16.14.2 minimum est recommandé (dernière version stable au moment du projet)
+- `yarn` est fortement conseillé mais pas obligatoire. Yarn s'installe grâce à la commande `npm install -g yarn` (dernière version à ce jour: 1.22.18)
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+Les dépendences du projet ont été définies dans le `package.json` mais les versions exactes sont gérées dans le `yarn.lock`, il est donc préférable d'utiliser `yarn`.
 
-## Type Support For `.vue` Imports in TS
+## Installation
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's `.vue` type support plugin by running `Volar: Switch TS Plugin on/off` from VSCode command palette.
+```bash
+# avec yarn
+yarn
+# sans yarn
+npm install
+```
+
+Permet d'installer toutes les dépendances du projet (listées dans le `package.json` et plus précisement dans le `yarn.lock`).
+
+## Démarrage
+
+```bash
+# avec yarn
+yarn start
+# sans yarn
+npm start
+```
+
+La commande start lance le serveur de développement qui se relance automatiquement quand du code est modifié et permet donc d'utiliser le site.
+
+## Développement
+
+Grâce à la recharge automatique du serveur, il est possible de développer en utilisant la commande `yarn start`.
+
+## Compilation pour la production
+
+`yarn build` va créer un dossier `dist` contenant toutes les ressources du site.
+
+## Tests
+
+Les tests de frontend sont très difficile à faire, c'est pour celà qu'avec le temps que nous avions nous avons décidé de ne pas en faire.
+
+## Résumé
+
+```bash
+npm install -g yarn
+yarn
+yarn start
+```
