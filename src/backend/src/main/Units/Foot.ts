@@ -14,14 +14,6 @@ export default class Foot extends AbstractUnit implements Embarkable {
     return "foot";
   }
 
-  refit(): void {
-    throw new Error("Method not implemented.");
-  }
-
-  train(): void {
-    throw new Error("Method not implemented.");
-  }
-
   reactionMove(hexId: HexID): void {
     throw new Error("Method not implemented.");
   }

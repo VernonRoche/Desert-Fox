@@ -22,9 +22,6 @@ describe("unit is correct add", function () {
     if (unit[0].getMoraleRating() != 3) {
       throw new Error("MoraleRating not correct");
     }
-    if (unit[0].getCombatFactor() != 3) {
-      throw new Error("CombatFactor not correct");
-    }
     if (unit[0].getMovementPoints() != 12) {
       throw new Error("MovementPoints not correct");
     }
@@ -73,6 +70,13 @@ describe("unit is correct add", function () {
     player.removeUnit(unit[0]);
     if (player.getUnits().length != 0) {
       throw new Error("getUnits not correct");
+    }
+  });
+
+  it("remove lifePoints", function () {
+    unit[0].removeLifePoints(1);
+    if (unit[0].getLifePoints() != 0) {
+      throw new Error("LifePoints not correct");
     }
   });
 });

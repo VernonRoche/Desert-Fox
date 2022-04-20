@@ -2,8 +2,9 @@ import P5 from "p5";
 import dataMap from "../constants/map";
 import drawHexagon from "./hexagon";
 import drawCaption from "./caption";
-import drawUnit from "./units";
+import { drawDump, drawUnit } from "./units";
 import { GameMap } from "../constants/types";
+import { colorsPlayer } from "../constants/colors";
 
 export default function drawHexMap(p5: P5, gameMap: GameMap) {
   let x, y;
@@ -14,6 +15,9 @@ export default function drawHexMap(p5: P5, gameMap: GameMap) {
   const marginTop = 50;
   const marginLeft = 50;
 
+  const strokeWeightBase = 5;
+  const reduceRadiusBase = r / 10;
+
   for (const g of gameMap) {
     const idString = g.hexId;
     const lineString = idString.substring(0, 2);
@@ -21,17 +25,32 @@ export default function drawHexMap(p5: P5, gameMap: GameMap) {
     const line = Number(lineString) - 1;
     const column = Number(columnString) - 1;
 
+    //0405 dump
+    //0205 supplyUnit
+
     //Hexagons
     {
+      //Bases
+      const base = g.base;
       if (line % 2 === 1) {
         x = xPositionOddLine(column);
         y = yPositionOddLine(line);
-        drawHexagon(p5, x, y, r, idString, g.terrain);
       } else {
         x = xPositionEvenLine(column);
         y = yPositionEvenLine(line);
-        drawHexagon(p5, x, y, r, idString, g.terrain);
       }
+      base !== undefined
+        ? drawHexagon(
+            p5,
+            x,
+            y,
+            r - reduceRadiusBase,
+            idString,
+            g.terrain,
+            colorsPlayer[String(base.owned)],
+            strokeWeightBase,
+          )
+        : drawHexagon(p5, x, y, r, idString, g.terrain);
     }
     //Units
     {
@@ -40,6 +59,13 @@ export default function drawHexMap(p5: P5, gameMap: GameMap) {
       for (const u of units) {
         drawUnit(p5, x, y, i, u.owned, u.type, u.id);
         i++;
+      }
+    }
+    //Dumps
+    {
+      const dumps = g.dumps;
+      for (const d of dumps) {
+        drawDump(p5, x, y, d.owned);
       }
     }
   }
