@@ -9,11 +9,6 @@ type State = {
 export const statesWithUserInput: Record<string, State> = {
   reinforcements: {
     on: {
-      NEXT: "initiative",
-    },
-  },
-  initiative: {
-    on: {
       NEXT: "first_player_movement",
     },
   },
@@ -92,7 +87,7 @@ export const TurnPhases = {
     },
     air_superiority: {
       on: {
-        NEXT: "first_player_movement", // "reinforcements",
+        NEXT: "reinforcements",
       },
     },
     supply_attrition: {
