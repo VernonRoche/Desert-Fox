@@ -24,4 +24,27 @@ export type GameMap = {
       owned: boolean;
     },
   ];
+  base:
+    | {
+        id: number;
+        curentPosition: { _x: number; _y: number };
+        primary: boolean;
+        owned: boolean;
+      }
+    | undefined;
+  dumps: [
+    {
+      id: number;
+      currentPosition: { _x: number; _y: number };
+      owned: boolean;
+    },
+  ];
+  suppplyUnits: [
+    {
+      id: number;
+      currentPosition: { _x: number; _y: number };
+      movementPoints: number;
+      owned: boolean;
+    },
+  ];
 }[];
