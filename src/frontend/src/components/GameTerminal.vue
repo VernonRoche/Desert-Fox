@@ -39,7 +39,7 @@
 import { onUnmounted, ref } from "@vue/runtime-dom";
 import { Unit } from "../utils/constants/types";
 import socket from "../utils/ClientSocket";
-import { allErrors } from "../utils/constants/errorExplanation";
+import getError from "../utils/constants/errorExplanation";
 
 const terminalInput = ref("");
 const lines = ref<{ data: string; author: string; time: Date }[]>([]);
@@ -91,7 +91,7 @@ const commands: Commands = {
     });
     socket.once("move", (resp: { error: string | false }) => {
       if (resp.error) {
-        addLine("Game", allErrors[resp.error] ?? resp.error);
+        addLine("Game", getError(resp.error));
       } else {
         addLine("Game", `L'unitée ${args[0]} s'est déplacée sur le hex ${args[1]}`);
       }
@@ -130,7 +130,7 @@ const commands: Commands = {
     socket.emit("done");
     socket.once("done", (resp: { error: string | false }) => {
       if (resp.error) {
-        addLine("Game", allErrors[resp.error] ?? resp.error);
+        addLine("Game", getError(resp.error));
       } else {
         addLine("Game", "Votre tour est terminé");
       }

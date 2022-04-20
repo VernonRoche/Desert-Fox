@@ -13,7 +13,13 @@ const doneErrors = {
   alreadydone: "Vous avez déjà passé votre tour",
 };
 
-export const allErrors: Record<string, string> = {
+const allErrors: Record<string, string> = {
   ...moveErrors,
   ...doneErrors,
 };
+
+function getError(error: string): string {
+  return allErrors[error] ?? error;
+}
+
+export default getError;
