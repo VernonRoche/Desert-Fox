@@ -34,17 +34,14 @@ export class StateMachine {
   stopMachine() {
     this.phaseService.stop();
   }
-  checkPhaseAndSupplies() : void{
-    if (this.getPhase().includes("movement") &&  this.getPhase().includes("first"))
-    {
+  checkPhaseAndSupplies(): void {
+    if (this.getPhase().includes("movement") && this.getPhase().includes("first")) {
       const game = this.socketServer.getGame();
-      if(!game) return;
+      if (!game) return;
       game.verifySupplies(1);
-    }
-    else if(this.getPhase().includes("movement") &&  this.getPhase().includes("second"))
-    {
+    } else if (this.getPhase().includes("movement") && this.getPhase().includes("second")) {
       const game = this.socketServer.getGame();
-      if(!game) return;
+      if (!game) return;
       game.verifySupplies(2);
     }
   }
@@ -88,10 +85,6 @@ export class StateMachine {
 
   runPhaseActions(actualPhase: string): void {
     switch (actualPhase) {
-      case "air_superiority": //TODO
-        break;
-      case "supply_attrition": //TODO
-        break;
       case "victory_check": //TODO : verify if the user has obtain the "port" of the other player
         if (this.phaseService.state.context.turn === 38 || false) {
           // replace false with the test
@@ -113,17 +106,9 @@ export class StateMachine {
       this.socketServer.broadcast("phase", {
         phase: actualPhase,
         play: false,
-        commands: ["select"],
+        commands: [],
         auto: true,
       });
-    if (actualPhase === "air_superiority") {
-      this.socketServer.broadcast("phase", {
-        phase: "reinforcements",
-        play: true,
-        commands: ["select"],
-        auto: false,
-      });
-    }
   }
 
   runPlayerCommand(player: Player, command: string, args: any): void {
@@ -139,33 +124,13 @@ export class StateMachine {
     _commands[command](this, player, args);
   }
 
-  public done: boolean[] = [false, false];
-
-  reinitDoneTable(): void {
-    this.done = [false, false];
-  }
-
   endTurn(player: Player): boolean {
-    if (["reinforcements"].includes(this.getPhase())) {
-      if (this.done[player.getId()]) player.getSocket().emit("done", { error: "alreadydone" });
-      else {
-        this.done[player.getId()] = true;
-        player.getSocket().emit("done", { error: false });
-      }
-
-      if (this.done[0] && this.done[1]) {
-        this.reinitDoneTable();
-        this.phaseService.send("NEXT");
-        return true;
-      }
-    } else {
-      if (this.checkIfCorrectPlayer(this.getPhase(), player.getId()).correct) {
-        this.checkPhaseAndSupplies();
-        this.phaseService.send("NEXT");
-        player.getSocket().emit("done", { error: false });
-        return true;
-      } else player.getSocket().emit("done", { error: "wrongplayer" });
-    }
+    if (this.checkIfCorrectPlayer(this.getPhase(), player.getId()).correct) {
+      this.checkPhaseAndSupplies();
+      this.phaseService.send("NEXT");
+      player.getSocket().emit("done", { error: false });
+      return true;
+    } else player.getSocket().emit("done", { error: "wrongplayer" });
     return false;
   }
 
@@ -218,8 +183,6 @@ export class StateMachine {
         if (playerId === PlayerID.ONE) return { correct: true, commands: ["attack"] };
         break;
       }
-      case "reinforcements":
-        return { correct: true, commands: ["select"] };
       default:
         return { correct: false, commands: [] };
     }
@@ -236,14 +199,6 @@ export class StateMachine {
       currentPhase,
       this.checkIfCorrectPlayer(currentPhase, correctPlayerId).commands,
     );
-    if (currentPhase === "reinforcements") {
-      this.socketServer.broadcast("phase", {
-        phase: currentPhase,
-        play: true,
-        commands: this.checkIfCorrectPlayer(currentPhase, players[0].getId()).commands, //Doesn't matter which player id it is
-        auto: false,
-      });
-    }
   }
 
   getPhaseService() {
