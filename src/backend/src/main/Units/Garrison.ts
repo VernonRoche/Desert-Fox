@@ -3,7 +3,7 @@ import AbstractUnit from "./AbstractUnit";
 
 export default class Garrison extends AbstractUnit {
   getType(): string {
-    return "Garrison";
+    return "garrison";
   }
 
   refit(): void {
@@ -19,14 +19,6 @@ export default class Garrison extends AbstractUnit {
   }
 
   overrun(hexId: HexID): void {
-    throw new Error("Method not implemented.");
-  }
-
-  hasAttacked(): boolean {
-    throw new Error("Method not implemented.");
-  }
-
-  removeLifePoints(lifePoints = 0): void {
     throw new Error("Method not implemented.");
   }
 }
