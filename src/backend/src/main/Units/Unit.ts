@@ -11,10 +11,6 @@ export type unitJson = {
   owned: boolean;
 };
 export default interface Unit extends Moveable {
-  refit(): void;
-
-  train(): void;
-
   reactionMove(hexId: HexID): void;
 
   overrun(hexId: HexID): void;
@@ -30,8 +26,6 @@ export default interface Unit extends Moveable {
   toJson(player: Player): unitJson;
 
   getType(): string;
-
-  getCombatFactor(): number;
 
   getLifePoints(): number;
 }

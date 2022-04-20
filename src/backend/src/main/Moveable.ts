@@ -10,8 +10,6 @@ export default interface Moveable extends Entity {
 
   remove(): void;
 
-  possibleMoves(): HexID[];
-
   // Remove movementPoints passed as parameter
   move(movementPoints: number): void;
 

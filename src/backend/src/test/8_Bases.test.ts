@@ -1,7 +1,6 @@
-import { getNewId, resetIds } from "../main/idManager";
+import { resetIds } from "../main/idManager";
 import Base from "../main/Infrastructure/Base";
 import HexID from "../main/Map/HexID";
-import Foot from "../main/Units/Foot";
 
 describe("Base test", function () {
   this.afterAll(() => {
@@ -10,7 +9,6 @@ describe("Base test", function () {
   const id = 1000;
   const footHexId = new HexID(2, 2);
   const _hexId2 = new HexID(3, 3);
-  const foot = new Foot(id, footHexId, 3, 3, 12, 1);
   const _base = new Base(footHexId, true, id);
 
   it("Base should be correct", function () {

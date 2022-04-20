@@ -22,9 +22,6 @@ describe("unit is correct add", function () {
     if (unit[0].getMoraleRating() != 3) {
       throw new Error("MoraleRating not correct");
     }
-    if (unit[0].getCombatFactor() != 3) {
-      throw new Error("CombatFactor not correct");
-    }
     if (unit[0].getMovementPoints() != 12) {
       throw new Error("MovementPoints not correct");
     }

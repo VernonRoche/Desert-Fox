@@ -31,10 +31,6 @@ export default abstract class AbstractUnit implements Unit {
     this._hasAttacked = false;
   }
 
-  abstract refit(): void;
-
-  abstract train(): void;
-
   abstract reactionMove(hexId: HexID): void;
 
   abstract overrun(hexId: HexID): void;
@@ -88,10 +84,6 @@ export default abstract class AbstractUnit implements Unit {
     throw new Error("Method not implemented.");
   }
 
-  public possibleMoves(): HexID[] {
-    throw new Error("Method not implemented.");
-  }
-
   // Remove movementPoints passed as parameter
   public move(movementPoints: number): void {
     this._remainingMovementPoints -= movementPoints;
@@ -111,10 +103,6 @@ export default abstract class AbstractUnit implements Unit {
 
   public resetMovementPoints(): void {
     this._remainingMovementPoints = this._movementPoints;
-  }
-
-  public getCombatFactor(): number {
-    return this._combatFactor;
   }
 
   public getLifePoints(): number {
