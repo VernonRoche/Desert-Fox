@@ -1,4 +1,4 @@
-const moveErrors: Record<string, string> = {
+const moveErrors = {
   turnerror: "Cette commande n'est pas disponible pendant cette phase",
   invalidargs: "Les arguments de cette commande sont invalides",
   invalidunitid: "Cet unit id n'est pas valide",
