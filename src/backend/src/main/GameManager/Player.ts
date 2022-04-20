@@ -2,10 +2,10 @@ import PlayerID from "./PlayerID";
 import Unit from "../Units/Unit";
 import Base from "../Infrastructure/Base";
 import SupplyUnit from "../Infrastructure/SupplyUnit";
-import RefitPoint from "../Infrastructure/RefitPoint";
 import Entity from "../Entity";
 import { Socket } from "socket.io";
 import Dump from "../Infrastructure/Dump";
+import Moveable from "../Moveable";
 
 export default class Player {
   private _id: PlayerID;
@@ -13,7 +13,6 @@ export default class Player {
   private _bases: Map<string, Base>;
   private _dumps: Map<string, Dump>;
   private _supplyUnits: Map<string, SupplyUnit>;
-  private _refitPoints: Map<string, RefitPoint>;
   private _socket: Socket;
 
   constructor(id: PlayerID, socket: Socket) {
@@ -22,7 +21,6 @@ export default class Player {
     this._bases = new Map();
     this._dumps = new Map();
     this._supplyUnits = new Map();
-    this._refitPoints = new Map();
     this._socket = socket;
   }
 
@@ -46,9 +44,18 @@ export default class Player {
 
   getUnitById(id: number): Unit {
     const unit = this._units.get(id.toString());
-
     if (!unit) {
       throw new Error("Nonexisting entity");
+    }
+    return unit;
+  }
+  getMoveableById(id: number): Moveable {
+    let unit = this._units.get(id.toString());
+    if (!unit) {
+      unit = this._supplyUnits.get(id.toString()) as Unit | undefined;
+      if (!unit) {
+        throw new Error("Nonexisting entity");
+      }
     }
     return unit;
   }
@@ -72,10 +79,6 @@ export default class Player {
     return Array.from(this._supplyUnits.values());
   }
 
-  getRefitPoints(): RefitPoint[] {
-    return Array.from(this._refitPoints.values());
-  }
-
   getSocket(): Socket {
     return this._socket;
   }
@@ -91,9 +94,6 @@ export default class Player {
   }
   addSupplyUnit(supplyUnit: SupplyUnit): void {
     this._supplyUnits.set(supplyUnit.getId().toString(), supplyUnit);
-  }
-  addRefitPoint(refitPoint: RefitPoint): void {
-    this._refitPoints.set(refitPoint.getId().toString(), refitPoint);
   }
   removeUnit(defenderUnit: Unit) {
     this._units.delete(defenderUnit.getId().toString());

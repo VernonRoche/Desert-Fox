@@ -4,7 +4,6 @@ import HexID from "../main/Map/HexID";
 import Foot from "../main/Units/Foot";
 import { getNewId, resetIds } from "../main/idManager";
 import Dump from "../main/Infrastructure/Dump";
-import RefitPoint from "../main/Infrastructure/RefitPoint";
 
 describe("Player Test", function () {
   this.afterAll(() => {
@@ -14,7 +13,6 @@ describe("Player Test", function () {
   const footHexId = new HexID(2, 2);
   const foot = new Foot(id, footHexId, 3, 3, 12, 12);
   const _dump = new Dump(getNewId(), footHexId);
-  const _refitPoints = new RefitPoint(5);
 
   //const socket = io('http://localhost:${5001}');
   const player = new Player(id, null as any);
@@ -30,10 +28,6 @@ describe("Player Test", function () {
       // a modifs
       throw new Error("SupplyUnits not correct");
     }
-    if (player.getRefitPoints().length !== 0) {
-      // a modifs
-      throw new Error("RefitPoints not correct");
-    }
     /*if (player.getSocket() != socket) {
         throw new Error("Socket not correct");
         }*/
@@ -43,13 +37,6 @@ describe("Player Test", function () {
     player.addUnit(foot);
     if (!player.hasEntity(foot)) {
       throw new Error("hasUnit not correct");
-    }
-  });
-
-  it("add refit points", function () {
-    player.addRefitPoint(_refitPoints);
-    if (player.getRefitPoints().length !== 1) {
-      throw new Error("RefitPoints not correct");
     }
   });
 

@@ -72,16 +72,29 @@ export default class Hex {
       this.addDump(entity as Dump);
     }
   }
+  removeEntity(entity: Entity) {
+    if (
+      entity.getType() === "motorized" ||
+      entity.getType() === "foot" ||
+      entity.getType() === "mechanized"
+    ) {
+      this.removeUnit(entity as Unit);
+    } else if (entity.getType() === "supply") {
+      this.removeSupplyUnit(entity as SupplyUnit);
+    } else if (entity.getType() === "dump") {
+      this.removeDump(entity as Dump);
+    }
+  }
 
   addBase(base: Base) {
     // only 1 base per hex
+    if( !base ) return; 
     if (this._base) throw new Error("base already present");
     this._base = base;
   }
 
   addDump(dump: Dump) {
-    // only 1 dumb per hex(for now)
-    if (this._dumps.length > 0) throw new Error("dump already present");
+    if( !dump ) return; 
     this._dumps.push(dump);
   }
 
@@ -101,6 +114,9 @@ export default class Hex {
     this._supplyUnits.forEach((item, index) => {
       if (item === unit) this._supplyUnits.splice(index, 1);
     });
+  }
+  removeDump(dump: Dump) {
+    this._dumps = this._dumps.filter((dmp) => dmp !== dump);
   }
 
   getNeighbours(): Hex[] {

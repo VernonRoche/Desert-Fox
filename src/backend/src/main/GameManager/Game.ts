@@ -86,10 +86,20 @@ export default class Game {
 
   // Checks if a move is possible and applies it.
   // Returns false if the move was not possible, true if move was succesful.
-  public moveUnit(player: Player, unit: Unit, destination: HexID): void {
+  public moveUnit(player: Player, unit: Moveable, destination: HexID): void {
     const canMove = this.canMove(player, unit, destination);
     if (typeof canMove === "string") {
       throw new Error(canMove);
+    }
+    if (
+      unit.getType() !== "SupplyUnit" &&
+      !(
+        unit.getType() !== "motorized" ||
+        unit.getType() !== "motorized" ||
+        unit.getType() !== "mechanized"
+      )
+    ) {
+      throw new Error("unit is not a supply unit or a unit, its a " + unit.getType());
     }
     const { movePossible, cost } = canMove;
     if (!movePossible) {
@@ -99,8 +109,8 @@ export default class Game {
     // Check if move is possible
     const originHex = this._map.findHex(unit.getCurrentPosition());
     const destinationHex = this._map.findHex(destination);
-    destinationHex.addUnit(unit);
-    originHex.removeUnit(unit);
+    destinationHex.addEntity(unit);
+    originHex.removeEntity(unit);
     unit.place(destination);
     unit.move(cost);
   }

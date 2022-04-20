@@ -42,7 +42,7 @@ export const _commands: Commands = {
     }
     let unit;
     try {
-      unit = player.getUnitById(unitId);
+      unit = player.getMoveableById(unitId);
     } catch (e) {
       player.getSocket().emit(args.type, { error: "invalidunitid" });
       return;

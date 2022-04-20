@@ -106,6 +106,8 @@ export default class GameMap {
   }
   removeDump(dump: Dump) {
     this._entities.delete(dump.getId().toString());
+    const hex = this._hexagons.get(dump.getCurrentPosition().id());
+    if (hex) hex.removeDump(dump);
   }
 
   public toJSON(player: Player): string {
