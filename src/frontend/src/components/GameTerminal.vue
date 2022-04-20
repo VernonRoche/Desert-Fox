@@ -137,7 +137,7 @@ const commands: Commands = {
     if (args.length !== 1) {
       addLine(
         "Game",
-        "Trop d'arguments, le premier argument doit être un numéro (identifiant d'hexagone)",
+        "Nombre d'arguments invalide, le premier argument doit être un numéro (identifiant d'hexagone)",
       );
       return;
     }
@@ -159,7 +159,6 @@ const commands: Commands = {
     socket.once(
       "hex",
       (resp: { units: Unit[]; bases: Base; dumps: Dump[]; supplyUnits: SupplyUnit[] }) => {
-        console.log(resp);
         let unitString = "";
         resp.units.forEach((unit) => {
           unitString += unitToString(unit);
@@ -174,6 +173,37 @@ const commands: Commands = {
         addLine("Game", `Unités: ${unitString}\n Bases: ${basesString}`);
       },
     );
+  },
+  embark: (args: string[]) => {
+    if (args.length !== 2) {
+      addLine(
+        "Game",
+        "Trop d'arguments, le premier argument doit être un numéro (identifiant d'unité) et le deuxième argument doit être un numéro (identifiant d'hexagone)",
+      );
+      return;
+    }
+
+    const embarkingId = +args[0];
+    const toEmbarkId = +args[1];
+    if (isNaN(embarkingId) || isNaN(toEmbarkId)) {
+      addLine(
+        "Game",
+        "Argument invalide, le premier argument doit être un numéro (identifiant d'unité) et le deuxième argument doit être un numéro (identifiant d'hexagone)",
+      );
+      return;
+    }
+    socket.emit("command", {
+      type: "embark",
+      embarkingId: args[0],
+      toEmbarkId: args[1],
+    });
+    socket.once("embark", (resp: { error: string | false }) => {
+      if (resp.error) {
+        addLine("Game", getError(resp.error));
+      } else {
+        addLine("Game", `L'unité ${args[0]} a embarqué ${args[1]}`);
+      }
+    });
   },
 };
 
