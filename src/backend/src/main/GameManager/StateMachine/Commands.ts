@@ -1,5 +1,4 @@
 import HexID from "../../Map/HexID";
-import webSocketServer from "../../SocketServer";
 import Player from "../Player";
 import { StateMachine } from "./StateMachine";
 
@@ -65,7 +64,13 @@ export const _commands: Commands = {
       return;
     }
     try {
-      webSocketServer.getGame()?.moveUnit(player, unit, new HexID(y, x));
+      console.log("Moving unit right there");
+      const game = stateMachine.getSocketServer().getGame();
+      if (!game) {
+        player.getSocket().emit(args.type, { error: "nogame" });
+        return;
+      }
+      game.moveUnit(player, unit, new HexID(y, x));
       if (stateMachine.isVerbose) console.log("move was successful");
       player.getSocket().emit(args.type, { error: false });
     } catch (e) {

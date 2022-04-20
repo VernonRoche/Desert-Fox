@@ -63,4 +63,16 @@ describe("unit is correct add", function () {
       throw new Error("owned not correct");
     }
   });
+
+  it("add units and remove units", function () {
+    const player = new Player(PlayerID.ONE, null as any);
+    player.addUnit(unit[0]);
+    if (player.getUnits().length != 1) {
+      throw new Error("getUnits not correct");
+    }
+    player.removeUnit(unit[0]);
+    if (player.getUnits().length != 0) {
+      throw new Error("getUnits not correct");
+    }
+  });
 });

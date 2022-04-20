@@ -1,6 +1,6 @@
 import { Socket } from "socket.io";
 import { createMachine, interpret } from "xstate";
-import webSocketServer, { SocketServer } from "../../SocketServer";
+import { SocketServer } from "../../SocketServer";
 import { AllArgs, commandTypes, _commands } from "./Commands";
 import Player from "../Player";
 import PlayerID from "../PlayerID";
@@ -102,25 +102,12 @@ export class StateMachine {
         auto: true,
       });
     if (actualPhase === "air_superiority") {
-      this.socketServer.sockets.forEach((socket) => {
-        const checkIfCorrectPlayer = this.checkIfCorrectPlayer(
-          "first_player_movement",
-          this.socketServer.getPlayerFromSocket(socket).getId(),
-        );
-        socket.emit("phase", {
-          phase: "first_player_movement",
-          play: checkIfCorrectPlayer.correct,
-          commands: checkIfCorrectPlayer.commands,
-          auto: false,
-        });
-      });
-      /* Ce qu'il faut mettre apres qu'on implemente reinforcements etc
-    this.socketServer.broadcast("phase", {
+      this.socketServer.broadcast("phase", {
         phase: "reinforcements",
         play: true,
         commands: ["select"],
         auto: false,
-      });*/
+      });
     }
   }
 
@@ -144,18 +131,24 @@ export class StateMachine {
   }
 
   endTurn(player: Player): boolean {
-    if (["reinforcements", "initiative", "allocation"].includes(this.getPhase())) {
-      this.done[player.getId()] = true;
+    if (["reinforcements"].includes(this.getPhase())) {
+      if (this.done[player.getId()]) player.getSocket().emit("done", { error: "alreadydone" });
+      else {
+        this.done[player.getId()] = true;
+        player.getSocket().emit("done", {error: false});
+      }
+
       if (this.done[0] && this.done[1]) {
         this.reinitDoneTable();
         this.phaseService.send("NEXT");
         return true;
       }
     } else {
-      if (this.checkIfCorrectPlayer(this.getPhase(), player.getId())) {
+      if (this.checkIfCorrectPlayer(this.getPhase(), player.getId()).correct) {
         this.phaseService.send("NEXT");
+        player.getSocket().emit("done", {error: false});
         return true;
-      } else throw new Error("wrongplayer");
+      } else player.getSocket().emit("done", { error: "wrongplayer" });
     }
     return false;
   }
@@ -189,11 +182,13 @@ export class StateMachine {
       case "first_player_reaction2":
       case "first_player_combat2": {
         if (playerId === PlayerID.ONE) return { correct: true, commands: ["move"] };
+        console.log("movement", currentPhase, playerId);
         break;
       }
       case "first_player_combat":
       case "first_player_combat2": {
         if (playerId === PlayerID.ONE) return { correct: true, commands: ["attack"] };
+        console.log("combat", currentPhase, playerId);
         break;
       }
       case "second_player_movement":
@@ -210,8 +205,6 @@ export class StateMachine {
       }
       case "reinforcements":
         return { correct: true, commands: ["select"] };
-      case "initiative":
-        return { correct: true, commands: [] };
       default:
         return { correct: false, commands: [] };
     }
@@ -228,7 +221,7 @@ export class StateMachine {
       currentPhase,
       this.checkIfCorrectPlayer(currentPhase, correctPlayerId).commands,
     );
-    if (currentPhase === "reinforcements" || currentPhase === "initiative") {
+    if (currentPhase === "reinforcements") {
       this.socketServer.broadcast("phase", {
         phase: currentPhase,
         play: true,
@@ -245,7 +238,8 @@ export class StateMachine {
   getPhase() {
     return this.phaseService.state.value.toString();
   }
-}
 
-const stateMachine = new StateMachine(webSocketServer);
-export default stateMachine;
+  getSocketServer() {
+    return this.socketServer;
+  }
+}
