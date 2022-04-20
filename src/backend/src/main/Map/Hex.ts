@@ -10,7 +10,7 @@ export default class Hex {
   private _hexId: HexID;
   private _units: Unit[];
   private _supplyUnits: SupplyUnit[];
-  private _bases: Base[];
+  private _base: Base | undefined;
   private _dumps: Dump[];
   private _connexions: Hex[]; // To be later replaced with HexNeighbour
   private _terrain: Terrain;
@@ -19,7 +19,6 @@ export default class Hex {
   constructor(hexId: HexID, terrain: Terrain) {
     this._hexId = hexId;
     this._units = [];
-    this._bases = [];
     this._dumps = [];
     this._supplyUnits = [];
     this._connexions = [];
@@ -33,8 +32,8 @@ export default class Hex {
   getSupplyUnits(): SupplyUnit[] {
     return this._supplyUnits;
   }
-  getBases(): Base[] {
-    return this._bases;
+  getBase(): Base | undefined {
+    return this._base;
   }
   getDumps(): Dump[] {
     return this._dumps;
@@ -76,8 +75,8 @@ export default class Hex {
 
   addBase(base: Base) {
     // only 1 base per hex
-    if (this._bases.length > 0) throw new Error("base already present");
-    this._bases.push(base);
+    if (this._base) throw new Error("base already present");
+    this._base = base;
   }
 
   addDump(dump: Dump) {

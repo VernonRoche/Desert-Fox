@@ -6,7 +6,7 @@ import Maps from "./Maps";
 import Terrain, { TerrainTypes } from "./Terrain";
 import Unit, { unitJson } from "../Units/Unit";
 import Player from "../GameManager/Player";
-import { baseJson } from "../Infrastructure/Base";
+import Base, { baseJson } from "../Infrastructure/Base";
 import Dump, { dumpJson } from "../Infrastructure/Dump";
 import { supplyUnitJson } from "../Infrastructure/SupplyUnit";
 const width = 66;
@@ -112,12 +112,12 @@ export default class GameMap {
     const json: JsonMap = [];
     this._hexagons.forEach((hex) => {
       const units: unitJson[] = [];
-      let base : baseJson | undefined;
+      let base : baseJson | undefined = undefined;
       const dumps: dumpJson[] = [];
       const supplyUnits: supplyUnitJson[] = [];
       hex.getUnits().forEach((unit) => units.push(unit.toJson(player)));
-      let bases = hex.getBases();
-      base = bases.find((baseX) =>  player.hasEntity(baseX)) ? bases[0].toJson(player) : undefined;
+      let baseX : Base | undefined = hex.getBase();
+      if (baseX) base = baseX.toJson(player);
       hex.getDumps().forEach((dump) => dumps.push(dump.toJson(player)));
       hex.getSupplyUnits().forEach((supplyUnit) => supplyUnits.push(supplyUnit.toJson(player)));
 
