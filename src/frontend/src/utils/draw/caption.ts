@@ -11,18 +11,12 @@ export default function drawCaption(p5: P5) {
 
   for (const [key, color] of Object.entries(colorsHexagon)) {
     if (key !== "empty") {
-      /* p5.push();
-            p5.fill(color);
-            p5.rect(width, height, widthRect, heightRect);
-            p5.pop();
-            drawText(p5, widthRect*2 + 5, height + heightRect/2, key, "black");
-            height -= 30; */
       const centreY = height + heightRect / 2;
       p5.push();
       p5.fill(color);
       p5.rect(width, height, widthRect, heightRect);
       p5.pop();
-      drawText(p5, centreX, centreY, key, "black", 10, "left");
+      drawText(p5, centreX, centreY, key, "black", "left");
       height -= 30;
     }
   }
