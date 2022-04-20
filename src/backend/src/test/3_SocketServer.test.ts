@@ -1,46 +1,44 @@
-import express from "express";
 import { io, Socket } from "socket.io-client";
 import { StateMachine } from "../main/GameManager/StateMachine/StateMachine";
 import { resetIds } from "../main/idManager";
 import { SocketServer } from "../main/SocketServer";
 
-function initSocket(port: number): Socket {
-  return io(`http://localhost:${port}`);
-}
-
 describe("Socket server tests", function () {
+  function initSocket(): Socket {
+    return io(`http://localhost:${SERVER_PORT}`);
+  }
   this.afterAll(() => {
     resetIds();
   });
-  let socketServer: SocketServer;
+  let server: SocketServer;
   let stateMachine: StateMachine;
   let player1: Socket;
   let player2: Socket;
   const CLIENT_PORT = 5050;
   const SERVER_PORT = 5000;
   it("Initialize socket server", function () {
-    socketServer = new SocketServer(CLIENT_PORT, SERVER_PORT, false);
-    stateMachine = new StateMachine(socketServer, false);
+    server = new SocketServer(CLIENT_PORT, SERVER_PORT, false);
+    stateMachine = new StateMachine(server, false);
   });
 
   it("webServer stores correctly clientPort", function () {
-    if (socketServer.clientPort !== CLIENT_PORT) {
+    if (server.clientPort !== CLIENT_PORT) {
       throw new Error("clientPort is not stored correctly");
     }
   });
 
   it("webServer stores correctly serverPort", function () {
-    if (socketServer.serverPort !== SERVER_PORT) {
+    if (server.serverPort !== SERVER_PORT) {
       throw new Error("serverPort is not stored correctly");
     }
   });
   it("Run webServer", function () {
-    socketServer.run(stateMachine);
+    server.run(stateMachine);
   });
 
   it("Initialize player 1 and connect", function () {
     return new Promise<void>((resolve) => {
-      player1 = initSocket(SERVER_PORT);
+      player1 = initSocket();
       player1.once("connect", () => {
         resolve();
       });
@@ -49,7 +47,7 @@ describe("Socket server tests", function () {
 
   it("Initialize player 2 and connect", function () {
     return new Promise<void>((resolve) => {
-      player2 = initSocket(SERVER_PORT);
+      player2 = initSocket();
       player2.once("connect", () => {
         resolve();
       });
@@ -57,7 +55,7 @@ describe("Socket server tests", function () {
   });
 
   it("Try to connect a 3rd player", function () {
-    const player3 = initSocket(SERVER_PORT);
+    const player3 = initSocket();
     return new Promise<void>((resolve, reject) => {
       player3.once("connect", () => {
         setTimeout(() => {
@@ -71,25 +69,25 @@ describe("Socket server tests", function () {
   });
 
   it("Game should be started", function () {
-    if (!socketServer.getGame()) {
+    if (!server.getGame()) {
       throw new Error("Game is not started with 2 players");
     }
   });
 
   it("Game should have player1", function () {
-    if (!socketServer.getGame()?.getPlayer1()) {
+    if (!server.getGame()?.getPlayer1()) {
       throw new Error("Game doesn't have player1");
     }
   });
 
   it("Game should have player2", function () {
-    if (!socketServer.getGame()?.getPlayer2()) {
+    if (!server.getGame()?.getPlayer2()) {
       throw new Error("Game doesn't have player2");
     }
   });
 
   it("Game should have player1 with correct socket", function () {
-    const gameSocketId = socketServer.getGame()?.getPlayer1()?.getSocket().id;
+    const gameSocketId = server.getGame()?.getPlayer1()?.getSocket().id;
     if (gameSocketId !== player1.id) {
       if (gameSocketId === player2.id) {
         throw new Error(`Game have player1 with the socket of player2`);
@@ -101,7 +99,7 @@ describe("Socket server tests", function () {
   });
 
   it("Game should have player2 with correct socket", function () {
-    const gameSocketId = socketServer.getGame()?.getPlayer2()?.getSocket().id;
+    const gameSocketId = server.getGame()?.getPlayer2()?.getSocket().id;
     if (gameSocketId !== player2.id) {
       if (gameSocketId === player1.id) {
         throw new Error(`Game have player2 with the socket of player1`);
@@ -115,7 +113,7 @@ describe("Socket server tests", function () {
   it("Player1 disconnection should stop game", function () {
     player1.once("disconnect", () => {
       setTimeout(() => {
-        const game = socketServer.getGame();
+        const game = server.getGame();
         if (game) {
           throw new Error("Game is not stopped with player1 disconnection");
         }
@@ -125,7 +123,7 @@ describe("Socket server tests", function () {
   });
 
   it("Only player2 should be remaining", function () {
-    const players = socketServer["_players"];
+    const players = server["_players"];
     if (players.length !== 1) {
       throw new Error("Player1 is not removed properly");
     }
@@ -133,7 +131,7 @@ describe("Socket server tests", function () {
       throw new Error("Remaining player is not player2");
     }
 
-    const sockets = socketServer["_sockets"];
+    const sockets = server["_sockets"];
     if (sockets.length !== 1) {
       throw new Error("Player1 socket is not removed properly");
     }
@@ -148,7 +146,7 @@ describe("Socket server tests", function () {
       player1.connect();
       player1.once("connect", () => {
         resolve();
-        if (!socketServer.getGame()) {
+        if (!server.getGame()) {
           throw new Error("Game is not restarted with player1 connection");
         }
       });
@@ -160,7 +158,7 @@ describe("Socket server tests", function () {
   it("Player2 disconnection should stop game", function () {
     player2.once("disconnect", () => {
       setTimeout(() => {
-        const game = socketServer.getGame();
+        const game = server.getGame();
         if (game) {
           throw new Error("Game is not stopped with player2 disconnection");
         }
@@ -174,7 +172,7 @@ describe("Socket server tests", function () {
       player2.connect();
       player2.once("connect", () => {
         resolve();
-        if (!socketServer.getGame()) {
+        if (!server.getGame()) {
           throw new Error("Game is not restarted with player2 connection");
         }
       });
@@ -203,6 +201,6 @@ describe("Socket server tests", function () {
   });
 
   it("close server", function () {
-    socketServer["_httpServer"].close();
+    server["_httpServer"].close();
   });
 });

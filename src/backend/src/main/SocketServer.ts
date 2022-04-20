@@ -3,7 +3,7 @@ import { Server, Socket } from "socket.io";
 import express from "express";
 import Game from "./GameManager/Game";
 import Player from "./GameManager/Player";
-import stateMachine, { MaxTurns, StateMachine } from "./GameManager/StateMachine/StateMachine";
+import { MaxTurns, StateMachine } from "./GameManager/StateMachine/StateMachine";
 import { resetIds } from "./idManager";
 
 export class SocketServer {
@@ -60,7 +60,7 @@ export class SocketServer {
     stateMachine.startMachine();
   }
 
-  private destroyGame() {
+  private destroyGame(stateMachine: StateMachine): void {
     if (this.isVerbose) console.log("Game destroyed");
     this._created = false;
     this._game = undefined;
@@ -91,7 +91,7 @@ export class SocketServer {
         this.createGame(stateMachine);
       }
       stateMachine.registerSocket(socket);
-      this.applyRoutes(socket);
+      this.applyRoutes(socket, stateMachine);
     });
   }
 
@@ -107,7 +107,7 @@ export class SocketServer {
   //////////// Routes
   /////////////////////////////////////////////////////////////
 
-  private applyRoutes(socketClient: Socket) {
+  private applyRoutes(socketClient: Socket, stateMachine: StateMachine): void {
     socketClient.on("ping message", () => {
       socketClient.emit("pong message", "pong");
     });
@@ -118,7 +118,7 @@ export class SocketServer {
       this._sockets = this._sockets.filter((socket) => socket.id !== socketClient.id);
       this._players = this._players.filter((player) => player.getSocket().id !== socketClient.id);
       if (this._created) {
-        this.destroyGame();
+        this.destroyGame(stateMachine);
         resetIds();
       }
     });
@@ -154,6 +154,3 @@ export class SocketServer {
     return this._players.find((player) => player.getSocket().id === socket.id) as Player;
   }
 }
-
-const webSocketServer = new SocketServer(8000, 3001);
-export default webSocketServer;

@@ -8,15 +8,13 @@ function closeServer(server: SocketServer) {
   server["_httpServer"].close();
 }
 
-function initSocket(port = 5001): Socket {
-  return io(`http://localhost:${port}`);
-}
-
 describe("Game tests", function () {
+  function initSocket(): Socket {
+    return io(`http://localhost:${SERVER_PORT}`);
+  }
   this.afterAll(() => {
     resetIds();
   });
-  this.timeout(2000);
   let server: SocketServer;
   let stateMachine: StateMachine;
   let player1: Socket;
@@ -25,7 +23,7 @@ describe("Game tests", function () {
   const SERVER_PORT = 5001;
 
   it("Initialize server", function () {
-    server = new SocketServer(CLIENT_PORT, SERVER_PORT, true);
+    server = new SocketServer(CLIENT_PORT, SERVER_PORT, false);
     stateMachine = new StateMachine(server, false);
     server.run(stateMachine);
   });
