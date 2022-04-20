@@ -116,7 +116,7 @@ export default class GameMap {
       const dumps: dumpJson[] = [];
       const supplyUnits: supplyUnitJson[] = [];
       hex.getUnits().forEach((unit) => units.push(unit.toJson(player)));
-      let baseX: Base | undefined = hex.getBase();
+      const baseX: Base | undefined = hex.getBase();
       if (baseX) base = baseX.toJson(player);
       hex.getDumps().forEach((dump) => dumps.push(dump.toJson(player)));
       hex.getSupplyUnits().forEach((supplyUnit) => supplyUnits.push(supplyUnit.toJson(player)));

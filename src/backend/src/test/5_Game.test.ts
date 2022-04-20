@@ -1,4 +1,5 @@
 import { io, Socket } from "socket.io-client";
+import { respond } from "xstate/lib/actions";
 import { StateMachine } from "../main/GameManager/StateMachine/StateMachine";
 import { resetIds } from "../main/idManager";
 import { SocketServer } from "../main/SocketServer";
@@ -88,6 +89,24 @@ describe("Game tests", function () {
       });
     });
   });
+  it("skip to first_player_movement phase", async function () {
+    return new Promise<void>((resolve, reject) => {
+      player1.emit("done");
+      player2.emit("done");
+      setTimeout(() => {
+        if (stateMachine.getPhase() !== "first_player_movement") {
+          reject(
+            new Error(
+              "Not in first_player_movement phase, current phase is : " +
+                stateMachine.getPhase() +
+                "instead",
+            ),
+          );
+        }
+        resolve();
+      }, 1000);
+    });
+  });
 
   it("First player moves a valid unit", function () {
     return new Promise<void>((resolve, reject) => {
@@ -146,8 +165,6 @@ describe("Game tests", function () {
   });
 
   it("skip to next player", function () {
-    player1.emit("done");
-    player2.emit("done");
     player1.emit("done");
   });
 

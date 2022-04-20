@@ -135,7 +135,7 @@ export class StateMachine {
       if (this.done[player.getId()]) player.getSocket().emit("done", { error: "alreadydone" });
       else {
         this.done[player.getId()] = true;
-        player.getSocket().emit("done", {error: false});
+        player.getSocket().emit("done", { error: false });
       }
 
       if (this.done[0] && this.done[1]) {
@@ -146,7 +146,7 @@ export class StateMachine {
     } else {
       if (this.checkIfCorrectPlayer(this.getPhase(), player.getId()).correct) {
         this.phaseService.send("NEXT");
-        player.getSocket().emit("done", {error: false});
+        player.getSocket().emit("done", { error: false });
         return true;
       } else player.getSocket().emit("done", { error: "wrongplayer" });
     }
@@ -179,8 +179,7 @@ export class StateMachine {
       case "first_player_movement":
       case "first_player_reaction":
       case "first_player_movement2":
-      case "first_player_reaction2":
-      case "first_player_combat2": {
+      case "first_player_reaction2": {
         if (playerId === PlayerID.ONE) return { correct: true, commands: ["move"] };
         console.log("movement", currentPhase, playerId);
         break;
