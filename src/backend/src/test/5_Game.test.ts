@@ -32,7 +32,6 @@ describe("Game tests", function () {
     return new Promise<void>((resolve) => {
       player1 = initSocket();
       player1.once("connect", () => {
-        console.log("Player 1 connected!");
         resolve();
       });
     });
@@ -42,7 +41,6 @@ describe("Game tests", function () {
     return new Promise<void>((resolve) => {
       player2 = initSocket();
       player2.once("connect", () => {
-        console.log("Player 2 connected!");
         resolve();
       });
     });
@@ -114,6 +112,35 @@ describe("Game tests", function () {
           resolve();
         }
         reject(new Error("Player cannot move this unit"));
+      });
+    });
+  });
+
+  it("First player fails to move to a non existing hex", function () {
+    return new Promise<void>((resolve, reject) => {
+      player1.emit("command", { type: "move", unitId: "0", hexId: "9999" });
+      player1.on("move", (resp: { error: string | false }) => {
+        if (resp.error === "invalidmove") {
+          resolve();
+        } else {
+          reject(new Error("Wrong error returned, supposed 'invalidhex', got: " + resp.error));
+        }
+        reject(new Error("Player cannot move to this hex"));
+      });
+    });
+  });
+
+  it("First player tries to move an opponent's unit", function () {
+    return new Promise<void>((resolve, reject) => {
+      player1.emit("command", { type: "move", unitId: "6", hexId: "2031" });
+      player1.on("move", (resp: { error: string | false }) => {
+        if (resp.error) {
+          if (resp.error === "invalidunitid") {
+            resolve();
+          }
+          reject(new Error("Wrong error returned, supposed 'invalidunitid', got: " + resp.error));
+        }
+        reject(new Error("Player cannot move this unit" + resp.error));
       });
     });
   });
