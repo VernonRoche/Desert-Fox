@@ -48,3 +48,17 @@ export type GameMap = {
     },
   ];
 }[];
+
+export type Base = {
+  currentPosition: string;
+  primary: boolean;
+  owned: boolean;
+};
+
+export type Dump = {
+  currentPosition: string;
+};
+export type SupplyUnit = {
+  currentPosition: string;
+  movementPoints: number;
+};

@@ -37,7 +37,7 @@
 
 <script lang="ts" setup>
 import { onUnmounted, ref } from "@vue/runtime-dom";
-import { Unit } from "../utils/constants/types";
+import { Base, Dump, SupplyUnit, Unit } from "../utils/constants/types";
 import socket from "../utils/ClientSocket";
 import getError from "../utils/constants/errorExplanation";
 
@@ -146,6 +146,38 @@ const commands: Commands = {
   },
   clear: () => {
     lines.value = [];
+  },
+
+  hex: (args: string[]) => {
+    if (args.length !== 1) {
+      addLine(
+        "Game",
+        "Trop d'arguments, le premier argument doit être un numéro (identifiant d'hexagone)",
+      );
+      return;
+    }
+
+    const hexId = +args[0];
+    if (isNaN(hexId)) {
+      addLine(
+        "Game",
+        "Argument invalide, le premier argument doit être un numéro (identifiant d'hexagone)",
+      );
+      return;
+    }
+
+    socket.emit("command", {
+      type: "hex",
+      hexId: args[0],
+    });
+
+    socket.once(
+      "hex",
+      (resp: { units: Unit[]; bases: Base[]; dumps: Dump[]; supplyUnits: SupplyUnit[] }) => {
+        console.log("Got from hex", resp);
+        addLine("Game", "received hex resp");
+      },
+    );
   },
 };
 
