@@ -59,6 +59,24 @@ export default class Player {
     }
     return unit;
   }
+  getEntityById(id: number): Entity {
+    let entity;
+    entity = this._units.get(id.toString());
+    if (!entity) {
+      entity = this._supplyUnits.get(id.toString());
+      if (!entity) {
+        entity = this._bases.get(id.toString());
+        if (!entity) {
+          entity = this._dumps.get(id.toString());
+          if (!entity) {
+            throw new Error("Nonexisting entity");
+          }
+        }
+      }
+    }
+    return entity;
+  }
+
 
   getId(): PlayerID {
     return this._id;
