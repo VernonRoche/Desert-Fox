@@ -10,6 +10,7 @@ const moveErrors: Record<string, string> = {
 
 const doneErrors = {
   wrongplayer: "Ce n'est pas votre tour",
+  alreadydone: "Vous avez déjà passé votre tour",
 };
 
 export const allErrors: Record<string, string> = {
