@@ -2,9 +2,9 @@ import Player from "../main/GameManager/Player";
 import PlayerID from "../main/GameManager/PlayerID";
 import HexID from "../main/Map/HexID";
 import Foot from "../main/Units/Foot";
-import fs from "fs";
-import { UnitJson } from "../main/jsonTypes";
 import { getNewId, resetIds } from "../main/idManager";
+import Dump from "../main/Infrastructure/Dump";
+import RefitPoint from "../main/Infrastructure/RefitPoint";
 
 describe("Player Test", function () {
   this.afterAll(() => {
@@ -13,6 +13,8 @@ describe("Player Test", function () {
   const id = PlayerID.ONE;
   const footHexId = new HexID(2, 2);
   const foot = new Foot(id, footHexId, 3, 3, 12, 12);
+  const _dump = new Dump(getNewId(), footHexId);
+  const _refitPoints = new RefitPoint(5);
 
   //const socket = io('http://localhost:${5001}');
   const player = new Player(id, null as any);
@@ -42,5 +44,19 @@ describe("Player Test", function () {
     if (!player.hasEntity(foot)) {
       throw new Error("hasUnit not correct");
     }
+  });
+
+  it("add refit points", function () {
+    player.addRefitPoint(_refitPoints);
+    if (player.getRefitPoints().length !== 1) {
+      throw new Error("RefitPoints not correct");
+    }
+  });
+
+  it("Dump is correct and remove dumps", function () {
+    const player2 = new Player(id, null as any);
+    player2.addUnit(foot);
+    player2.addDump(_dump);
+    player2.removeDump(_dump);
   });
 });
