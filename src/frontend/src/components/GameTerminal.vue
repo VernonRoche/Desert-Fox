@@ -108,19 +108,7 @@ const commands: Commands = {
         addLine("Game", "La partie n'est pas lancée");
         return;
       }
-      addLine(
-        "Game",
-        resp
-          .map(
-            ({ _id, _lifePoints, _currentPosition, _remainingMovementPoints }) =>
-              `Unit ${_id} has ${_lifePoints} life point at hexId (${addZeroIfNeeded(
-                _currentPosition._y,
-              )}${addZeroIfNeeded(
-                _currentPosition._x,
-              )}) with ${_remainingMovementPoints} movement points`,
-          )
-          .join("\n"),
-      );
+      addLine("Game", resp.map(unitToString).join(""));
     });
   },
   done: () => {
@@ -174,18 +162,16 @@ const commands: Commands = {
         console.log(resp);
         let unitString = "";
         resp.units.forEach((unit) => {
-          unitString += `Unit ${unit._id} has ${
-            unit._lifePoints
-          } life point at hexId (${addZeroIfNeeded(unit._currentPosition._y)}${addZeroIfNeeded(
-            unit._currentPosition._x,
-          )}) with ${unit._remainingMovementPoints} movement points\n`;
+          unitString += unitToString(unit);
         });
         let basesString = "";
         const { _currentPosition, _primary } = resp.bases;
-        basesString += `Base at hexId (${addZeroIfNeeded(_currentPosition._y)}${addZeroIfNeeded(
-          _currentPosition._x,
-        )}) is a ${_primary ? "primary" : "secondary"} base`;
-        addLine("Game", `Les unités sont : ${unitString}, les bases sont : ${basesString}`);
+        basesString += `La base à l'hexagone (${addZeroIfNeeded(
+          _currentPosition._y,
+        )}${addZeroIfNeeded(_currentPosition._x)}) est une base ${
+          _primary ? "primaire" : "secondaire"
+        }`;
+        addLine("Game", `Unités: ${unitString}\n Bases: ${basesString}`);
       },
     );
   },
@@ -289,6 +275,14 @@ function handleKeyUp() {
 
 function addZeroIfNeeded(number: number) {
   return number < 10 ? `0${number}` : number;
+}
+
+function unitToString(unit: Unit) {
+  return `L'unité ${unit._id} a ${unit._lifePoints} point${
+    +unit._lifePoints > 1 ? "s" : ""
+  } de vie à l'hexagone (${addZeroIfNeeded(unit._currentPosition._y)}${addZeroIfNeeded(
+    unit._currentPosition._x,
+  )}) avec ${unit._remainingMovementPoints} points de mouvement\n`;
 }
 
 onUnmounted(disconnectSocket);
