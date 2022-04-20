@@ -14,9 +14,8 @@ async function main() {
     .option("quiet", {
       alias: "q",
       default: false,
-      describe: "Quiet mode",
+      describe: "Mode muet (n'affiche plus les messages du serveur et de la machine d'état)",
       boolean: true,
-      requiresArg: true,
     })
     .option("help", {
       alias: "h",
