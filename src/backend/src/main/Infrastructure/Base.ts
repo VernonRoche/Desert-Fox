@@ -1,4 +1,3 @@
-import Embarkable from "../Embarkable";
 import Entity from "../Entity";
 import Player from "../GameManager/Player";
 import HexID from "../Map/HexID";

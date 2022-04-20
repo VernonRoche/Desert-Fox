@@ -50,10 +50,6 @@ export default class SupplyUnit implements Moveable {
     this._remainingMovementPoints -= movementPoints;
   }
 
-  nightMove(hexId: HexID): void {
-    throw new Error("Method not implemented.");
-  }
-
   getMovementPoints(): number {
     return this._movementPoints;
   }
@@ -67,11 +63,17 @@ export default class SupplyUnit implements Moveable {
   }
 
   public embark(item: Embarkable): void {
-    throw new Error("Method not implemented.");
+    if (this._item.length === 0) this._item.push(item);
+    else throw new Error("Item already in supply");
   }
 
-  public disemabrk(): void {
-    throw new Error("Method not implemented.");
+  public disembark(): Embarkable {
+    if (this._item.length === 0) throw new Error("No item in supply");
+    return this._item.pop() as Embarkable;
+  }
+  getEmbarked(): Embarkable | undefined {
+    if (this._item.length === 0) return undefined;
+    return this._item[0];
   }
 
   public createBase(): void {

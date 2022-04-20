@@ -1,6 +1,7 @@
 import Game from "../main/GameManager/Game";
 import Player from "../main/GameManager/Player";
 import PlayerID from "../main/GameManager/PlayerID";
+import SupplyUnit from "../main/Infrastructure/SupplyUnit";
 import Moveable from "../main/Moveable";
 
 describe("Game tests", function () {
@@ -29,6 +30,32 @@ describe("Game tests", function () {
       )
     ) {
       throw new Error("Game should check supplies properly");
+    }
+  });
+  it("checks embark", function () {
+    const aSupplyUnit = player1.getSupplyUnits()[0];
+    const aDump = player1.getDumps()[0];
+    try {
+      game.moveUnit(player1, aSupplyUnit, aDump.getCurrentPosition());
+    } catch (e) {
+      throw new Error("The move of the supply unit to the dump wasn't possible");
+    }
+    game.embarkEntity(player1, aSupplyUnit, aDump);
+    if (game.getMap().findHex(aSupplyUnit.getCurrentPosition()).getDumps().length !== 0) {
+      throw new Error("Embark didn't work properly. The dump is still in the map !");
+    }
+    if (!aSupplyUnit.getEmbarked()) {
+      throw new Error("Embark didn't work properly. The unit is not embarked !");
+    }
+  });
+  it("checks disembark", function () {
+    const aSupplyUnit = player1.getSupplyUnits()[0];
+    game.disembarkEntity(player1, aSupplyUnit);
+    if (game.getMap().findHex(aSupplyUnit.getCurrentPosition()).getDumps().length !== 1) {
+      throw new Error("Disembark didn't work properly. The dump is not in the map !");
+    }
+    if (aSupplyUnit.getEmbarked()) {
+      throw new Error("Disembark didn't work properly. The unit is still embarked !");
     }
   });
 });

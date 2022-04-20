@@ -9,6 +9,8 @@ import Dump from "../Infrastructure/Dump";
 import { loadEntitiesAndMap } from "./EntityLoader";
 import CombatSimulator, { DamageResult, MoraleResult } from "./CombatSimulator";
 import Maps from "../Map/Maps";
+import Embarkable from "../Embarkable";
+import SupplyUnit from "../Infrastructure/SupplyUnit";
 
 const BASE_RANGE = 14;
 const SUPPLYUNIT_RANGE = 7;
@@ -43,6 +45,8 @@ export default class Game {
 
     // Check if unit exists and that the player owns it
     if (!player.hasEntity(unit)) return "that unit does not exist";
+    if (unit.getType() === "foot")
+      if ((unit as unknown as Embarkable).isEmbarked()) return "unit is embarked";
 
     // Check if the player owns the unit
     if (!this._map.hexBelongsToPlayer(destination, player))
@@ -82,6 +86,39 @@ export default class Game {
       }
     }
     return availableUnits;
+  }
+
+  embarkEntity(player: Player, supplyUnit: SupplyUnit, toEmbark: Embarkable): void {
+    if (!player.hasEntity(supplyUnit)) {
+      throw new Error("supply unit does not exist");
+    }
+    if (!player.hasEntity(toEmbark)) {
+      throw new Error("embarkable entity does not exist");
+    }
+    if (toEmbark.getCurrentPosition().toString() !== supplyUnit.getCurrentPosition().toString()) {
+      throw new Error("embarkable entity is not in the same hex as the supply unit");
+    }
+    const hex = this._map.findHex(supplyUnit.getCurrentPosition());
+    try {
+      supplyUnit.embark(toEmbark);
+    } catch (e) {
+      throw new Error("already embarked");
+    }
+    hex.removeEntity(toEmbark);
+  }
+
+  disembarkEntity(player: Player, supplyUnit: SupplyUnit): void {
+    if (!player.hasEntity(supplyUnit)) {
+      throw new Error("supply unit does not exist");
+    }
+    let toDisembark: Embarkable;
+    try {
+      toDisembark = supplyUnit.disembark();
+    } catch (e) {
+      throw new Error("no entity to disembark");
+    }
+    const hex = this._map.findHex(supplyUnit.getCurrentPosition());
+    hex.addEntity(toDisembark);
   }
 
   // Checks if a move is possible and applies it.
@@ -141,6 +178,7 @@ export default class Game {
     for (const unit of units) {
       for (const dump of dumps) {
         // check if unit is connected to dump
+        if (dump.isEmbarked()) continue;
         if (
           this._pathfinder.findShortestWay(
             unit.getCurrentPosition(),

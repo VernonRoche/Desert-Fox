@@ -12,10 +12,14 @@ export type dumpJson = {
 export default class Dump implements Embarkable {
   private _currentPosition: HexID;
   private _id: number;
+  private _embarked = false;
 
   constructor(id: number, hexId: HexID) {
     this._id = id;
     this._currentPosition = hexId;
+  }
+  isEmbarked(): boolean {
+    return this._embarked;
   }
   remove(): void {
     throw new Error("Method not implemented.");
@@ -24,11 +28,11 @@ export default class Dump implements Embarkable {
     return "dump";
   }
   embark(): void {
-    throw new Error("Method not implemented.");
+    this._embarked = true;
   }
 
   disembark(): void {
-    throw new Error("Method not implemented.");
+    this._embarked = false;
   }
 
   getId(): number {

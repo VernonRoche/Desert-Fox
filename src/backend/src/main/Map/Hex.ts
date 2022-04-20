@@ -88,13 +88,13 @@ export default class Hex {
 
   addBase(base: Base) {
     // only 1 base per hex
-    if( !base ) return; 
+    if (!base) return;
     if (this._base) throw new Error("base already present");
     this._base = base;
   }
 
   addDump(dump: Dump) {
-    if( !dump ) return; 
+    if (!dump) return;
     this._dumps.push(dump);
   }
 

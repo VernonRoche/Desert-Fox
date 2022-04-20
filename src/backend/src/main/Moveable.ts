@@ -13,8 +13,6 @@ export default interface Moveable extends Entity {
   // Remove movementPoints passed as parameter
   move(movementPoints: number): void;
 
-  nightMove(hexId: HexID): void;
-
   getMovementPoints(): number;
 
   getRemainingMovementPoints(): number;

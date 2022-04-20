@@ -31,10 +31,6 @@ export default abstract class AbstractUnit implements Unit {
     this._hasAttacked = false;
   }
 
-  abstract reactionMove(hexId: HexID): void;
-
-  abstract overrun(hexId: HexID): void;
-
   hasAttacked(): boolean {
     return this._hasAttacked;
   }

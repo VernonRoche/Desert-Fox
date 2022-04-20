@@ -11,10 +11,6 @@ export type unitJson = {
   owned: boolean;
 };
 export default interface Unit extends Moveable {
-  reactionMove(hexId: HexID): void;
-
-  overrun(hexId: HexID): void;
-
   hasAttacked(): boolean;
 
   removeLifePoints(lifePoints: number): void;
