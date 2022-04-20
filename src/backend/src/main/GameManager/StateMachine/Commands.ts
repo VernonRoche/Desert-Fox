@@ -81,13 +81,26 @@ export const _commands: Commands = {
     const playerUnits = player.getUnits();
     player.getSocket().emit("units", playerUnits);
   },
+  hex(stateMachine: StateMachine, player: Player, args: MoveArgs & BaseCommand) {
+    const game = stateMachine.getSocketServer().getGame();
+    if (!game) {
+      player.getSocket().emit(args.type, { error: "nogame" });
+      return;
+    }
+    if (!args.hexId) {
+      player.getSocket().emit(args.type, { error: "invalidhexid" });
+      return;
+    }
+    const hex = game
+      .getMap()
+      .findHex(new HexID(+args.hexId.substring(2, 4), +args.hexId.substring(0, 2)));
+    const units = hex.getUnits();
+    const bases = hex.getBase();
+    const dumps = hex.getDumps();
+    const supplyUnits = hex.getSupplyUnits();
+    player.getSocket().emit(args.type, { units, bases, dumps, supplyUnits });
+  },
   attack: (stateMachine: StateMachine, _player: Player, _args: AttackArgs & BaseCommand) => {
-    //TODO
-  },
-  select: (stateMachine: StateMachine, _player: Player, _args: MoveArgs & BaseCommand) => {
-    //TODO
-  },
-  activate: (stateMachine: StateMachine, _player: Player, _args: MoveArgs & BaseCommand) => {
     //TODO
   },
 };

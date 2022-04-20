@@ -35,7 +35,7 @@ export default class Game {
   // check if(canMove === true)
   public canMove(
     player: Player,
-    unit: Unit,
+    unit: Moveable,
     destination: HexID,
   ): { movePossible: boolean; cost: number } | string {
     const destinationHex = this._map.findHex(destination);

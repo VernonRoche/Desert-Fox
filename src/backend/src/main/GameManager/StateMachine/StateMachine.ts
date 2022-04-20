@@ -89,7 +89,7 @@ export class StateMachine {
         if (this.phaseService.state.context.turn === 38 || false) {
           // replace false with the test
           this.phaseService.stop();
-          this.socketServer.broadcast("game_over", { winner: "player" });
+          this.socketServer.broadcast("gameOver", { winner: "player" }); //
         }
         break;
       case "turn_marker": //TODO
