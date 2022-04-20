@@ -7,32 +7,18 @@ type State = {
 };
 
 export const statesWithUserInput: Record<string, State> = {
-  reinforcements: {
-    on: {
-      NEXT: "first_player_movement",
-    },
-  },
   first_player_movement: {
-    on: {
-      NEXT: "second_player_reaction",
-    },
-  },
-  second_player_reaction: {
     on: {
       NEXT: "first_player_combat",
     },
   },
+
   first_player_combat: {
     on: {
       NEXT: "second_player_movement",
     },
   },
   second_player_movement: {
-    on: {
-      NEXT: "first_player_reaction",
-    },
-  },
-  first_player_reaction: {
     on: {
       NEXT: "second_player_combat",
     },
@@ -44,11 +30,6 @@ export const statesWithUserInput: Record<string, State> = {
   },
   first_player_movement2: {
     on: {
-      NEXT: "second_player_reaction2",
-    },
-  },
-  second_player_reaction2: {
-    on: {
       NEXT: "first_player_combat2",
     },
   },
@@ -59,17 +40,12 @@ export const statesWithUserInput: Record<string, State> = {
   },
   second_player_movement2: {
     on: {
-      NEXT: "first_player_reaction2",
-    },
-  },
-  first_player_reaction2: {
-    on: {
       NEXT: "second_player_combat2",
     },
   },
   second_player_combat2: {
     on: {
-      NEXT: "supply_attrition",
+      NEXT: "victory_check",
     },
   },
 };
@@ -82,17 +58,7 @@ export const TurnPhases = {
     ...statesWithUserInput,
     initial: {
       on: {
-        NEXT: "air_superiority",
-      },
-    },
-    air_superiority: {
-      on: {
-        NEXT: "reinforcements",
-      },
-    },
-    supply_attrition: {
-      on: {
-        NEXT: "victory_check",
+        NEXT: "first_player_movement",
       },
     },
     victory_check: {
@@ -102,7 +68,7 @@ export const TurnPhases = {
     },
     turn_marker: {
       on: {
-        NEXT: "air_superiority",
+        NEXT: "first_player_movement",
       },
     },
   },

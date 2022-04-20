@@ -8,7 +8,7 @@ function closeServer(server: SocketServer) {
   server["_httpServer"].close();
 }
 
-describe("Game tests", function () {
+describe("Game instance tests", function () {
   function initSocket(): Socket {
     return io(`http://localhost:${SERVER_PORT}`);
   }
@@ -88,25 +88,6 @@ describe("Game tests", function () {
       });
     });
   });
-  it("skip to first_player_movement phase", async function () {
-    return new Promise<void>((resolve, reject) => {
-      player1.emit("done");
-      player2.emit("done");
-      setTimeout(() => {
-        if (stateMachine.getPhase() !== "first_player_movement") {
-          reject(
-            new Error(
-              "Not in first_player_movement phase, current phase is : " +
-                stateMachine.getPhase() +
-                "instead",
-            ),
-          );
-        }
-        resolve();
-      }, 1000);
-    });
-  });
-
   it("First player moves a valid unit", function () {
     return new Promise<void>((resolve, reject) => {
       player1.emit("command", { type: "move", unitId: "0", hexId: "0103" });
@@ -164,6 +145,7 @@ describe("Game tests", function () {
   });
 
   it("skip to next player", function () {
+    player1.emit("done");
     player1.emit("done");
   });
 

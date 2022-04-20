@@ -111,15 +111,18 @@ describe("Socket server tests", function () {
   });
 
   it("Player1 disconnection should stop game", function () {
-    player1.once("disconnect", () => {
-      setTimeout(() => {
-        const game = server.getGame();
-        if (game) {
-          throw new Error("Game is not stopped with player1 disconnection");
-        }
-      }, 2000);
+    return new Promise<void>((resolve, reject) => {
+      player1.once("disconnect", () => {
+        setTimeout(() => {
+          const game = server.getGame();
+          if (game) {
+            reject(new Error("Game is not stopped with player1 disconnection"));
+          }
+          resolve();
+        }, 100);
+      });
+      player1.disconnect();
     });
-    player1.disconnect();
   });
 
   it("Only player2 should be remaining", function () {
@@ -156,15 +159,18 @@ describe("Socket server tests", function () {
   // TODO: check both players are here and each player has the correct player id
 
   it("Player2 disconnection should stop game", function () {
-    player2.once("disconnect", () => {
-      setTimeout(() => {
-        const game = server.getGame();
-        if (game) {
-          throw new Error("Game is not stopped with player2 disconnection");
-        }
-      }, 2000);
+    return new Promise<void>((resolve, reject) => {
+      player2.once("disconnect", () => {
+        setTimeout(() => {
+          const game = server.getGame();
+          if (game) {
+            reject(new Error("Game is not stopped with player2 disconnection"));
+          }
+          resolve();
+        }, 100);
+      });
+      player2.disconnect();
     });
-    player2.disconnect();
   });
 
   it("Player2 connection should restart a new game", function () {

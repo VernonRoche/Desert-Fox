@@ -29,16 +29,20 @@ describe("State Machine tests", function () {
   it("Testing phase transitions", function () {
     return new Promise<void>((resolve, reject) => {
       testService.send("NEXT");
-      if (testService.state.value.toString() !== "air_superiority") {
-        throw new Error("State machine transitions not working");
+      if (testService.state.value.toString() !== "first_player_movement") {
+        throw new Error(
+          "State machine transitions not working. state is " +
+            testService.state.value.toString() +
+            " instead of first_player_movement",
+        );
       }
       testService.send("NEXT");
-      if (testService.state.value.toString() !== "reinforcements") {
+      if (testService.state.value.toString() !== "first_player_combat") {
         reject(
           new Error(
             "State machine transitions not working. The phase is " +
               testService.state.value.toString() +
-              " instead of reinforcements",
+              " instead of first_player_combat",
           ),
         );
       }
@@ -47,14 +51,14 @@ describe("State Machine tests", function () {
   });
   testService.send("RESET");
   it("Testing the loop of phases", function () {
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < 9; i++) {
       testService.send("NEXT");
     }
-    if (testService.state.value.toString() !== "air_superiority") {
+    if (testService.state.value.toString() !== "first_player_movement") {
       throw new Error(
         "State machine not looping properly. The phase is " +
           testService.state.value.toString() +
-          " instead of air_superiority",
+          " instead of first_player_movement",
       );
     }
   });

@@ -154,7 +154,7 @@ export default class Game {
     if (playerId !== 1 && playerId !== 2) {
       return;
     }
-    let player = playerId === 1 ? this._player1 : this._player2;
+    const player = playerId === 1 ? this._player1 : this._player2;
 
     const playerBases = player.getBases();
     const playerDumps = player.getDumps();
