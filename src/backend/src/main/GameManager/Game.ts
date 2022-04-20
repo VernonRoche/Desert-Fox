@@ -150,48 +150,29 @@ export default class Game {
     return this.checkUnitSupplies(player, supplyUnits, bases, dumps, []);
   }
 
-  checkSupplies(): void {
-    const player1Bases = this._player1.getBases();
-    const player1Dumps = this._player1.getDumps();
-    const player1Units = this._player1.getUnits();
-    const player1Supplies = this._player1.getSupplyUnits();
-    player1Units.forEach((unit) => {
+  verifySupplies(playerId: number): void {
+    if (playerId !== 1 && playerId !== 2) {
+      return;
+    }
+    let player = playerId === 1 ? this._player1 : this._player2;
+
+    const playerBases = player.getBases();
+    const playerDumps = player.getDumps();
+    const playerUnits = player.getUnits();
+    const playerSupplies = player.getSupplyUnits();
+    playerUnits.forEach((unit) => {
       if (
         !this.checkUnitSupplies(
-          this._player1,
+          player,
           [unit],
-          player1Bases,
-          player1Dumps,
-          player1Supplies.filter(
+          playerBases,
+          playerDumps,
+          playerSupplies.filter(
             (supplyUnit) =>
               this._pathfinder.findShortestWay(
                 unit.getCurrentPosition(),
                 supplyUnit.getCurrentPosition(),
-                this._player1,
-              ).sumOfWeight <= SUPPLYUNIT_RANGE,
-          ),
-        )
-      ) {
-        // apply disrupted
-      }
-    });
-    const player2Bases = this._player2.getBases();
-    const player2Dumps = this._player2.getDumps();
-    const player2Units = this._player2.getUnits();
-    const player2Supplies = this._player2.getSupplyUnits();
-    player2Units.forEach((unit) => {
-      if (
-        !this.checkUnitSupplies(
-          this._player2,
-          [unit],
-          player2Bases,
-          player2Dumps,
-          player2Supplies.filter(
-            (supplyUnit) =>
-              this._pathfinder.findShortestWay(
-                unit.getCurrentPosition(),
-                supplyUnit.getCurrentPosition(),
-                this._player1,
+                player,
               ).sumOfWeight <= SUPPLYUNIT_RANGE,
           ),
         )

@@ -27,11 +27,26 @@ export class StateMachine {
         if (this.isVerbose) console.log("phase : " + state.value.toString());
         this.phaseService.send("NEXT");
       }
+      this.checkPhaseAndSupplies();
     });
   }
 
   stopMachine() {
     this.phaseService.stop();
+  }
+  checkPhaseAndSupplies() : void{
+    if (this.getPhase().includes("movement") &&  this.getPhase().includes("first"))
+    {
+      const game = this.socketServer.getGame();
+      if(!game) return;
+      game.verifySupplies(1);
+    }
+    else if(this.getPhase().includes("movement") &&  this.getPhase().includes("second"))
+    {
+      const game = this.socketServer.getGame();
+      if(!game) return;
+      game.verifySupplies(2);
+    }
   }
   get isVerbose() {
     return this._verbose;
@@ -145,6 +160,7 @@ export class StateMachine {
       }
     } else {
       if (this.checkIfCorrectPlayer(this.getPhase(), player.getId()).correct) {
+        this.checkPhaseAndSupplies();
         this.phaseService.send("NEXT");
         player.getSocket().emit("done", { error: false });
         return true;
