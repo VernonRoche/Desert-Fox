@@ -67,8 +67,8 @@ export default class SupplyUnit implements Moveable {
     else throw new Error("Item already in supply");
   }
 
-  public disembark(): Embarkable {
-    if (this._item.length === 0) throw new Error("No item in supply");
+  public disembark(): Embarkable | undefined {
+    if (this._item.length === 0) return undefined;
     return this._item.pop() as Embarkable;
   }
   getEmbarked(): Embarkable | undefined {

@@ -106,17 +106,18 @@ export default class Game {
     }
   }
 
-  disembarkEntity(player: Player, supplyUnit: SupplyUnit): void {
+  disembarkEntity(player: Player, supplyUnit: SupplyUnit): Embarkable | undefined{
     if (!player.hasEntity(supplyUnit)) {
       throw new Error("supply unit does not exist");
     }
-    let toDisembark: Embarkable;
+    let toDisembark: Embarkable | undefined = undefined;
     try {
       toDisembark = supplyUnit.disembark();
     } catch (e) {
       throw new Error("no entity to disembark");
     }
     const hex = this._map.findHex(supplyUnit.getCurrentPosition());
+    return toDisembark;
   }
 
   // Checks if a move is possible and applies it.
