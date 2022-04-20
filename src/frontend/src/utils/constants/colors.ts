@@ -22,6 +22,6 @@ export const colorsPlayer: { [index: string]: string } = {
 
 export const colorsSea = "#5499c7";
 
-export const colorsDump = [214, 137, 16];
+export const colorsDump = [214, 137, 16, 127];
 
 export const colorsSupplyUnit = " #cb4335";

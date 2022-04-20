@@ -35,7 +35,7 @@ export function drawDump(p5: P5, x: number, y: number, owned: boolean) {
   p5.push();
   p5.strokeWeight(strokeWeight);
   p5.stroke(colorsPlayer[String(owned)]);
-  p5.fill(colorsDump[0], colorsDump[1], colorsDump[2], 127);
+  p5.fill(colorsDump[0], colorsDump[1], colorsDump[2], colorsDump[3]);
   p5.rect(_x, _y, textSize * 3, textSize * 2);
 }
 
