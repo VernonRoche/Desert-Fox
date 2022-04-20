@@ -2,6 +2,7 @@ import HexID from "../Map/HexID";
 import Dice from "../GameManager/Dice";
 import Player from "../GameManager/Player";
 import Unit, { unitJson } from "./Unit";
+import Embarkable from "../Embarkable";
 
 export default abstract class AbstractUnit implements Unit {
   private _currentPosition: HexID;
@@ -59,6 +60,8 @@ export default abstract class AbstractUnit implements Unit {
       movementPoints: this.getMovementPoints(),
       remainingMovementPoints: this.getRemainingMovementPoints(),
       owned: player.hasEntity(this),
+      embarked:
+        this.getType() === "foot" ? (this as unknown as Embarkable).isEmbarked() : undefined,
     };
   }
 

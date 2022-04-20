@@ -104,7 +104,6 @@ export default class Game {
     } catch (e) {
       throw new Error("already embarked");
     }
-    hex.removeEntity(toEmbark);
   }
 
   disembarkEntity(player: Player, supplyUnit: SupplyUnit): void {
@@ -118,7 +117,6 @@ export default class Game {
       throw new Error("no entity to disembark");
     }
     const hex = this._map.findHex(supplyUnit.getCurrentPosition());
-    hex.addEntity(toDisembark);
   }
 
   // Checks if a move is possible and applies it.
@@ -148,6 +146,13 @@ export default class Game {
     const destinationHex = this._map.findHex(destination);
     destinationHex.addEntity(unit);
     originHex.removeEntity(unit);
+    if (unit.getType() === "SupplyUnit") {
+      const embarkedEntity = (unit as unknown as SupplyUnit).getEmbarked();
+      if (embarkedEntity) {
+        destinationHex.addEntity(embarkedEntity);
+        originHex.removeEntity(embarkedEntity);
+      }
+    }
     unit.place(destination);
     unit.move(cost);
   }

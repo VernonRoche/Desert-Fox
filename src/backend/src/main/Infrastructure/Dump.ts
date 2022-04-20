@@ -7,6 +7,7 @@ export type dumpJson = {
   id: number;
   currentPosition: HexID;
   owned: boolean;
+  embarked: boolean;
 };
 
 export default class Dump implements Embarkable {
@@ -51,6 +52,7 @@ export default class Dump implements Embarkable {
       id: this.getId(),
       currentPosition: this.getCurrentPosition(),
       owned: player.hasEntity(this),
+      embarked: this.isEmbarked(),
     };
   }
 }

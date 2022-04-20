@@ -41,9 +41,6 @@ describe("Game tests", function () {
       throw new Error("The move of the supply unit to the dump wasn't possible");
     }
     game.embarkEntity(player1, aSupplyUnit, aDump);
-    if (game.getMap().findHex(aSupplyUnit.getCurrentPosition()).getDumps().length !== 0) {
-      throw new Error("Embark didn't work properly. The dump is still in the map !");
-    }
     if (!aSupplyUnit.getEmbarked()) {
       throw new Error("Embark didn't work properly. The unit is not embarked !");
     }

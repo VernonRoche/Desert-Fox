@@ -9,6 +9,7 @@ export type unitJson = {
   movementPoints: number;
   remainingMovementPoints: number;
   owned: boolean;
+  embarked: boolean | undefined;
 };
 export default interface Unit extends Moveable {
   hasAttacked(): boolean;
