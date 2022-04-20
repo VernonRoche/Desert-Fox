@@ -39,7 +39,7 @@ export type GameMap = {
       owned: boolean;
     },
   ];
-  suppplyUnits: [
+  supplyUnits: [
     {
       id: number;
       currentPosition: { _x: number; _y: number };
