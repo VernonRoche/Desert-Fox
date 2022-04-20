@@ -112,11 +112,11 @@ export default class GameMap {
     const json: JsonMap = [];
     this._hexagons.forEach((hex) => {
       const units: unitJson[] = [];
-      let base : baseJson | undefined = undefined;
+      let base: baseJson | undefined = undefined;
       const dumps: dumpJson[] = [];
       const supplyUnits: supplyUnitJson[] = [];
       hex.getUnits().forEach((unit) => units.push(unit.toJson(player)));
-      let baseX : Base | undefined = hex.getBase();
+      let baseX: Base | undefined = hex.getBase();
       if (baseX) base = baseX.toJson(player);
       hex.getDumps().forEach((dump) => dumps.push(dump.toJson(player)));
       hex.getSupplyUnits().forEach((supplyUnit) => supplyUnits.push(supplyUnit.toJson(player)));
@@ -125,7 +125,7 @@ export default class GameMap {
         hexId: hex.getID().id(),
         terrain: hex.getTerrain().terrainType,
         units: units,
-        base : base,
+        base: base,
         dumps: dumps,
         supplyUnits: supplyUnits,
       });
