@@ -66,6 +66,7 @@ export class SocketServer {
     this._game = undefined;
     this.broadcast("gameDestroyed", {});
     stateMachine.stopMachine();
+    resetIds();
   }
 
   public run(stateMachine: StateMachine): void {
@@ -119,7 +120,6 @@ export class SocketServer {
       this._players = this._players.filter((player) => player.getSocket().id !== socketClient.id);
       if (this._created) {
         this.destroyGame(stateMachine);
-        resetIds();
       }
     });
 
