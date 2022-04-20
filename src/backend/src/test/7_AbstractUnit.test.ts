@@ -75,4 +75,11 @@ describe("unit is correct add", function () {
       throw new Error("getUnits not correct");
     }
   });
+
+  it("remove lifePoints", function () {
+    unit[0].removeLifePoints(1);
+    if (unit[0].getLifePoints() != 0) {
+      throw new Error("LifePoints not correct");
+    }
+  });
 });
