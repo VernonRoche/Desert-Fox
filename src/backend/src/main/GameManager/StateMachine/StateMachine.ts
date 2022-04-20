@@ -102,7 +102,7 @@ export class StateMachine {
         auto: true,
       });
     if (actualPhase === "air_superiority") {
-    this.socketServer.broadcast("phase", {
+      this.socketServer.broadcast("phase", {
         phase: "reinforcements",
         play: true,
         commands: ["select"],
@@ -132,7 +132,12 @@ export class StateMachine {
 
   endTurn(player: Player): boolean {
     if (["reinforcements"].includes(this.getPhase())) {
-      this.done[player.getId()] = true;
+      if (this.done[player.getId()]) player.getSocket().emit("done", { error: "alreadydone" });
+      else {
+        this.done[player.getId()] = true;
+        player.getSocket().emit("done", {error: false});
+      }
+
       if (this.done[0] && this.done[1]) {
         this.reinitDoneTable();
         this.phaseService.send("NEXT");
@@ -141,6 +146,7 @@ export class StateMachine {
     } else {
       if (this.checkIfCorrectPlayer(this.getPhase(), player.getId()).correct) {
         this.phaseService.send("NEXT");
+        player.getSocket().emit("done", {error: false});
         return true;
       } else player.getSocket().emit("done", { error: "wrongplayer" });
     }
@@ -176,13 +182,13 @@ export class StateMachine {
       case "first_player_reaction2":
       case "first_player_combat2": {
         if (playerId === PlayerID.ONE) return { correct: true, commands: ["move"] };
-        console.log("movement",currentPhase,playerId);
+        console.log("movement", currentPhase, playerId);
         break;
       }
       case "first_player_combat":
       case "first_player_combat2": {
         if (playerId === PlayerID.ONE) return { correct: true, commands: ["attack"] };
-        console.log("combat",currentPhase,playerId);
+        console.log("combat", currentPhase, playerId);
         break;
       }
       case "second_player_movement":
