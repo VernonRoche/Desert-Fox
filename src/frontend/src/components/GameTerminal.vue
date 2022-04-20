@@ -104,9 +104,6 @@ const commands: Commands = {
     });
 
     socket.once("units", (resp: Unit[] & { error: "nogame" }) => {
-      function addZeroIfNeeded(number: number) {
-        return number < 10 ? `0${number}` : number;
-      }
       if (resp.error /*  === "nogame" */) {
         addLine("Game", "La partie n'est pas lancée");
         return;
@@ -173,9 +170,22 @@ const commands: Commands = {
 
     socket.once(
       "hex",
-      (resp: { units: Unit[]; bases: Base[]; dumps: Dump[]; supplyUnits: SupplyUnit[] }) => {
-        console.log("Got from hex", resp);
-        addLine("Game", "received hex resp");
+      (resp: { units: Unit[]; bases: Base; dumps: Dump[]; supplyUnits: SupplyUnit[] }) => {
+        console.log(resp);
+        let unitString = "";
+        resp.units.forEach((unit) => {
+          unitString += `Unit ${unit._id} has ${
+            unit._lifePoints
+          } life point at hexId (${addZeroIfNeeded(unit._currentPosition._y)}${addZeroIfNeeded(
+            unit._currentPosition._x,
+          )}) with ${unit._remainingMovementPoints} movement points\n`;
+        });
+        let basesString = "";
+        const { _currentPosition, _primary } = resp.bases;
+        basesString += `Base at hexId (${addZeroIfNeeded(_currentPosition._y)}${addZeroIfNeeded(
+          _currentPosition._x,
+        )}) is a ${_primary ? "primary" : "secondary"} base`;
+        addLine("Game", `Les unités sont : ${unitString}, les bases sont : ${basesString}`);
       },
     );
   },
@@ -275,6 +285,10 @@ function handleKeyUp() {
   const filtered = lines.value.filter((line) => line.author === "Vous");
   console.log(filtered);
   terminalInput.value = filtered[filtered.length - 1].data;
+}
+
+function addZeroIfNeeded(number: number) {
+  return number < 10 ? `0${number}` : number;
 }
 
 onUnmounted(disconnectSocket);

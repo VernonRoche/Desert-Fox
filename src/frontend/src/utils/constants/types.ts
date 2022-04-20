@@ -1,9 +1,11 @@
+type Position = {
+  _x: number;
+  _y: number;
+};
+
 export type Unit = {
   _combatFactor: string;
-  _currentPosition: {
-    _x: number;
-    _y: number;
-  };
+  _currentPosition: Position;
   _id: string;
   _lifePoints: string;
   _moraleRating: string;
@@ -18,7 +20,7 @@ export type GameMap = {
     {
       type: string;
       id: number;
-      currentPosition: { _x: number; _y: number };
+      currentPosition: Position;
       movementPoints: number;
       remainingMovementPoints: number;
       owned: boolean;
@@ -27,7 +29,7 @@ export type GameMap = {
   base:
     | {
         id: number;
-        curentPosition: { _x: number; _y: number };
+        curentPosition: Position;
         primary: boolean;
         owned: boolean;
       }
@@ -35,14 +37,14 @@ export type GameMap = {
   dumps: [
     {
       id: number;
-      currentPosition: { _x: number; _y: number };
+      currentPosition: Position;
       owned: boolean;
     },
   ];
   supplyUnits: [
     {
       id: number;
-      currentPosition: { _x: number; _y: number };
+      currentPosition: Position;
       movementPoints: number;
       owned: boolean;
     },
@@ -50,15 +52,14 @@ export type GameMap = {
 }[];
 
 export type Base = {
-  currentPosition: string;
-  primary: boolean;
-  owned: boolean;
+  _currentPosition: Position;
+  _primary: boolean;
 };
 
 export type Dump = {
-  currentPosition: string;
+  _currentPosition: Position;
 };
 export type SupplyUnit = {
-  currentPosition: string;
-  movementPoints: number;
+  _currentPosition: Position;
+  _movementPoints: number;
 };
