@@ -91,11 +91,12 @@ export const _commands: Commands = {
     }
     const hex = game
       .getMap()
-      .findHex(new HexID(+args.hexId.substring(2, 4), +args.hexId.substring(0, 2)));
+      .findHex(new HexID(+args.hexId.substring(0, 2), +args.hexId.substring(2, 4)));
     const units = hex.getUnits();
     const bases = hex.getBase();
     const dumps = hex.getDumps();
     const supplyUnits = hex.getSupplyUnits();
+    console.log({ units, bases, dumps, supplyUnits });
     player.getSocket().emit(args.type, { units, bases, dumps, supplyUnits });
   },
   attack: (stateMachine: StateMachine, _player: Player, _args: AttackArgs & BaseCommand) => {
