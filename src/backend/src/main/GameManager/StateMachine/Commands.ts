@@ -23,10 +23,9 @@ type MoveArgs = {
 };
 
 type EmbarkArgs = {
-  embarkingId?: string;
-  toEmbarkId?: string;
+  embarkingId?: string; // l'unit qui embark
+  toEmbarkId?: string; // l'unit qui va être embarqué
 };
-
 
 type AttackArgs = MoveArgs & {
   combatSupply?: boolean;
@@ -110,9 +109,9 @@ export const _commands: Commands = {
     //TODO
   },
   embark: (stateMachine: StateMachine, player: Player, args: BaseCommand & EmbarkArgs) => {
-    if(!args.embarkingId || !args.toEmbarkId) {
+    if (!args.embarkingId || !args.toEmbarkId) {
       player.getSocket().emit(args.type, { error: "invalidargs" });
-      return
+      return;
     }
     const unitId = +args.embarkingId;
     if (isNaN(unitId)) {
@@ -122,8 +121,7 @@ export const _commands: Commands = {
     let unit;
     try {
       unit = player.getEntityById(unitId);
-    }
-    catch (e) {
+    } catch (e) {
       player.getSocket().emit(args.type, { error: "invalidsupplyunitid" });
       return;
     }
@@ -140,8 +138,7 @@ export const _commands: Commands = {
     let toEmbark;
     try {
       toEmbark = player.getEntityById(toEmbarkId);
-    }
-    catch (e) {
+    } catch (e) {
       player.getSocket().emit(args.type, { error: "invalidembarkid" });
       return;
     }
@@ -151,17 +148,14 @@ export const _commands: Commands = {
     }
     try {
       const game = stateMachine.getSocketServer().getGame();
-      if(!game) 
-      {
+      if (!game) {
         player.getSocket().emit(args.type, { error: "nogame" });
         return;
       }
       game.embarkEntity(player, unit as SupplyUnit, toEmbark as Embarkable);
       player.getSocket().emit(args.type, { error: false });
-    }
-    catch (e) {
+    } catch (e) {
       player.getSocket().emit(args.type, { error: "invalidembark" });
     }
-  }
-
+  },
 };
