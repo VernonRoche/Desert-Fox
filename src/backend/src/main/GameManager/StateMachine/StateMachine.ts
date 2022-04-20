@@ -1,6 +1,6 @@
 import { Socket } from "socket.io";
 import { createMachine, interpret } from "xstate";
-import webSocketServer, { SocketServer } from "../../SocketServer";
+import { SocketServer } from "../../SocketServer";
 import { AllArgs, commandTypes, _commands } from "./Commands";
 import Player from "../Player";
 import PlayerID from "../PlayerID";
@@ -245,7 +245,8 @@ export class StateMachine {
   getPhase() {
     return this.phaseService.state.value.toString();
   }
-}
 
-const stateMachine = new StateMachine(webSocketServer);
-export default stateMachine;
+  getSocketServer() {
+    return this.socketServer;
+  }
+}

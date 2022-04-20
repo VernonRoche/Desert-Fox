@@ -1,15 +1,22 @@
 import yargs from "yargs";
-import stateMachine from "./GameManager/StateMachine/StateMachine";
-import webSocketServer from "./SocketServer";
+import { StateMachine } from "./GameManager/StateMachine/StateMachine";
+import { SocketServer } from "./SocketServer";
 
 async function main() {
   const yargsOptions = yargs
     .option("port", {
       alias: "p",
-      default: 3000,
+      default: 8000,
       describe: "Port to listen on",
       requiresArg: true,
       number: true,
+    })
+    .option("quiet", {
+      alias: "q",
+      default: false,
+      describe: "Quiet mode",
+      boolean: true,
+      requiresArg: true,
     })
     .option("help", {
       alias: "h",
@@ -25,10 +32,12 @@ async function main() {
     return;
   }
 
-  webSocketServer.run(stateMachine);
+  const socketServer = new SocketServer(8000, 3001, !args.quiet);
+  const stateMachine = new StateMachine(socketServer, !args.quiet);
+  socketServer.run(stateMachine);
 
-  console.log("Client port needs to be:", webSocketServer.clientPort);
-  console.log("Server port is:", webSocketServer.serverPort);
+  console.log("Client port needs to be:", socketServer.clientPort);
+  console.log("Server port is:", socketServer.serverPort);
 
   process.on("SIGINT", () => {
     console.log("Program received SIGSEGV (CTRL+C), stopping server...");
