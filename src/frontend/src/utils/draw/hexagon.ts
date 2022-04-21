@@ -19,6 +19,7 @@ export default function drawHexagon(
   p5.strokeWeight(strokeWeight);
   p5.fill(colorsHexagon[typeTerrain] ?? "white");
   p5.beginShape();
+  //Calculate the six points of the hexagon
   for (let i = 0; i < 6; i++) {
     const hexPoints = handlerHexPoints(x, y, r, i);
     p5.vertex(hexPoints.x, hexPoints.y);

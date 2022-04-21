@@ -37,6 +37,7 @@ export function drawUnit(
   p5.circle(points.x, points.y, size);
   p5.pop();
 
+  //If the unit is disrupted, draw a red line on the unit
   if (disrupted) {
     console.log("ici");
     const s = size / 2;
