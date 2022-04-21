@@ -69,6 +69,64 @@ Consigne : description des tests, discussion de leurs résultats, explication de
 
 \subsubsection{Vérification du serveur socket}
 
+\mytest
+{Vérification si le port du client est stocké correctement}
+{Un entier représentant le port du client}
+{En cas d'une inégalité entre le port du client et le port enregistré pour le serveur socket, nous levons une exception}
+{On vérifie avec une comparaison entre deux entiers}
+
+\mytest
+{Vérification si le port du serveur est stocké correctement}
+{Un entier représentant le port du serveur}
+{En cas d'une inégalité entre le port du serveur et le port enregistré pour le serveur socket, nous levons une exception}
+{On vérifie avec une comparaison entre deux entiers}
+
+\mytest
+{Vérification de la limite de joueurs dans une partie (2 joueurs maximum)}
+{La connexion d'un joueur}
+{En cas de connexion d'un troisième joueur, une exception est levée}
+{Avant de vérifier la connexion d'un troisième joueur, nous attendons 500 millisecondes}
+
+\mytest
+{Vérification du lancement de la partie}
+{Une instance du \texttt{serveur}}
+{Avec notre instance du serveur, on essaye de récupérer le jeu, si ce n'est pas le cas, on lève une exception}
+{On vérifie l'instance du jeu avec l'instance du serveur}
+
+\mytest
+{Vérification du joueur \#1 dans la partie}
+{Une instance du \texttt{serveur}}
+{Si le joueur \#1 n'est pas accessible via l'instance du jeu, nous levons une exception}
+{On vérifie dans l'instance du jeu qui est accessible à partir de l'instance du serveur}
+
+\mytest
+{Vérification du joueur \#2 dans la partie}
+{Une instance du \texttt{serveur}}
+{Si le joueur \#2 n'est pas accessible via l'instance du jeu, nous levons une exception}
+{On vérifie dans l'instance du jeu qui est accessible à partir de l'instance du serveur}
+
+\mytest
+{Vérification de l'identifiant du socket du joueur \#1}
+{Une instance du \texttt{serveur}}
+{
+    \begin{itemize}
+        \item Le joueur \#1 possède le socket du joueur \#2 $\rightarrow$ exception
+        \item Le jeu ne possède pas le bon identifiant du joueur \#1 $\rightarrow$ exception
+    \end{itemize}
+}
+{On récupère les identifiants des différents joueurs dans l'instance du jeu (accessible à partir de l'instance du serveur)}
+
+\mytest
+{Vérification de l'identifiant du socket du joueur \#2}
+{Une instance du \texttt{serveur}}
+{
+    \begin{itemize}
+        \item Le joueur \#2 possède le socket du joueur \#1 $\rightarrow$ exception
+        \item Le jeu ne possède pas le bon identifiant du joueur \#2 $\rightarrow$ exception
+    \end{itemize}
+}
+{On récupère les identifiants des différents joueurs dans l'instance du jeu (accessible à partir de l'instance du serveur)}
+
 TODO
 
 \subsubsection{Vérification de la machine d'état}
