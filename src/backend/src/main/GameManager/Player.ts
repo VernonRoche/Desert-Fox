@@ -133,4 +133,8 @@ export default class Player {
   removeDump(dump: Dump) {
     if (this.hasEntity(dump)) this._dumps.delete(dump.getId().toString());
   }
+
+  removeSupplyUnit(supplyUnit: SupplyUnit) {
+    this._supplyUnits.delete(supplyUnit.getId().toString());
+  }
 }

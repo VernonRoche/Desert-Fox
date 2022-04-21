@@ -193,9 +193,9 @@ export default class Game {
             player,
           ).sumOfWeight <= DUMP_RANGE
         ) {
-            this._map.removeDump(dump);
-            player.removeDump(dump);
-          
+          this._map.removeDump(dump);
+          player.removeDump(dump);
+
           found = true;
           break;
         }
@@ -324,9 +324,32 @@ export default class Game {
     // The defender is the opposite player
     const defenderPlayer = attackerPlayer === this._player1 ? this._player2 : this._player1;
 
+    // Check if attacker is embarked
+    for (const attacker of attackers) {
+      if (attacker.getType() === "foot" && (attacker as unknown as Embarkable).isEmbarked()) {
+        throw new Error("Embarked units cannot attack");
+      }
+    }
+
     // Check if the unit is in range
     if (!destinationHex.getNeighbours().includes(originHex)) {
       throw new Error(`Unit ${attackers[0].getId()} is not in range of hex ${destination}.`);
+    }
+
+    // Check if there are only supply units in the destination hex
+    if (destinationHex.getSupplyUnits().length > 0 && destinationHex.getUnits().length === 0) {
+      for (const supplyUnit of destinationHex.getSupplyUnits()) {
+        if (supplyUnit.capture()) {
+          attackerPlayer.addSupplyUnit(supplyUnit);
+        } else {
+          destinationHex.removeSupplyUnit(supplyUnit);
+        }
+        defenderPlayer.removeSupplyUnit(supplyUnit);
+      }
+      return {
+        attacker: { damage: DamageResult.NONE, morale: MoraleResult.NONE },
+        defender: { damage: DamageResult.NONE, morale: MoraleResult.NONE },
+      };
     }
 
     // Get initial combat results
@@ -348,15 +371,9 @@ export default class Game {
     // by the defenders.
     let lifePointsLost = 0;
     const defenderLifePoints = [0, 0, 0, 0, 0];
-    const attackerSupplies = new Map<number, boolean>();
     // For each morale group add the hp of the units in it
     for (const defender of destinationHex.getUnits()) {
       defenderLifePoints[defender.getMoraleRating() - 1] += defender.getLifePoints();
-    }
-    // Find which attackers have supplies
-    for (const attacker of attackers) {
-      // TO IMPLEMENT USING SUPPLY PATHFINDER
-      attackerSupplies.set(attacker.getId(), true);
     }
 
     // Determine combat results for defenders
@@ -373,7 +390,7 @@ export default class Game {
         attackers.length,
         destinationHex.getUnits().length,
         i + 1,
-        false,
+        this.verifyCombatSuppliesForUnit(attackerPlayer, attackers[0]),
       );
       // Get the defender damage result. Depending on it, we may have to apply
       // half or a quarter of the total defender's hp in damage.

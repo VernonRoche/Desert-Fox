@@ -2,6 +2,7 @@ import Embarkable from "../Embarkable";
 import Player from "../GameManager/Player";
 import HexID from "../Map/HexID";
 import Moveable from "../Moveable";
+import Dice from "../GameManager/Dice";
 
 export type supplyUnitJson = {
   id: number;
@@ -40,10 +41,6 @@ export default class SupplyUnit implements Moveable {
   }
 
   remove(): void {
-    throw new Error("Method not implemented.");
-  }
-
-  possibleMoves(): HexID[] {
     throw new Error("Method not implemented.");
   }
 
@@ -86,8 +83,12 @@ export default class SupplyUnit implements Moveable {
     throw new Error("Method not implemented.");
   }
 
+  // Throws a dice. If the result is 1-3 then the unit is captured.
+  // If it is 4-6 then the unit is destroyed.
+  // Return true if captured, false if destroyed.
   public capture(): boolean {
-    throw new Error("Method not implemented.");
+    const roll = Dice.rollDice();
+    return roll >= 1 && roll <= 3;
   }
 
   toJson(player: Player): supplyUnitJson {

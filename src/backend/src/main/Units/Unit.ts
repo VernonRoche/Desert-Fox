@@ -30,8 +30,11 @@ export default interface Unit extends Moveable {
 
   getLifePoints(): number;
 
+  // Adds one to morale rating of unit, does not apply ZOC to neighbour hexes and if the unit is motorized
+  // then reduce movement by half.
   disrupt(): void;
 
+  // Undoes the effect applied from disrupt function
   undisrupt(): void;
 
   isDisrupted(): boolean;
