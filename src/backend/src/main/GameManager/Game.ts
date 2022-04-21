@@ -163,6 +163,7 @@ export default class Game {
     bases: Base[],
     dumps: Dump[],
     supplyUnits: Moveable[],
+    removeDumpIfFound: boolean,
   ): boolean {
     let found = false;
     for (const unit of units) {
@@ -172,7 +173,7 @@ export default class Game {
           this._pathfinder.findShortestWay(
             unit.getCurrentPosition(),
             base.getCurrentPosition(),
-            this._player1,
+            player,
           ).sumOfWeight <= BASE_RANGE
         ) {
           found = true;
@@ -190,21 +191,23 @@ export default class Game {
             unit.getCurrentPosition(),
             dump.getCurrentPosition(),
 
-            this._player1,
+            player,
           ).sumOfWeight <= DUMP_RANGE
         ) {
-          this._map.removeDump(dump);
-          player.removeDump(dump);
+          if (removeDumpIfFound) {
+            this._map.removeDump(dump);
+            player.removeDump(dump);
+          }
           found = true;
           break;
         }
       }
     }
     if (found) return true;
-    return this.checkUnitSupplies(player, supplyUnits, bases, dumps, []);
+    return this.checkUnitSupplies(player, supplyUnits, bases, dumps, [], removeDumpIfFound);
   }
 
-  verifySupplies(playerId: number): void {
+  verifySupplies(playerId: number, removeDumpIfFound: boolean): void {
     if (playerId !== 1 && playerId !== 2) {
       return;
     }
@@ -229,6 +232,7 @@ export default class Game {
                 player,
               ).sumOfWeight <= SUPPLYUNIT_RANGE,
           ),
+          removeDumpIfFound,
         )
       ) {
         unit.disrupt();
@@ -236,31 +240,47 @@ export default class Game {
     });
   }
 
-  verifySuppliesForUnit(playerId: number, unit: Unit): boolean {
-    if (playerId !== 1 && playerId !== 2) {
-      throw new Error("player id is not valid");
-    }
-    const player = playerId === 1 ? this._player1 : this._player2;
+  verifyCombatSuppliesForUnit(player: Player, unit: Unit): boolean {
     if (!player.hasEntity(unit)) throw new Error("player does not have the unit");
-    const playerBases = player.getBases();
-    const playerDumps = player.getDumps();
-    const playerSupplies = player.getSupplyUnits();
-    return this.checkUnitSupplies(
-      player,
-      [unit],
-      playerBases,
-      playerDumps,
-      playerSupplies.filter(
+    const supplyUnitsToCheck = player
+      .getSupplyUnits()
+      .filter(
         (supplyUnit) =>
           this._pathfinder.findShortestWay(
             unit.getCurrentPosition(),
             supplyUnit.getCurrentPosition(),
             player,
           ).sumOfWeight <= SUPPLYUNIT_RANGE,
-      ),
-    );
+      );
+    return this.verifyCombatSuppliesRec(player, [unit], supplyUnitsToCheck);
   }
 
+  verifyCombatSuppliesRec(player: Player, units: Moveable[], supplies: Moveable[]): boolean {
+    if (units.length === 0) return false; // if no units left, it hasn't found a dump
+    const playerDumps = player.getDumps();
+    let found = false;
+    for (const unit of units) {
+      for (const dump of playerDumps) {
+        // check if unit is connected to dump
+        if (dump.isEmbarked()) continue;
+        if (
+          this._pathfinder.findShortestWay(
+            unit.getCurrentPosition(),
+            dump.getCurrentPosition(),
+
+            player,
+          ).sumOfWeight <= DUMP_RANGE
+        ) {
+          this._map.removeDump(dump);
+          player.removeDump(dump);
+          found = true;
+          break;
+        }
+      }
+    }
+    if (found) return true;
+    return this.verifyCombatSuppliesRec(player, supplies, []);
+  }
   /*
    * Main combat function.
    * It does some verifications to see if the combat is possible.
