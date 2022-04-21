@@ -102,11 +102,40 @@ TODO
 
 \subsubsection{Vérification de l'attaque}
 
-TODO
+\mytest
+{Vérifier si le combat retourne les bons résultats de dégats et applique les bons effets}
+{Une unité attaquante et une unité defenseuse}
+{Si un résultat doit détruire une unité ou au contraire ne rien faire, les effets se repercutent dans le jeu}
+{Nous verifions pour les résultats aleatoires possibles, tout résultat de combat est bien appliqué. Nottament vérifier
+que une unité est bien détruite, si elle perd les bons points de vie ou si elle est toujours vivante}
+
+\mytest
+{Vérifier si le combat retourne les bons résultats de morale et applique les bons effets}
+{Une unité attaquante et une unité defenseuse}
+{Si un résultat doit forcer une unité à se replier ou non, alors le changement doit être visible dans le jeu}
+{Nous verifions pour les résultats aleatoires possibles, que si une unité doit se replier, alors l'unité se
+deplace loin de l'ennemie. Si il faut pas alors elle doit rester au même endroit.}
 
 \subsubsection{Vérification du combat}
 
-TODO
+\mytest
+{Vérifier si le simulateur de combat retourne les bons résultats pour les degats}
+{Un nombre d'attaquants et de defenseurs, un entier représentant le morale et un type de terrain}
+{Chaque combinaison de paramètres doit retourner le même résultat exact à chaque fois}
+{Nous prenons quatres combinaisons d'entrées distinctes. 
+En divisant le nombre d'attaquants par le nombre de défenseurs, on applique les règles du jeu pour definir
+quelle case du tableau des résultats de combat il faut obtenir. Pour ne pas avoir des résultats aleatoires comme
+il le faut normalement et avoir des tests exacts, nous ne lancons pas de dé.}
+
+\mytest
+{Vérifier si le simulateur de combat retourne les bons résultats pour le morale}
+{Un nombre d'attaquants et de defenseurs, un entier représentant le morale et un type de terrain}
+{Chaque combinaison de paramètres doit retourner le même résultat exact à chaque fois}
+{Nous prenons les même quatres combinaisons d'entrées distinctes. 
+En divisant le nombre d'attaquants par le nombre de défenseurs, on applique les règles du jeu pour definir
+quelle case du tableau des résultats de combat il faut obtenir. Pour ne pas avoir des résultats aleatoires comme
+il le faut normalement et avoir des tests exacts, nous ne lancons pas de dé.}
+
 
 \subsubsection{Vérification du jeu}
 
@@ -114,7 +143,21 @@ TODO
 
 \subsubsection{Vérification de la recherche du plus court chemin}
 
-TODO
+\mytest
+{Vérifier si le chemin renvoyé est le plus court}
+{Identifiant d'un hexagone de départ, l'identifiant d'un hexagone de destination et l'unité qui se deplace}
+{Pour un hexagone de départ et de destination donné, un plus court chemin a toujours le même poids. Nous verifions
+si il est égale à celui ci}
+{En ayant une unité qui est adjacente à une unité ennemie, nous verifions si le calcul de cout est correcte, car
+le plus court chemin passe à coté d'elle, ce qui teste plusieurs scenarios qui peuvent être rencontrés dans le jeu}
+
+\mytest
+{Vérifier si une unité ne passe pas par un hexagone qui contient des ennemis}
+{Identifiant d'un hexagone de départ, l'identifiant d'un hexagone de destination et l'unité qui se deplace}
+{Si on trouve un plus court chemin entre deux hexagones, le chemin ne doit pas contenir un hexagone qui a des
+unités ennemies.}
+{En prenant un plus court chemin, nous verifions pour tout les hexagones du chemin, si il n'appartient pas
+au joueur qui tente de bouger l'unité.}
 
 \subsection{Couverture du code}
 
