@@ -236,7 +236,7 @@ export default class Game {
     });
   }
 
-  verifySuppliesForAnUnit(playerId: number, unit: Unit): boolean {
+  verifySuppliesForUnit(playerId: number, unit: Unit): boolean {
     if (playerId !== 1 && playerId !== 2) {
       throw new Error("player id is not valid");
     }
@@ -245,25 +245,20 @@ export default class Game {
     const playerBases = player.getBases();
     const playerDumps = player.getDumps();
     const playerSupplies = player.getSupplyUnits();
-    if (
-      !this.checkUnitSupplies(
-        player,
-        [unit],
-        playerBases,
-        playerDumps,
-        playerSupplies.filter(
-          (supplyUnit) =>
-            this._pathfinder.findShortestWay(
-              unit.getCurrentPosition(),
-              supplyUnit.getCurrentPosition(),
-              player,
-            ).sumOfWeight <= SUPPLYUNIT_RANGE,
-        ),
-      )
-    ) {
-      return false;
-    }
-    return true;
+    return this.checkUnitSupplies(
+      player,
+      [unit],
+      playerBases,
+      playerDumps,
+      playerSupplies.filter(
+        (supplyUnit) =>
+          this._pathfinder.findShortestWay(
+            unit.getCurrentPosition(),
+            supplyUnit.getCurrentPosition(),
+            player,
+          ).sumOfWeight <= SUPPLYUNIT_RANGE,
+      ),
+    );
   }
 
   /*
