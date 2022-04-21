@@ -1,4 +1,4 @@
-*.aux
-*.fdb_latexmk
-*.fls
-*.log
+*
+!*.tex
+!*.bib
+!data/*
