@@ -2,7 +2,7 @@ import P5 from "p5";
 import dataMap from "../constants/map";
 import drawHexagon from "./hexagon";
 import drawCaption from "./caption";
-import { drawDump, drawSupplyUnit, drawUnit } from "./units";
+import { drawDump, drawSupplyUnit, drawUnit, drawUnitEmbarked } from "./units";
 import { GameMap } from "../constants/types";
 import { colorsPlayer } from "../constants/colors";
 
@@ -30,7 +30,6 @@ export default function drawHexMap(p5: P5, gameMap: GameMap) {
 
     //Hexagons
     {
-      //Bases
       const base = g.base;
       if (line % 2 === 1) {
         x = xPositionOddLine(column);
@@ -39,6 +38,7 @@ export default function drawHexMap(p5: P5, gameMap: GameMap) {
         x = xPositionEvenLine(column);
         y = yPositionEvenLine(line);
       }
+      //Bases
       base !== undefined
         ? drawHexagon(
             p5,
@@ -53,21 +53,22 @@ export default function drawHexMap(p5: P5, gameMap: GameMap) {
         : drawHexagon(p5, x, y, r, idString, g.terrain);
     }
 
-    //Units
-    {
-      const units = g.units;
-      let i = 0;
-      for (const u of units) {
-        drawUnit(p5, x, y, i, u.owned, u.type, u.id);
-        i++;
-      }
-    }
-
     //SuplyUnit
     {
       const suppplyUnits = g.supplyUnits;
       for (const s of suppplyUnits) {
         drawSupplyUnit(p5, x, y, s.owned);
+      }
+    }
+
+    //Units
+    {
+      const units = g.units;
+      let i = 0;
+      for (const u of units) {
+        if (u.embarked === true) drawUnitEmbarked(p5, x, y);
+        else drawUnit(p5, x, y, i, u.owned, u.type, u.id);
+        i++;
       }
     }
 
