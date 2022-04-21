@@ -1,6 +1,6 @@
 import { TerrainTypes } from "../main/Map/Terrain";
 import CombatSimulator, { DamageResult, MoraleResult } from "../main/GameManager/CombatSimulator";
-import { resetIds } from "../main/idManager";
+import { resetIds } from "../main/IdManager";
 
 describe("Check if combat simulator works correctly", function () {
   this.afterAll(() => {

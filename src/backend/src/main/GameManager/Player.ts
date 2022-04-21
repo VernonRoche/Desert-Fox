@@ -97,6 +97,7 @@ export default class Player {
   getBases(): Base[] {
     return Array.from(this._bases.values());
   }
+
   getDumps(): Dump[] {
     return Array.from(this._dumps.values());
   }
@@ -112,18 +113,23 @@ export default class Player {
   addUnit(unit: Unit): void {
     this._units.set(unit.getId().toString(), unit);
   }
+
   addBase(base: Base): void {
     this._bases.set(base.getId().toString(), base);
   }
+
   addDump(dump: Dump): void {
     this._dumps.set(dump.getId().toString(), dump);
   }
+
   addSupplyUnit(supplyUnit: SupplyUnit): void {
     this._supplyUnits.set(supplyUnit.getId().toString(), supplyUnit);
   }
+
   removeUnit(defenderUnit: Unit) {
     this._units.delete(defenderUnit.getId().toString());
   }
+
   removeDump(dump: Dump) {
     if (this.hasEntity(dump)) this._dumps.delete(dump.getId().toString());
   }

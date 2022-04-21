@@ -4,7 +4,7 @@ import express from "express";
 import Game from "./GameManager/Game";
 import Player from "./GameManager/Player";
 import { MaxTurns, StateMachine } from "./GameManager/StateMachine/StateMachine";
-import { resetIds } from "./idManager";
+import { resetIds } from "./IdManager";
 
 export class SocketServer {
   private _httpServer: http.Server;

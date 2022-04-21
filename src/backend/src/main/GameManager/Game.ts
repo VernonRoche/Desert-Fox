@@ -156,6 +156,7 @@ export default class Game {
     unit.place(destination);
     unit.move(cost);
   }
+
   checkUnitSupplies(
     player: Player,
     units: Moveable[],

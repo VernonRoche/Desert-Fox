@@ -9,6 +9,7 @@ import Player from "../GameManager/Player";
 import Base, { baseJson } from "../Infrastructure/Base";
 import Dump, { dumpJson } from "../Infrastructure/Dump";
 import { supplyUnitJson } from "../Infrastructure/SupplyUnit";
+
 const width = 66;
 const height = 29;
 
@@ -26,9 +27,12 @@ export default class GameMap {
 
   constructor(mapName: Maps, entities: Map<string, Entity>) {
     this._entities = entities;
+    // Load the map from a json file.
     const json = fs.readFileSync(`maps/${mapName}.json`, "utf8");
     const map: JsonMap = JSON.parse(json);
     const validTerrains = Object.values(TerrainTypes) as string[];
+    // Convert the json data to Terrain types and hex identifiers.
+    // Finally create the corresponding hexes.
     map.forEach(({ hexId, terrain }) => {
       const x = +hexId.substring(2, 4);
       const y = +hexId.substring(0, 2);
@@ -45,6 +49,7 @@ export default class GameMap {
         this._hexagons.set(hexID.id(), hex);
       }
     });
+    // Initialize the neighbours of each hex.
     for (const hex of this._hexagons.values()) {
       const x = hex.getId().getX();
       const y = hex.getId().getY();
@@ -104,12 +109,14 @@ export default class GameMap {
     if (hex) hex.addUnit(unit);
     else throw new Error("incorrecthex");
   }
+
   removeDump(dump: Dump) {
     this._entities.delete(dump.getId().toString());
     const hex = this._hexagons.get(dump.getCurrentPosition().id());
     if (hex) hex.removeDump(dump);
   }
 
+  // Convert all data held by the map into JSON format.
   public toJSON(player: Player): string {
     const json: JsonMap = [];
     this._hexagons.forEach((hex) => {
@@ -144,6 +151,9 @@ export default class GameMap {
     return unit;
   }
 
+  // Returns true if the given hex has a unit of the player, or is empty.
+  // Returns false if there is an enemy unit on the hex.
+  // For convenience purposes an empty hex belongs to both players.
   public hexBelongsToPlayer(hexID: HexID, player: Player): boolean {
     const hex = this.findHex(hexID);
     if (hex.getUnits().length === 0) {
@@ -152,6 +162,7 @@ export default class GameMap {
     return hex.getUnits().some((unit) => player.hasEntity(unit));
   }
 
+  // Returns true if the hex is a neighbour of a hex holding an enemy unit.
   public hexIsInEnemyZoneOfControl(hexID: HexID, enemyPlayer: Player): boolean {
     const hex = this.findHex(hexID);
     for (const neighbour of hex.getNeighbours()) {

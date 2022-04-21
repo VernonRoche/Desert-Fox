@@ -1,7 +1,7 @@
 import Entity from "../Entity";
 import fs from "fs";
 import { BaseJson, DumpJson, SupplyUnitJson, UnitJson } from "../jsonTypes";
-import { getNewId } from "../idManager";
+import { getNewId } from "../IdManager";
 import Mechanized from "../Units/Mechanized";
 import HexID from "../Map/HexID";
 import Foot from "../Units/Foot";
@@ -81,6 +81,7 @@ function addUnitsToPlayer(
     allEntities.set(unitId.toString(), unitToAdd);
   });
 }
+
 function addBasesToPlayer(player: Player, bases: BaseJson[], allEntities: Map<string, Entity>) {
   bases.forEach((base: BaseJson) => {
     const x = +base.currentPosition.substring(2, 4);

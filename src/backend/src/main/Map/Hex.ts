@@ -32,9 +32,11 @@ export default class Hex {
   getSupplyUnits(): SupplyUnit[] {
     return this._supplyUnits;
   }
+
   getBase(): Base | undefined {
     return this._base;
   }
+
   getDumps(): Dump[] {
     return this._dumps;
   }
@@ -72,6 +74,7 @@ export default class Hex {
       this.addDump(entity as Dump);
     }
   }
+
   removeEntity(entity: Entity) {
     if (
       entity.getType() === "motorized" ||
@@ -115,6 +118,7 @@ export default class Hex {
       if (item === unit) this._supplyUnits.splice(index, 1);
     });
   }
+
   removeDump(dump: Dump) {
     this._dumps = this._dumps.filter((dmp) => dmp !== dump);
   }

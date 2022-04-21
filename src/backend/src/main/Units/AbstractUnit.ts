@@ -40,6 +40,10 @@ export default abstract class AbstractUnit implements Unit {
     this._lifePoints -= lifePoints;
   }
 
+  // This check is used in combat.
+  // We roll a dice. If the dice equals 6 then we automatically fail.
+  // If not, then we get the dice result and add the morale rating of the unit
+  // to it. If the result is higher than 5, then we fail.
   moraleCheck(): boolean {
     const dice = Dice.rollDice();
     if (dice == 6) {
@@ -52,6 +56,7 @@ export default abstract class AbstractUnit implements Unit {
     return this._moraleRating;
   }
 
+  // Convert all our unit's data in a JSON object.
   toJson(player: Player): unitJson {
     return {
       type: this.getType(),
@@ -71,6 +76,8 @@ export default abstract class AbstractUnit implements Unit {
     return this._id;
   }
 
+  // The function returns a HexID object, representing the coordinates of the
+  // unit.
   public getCurrentPosition() {
     return this._currentPosition;
   }

@@ -4,7 +4,7 @@ import Player from "../main/GameManager/Player";
 import PlayerID from "../main/GameManager/PlayerID";
 import { Socket } from "socket.io";
 import Mechanized from "../main/Units/Mechanized";
-import { resetIds } from "../main/idManager";
+import { resetIds } from "../main/IdManager";
 import { DamageResult, MoraleResult } from "../main/GameManager/CombatSimulator";
 
 describe("Check if attack works correctly", function () {
