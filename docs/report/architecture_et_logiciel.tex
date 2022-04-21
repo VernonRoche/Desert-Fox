@@ -5,6 +5,21 @@ Nous avons divisé notre modèle en trois grandes architectures, le serveur, la 
 
 \subsection{Architecture du serveur}
 
+Le serveur a 3 fonctionnalités principales :
+\begin{enumerate}
+    \item Gérer les connexions avec les clients
+    \item Gérer la machine d'état du jeu
+    \item Gérer le jeu
+\end{enumerate}
+
+Le serveur permet aux clients de communiquer avec le jeu en manipulant ce dernier selon les commandes reçues.
+
+\subsubsection{Connexions}
+
+Le serveur écoute sur le port 3001 par défaut, mais peut être modifié en lui passant un argument en ligne de commande au moment de le lancer.
+Pour que le serveur accepte les connexions entrantes, il faut que la connexion provienne d'une adresse en particulier. Par défaut celle ci est \begin{verbatim}http://localhost:8000\end{verbatim}, mais elle peut être modifiée en ligne de commande au moment de le lancer.
+Il possède une liste des {\tt sockets} connectée au serveur, qui sont les connexions des clients.
+
 TODO: Expliquer l'architecture du serveur en détail, c'est-à-dire 2 listes: une de player et une de sockets, il y a une stateMachine qui gère les différents états du jeu,
 le jeu est créé quand les 2 joueurs sont connectés, la carte est envoyée à  ce moment-là, quand une action est effectuée qui change la carte il faut renvoyer la carte
 

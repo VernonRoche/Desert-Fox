@@ -22,7 +22,6 @@
 }
 
 \section{Nos tests}
-
 Nous avons mis en place divers outils pour contrôler notre implémentation :
 \begin{itemize}
     \item Chaque \emph{commit} sera vérifier par des pipelines de \emph{GitLab}. Cet outil compile le code proposé sur une machine afin de voir si le code suggérer n'a aucune erreur de compilation.
@@ -72,15 +71,45 @@ Consigne : description des tests, discussion de leurs résultats, explication de
 
 TODO
 
-\subsubsection{Vérification de l'instance de la machine d'état}
-
-TODO
-
 \subsubsection{Vérification de la machine d'état}
+\mytest
+{Verification de l'instantiation de la machine d'état}
+{Les spécificités nécéssaires pour demarrer la machine d'état, dont les phases}
+{Si la machine d'état se lance correctement}
+{Vérifie si l'état actuel est l'état initial}
 
-TODO
+\mytest
+{Verification du redemarrage de la machine d'état}
+{La machine d'état lancée dans le test précédent}
+{Si la machine d'état se re-demarre correctement}
+{Vérifie si l'état actuel est bien l'état initial}
+
+\mytest
+{Verification des transitions de la machine d'état}
+{La machine d'état lancée dans le premier test de cette section}
+{Si la machine d'état parcourt les phases correctement}
+{Vérifie aprés chaque appel au changement de l'état actuel de la machine d'état si ce dernier est correct}
+
+\mytest
+{Verification du compteur de tours}
+{La machine d'état lancée dans le premier test de cette section}
+{Si la machine d'état augmente le nombre de tours a la fin de chaque tour}
+{Vérifie si aprés une serie de changement de phases, la machine d'état met bien à jour le nombre du tour actuel}
+
+\mytest
+{Verification du compteur de tours}
+{La machine d'état lancée dans le premier test de cette section}
+{Si la machine d'état augmente le nombre de tours a la fin de chaque tour}
+{Vérifie si aprés une serie de changement de phases, la machine d'état met bien à jour le nombre du tour actuel}
+
+\mytest
+{Verification le changement de phases pendant un tour}
+{La machine d'état lancée dans le premier test de cette section}
+{Si la machine d'état recommence bien a la phase initiale aprés un tour de phases}
+{Vérifie si aprés une serie de changement de phases égale au nombre totale de phases dans le jeu, l'état de la machine d'état est initiale}
 
 \subsubsection{Vérification de l'instance du jeu}
+
 
 TODO
 
@@ -89,10 +118,6 @@ TODO
 TODO
 
 \subsubsection{Vérification de la classe abstraite \emph{Player}}
-
-TODO
-
-\subsubsection{Vérification d'une base}
 
 TODO
 
