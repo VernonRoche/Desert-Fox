@@ -172,7 +172,7 @@ const commands: Commands = {
             _primary ? "primaire" : "secondaire"
           }`;
         }
-        addLine("Game", `Unités: ${unitString}\n Bases: ${basesString}`);
+        addLine("Game", `Unités: ${unitString}\n${basesString ? "Base: " + basesString : ""}`);
       },
     );
   },
