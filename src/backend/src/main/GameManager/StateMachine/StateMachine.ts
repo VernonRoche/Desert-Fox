@@ -47,16 +47,29 @@ export class StateMachine {
     this.phaseService.stop();
   }
   checkPhaseAndSupplies(): void {
+    let changeMap = false; // variable that checks if the map has to be refreshed or not
     if (this.getPhase().includes("movement") && this.getPhase().includes("first")) {
       const game = this.socketServer.getGame();
       if (!game) return;
-      game.verifySupplies(1);
+      changeMap = game.verifySupplies(1);
     } else if (this.getPhase().includes("movement") && this.getPhase().includes("second")) {
       const game = this.socketServer.getGame();
       if (!game) return;
-      game.verifySupplies(2);
+      changeMap = game.verifySupplies(2);
+    }
+    if (changeMap) {
+      this.socketServer.sockets.forEach((socket) => {
+        socket.emit(
+          "map",
+          this.socketServer
+            .getGame()
+            ?.getMap()
+            .toJSON(this.socketServer.getPlayerFromSocket(socket)),
+        );
+      });
     }
   }
+
   get isVerbose() {
     return this._verbose;
   }
@@ -97,8 +110,9 @@ export class StateMachine {
 
   runPhaseActions(actualPhase: string): void {
     switch (actualPhase) {
-      case "victory_check": //TODO : verify if the user has obtain the "port" of the other player
-        {if (this.phaseService.state.context.turn === 38) {
+      case "victory_check": {
+        //TODO : verify if the user has obtain the "port" of the other player
+        if (this.phaseService.state.context.turn === 38) {
           // replace false with the test
           this.phaseService.stop();
           this.socketServer.sockets.forEach((socket) => {

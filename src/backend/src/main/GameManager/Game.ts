@@ -11,6 +11,7 @@ import CombatSimulator, { DamageResult, MoraleResult } from "./CombatSimulator";
 import Maps from "../Map/Maps";
 import Embarkable from "../Embarkable";
 import SupplyUnit from "../Infrastructure/SupplyUnit";
+import e from "express";
 
 const BASE_RANGE = 14;
 const SUPPLYUNIT_RANGE = 7;
@@ -165,6 +166,7 @@ export default class Game {
     dumps: Dump[],
     supplyUnits: Moveable[],
   ): boolean {
+    if (units.length === 0) return false;
     let found = false;
     for (const unit of units) {
       for (const base of bases) {
@@ -174,6 +176,8 @@ export default class Game {
             unit.getCurrentPosition(),
             base.getCurrentPosition(),
             player,
+            unit.getType(),
+            true,
           ).sumOfWeight <= BASE_RANGE
         ) {
           found = true;
@@ -206,9 +210,9 @@ export default class Game {
     return this.checkUnitSupplies(player, supplyUnits, bases, dumps, []);
   }
 
-  verifySupplies(playerId: number): void {
+  verifySupplies(playerId: number): boolean {
     if (playerId !== 1 && playerId !== 2) {
-      return;
+      throw new Error("player id is not valid");
     }
     const player = playerId === 1 ? this._player1 : this._player2;
 
@@ -216,6 +220,7 @@ export default class Game {
     const playerDumps = player.getDumps();
     const playerUnits = player.getUnits();
     const playerSupplies = player.getSupplyUnits();
+    let supplied = false;
     playerUnits.forEach((unit) => {
       if (
         !this.checkUnitSupplies(
@@ -229,13 +234,19 @@ export default class Game {
                 unit.getCurrentPosition(),
                 supplyUnit.getCurrentPosition(),
                 player,
+                unit.getType(),
+                true,
               ).sumOfWeight <= SUPPLYUNIT_RANGE,
           ),
         )
       ) {
         unit.disrupt();
+      } else if (!supplied) {
+        supplied = true;
       }
     });
+
+    return supplied;
   }
 
   verifyCombatSuppliesForUnit(player: Player, unit: Unit): boolean {
@@ -248,6 +259,8 @@ export default class Game {
             unit.getCurrentPosition(),
             supplyUnit.getCurrentPosition(),
             player,
+            unit.getType(),
+            true,
           ).sumOfWeight <= SUPPLYUNIT_RANGE,
       );
     return this.verifyCombatSuppliesRec(player, [unit], supplyUnitsToCheck);
@@ -267,6 +280,8 @@ export default class Game {
             dump.getCurrentPosition(),
 
             player,
+            unit.getType(),
+            true,
           ).sumOfWeight <= DUMP_RANGE
         ) {
           this._map.removeDump(dump);
