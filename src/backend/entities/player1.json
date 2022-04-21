@@ -58,11 +58,52 @@
     "dumps": [
         {
             "currentPosition": "0405"
+        },
+        {
+            "currentPosition": "1713"
+        },
+        {
+            "currentPosition": "0706"
+        },
+        {
+            "currentPosition": "0610"
+        },
+        {
+            "currentPosition": "1109"
+        },
+        {
+            "currentPosition": "1308"
+        },
+        {
+            "currentPosition": "1014"
+        },
+        {
+            "currentPosition": "1806"
+        },
+        {
+            "currentPosition": "0317"
+        },
+        {
+            "currentPosition": "0815"
         }
+
+        
     ],
     "supplyUnits": [
         {
             "currentPosition" : "0205",
+            "movementPoints" : "12"
+        },
+        {
+            "currentPosition" : "0403",
+            "movementPoints" : "12"
+        },
+        {
+            "currentPosition" : "0602",
+            "movementPoints" : "12"
+        },
+        {
+            "currentPosition" : "0206",
             "movementPoints" : "12"
         }
     ]
