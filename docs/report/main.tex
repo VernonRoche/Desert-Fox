@@ -7,20 +7,17 @@
 \usepackage[top=2.54cm, bottom=2.54cm, left=2.54cm, right=2.54cm]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
+\usepackage[table]{xcolor}
 \usepackage{copyrightbox}
 \usepackage{multirow}%tableaux
-
-
-
 \usepackage{listings} %cahier des besoins
 \usepackage{bbding}
 \usepackage{pifont}
 \usepackage{wasysym}
 \usepackage{amssymb}
-\newcommand{\cmark}{\ding{52}}%
-\newcommand{\xmark}{\ding{55}}%
 
-
+\def\FAIT{\textcolor[HTML]{4E944F}{\textbf{\ding{52}}}}
+\def\NOP{\textcolor[HTML]{E83A14}{\textbf{\ding{55}}}}
 
 \lstset{
 language=C,
