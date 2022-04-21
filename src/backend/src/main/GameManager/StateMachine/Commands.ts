@@ -158,4 +158,41 @@ export const _commands: Commands = {
       player.getSocket().emit(args.type, { error: "invalidembark" });
     }
   },
+  disembark: (stateMachine: StateMachine, player: Player, args: BaseCommand & EmbarkArgs) => {
+    if (!args.embarkingId) {
+      player.getSocket().emit(args.type, { error: "invalidargs" });
+      return;
+    }
+    const unitId = +args.embarkingId;
+    if (isNaN(unitId)) {
+      player.getSocket().emit(args.type, { error: "invalidsupplyunitid" });
+      return;
+    }
+    let unit;
+    try {
+      unit = player.getEntityById(unitId);
+    } catch (e) {
+      player.getSocket().emit(args.type, { error: "invalidsupplyunitid" });
+      return;
+    }
+    if (!unit) {
+      player.getSocket().emit(args.type, { error: "invalidsupplyunit" });
+      return;
+    }
+    try {
+      const game = stateMachine.getSocketServer().getGame();
+      if (!game) {
+        player.getSocket().emit(args.type, { error: "nogame" });
+        return;
+      }
+      const toDisembark: Embarkable | undefined = game.disembarkEntity(player, unit as SupplyUnit);
+      if (!toDisembark) {
+        player.getSocket().emit(args.type, { error: "invaliddisembark" });
+        return;
+      }
+      player.getSocket().emit(args.type, { error: false });
+    } catch (e) {
+      player.getSocket().emit(args.type, { error: "invaliddisembark" });
+    }
+  },
 };
