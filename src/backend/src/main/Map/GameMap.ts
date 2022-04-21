@@ -161,17 +161,4 @@ export default class GameMap {
     }
     return hex.getUnits().some((unit) => player.hasEntity(unit));
   }
-
-  // Returns true if the hex is a neighbour of a hex holding an enemy unit.
-  public hexIsInEnemyZoneOfControl(hexID: HexID, enemyPlayer: Player): boolean {
-    const hex = this.findHex(hexID);
-    for (const neighbour of hex.getNeighbours()) {
-      if (neighbour.getUnits().length > 0) {
-        if (neighbour.getUnits().some((unit) => enemyPlayer.hasEntity(unit))) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }
 }
