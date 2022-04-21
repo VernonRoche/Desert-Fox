@@ -241,8 +241,7 @@ export default class Game {
       throw new Error("player id is not valid");
     }
     const player = playerId === 1 ? this._player1 : this._player2;
-    if(!player.hasEntity(unit))
-      throw new Error("player does not have the unit");
+    if (!player.hasEntity(unit)) throw new Error("player does not have the unit");
     const playerBases = player.getBases();
     const playerDumps = player.getDumps();
     const playerSupplies = player.getSupplyUnits();
