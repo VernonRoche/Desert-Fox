@@ -5,6 +5,7 @@ import { AllArgs, commandTypes, _commands } from "./Commands";
 import Player from "../Player";
 import PlayerID from "../PlayerID";
 import { statesWithUserInput, TurnPhases } from "./States";
+import Game from "../Game";
 export const MaxTurns = 38;
 
 export class StateMachine {
@@ -149,6 +150,32 @@ export class StateMachine {
           current: this.phaseService.state.context.turn,
           total: MaxTurns,
         });
+        const game = this.socketServer.getGame();
+        if (!game) return;
+        game
+          .getPlayer1()
+          .getUnits()
+          .forEach((unit) => {
+            unit.resetMovementPoints();
+          });
+        game
+          .getPlayer1()
+          .getSupplyUnits()
+          .forEach((supplyUnit) => {
+            supplyUnit.resetMovementPoints();
+          });
+        game
+          .getPlayer2()
+          .getUnits()
+          .forEach((unit) => {
+            unit.resetMovementPoints();
+          });
+        game
+          .getPlayer2()
+          .getSupplyUnits()
+          .forEach((supplyUnit) => {
+            supplyUnit.resetMovementPoints();
+          });
         break;
       }
       case "initial": {
