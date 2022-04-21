@@ -6,7 +6,12 @@ import {
   colorsUnit,
   colorsUnitEmbarked,
 } from "../constants/colors";
-import handlerHexPoints from "../constants/hexPoints";
+import handlerHexPoints, {
+  pointCosNeg,
+  pointCosPos,
+  pointSinNeg,
+  pointSinPos,
+} from "../constants/hexPoints";
 import dataMap from "../constants/map";
 import drawText from "./text";
 
@@ -21,6 +26,7 @@ export function drawUnit(
   owned: boolean,
   type: string,
   id: number,
+  disrupted: boolean,
 ) {
   const points = handlerHexPoints(x, y, size, index, true);
 
@@ -30,6 +36,21 @@ export function drawUnit(
   p5.fill(colorsUnit[type] ?? "white");
   p5.circle(points.x, points.y, size);
   p5.pop();
+
+  if (disrupted) {
+    console.log("ici");
+    const s = size / 2;
+    const x1 = pointCosPos(points.x, s);
+    const y1 = pointSinNeg(points.y, s);
+    const x2 = pointCosNeg(points.x, s);
+    const y2 = pointSinPos(points.y, s);
+
+    p5.push();
+    p5.stroke("red");
+    p5.line(x1, y1, x2, y2);
+    p5.pop();
+  }
+
   drawText(p5, points.x, points.y + 3, id, "white");
 }
 
