@@ -6,7 +6,7 @@ MAIN = main
 all: pdf
 
 pdf:
-	latexmk --pdf -shell-escape --halt-on-error $(MAIN).tex
+	$(LATEX) --pdf -shell-escape --halt-on-error $(MAIN).tex
 
 clean:
 	$(LATEX) -C $(MAIN).tex
