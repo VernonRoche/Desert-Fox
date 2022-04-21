@@ -26,20 +26,21 @@ export default class Game {
     this._player2 = player2;
     this._map = new GameMap(Maps.LIBYA, loadEntitiesAndMap(this));
     this._pathfinder = new Pathfinder(this._map);
-    // Initialize Pathfinder
   }
 
-  // check if a move is possible
-  // it does not apply move
-  // return true if can move
-  // return a string containing the reason if it cannot
-  // do not try if(canMove) since it will always be true
-  // check if(canMove === true)
+  /*
+   * Check if a move is possible. It does not apply the move.
+   * It returns the result of the pathfinder if it can move.
+   * Return a string containing the reason if it cannot.
+   * Do not try if(canMove) since it will always be true.
+   * Check if(canMove === true) for security reasons.
+   */
   public canMove(
     player: Player,
     unit: Moveable,
     destination: HexID,
   ): { movePossible: boolean; cost: number } | string {
+    // Check if the destination hex exists.
     const destinationHex = this._map.findHex(destination);
     if (!destinationHex) return "hex does not exist";
 
@@ -53,9 +54,6 @@ export default class Game {
       return "enemies are present in this hex";
 
     // Check if the remaining movement points are enough by using Pathfinder
-    // Has to be proven, because now we take the weight of the Pathfinder result.
-    // Which may or may not represent the real cost in movement points.
-
     const { sumOfWeight } = this._pathfinder.findShortestWay(
       unit.getCurrentPosition(),
       destination,
@@ -65,7 +63,6 @@ export default class Game {
 
     if (sumOfWeight > unit.getRemainingMovementPoints()) return "not enough movement points";
 
-    // Check if move is possible
     return { movePossible: true, cost: sumOfWeight };
   }
 
@@ -106,7 +103,7 @@ export default class Game {
     }
   }
 
-  disembarkEntity(player: Player, supplyUnit: SupplyUnit): Embarkable | undefined{
+  disembarkEntity(player: Player, supplyUnit: SupplyUnit): Embarkable | undefined {
     if (!player.hasEntity(supplyUnit)) {
       throw new Error("supply unit does not exist");
     }
@@ -121,17 +118,17 @@ export default class Game {
   }
 
   // Checks if a move is possible and applies it.
-  // Returns false if the move was not possible, true if move was succesful.
   public moveUnit(player: Player, unit: Moveable, destination: HexID): void {
     const canMove = this.canMove(player, unit, destination);
     if (typeof canMove === "string") {
       throw new Error(canMove);
     }
+    //Check if the unit type is allowed to move
     if (
-      unit.getType() !== "SupplyUnit" &&
+      unit.getType() !== "supply" &&
       !(
         unit.getType() !== "motorized" ||
-        unit.getType() !== "motorized" ||
+        unit.getType() !== "foot" ||
         unit.getType() !== "mechanized"
       )
     ) {
@@ -142,18 +139,20 @@ export default class Game {
       throw new Error(`Cannot move unit: ${canMove}`);
     }
 
-    // Check if move is possible
+    // Apply the move
     const originHex = this._map.findHex(unit.getCurrentPosition());
     const destinationHex = this._map.findHex(destination);
+    // Move the unit from one hex to another
     destinationHex.addEntity(unit);
     originHex.removeEntity(unit);
-    if (unit.getType() === "SupplyUnit") {
+    if (unit.getType() === "supply") {
       const embarkedEntity = (unit as unknown as SupplyUnit).getEmbarked();
       if (embarkedEntity) {
         destinationHex.addEntity(embarkedEntity);
         originHex.removeEntity(embarkedEntity);
       }
     }
+    // Update the unit's position for itself to know.
     unit.place(destination);
     unit.move(cost);
   }
@@ -236,6 +235,14 @@ export default class Game {
     });
   }
 
+  /*
+   * Main combat function.
+   * It does some verifications to see if the combat is possible.
+   * Then it prepares some data and then gets the combat result from the
+   * CombatSimulator class. It then applies the result to the map.
+   * It returns the same type as the CombatSimulator class with all the
+   * combat results.
+   */
   public attackHex(
     attackers: Unit[],
     destination: HexID,
@@ -253,6 +260,7 @@ export default class Game {
     if (!destinationHex) {
       throw new Error(`Hex ${destination} does not exist.`);
     }
+    // Find which player attacks.
     let attackerPlayer: Player;
     // Player 1 attacks
     if (this._map.hexBelongsToPlayer(originHex.getID(), this._player1)) {
@@ -270,6 +278,7 @@ export default class Game {
         throw new Error(`Hex ${destination} does not have enemies for Player 2.`);
       }
     }
+    // The defender is the opposite player
     const defenderPlayer = attackerPlayer === this._player1 ? this._player2 : this._player1;
 
     // Check if the unit is in range
@@ -277,7 +286,9 @@ export default class Game {
       throw new Error(`Unit ${attackers[0].getId()} is not in range of hex ${destination}.`);
     }
 
-    // Get combat results
+    // Get initial combat results
+    // This operation may seem redundant with the later call in the main loop
+    // but it is needed to have the system working properly.
     let result = CombatSimulator.combatResult(
       destinationHex.getTerrain().terrainType,
       attackers.length,
@@ -287,12 +298,19 @@ export default class Game {
     );
 
     // Get total hp of defenders and attacker supplies
+    // Hp of defenders are divided into morale groups, hence why we use
+    // an array of 5 elements.
+    // The variable lifePointsLost will be used in the attacker section.
+    // It will be used if the combat result is X or XX. It counts the hp lost
+    // by the defenders.
     let lifePointsLost = 0;
     const defenderLifePoints = [0, 0, 0, 0, 0];
     const attackerSupplies = new Map<number, boolean>();
+    // For each morale group add the hp of the units in it
     for (const defender of destinationHex.getUnits()) {
       defenderLifePoints[defender.getMoraleRating() - 1] += defender.getLifePoints();
     }
+    // Find which attackers have supplies
     for (const attacker of attackers) {
       // TO IMPLEMENT USING SUPPLY PATHFINDER
       attackerSupplies.set(attacker.getId(), true);
@@ -300,9 +318,13 @@ export default class Game {
 
     // Determine combat results for defenders
     for (let i = 0; i < 5; i++) {
+      // If there is no unit in the morale group, skip it
       if (defenderLifePoints[i] === 0) {
         continue;
       }
+      // Calculate combat results
+      // We pass i+1 because the morale group is 1-5, but the array is 0-4.
+      // Cf CombatSimulator.combatResult, where we subtract 1 from the morale.
       result = CombatSimulator.combatResult(
         destinationHex.getTerrain().terrainType,
         attackers.length,
@@ -310,40 +332,53 @@ export default class Game {
         i + 1,
         false,
       );
+      // Get the defender damage result. Depending on it, we may have to apply
+      // half or a quarter of the total defender's hp in damage.
       switch (result["defender"]["damage"]) {
-        case DamageResult.E:
-          break;
         case DamageResult.H:
           defenderLifePoints[i] = Math.round(defenderLifePoints[i] / 2);
           break;
         case DamageResult.Q:
           defenderLifePoints[i] = Math.round(defenderLifePoints[i] / 4);
           break;
+        case DamageResult.E:
         case DamageResult.NONE:
           break;
         default:
           throw new Error(`Unknown damage result: ${result["defender"]["damage"]}`);
       }
       // Apply damage results to defender units
+      // Create an array of destroyed defender units.
+      // This will be used to eventually skip checking morale results.
       const destroyedDefenders: Unit[] = [];
       let defenders = destinationHex.getUnits();
       for (const defenderUnit of defenders) {
+        // For all defenders, see if their morale is equal to the current
+        // Iteration of the loop.
+        // This is done because combat results are applied per morale group.
         if (defenderUnit.getMoraleRating() - 1 === i) {
           switch (result["defender"]["damage"]) {
+            // Units are destroyed
             case DamageResult.E:
               defenderPlayer.removeUnit(defenderUnit);
               destinationHex.removeUnit(defenderUnit);
               destroyedDefenders.push(defenderUnit);
               break;
+            // Units take half or quarter their hp in damage. The total damage
+            // taken by the group is calculated in the previous switch.
             case DamageResult.H:
             case DamageResult.Q:
               if (defenderUnit.getLifePoints() === 2 && defenderLifePoints[i] >= 2) {
+                // If the unit has 2 hp and the total damage is 2 or more,
+                // it is destroyed.
                 defenderPlayer.removeUnit(defenderUnit);
                 destinationHex.removeUnit(defenderUnit);
                 destroyedDefenders.push(defenderUnit);
                 defenderLifePoints[i] -= 2;
                 lifePointsLost += 2;
               } else if (defenderLifePoints[i] >= 1) {
+                // We remove 1 hp from the unit. If it had 1 hp instead of 2
+                // we verify that it has hp left and possibly destroy it.
                 defenderUnit.removeLifePoints(1);
                 if (defenderUnit.getLifePoints() === 0) {
                   defenderPlayer.removeUnit(defenderUnit);
@@ -361,11 +396,15 @@ export default class Game {
           }
         }
       }
+      // Remove killed defenders
       defenders = defenders.filter((defender) => !destroyedDefenders.includes(defender));
       // Apply morale results to defender units
       for (const defenderUnit of defenders) {
+        // Same idea as above, but for morale. We divide the defenders into
+        // morale groups.
         if (defenderUnit.getMoraleRating() - 1 === i) {
           switch (result["defender"]["morale"]) {
+            // The unit does a morale check, if it fails, it retreats.
             case MoraleResult.M:
               if (!defenderUnit.moraleCheck()) {
                 for (const hexNeighbour of destinationHex.getNeighbours()) {
@@ -373,6 +412,7 @@ export default class Game {
                     this._map.hexBelongsToPlayer(hexNeighbour.getID(), defenderPlayer) &&
                     hexNeighbour.getUnits().length === 0
                   ) {
+                    // If the hex is empty, we retreat the unit to it.
                     hexNeighbour.addUnit(defenderUnit);
                     destinationHex.removeUnit(defenderUnit);
                     defenderUnit.place(hexNeighbour.getID());
@@ -381,9 +421,12 @@ export default class Game {
                 }
               }
               break;
+            // Disrupt the unit
             case MoraleResult.D:
               // DISRUPT UNIT
               break;
+            // Disrupt the unit and retreat. For now the implementation is
+            // the same because of retreat distance restrictions.
             case MoraleResult.R:
             case MoraleResult.W:
               for (const hexNeighbour of destinationHex.getNeighbours()) {
@@ -409,18 +452,23 @@ export default class Game {
     }
 
     // Determine combat results for attackers
+    // If the result is X, then the attacker takes half the damage of defenders.
     if (result["attacker"]["damage"] === DamageResult.X) {
       lifePointsLost = lifePointsLost / 2;
     }
+
+    // The process of damage and morale resolution is the same as the defenders.
+    // With the only exception that the attackers are not divided into morale
+    // groups.
     let attackerLifePoints = 0;
     for (const attacker of attackers) {
       attackerLifePoints += attacker.getLifePoints();
     }
     if (result["attacker"]["damage"] === DamageResult.H) {
-      attackerLifePoints = Math.round(attackerLifePoints * 0.5);
+      attackerLifePoints = Math.round(attackerLifePoints / 2);
     }
     if (result["attacker"]["damage"] === DamageResult.Q) {
-      attackerLifePoints = Math.round(attackerLifePoints * 0.25);
+      attackerLifePoints = Math.round(attackerLifePoints / 4);
     }
     const destroyedAttackers: Unit[] = [];
     for (const attacker of attackers) {
@@ -472,6 +520,7 @@ export default class Game {
           throw new Error(`Unknown damage result: ${result["attacker"]["damage"]}`);
       }
     }
+    // Remove destroyed attackers from the list of attackers
     attackers = attackers.filter((attacker) => !destroyedAttackers.includes(attacker));
     // Apply morale results to attacker units
     for (const attacker of attackers) {
@@ -515,6 +564,7 @@ export default class Game {
           throw new Error(`Unknown morale result: ${result["attacker"]["morale"]}`);
       }
     }
+    // The combat is finished, now we return the results.
     return result;
   }
 
