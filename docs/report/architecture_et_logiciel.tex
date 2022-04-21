@@ -30,9 +30,9 @@ Toute la démonstration précédente était notre réflexion lors de la concepti
     \centering
     \def\stackalignment{r}
     \stackunder{\includegraphics[scale=0.3]{data/UML_Decorator_Pattern_Exmple.png}}%
-           {\scriptsize%
-            Source : wikipedia}
-    \caption{Exemple d'un Decorator}
+    {\scriptsize%
+        Source : wikipedia}
+    \caption{Exemple d'un {\tt Decorator}}
     \label{fig:UML_Decorator_Pattern_Exmple}
 \end{figure}
 
@@ -44,7 +44,7 @@ Toute la démonstration précédente était notre réflexion lors de la concepti
     \label{fig:uml_abstract_unit}
 \end{figure}
 
-Dans les règles ils existent toutes les unités d'attaque qui se trouvent ci-dessus. Comme nous avions un temps limité nous avons décidé de ne pas toutes les implémenter car même si certaines ont un comportement différent le travail aurait été chronophage et donc nous avons privilégié des aspects plus importants du projet. On peut trouver les unités d'attaque choisies dans le diagramme \ref{fig:uml_entity} (Foot, Mechanized, Motorized).
+Dans les règles, il existe toutes les unités d'attaque qui se trouvent ci-dessus. Comme nous avions un temps limité nous avons décidé de ne pas toutes les implémenter, car même si certaines ont un comportement différent le travail aurait été trop chronophage et donc nous avons privilégié des aspects plus importants du projet. On peut trouver les unités d'attaque choisies dans le diagramme \ref{fig:uml_entity} (Foot, Mechanized, Motorized).
 
 \subsection{Mouvement et Approvisionnement}
 
@@ -58,7 +58,8 @@ Dans les règles ils existent toutes les unités d'attaque qui se trouvent ci-de
 
 \subsection{Service d'hébergement}
 
-Pour le service d'hébergement nous avons utilisé le GitLab du Cremi comme demandé dans les consignes. Nous avons paramétré les pipelines pour qu'à chaques commits il effectue les tests automatiquement pour aider à ne pas faire des commits complètement erronés. Concernant les branches nous avons divisé le dépôt en quatre:
+Pour le service d'hébergement, nous avons utilisé le GitLab du CREMI comme demandé dans les consignes. Nous avons paramétré les pipelines pour qu'à chaque commit, il effectue les tests automatiquement pour aider à ne pas faire des commits complètement erronés.
+Si les tests ratent, alors un mail est envoyé à l'auteur du commit et le commit est marqué sur GitLab avec une croix rouge signifiant l'échec des tests Concernant les branches nous avons divisé le dépôt en quatre :
 \begin{itemize}
     \item main
     \item dev
@@ -66,11 +67,11 @@ Pour le service d'hébergement nous avons utilisé le GitLab du Cremi comme dema
     \item frontend
 \end{itemize}
 
-Le principe est que l'on développe sur les branches correspondantes (\lstinline{frontend} et \lstinline{backend}), que l'on fusionne ces deux dernières sur la branche \lstinline{dev} pour vérifier si tout se passe bien et enfin mettre à jour le main pour avoir une version stable. Cela nous paraissait le plus logique sauf que l'on s'est vite rendu compte que ce n'était pas le moyen le plus optimisé de travailler car lorsqu'on travaille sur la même chose sur le \lstinline{backend} et le \lstinline{frontend} cela produisait divers bugs lorsqu'on réunissait les deux branches. Il aurait sûrement plutôt réfléchir en features et donc créer une branche pour chaque tâche.
+Le principe de base était que nous développions sur les branches (\lstinline{frontend} et \lstinline{backend}) puis que nous fusionnions ces deux dernières sur la branche \lstinline{dev}. A partir de là, nous vérifions que le frontend et le backend fonctionnaient bien ensemble. Si il avait une erreur, alors c'était là que nous travaillions en attendant de régler le problème. Une fois que nous avions une version stable, nous fusionnions la branche \lstinline{dev} à la branche \lstinline{main}. La branche main est réservée aux versions stables qui compilent et qui fonctionnent correctement. Malheureusement nous nous sommes vite rendu compte que ce n'était pas le moyen le plus optimisé de travailler, car lorsqu'on travaille sur la communication client-serveur sur le \lstinline{backend} et le \lstinline{frontend}, il fallait fusionner les deux branches sur la branche \lstinline{dev} pour pouvoir tester, ce qui prenait beaucoup de temps et était plutôt fastidieux. Nous avons décidé de travailler sur la branche \lstinline{dev} pour faciliter les tests de la communication client serveur. Il aurait sûrement fallu faire des branches en fonction des {\tt features}.
 
 \subsection{Langage de programmation}
 
-Nous avons choisi comme langage de programmation \lstinline{TypeScript} pour le \lstinline{backend} et le \lstinline{frontend}. En effet en ayant la même technologie pour tout le projet cela rend la communication beaucoup plus simple entre les deux côtés. On aurait aussi pu utiliser \lstinline{JavaScript} mais une surcouche de typage nous permet de sécuriser la production du code. Enfin ce choix nous a laissé la liberté de ne pas faire que de la programmation objet, par exemple le \lstinline{frontend} est en majorité de la programmation impérative.
+Nous avons choisi comme langage de programmation \lstinline{TypeScript} pour le \lstinline{backend} et le \lstinline{frontend}. En effet, en ayant la même technologie pour tout le projet cela rend la communication beaucoup plus simple entre les deux côtés. On aurait aussi pu utiliser \lstinline{JavaScript}, mais une surcouche de typage nous permet de sécuriser la production du code grâce à la vérification du typage à la compilation, qui n'existe pas dans \lstinline{JavaScript}. Enfin ce choix nous a laissé la liberté de ne pas faire que de la programmation objet, par exemple le \lstinline{frontend} est en majorité de la programmation impérative et fonctionnelle.
 
 \subsection{Communication client-serveur}
 
@@ -78,7 +79,7 @@ Nous avons choisi comme langage de programmation \lstinline{TypeScript} pour le 
 
 \subsection{Test}
 
-Pour les tests nous avons utilisé Mocha qui est un {\tt framework} de test pour les programmes Node.js.
+Pour les tests, nous avons utilisé {\tt Mocha} qui est un {\tt framework} de test pour les programmes Node.js.
 Nous testons le backend et les communications des sockets parce qu'il est compliqué de tester l'affichage.
 Nous avons réalisé des tests unitaires, la couverture ({\tt coverage}) du code est aussi vérifiée grâce à nyc qui est un {\tt framework} compatible avec Mocha.
 Nous y reviendrons plus tard dans une partie dédiée.
@@ -94,8 +95,8 @@ Pour dessiner les hexagones de la map nous avons cherché des algorithmes pour n
     \centering
     \def\stackalignment{r}
     \stackunder{\includegraphics[scale=0.3]{data/hexmap_exemple.png}}%
-           {\scriptsize%
-            Source : https://eperezcosano.github.io/hex-grid}
+    {\scriptsize%
+        Source : https://eperezcosano.github.io/hex-grid}
     \caption{Deux lignes d'hexagones}
     \label{fig:hexmap_exemple}
 \end{figure}
@@ -108,8 +109,8 @@ Le problème de ce genre d'affichage est que deux cases sur la même ligne (avec
     \centering
     \def\stackalignment{r}
     \stackunder{\includegraphics[scale=0.3]{data/hexagon.png}}%
-           {\scriptsize%
-            Source : https://fr.wikipedia.org/wiki/Hexagone}
+    {\scriptsize%
+        Source : https://fr.wikipedia.org/wiki/Hexagone}
     \caption{Les étapes pour dessiner un hexagone}
     \label{fig:hexagon}
 \end{figure}

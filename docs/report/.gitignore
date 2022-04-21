@@ -3,5 +3,9 @@
 *.fls
 *.log
 *.pdf
+*.toc
+*.out
+*.blg
+*.bbl
 .nfs*
 *synctex*
