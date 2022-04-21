@@ -169,9 +169,7 @@ const commands: Commands = {
         let baseString = "";
         if (base) {
           const { _currentPosition, _primary } = base;
-          baseString += `La base à l'hexagone (${addZeroIfNeeded(
-            _currentPosition._y,
-          )}${addZeroIfNeeded(_currentPosition._x)}) est une base ${
+          baseString += `La base à l'hexagone (${hexIdToString(_currentPosition)}) est une base ${
             _primary ? "primaire" : "secondaire"
           }`;
         }
@@ -316,6 +314,41 @@ socket.on("commandMessage", (resp: { error: string } & string) => {
   }
 });
 
+type DamageResult = "NONE" | "Q" | "H" | "E";
+type MoraleResult = "NONE" | "M" | "D" | "W" | "R";
+
+const damageExplanations: Record<string, string> = {
+  Q: "Un quart des points de vie totaux de votre hexagone a été distribué en dégats à vos unités. ",
+  H: "La moitié des points de vie totaux de votre hexagone a été distribué en dégats à vos unités. ",
+  E: "Toutes vos unités ont été détruites. ",
+};
+
+const moraleExplanations: Record<string, string> = {
+  M: "Les unités font un test de morale.",
+  D: "Les unités obtiennent l'état ((disrupted)).",
+  W: "Les unités se replient et obtiennent l'état ((disrupted)).",
+  R: "Les unités se replient et obtiennent l'état ((disrupted)).",
+};
+
+socket.on(
+  "attackResult",
+  (resp: {
+    damage: DamageResult;
+    morale: MoraleResult;
+    defenderHexId: { _x: number; _y: number };
+  }) => {
+    const { damage, morale, defenderHexId } = resp;
+    const damageExplanation = damageExplanations[damage] ?? "";
+    const moraleExplanation = moraleExplanations[morale] ?? "";
+    addLine(
+      "Game",
+      `L'hexagone ${hexIdToString(
+        defenderHexId,
+      )} a été attaqué. ${damageExplanation}${moraleExplanation}`,
+    );
+  },
+);
+
 socket.on("phase", (resp: { phase: string; play: boolean; commands: string[]; auto: boolean }) => {
   if (resp.auto) {
     // handle automatic phase
@@ -400,6 +433,10 @@ function unitToString(unit: Unit) {
   } de vie à l'hexagone (${addZeroIfNeeded(unit._currentPosition._y)}${addZeroIfNeeded(
     unit._currentPosition._x,
   )}) avec ${unit._remainingMovementPoints} points de mouvement\n`;
+}
+
+function hexIdToString(hexId: { _x: number; _y: number }) {
+  return `(${addZeroIfNeeded(hexId._y)}${addZeroIfNeeded(hexId._x)})`;
 }
 
 onUnmounted(disconnectSocket);
