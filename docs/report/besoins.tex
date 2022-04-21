@@ -292,37 +292,46 @@ Les joueurs devront se connecter sur un serveur afin d'accéder à la partie. Le
 Le serveur avertira l'utilisateur lors d'une mauvaise utilisation de l'interface et des requêtes parasites pour le serveur.
 
 
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.35]{data/plateau_du_jeu.jpg}
-\caption{Plateau du jeu Desert Fox}.
-\end{figure}
+
 
 La carte s'affiche quand les deux joueurs sont connectés. Ici le joueur 1 peut commencer à jouer
-. On peut voir en haut de la page, une barre qui affiche la phase actuelle sur 19, le tour  et le nombre d'unités restantes.
+. Nous pouvons voir en haut de la page, une barre qui affiche la phase actuelle sur 19, le tour  et le nombre d'unités restantes.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.35]{data/plateau_du_jeu.png}
+    \caption{Plateau du jeu Desert Fox}.
+\end{figure}
+
+En bas de la carte, Nous pouvons observer une légende, en bas à gauche.\\
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.35]{data/justification2.jpg}
-\caption{Bas de la carte et légende de la carte du jeu}.
+\includegraphics[scale=0.35]{data/Bas_de_map.png}
+\caption{Bas de la carte du jeu}.
 \end{figure}
-En bas de la carte, on peut observer une légende, en bas à gauche.\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.35]{data/Map_Legend.png}
+    \caption{Légende de la carte du jeu}.
+\end{figure}
+
+Voici la page du joueur 1 qui peut jouer.\\
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.4]{data/player_1_acces.jpg}
 \caption{Barre d'information du joueur 1}.
 \end{figure}
 
-Voici la page du joueur 1 qui peut jouer.\\
-
+Voici la page du joueur 2 qui doit attendre l'adversaire de jouer.\\
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.35]{data/joueur_2.jpg}
 \caption{Barre d'information du joueur 2}.
 \end{figure}
 
-Voici la page du joueur 2 qui doit attendre l'adversaire de jouer.
+Le joueur qui peut jouer peut faire bouger son unité dans le terminal a droite de l'image.
+Nous pouvons voir que l'unité 0 s'est déplacé de l'hexagone \lstinline{0102} à \lstinline{0206}. Le déplacement est valide car on ne dépasse pas le mouvement alloué de l'unité (MA).\\
 
 \begin{figure}[H]
 \centering
@@ -330,40 +339,45 @@ Voici la page du joueur 2 qui doit attendre l'adversaire de jouer.
 \caption{Mouvement de l'unité \lstinline{0} vers l'hexagone \lstinline{0206}}.
 \end{figure}
 
-Le joueur qui peut jouer peut faire bouger son unité dans le terminal a droite de l'image.
-On peut voir que l'unité 0 s'est déplacé de l'hexagone \lstinline{0102} à \lstinline{0206}. Le déplacement est valide car on ne dépasse pas le mouvement alloué de l'unité (MA).\\
-
+Le joueur peut afficher des informations concernant ses unités dans le terminal.
+En tapant \og units \fg{}, le joueur à toutes ses unités présent avec le mouvement point et  les points de vies.\\
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.6]{data/info_units.jpg}
 \caption{Terminal qui donne les informations des unités du joueur 1 }.
 \end{figure}
 
-Le joueur peut afficher des informations concernant ses unités dans le terminal.
-En tapant \og units \fg{}, le joueur à toutes ses unités présent avec le mouvement point et  les points de vies.
-
+Quand le joueur a terminé son tour, il doit écrire dans le terminal \og done \fg{}
+le joueur ne pourra que communiquer par chat à l'adversaire et l'adversaire peuvent continuer à jouer.\\
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.35]{data/fin_tour.jpg}
 \caption{Fin du tour pour le joueur 1}.
 \end{figure}
 
-Quand le joueur a terminé son tour, il doit écrire dans le terminal \og done \fg{}
-le joueur ne pourra que communiquer par chat à l'adversaire et l'adversaire peuvent continuer à jouer.\\
 
+Le joueur peut aussi aficher les entités, par exemple les unités, les bases, les dumps et les unités de soutien qui sont present dans une hexagone. 
+Cela est possible grace a la commande {\tt hex}, qui prend en parametre un identifiant d'hexagone.Voici un exemple :\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{data/hex_command.jpg}
+    \caption{Utilisation de la commande hex}.
+\end{figure}
+
+Les deux joueurs peuvent communiquer ensemble  à l'aide du terminal, le joueur doit écrire au dans le terminal \og message \fg{} puis écrit son message.\\
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.6]{data/chat.jpg}
 \caption{Communication entre deux joueurs}.
 \end{figure}
-Les deux joueurs peuvent communiquer ensemble  à l'aide du terminal, le joueur doit écrire au dans le terminal \og message \fg{} puis écrit son message.
 
+Un message d'erreur s'affiche dans le terminal si le joueur écrit  des mauvaises commandes.
+Par exemple, le joueur oublie les arguments, ou donne un mauvais hexagone.\\
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.6]{data/erreur.jpg}
 \caption{Exemple de mauvaises commandes}.
 \end{figure}
-Un message d'erreur s'affiche dans le terminal si le joueur écrit  des mauvaises commandes.
-Par exemple, le joueur oublie les arguments, ou donne un mauvais hexagone.
 
