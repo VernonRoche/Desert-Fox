@@ -128,7 +128,6 @@ export class StateMachine {
 
   endTurn(player: Player): boolean {
     if (this.checkIfCorrectPlayer(this.getPhase(), player.getId()).correct) {
-      this.checkPhaseAndSupplies();
       this.phaseService.send("NEXT");
       player.getSocket().emit("done", { error: false });
       return true;
