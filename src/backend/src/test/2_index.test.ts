@@ -1,4 +1,4 @@
-import { resetIds } from "../main/idManager";
+import { resetIds } from "../main/IdManager";
 import GameMap from "../main/Map/GameMap";
 import HexID from "../main/Map/HexID";
 import Maps from "../main/Map/Maps";

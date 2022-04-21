@@ -1,7 +1,6 @@
 import Game from "../main/GameManager/Game";
 import Player from "../main/GameManager/Player";
 import PlayerID from "../main/GameManager/PlayerID";
-import SupplyUnit from "../main/Infrastructure/SupplyUnit";
 import Moveable from "../main/Moveable";
 
 describe("Game tests", function () {

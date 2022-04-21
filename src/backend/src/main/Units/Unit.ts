@@ -11,18 +11,22 @@ export type unitJson = {
   owned: boolean;
   embarked: boolean | undefined;
 };
+
+// Interface which represents entities that can fight.
+// Extending Moveable means of course they can also move.
 export default interface Unit extends Moveable {
+  // Verifies if it has attacked during the current phase
   hasAttacked(): boolean;
 
   removeLifePoints(lifePoints: number): void;
 
+  // Rolls a dice and gets the morale rating of the unit. Adds them up to get the result
+  // More details in it's implementation found in AbstractUnit class
   moraleCheck(): boolean;
 
   getMoraleRating(): number;
 
   toJson(player: Player): unitJson;
-
-  getType(): string;
 
   getLifePoints(): number;
 }

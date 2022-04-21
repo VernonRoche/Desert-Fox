@@ -2,7 +2,7 @@ import Player from "../main/GameManager/Player";
 import PlayerID from "../main/GameManager/PlayerID";
 import HexID from "../main/Map/HexID";
 import Foot from "../main/Units/Foot";
-import { getNewId, resetIds } from "../main/idManager";
+import { getNewId, resetIds } from "../main/IdManager";
 import Dump from "../main/Infrastructure/Dump";
 
 describe("Player Test", function () {

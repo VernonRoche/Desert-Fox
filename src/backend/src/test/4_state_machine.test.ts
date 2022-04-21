@@ -1,7 +1,6 @@
 import { createMachine, interpret } from "xstate";
-import { StateMachine } from "../main/GameManager/StateMachine/StateMachine";
 import { TurnPhases } from "../main/GameManager/StateMachine/States";
-import { resetIds } from "../main/idManager";
+import { resetIds } from "../main/IdManager";
 
 describe("State Machine tests", function () {
   this.afterAll(() => {

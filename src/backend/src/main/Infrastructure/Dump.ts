@@ -1,5 +1,4 @@
 import Embarkable from "../Embarkable";
-import Entity from "../Entity";
 import Player from "../GameManager/Player";
 import HexID from "../Map/HexID";
 
@@ -19,15 +18,19 @@ export default class Dump implements Embarkable {
     this._id = id;
     this._currentPosition = hexId;
   }
+
   isEmbarked(): boolean {
     return this._embarked;
   }
+
   remove(): void {
     throw new Error("Method not implemented.");
   }
+
   getType(): string {
     return "dump";
   }
+
   embark(): void {
     this._embarked = true;
   }
@@ -43,6 +46,7 @@ export default class Dump implements Embarkable {
   getCurrentPosition(): HexID {
     return this._currentPosition;
   }
+
   place(hexId: HexID): void {
     this._currentPosition = new HexID(hexId.getY(), hexId.getX());
   }

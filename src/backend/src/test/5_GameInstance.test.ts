@@ -1,6 +1,6 @@
 import { io, Socket } from "socket.io-client";
 import { StateMachine } from "../main/GameManager/StateMachine/StateMachine";
-import { resetIds } from "../main/idManager";
+import { resetIds } from "../main/IdManager";
 import { SocketServer } from "../main/SocketServer";
 import Unit from "../main/Units/Unit";
 
@@ -12,6 +12,7 @@ describe("Game instance tests", function () {
   function initSocket(): Socket {
     return io(`http://localhost:${SERVER_PORT}`);
   }
+
   this.afterAll(() => {
     resetIds();
   });

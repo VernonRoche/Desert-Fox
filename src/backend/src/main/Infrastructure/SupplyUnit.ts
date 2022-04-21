@@ -22,6 +22,7 @@ export default class SupplyUnit implements Moveable {
     this._movementPoints = movementPoints;
     this._remainingMovementPoints = movementPoints;
   }
+
   getType(): string {
     return "supply";
   }
@@ -71,6 +72,7 @@ export default class SupplyUnit implements Moveable {
     if (this._item.length === 0) return undefined;
     return this._item.pop() as Embarkable;
   }
+
   getEmbarked(): Embarkable | undefined {
     if (this._item.length === 0) return undefined;
     return this._item[0];

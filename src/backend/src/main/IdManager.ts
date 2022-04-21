@@ -1,3 +1,4 @@
+// Class which allows for each entity to have a unique identifier.
 let id = 0;
 
 export function getNewId() {

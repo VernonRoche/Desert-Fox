@@ -23,6 +23,7 @@ export default class Base implements Entity {
     this._id = id;
     this._currentPosition = hexId;
   }
+
   getType(): string {
     return "base";
   }
@@ -34,6 +35,7 @@ export default class Base implements Entity {
   getId(): number {
     return this._id;
   }
+
   sent(): void {
     this._sent = true;
   }
@@ -45,6 +47,7 @@ export default class Base implements Entity {
   removeDump(dump: Dump): void {
     this.dumps = this.dumps.filter((d) => d.getId() !== dump.getId());
   }
+
   canSend(): boolean {
     return this._sent;
   }
@@ -65,6 +68,7 @@ export default class Base implements Entity {
   getCurrentPosition() {
     return this._currentPosition;
   }
+
   place(hexId: HexID): void {
     this._currentPosition = new HexID(hexId.getY(), hexId.getX());
   }

@@ -1,4 +1,4 @@
-import { resetIds } from "../main/idManager";
+import { resetIds } from "../main/IdManager";
 import Base from "../main/Infrastructure/Base";
 import HexID from "../main/Map/HexID";
 

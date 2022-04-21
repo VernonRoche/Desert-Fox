@@ -1,3 +1,4 @@
+// The different types of terrain possible.
 export enum TerrainTypes {
   CLEAR = "clear",
   ROUGH = "rough",
@@ -9,6 +10,7 @@ export enum TerrainTypes {
   EMPTY = "empty",
 }
 
+// Those are the different costs of entering a hex of a given terrain type.
 const terrainWeights: Record<TerrainTypes, number> = {
   [TerrainTypes.CLEAR]: 1,
   [TerrainTypes.ROUGH]: 2,

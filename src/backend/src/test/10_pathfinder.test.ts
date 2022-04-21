@@ -1,12 +1,10 @@
 import Game from "../main/GameManager/Game";
-import GameMap from "../main/Map/GameMap";
 import HexID from "../main/Map/HexID";
-import Maps from "../main/Map/Maps";
 import Player from "../main/GameManager/Player";
 import PlayerID from "../main/GameManager/PlayerID";
 import { Socket } from "socket.io";
 import Mechanized from "../main/Units/Mechanized";
-import { resetIds } from "../main/idManager";
+import { resetIds } from "../main/IdManager";
 
 describe("Check if Pathfinder works correctly", function () {
   this.afterAll(() => {
