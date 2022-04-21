@@ -44,46 +44,46 @@ export default function handlerHexPoints(
   return functions[index]();
 }
 
+export function pointCosPos(x: number, r: number) {
+  return cosPI6 * r + x;
+}
+
+export function pointSinPos(y: number, r: number) {
+  return sinPI6 * r + y;
+}
+
+export function pointCosNeg(x: number, r: number) {
+  return -cosPI6 * r + x;
+}
+
+export function pointSinNeg(y: number, r: number) {
+  return -sinPI6 * r + y;
+}
+
 function hexPointsFromIndex(
   x: number,
   y: number,
   r: number,
   index: number,
 ): { x: number; y: number } {
-  function pointCosPos() {
-    return cosPI6 * r + x;
-  }
-
-  function pointSinPos() {
-    return sinPI6 * r + y;
-  }
-
-  function pointCosNeg() {
-    return -cosPI6 * r + x;
-  }
-
-  function pointSinNeg() {
-    return -sinPI6 * r + y;
-  }
-
   const functions = [
     () => {
       return { x: x, y: y - r };
     },
     () => {
-      return { x: pointCosPos(), y: pointSinNeg() };
+      return { x: pointCosPos(x, r), y: pointSinNeg(y, r) };
     },
     () => {
-      return { x: pointCosPos(), y: pointSinPos() };
+      return { x: pointCosPos(x, r), y: pointSinPos(y, r) };
     },
     () => {
       return { x: x, y: y + r };
     },
     () => {
-      return { x: pointCosNeg(), y: pointSinPos() };
+      return { x: pointCosNeg(x, r), y: pointSinPos(y, r) };
     },
     () => {
-      return { x: pointCosNeg(), y: pointSinNeg() };
+      return { x: pointCosNeg(x, r), y: pointSinNeg(y, r) };
     },
   ];
 

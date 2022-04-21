@@ -25,6 +25,7 @@ export type GameMap = {
       remainingMovementPoints: number;
       owned: boolean;
       embarked: boolean | undefined;
+      disrupted: boolean;
     },
   ];
   base:
@@ -51,6 +52,7 @@ export type GameMap = {
     },
   ];
 }[];
+//{"hexId":"0302","terrain":"clear","units":[{"type":"motorized","id":3,"currentPosition":{"_x":2,"_y":3},"movementPoints":"20","remainingMovementPoints":"20","owned":false,"disrupted":false}
 
 export type Base = {
   _currentPosition: Position;
