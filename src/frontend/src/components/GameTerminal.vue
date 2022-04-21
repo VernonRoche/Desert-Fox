@@ -159,20 +159,55 @@ const commands: Commands = {
     socket.once(
       "hex",
       (resp: { units: Unit[]; base?: Base; dumps: Dump[]; supplyUnits: SupplyUnit[] }) => {
+        // unit
         let unitString = "";
-        resp.units.forEach((unit) => {
+        const { units, dumps, supplyUnits, base } = resp;
+        units.forEach((unit) => {
           unitString += unitToString(unit);
         });
-        let basesString = "";
-        if (resp.base) {
-          const { _currentPosition, _primary } = resp.base;
-          basesString += `La base à l'hexagone (${addZeroIfNeeded(
+        // base
+        let baseString = "";
+        if (base) {
+          const { _currentPosition, _primary } = base;
+          baseString += `La base à l'hexagone (${addZeroIfNeeded(
             _currentPosition._y,
           )}${addZeroIfNeeded(_currentPosition._x)}) est une base ${
             _primary ? "primaire" : "secondaire"
           }`;
         }
-        addLine("Game", `Unités: ${unitString}\n${basesString ? "Base: " + basesString : ""}`);
+        // dump
+        let dumpString = "";
+        if (dumps.length > 0) {
+          dumpString = `Il y a l'hexagone (${addZeroIfNeeded(
+            dumps[0]._currentPosition._y,
+          )}${addZeroIfNeeded(dumps[0]._currentPosition._x)}) ${dumps.length} dump${
+            dumps.length > 1 ? "s" : ""
+          }`;
+        }
+
+        //supplyUnit
+        let supplyString = "";
+        if (supplyUnits.length > 0) {
+          supplyString = `Il y a l'hexagone (${addZeroIfNeeded(
+            supplyUnits[0]._currentPosition._y,
+          )}${addZeroIfNeeded(supplyUnits[0]._currentPosition._x)}) ${
+            supplyUnits.length
+          } ((supplyUnit${supplyUnits.length > 1 ? "s" : ""}))`;
+        }
+        let finalString = "";
+
+        if (unitString) {
+          finalString += `Unités: ${unitString}\n`;
+        }
+        if (baseString) {
+          finalString += `Base: ${baseString}\n`;
+        }
+
+        if (dumpString) {
+          finalString += `Dump: ${dumpString}\n`;
+        }
+
+        addLine("Game", finalString);
       },
     );
   },
