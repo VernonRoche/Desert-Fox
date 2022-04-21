@@ -67,7 +67,7 @@ export default function drawHexMap(p5: P5, gameMap: GameMap) {
       let i = 0;
       for (const u of units) {
         if (u.embarked === true) drawUnitEmbarked(p5, x, y);
-        else drawUnit(p5, x, y, i, u.owned, u.type, u.id);
+        else drawUnit(p5, x, y, i, u.owned, u.type, u.id, u.disrupted);
         i++;
       }
     }

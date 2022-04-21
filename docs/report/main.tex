@@ -15,6 +15,7 @@
 \usepackage{pifont}
 \usepackage{wasysym}
 \usepackage{amssymb}
+\usepackage{enotez}
 
 \def\FAIT{\textcolor[HTML]{4E944F}{\textbf{\ding{52}}}}
 \def\NOP{\textcolor[HTML]{E83A14}{\textbf{\ding{55}}}}
@@ -47,7 +48,8 @@ lineskip=-1pt
 
 
 \newpage
-\tableofcontents %table des matière
+
+{\hypersetup{hidelinks} \tableofcontents} %table des matière
 
 
 \newpage
@@ -70,9 +72,12 @@ lineskip=-1pt
 
 \bibliography{bibiography}
 
-\subsection{Source}
+\subsection{Source images}
+
+\printendnotes
 
 \input{Annexe}
+
 
 
 \end{document}
