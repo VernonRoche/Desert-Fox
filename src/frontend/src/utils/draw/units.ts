@@ -1,10 +1,17 @@
 import P5 from "p5";
-import { colorsDump, colorsPlayer, colorsSupplyUnit, colorsUnit } from "../constants/colors";
+import {
+  colorsDump,
+  colorsPlayer,
+  colorsSupplyUnit,
+  colorsUnit,
+  colorsUnitEmbarked,
+} from "../constants/colors";
 import handlerHexPoints from "../constants/hexPoints";
 import dataMap from "../constants/map";
 import drawText from "./text";
 
 const strokeWeight = 2;
+const size = dataMap["raduisHexagon"] / 3.25;
 
 export function drawUnit(
   p5: P5,
@@ -15,7 +22,6 @@ export function drawUnit(
   type: string,
   id: number,
 ) {
-  const size = dataMap["raduisHexagon"] / 3.25;
   const points = handlerHexPoints(x, y, size, index, true);
 
   p5.push();
@@ -39,9 +45,9 @@ export function drawDump(p5: P5, x: number, y: number, owned: boolean) {
   p5.rect(_x, _y, textSize * 3, textSize * 2);
 }
 
+const margin = 5;
+
 export function drawSupplyUnit(p5: P5, x: number, y: number, owned: boolean) {
-  const size = dataMap["raduisHexagon"] / 3.25;
-  const margin = 5;
   const _x = x - size / 2;
   const _y = y + margin;
 
@@ -50,5 +56,15 @@ export function drawSupplyUnit(p5: P5, x: number, y: number, owned: boolean) {
   p5.stroke(colorsPlayer[String(owned)]);
   p5.fill(colorsSupplyUnit);
   p5.square(_x, _y, size);
+  p5.pop();
+}
+
+export function drawUnitEmbarked(p5: P5, x: number, y: number) {
+  const _y = y + margin * 2 + strokeWeight / 2;
+
+  p5.push();
+  p5.strokeWeight(1);
+  p5.fill(colorsUnitEmbarked[0], colorsUnitEmbarked[1], colorsUnitEmbarked[2]);
+  p5.circle(x, _y, size * 0.5);
   p5.pop();
 }

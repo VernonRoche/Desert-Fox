@@ -24,6 +24,7 @@ export type GameMap = {
       movementPoints: number;
       remainingMovementPoints: number;
       owned: boolean;
+      embarked: boolean | undefined;
     },
   ];
   base:

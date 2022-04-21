@@ -24,4 +24,6 @@ export const colorsSea = "#5499c7";
 
 export const colorsDump = [214, 137, 16, 127];
 
+export const colorsUnitEmbarked = [10, 10, 10];
+
 export const colorsSupplyUnit = " #cb4335";
