@@ -163,7 +163,6 @@ export default class Game {
     bases: Base[],
     dumps: Dump[],
     supplyUnits: Moveable[],
-    removeDumpIfFound: boolean,
   ): boolean {
     let found = false;
     for (const unit of units) {
@@ -194,20 +193,19 @@ export default class Game {
             player,
           ).sumOfWeight <= DUMP_RANGE
         ) {
-          if (removeDumpIfFound) {
             this._map.removeDump(dump);
             player.removeDump(dump);
-          }
+          
           found = true;
           break;
         }
       }
     }
     if (found) return true;
-    return this.checkUnitSupplies(player, supplyUnits, bases, dumps, [], removeDumpIfFound);
+    return this.checkUnitSupplies(player, supplyUnits, bases, dumps, []);
   }
 
-  verifySupplies(playerId: number, removeDumpIfFound: boolean): void {
+  verifySupplies(playerId: number): void {
     if (playerId !== 1 && playerId !== 2) {
       return;
     }
@@ -232,7 +230,6 @@ export default class Game {
                 player,
               ).sumOfWeight <= SUPPLYUNIT_RANGE,
           ),
-          removeDumpIfFound,
         )
       ) {
         unit.disrupt();
