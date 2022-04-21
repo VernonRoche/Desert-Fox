@@ -11,6 +11,8 @@ export enum commandTypes {
   attack = "attack",
   units = "units",
   hex = "hex",
+  embark = "embark",
+  disembark = "disembark",
 }
 
 type BaseCommand = {

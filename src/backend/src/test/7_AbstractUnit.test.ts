@@ -9,7 +9,7 @@ describe("unit is correct add", function () {
   const id = 1000;
   const unit: Unit[] = [];
   const footHexId = new HexID(2, 2);
-  const foot = new Foot(id, footHexId, 3, 3, 12, 1);
+  const foot = new Foot(id, footHexId, 3, 12, 1);
   unit.push(foot);
 
   it("Unit should be correct", function () {

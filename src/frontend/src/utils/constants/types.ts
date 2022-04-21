@@ -57,6 +57,7 @@ export type Base = {
 };
 
 export type Dump = {
+  _id: number;
   _currentPosition: Position;
 };
 export type SupplyUnit = {

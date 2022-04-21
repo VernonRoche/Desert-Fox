@@ -28,21 +28,20 @@ export default class Player {
   // It also indirectly verifies that it's type is valid.
   // Loops through the different lists of entities held by the player.
   hasEntity(entity: Entity): boolean {
-    let check = false;
-    if (
-      entity.getType() === "motorized" ||
-      entity.getType() === "foot" ||
-      entity.getType() === "mechanized"
-    ) {
-      check = this._units.has(entity.getId().toString());
-    } else if (entity.getType() === "supply") {
-      check = this._supplyUnits.has(entity.getId().toString());
-    } else if (entity.getType() === "base") {
-      check = this._bases.has(entity.getId().toString());
-    } else if (entity.getType() === "dump") {
-      check = this._dumps.has(entity.getId().toString());
+    switch (entity.getType()) {
+      case "motorized":
+      case "foot":
+      case "mechanized":
+        return this._units.has(entity.getId().toString());
+      case "supply":
+        return this._supplyUnits.has(entity.getId().toString());
+      case "base":
+        return this._bases.has(entity.getId().toString());
+      case "dump":
+        return this._dumps.has(entity.getId().toString());
+      default:
+        throw new Error("Invalid entity type");
     }
-    return check;
   }
 
   // The function fetches a unit with a given id.

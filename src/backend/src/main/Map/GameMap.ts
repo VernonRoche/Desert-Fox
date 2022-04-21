@@ -10,9 +10,6 @@ import Base, { baseJson } from "../Infrastructure/Base";
 import Dump, { dumpJson } from "../Infrastructure/Dump";
 import { supplyUnitJson } from "../Infrastructure/SupplyUnit";
 
-const width = 66;
-const height = 29;
-
 type JsonMap = {
   hexId: string;
   terrain: string;
@@ -159,6 +156,9 @@ export default class GameMap {
     if (hex.getUnits().length === 0 && hex.getSupplyUnits().length === 0) {
       return true;
     }
-    return hex.getUnits().some((unit) => player.hasEntity(unit));
+    return (
+      hex.getUnits().some((unit) => player.hasEntity(unit)) ||
+      hex.getSupplyUnits().some((unit) => player.hasEntity(unit))
+    );
   }
 }

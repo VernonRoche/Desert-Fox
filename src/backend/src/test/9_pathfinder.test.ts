@@ -1,7 +1,5 @@
 import Game from "../main/GameManager/Game";
-import GameMap from "../main/Map/GameMap";
 import HexID from "../main/Map/HexID";
-import Maps from "../main/Map/Maps";
 import Player from "../main/GameManager/Player";
 import PlayerID from "../main/GameManager/PlayerID";
 import { Socket } from "socket.io";
@@ -19,8 +17,8 @@ describe("Check if Pathfinder works correctly", function () {
     const allyPlayer = new Player(PlayerID.ONE, Socket.prototype);
     const enemyPlayer = new Player(PlayerID.TWO, Socket.prototype);
     game = new Game(allyPlayer, enemyPlayer);
-    const enemyUnit = new Mechanized(1001, new HexID(8, 5), 3, 2, 15, 1);
-    const friendlyUnit = new Mechanized(1000, new HexID(7, 5), 3, 2, 15, 1);
+    const enemyUnit = new Mechanized(1001, new HexID(8, 5), 2, 15, 1);
+    const friendlyUnit = new Mechanized(1000, new HexID(7, 5), 2, 15, 1);
     allyPlayer.addUnit(friendlyUnit);
     enemyPlayer.addUnit(enemyUnit);
     game.getMap().findHex(start).addUnit(friendlyUnit);

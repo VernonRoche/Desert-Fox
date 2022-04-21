@@ -18,8 +18,8 @@ describe("Check if attack works correctly", function () {
     const allyPlayer = new Player(PlayerID.ONE, Socket.prototype);
     const enemyPlayer = new Player(PlayerID.TWO, Socket.prototype);
     game = new Game(allyPlayer, enemyPlayer);
-    const friendlyUnit = new Mechanized(1000, new HexID(7, 5), 3, 2, 15, 1);
-    const enemyUnit = new Mechanized(1001, new HexID(8, 5), 3, 2, 15, 1);
+    const friendlyUnit = new Mechanized(1000, new HexID(7, 5), 3, 15, 1);
+    const enemyUnit = new Mechanized(1001, new HexID(8, 5), 3, 15, 1);
     allyPlayer.addUnit(friendlyUnit);
     enemyPlayer.addUnit(enemyUnit);
     game.getMap().findHex(start).addUnit(friendlyUnit);
