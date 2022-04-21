@@ -62,4 +62,5 @@ export type Dump = {
 export type SupplyUnit = {
   _currentPosition: Position;
   _movementPoints: number;
+  _id: number;
 };

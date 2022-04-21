@@ -187,13 +187,9 @@ const commands: Commands = {
 
         //supplyUnit
         let supplyString = "";
-        if (supplyUnits.length > 0) {
-          supplyString = `Il y a l'hexagone (${addZeroIfNeeded(
-            supplyUnits[0]._currentPosition._y,
-          )}${addZeroIfNeeded(supplyUnits[0]._currentPosition._x)}) ${
-            supplyUnits.length
-          } ((supplyUnit${supplyUnits.length > 1 ? "s" : ""}))`;
-        }
+        supplyUnits.forEach((supplyUnit) => {
+          supplyString += `L'unité ${supplyUnit._id} possède ${supplyUnit._movementPoints} points de mouvements\n`;
+        });
         let finalString = "";
 
         if (unitString) {
