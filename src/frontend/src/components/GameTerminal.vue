@@ -226,6 +226,39 @@ const commands: Commands = {
       }
     });
   },
+  attack: (args: string[]) => {
+    if (args.length !== 2) {
+      addLine(
+        "Game",
+        "Nombre d'arguments invalide, le premier argument doit être un identifiant d'hexagone et le deuxième argument doit être un identifiant d'hexagone",
+      );
+      return;
+    }
+    const attackingId = +args[0];
+    const attackedId = +args[1];
+
+    if (isNaN(attackingId) || isNaN(attackedId)) {
+      addLine(
+        "Game",
+        "Argument invalide, le premier argument doit être un numéro (identifiant d'unité) et le deuxième argument doit être un numéro (identifiant d'hexagone)",
+      );
+      return;
+    }
+
+    socket.emit("command", {
+      type: "attack",
+      attackingId: args[0],
+      attackedId: args[1],
+    });
+
+    socket.once("attack", (resp: { error: string | false }) => {
+      if (resp.error) {
+        addLine("Game", getError(resp.error));
+      } else {
+        addLine("Game", `L'hexagone ${args[0]} a attaqué l'hexagone ${args[1]}`);
+      }
+    });
+  },
 };
 
 addLine("Game", "Connexion au serveur...");
