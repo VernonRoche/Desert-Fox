@@ -282,13 +282,25 @@ const commands: Commands = {
       hexIdDefender: args[1],
     });
 
-    socket.once("attack", (resp: { error: string | false }) => {
-      if (resp.error) {
-        addLine("Game", getError(resp.error));
-      } else {
-        addLine("Game", `L'hexagone ${args[0]} a attaqué l'hexagone ${args[1]}`);
-      }
-    });
+    socket.once(
+      "attack",
+      (resp: {
+        error: string | false;
+        result: {
+          damage: DamageResult;
+          morale: MoraleResult;
+        };
+      }) => {
+        if (resp.error) {
+          addLine("Game", getError(resp.error));
+          return;
+        }
+        const { damage, morale } = resp.result;
+        const damageExplanation = damageExplanations[damage] ?? "";
+        const moraleExplanation = moraleExplanations[morale] ?? "";
+        addLine("Game", `${damageExplanation}${moraleExplanation}`);
+      },
+    );
   },
 };
 
@@ -314,13 +326,15 @@ socket.on("commandMessage", (resp: { error: string } & string) => {
   }
 });
 
-type DamageResult = "NONE" | "Q" | "H" | "E";
+type DamageResult = "NONE" | "Q" | "H" | "E" | "X" | "XX";
 type MoraleResult = "NONE" | "M" | "D" | "W" | "R";
 
 const damageExplanations: Record<string, string> = {
   Q: "Un quart des points de vie totaux de votre hexagone a été distribué en dégats à vos unités. ",
   H: "La moitié des points de vie totaux de votre hexagone a été distribué en dégats à vos unités. ",
   E: "Toutes vos unités ont été détruites. ",
+  X: "Vos unités ont subit la moitié des dégats infligés aux défenseurs. ",
+  XX: "Vos unités ont subit les même dégats infligés aux défenseurs. ",
 };
 
 const moraleExplanations: Record<string, string> = {
@@ -333,11 +347,14 @@ const moraleExplanations: Record<string, string> = {
 socket.on(
   "attackResult",
   (resp: {
-    damage: DamageResult;
-    morale: MoraleResult;
+    result: {
+      damage: DamageResult;
+      morale: MoraleResult;
+    };
     defenderHexId: { _x: number; _y: number };
   }) => {
-    const { damage, morale, defenderHexId } = resp;
+    const { result, defenderHexId } = resp;
+    const { damage, morale } = result;
     const damageExplanation = damageExplanations[damage] ?? "";
     const moraleExplanation = moraleExplanations[morale] ?? "";
     addLine(
