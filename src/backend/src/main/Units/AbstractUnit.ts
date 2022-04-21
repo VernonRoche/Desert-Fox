@@ -2,13 +2,11 @@ import HexID from "../Map/HexID";
 import Dice from "../GameManager/Dice";
 import Player from "../GameManager/Player";
 import Unit, { unitJson } from "./Unit";
-import Embarkable from "../Embarkable";
 
 export default abstract class AbstractUnit implements Unit {
   private _currentPosition: HexID;
   private _movementPoints: number;
   private _id: number;
-  private _combatFactor: number;
   private _remainingMovementPoints: number;
   private _lifePoints: number;
   private _moraleRating: number;
@@ -19,14 +17,12 @@ export default abstract class AbstractUnit implements Unit {
     id: number,
     currentPosition: HexID,
     moraleRating: number,
-    combatFactor: number,
     movementPoints: number,
     lifePoints: number,
   ) {
     this._currentPosition = currentPosition;
     this._movementPoints = movementPoints;
     this._remainingMovementPoints = movementPoints;
-    this._combatFactor = combatFactor;
     this._lifePoints = lifePoints;
     this._id = id;
     this._moraleRating = moraleRating;
@@ -67,8 +63,7 @@ export default abstract class AbstractUnit implements Unit {
       movementPoints: this.getMovementPoints(),
       remainingMovementPoints: this.getRemainingMovementPoints(),
       owned: player.hasEntity(this),
-      embarked:
-        this.getType() === "foot" ? (this as unknown as Embarkable).isEmbarked() : undefined,
+      embarked: undefined,
     };
   }
 
@@ -95,10 +90,6 @@ export default abstract class AbstractUnit implements Unit {
   // Remove movementPoints passed as parameter
   public move(movementPoints: number): void {
     this._remainingMovementPoints -= movementPoints;
-  }
-
-  public nightMove(hexId: HexID): void {
-    throw new Error("Method not implemented.");
   }
 
   public getMovementPoints(): number {

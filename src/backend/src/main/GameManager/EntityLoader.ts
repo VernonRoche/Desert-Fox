@@ -54,7 +54,6 @@ function addUnitsToPlayer(
         unitId,
         new HexID(y, x),
         unit.moraleRating,
-        unit.combatFactor,
         unit.movementPoints,
         unit.lifePoints,
       );
@@ -63,7 +62,6 @@ function addUnitsToPlayer(
         unitId,
         new HexID(y, x),
         unit.moraleRating,
-        unit.combatFactor,
         unit.movementPoints,
         unit.lifePoints,
       );
@@ -72,7 +70,6 @@ function addUnitsToPlayer(
         unitId,
         new HexID(y, x),
         unit.moraleRating,
-        unit.combatFactor,
         unit.movementPoints,
         unit.lifePoints,
       );
