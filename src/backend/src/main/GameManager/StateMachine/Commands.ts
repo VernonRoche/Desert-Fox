@@ -154,7 +154,15 @@ export const _commands: Commands = {
     }
     const attackers: Unit[] = attackerHex.getUnits(); //because it might be modified( for example if a unit dies in combat )
     try {
-      game.attackHex(attackers, new HexID(+_args.hexIdDefender.substring(0, 2), +_args.hexIdDefender.substring(2, 4)));
+      const result = game.attackHex(
+        attackers,
+        new HexID(+_args.hexIdDefender.substring(0, 2), +_args.hexIdDefender.substring(2, 4)),
+      );
+      _player.getSocket().emit(_args.type, { error: false, result: result.attacker });
+      stateMachine.getSocketServer().sockets[Math.abs(_player.getId() - 1)].emit("attackResult", {
+        result: result.defender,
+        defendHexId: _args.hexIdDefender,
+      });
     } catch (e) {
       console.log(e);
       _player.getSocket().emit(_args.type, { error: "invalidattack" });
