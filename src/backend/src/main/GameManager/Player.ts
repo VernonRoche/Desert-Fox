@@ -24,6 +24,9 @@ export default class Player {
     this._socket = socket;
   }
 
+  // The function verifies if the player has the parameter entity.
+  // It also indirectly verifies that it's type is valid.
+  // Loops through the different lists of entities held by the player.
   hasEntity(entity: Entity): boolean {
     let check = false;
     if (
@@ -42,6 +45,7 @@ export default class Player {
     return check;
   }
 
+  // The function fetches a unit with a given id.
   getUnitById(id: number): Unit {
     const unit = this._units.get(id.toString());
     if (!unit) {
@@ -49,6 +53,8 @@ export default class Player {
     }
     return unit;
   }
+
+  // The function acts as getUnitById, but may also return a supply unit.
   getMoveableById(id: number): Moveable {
     let unit = this._units.get(id.toString());
     if (!unit) {
@@ -59,6 +65,9 @@ export default class Player {
     }
     return unit;
   }
+
+  // This function is the most generalized one, similar to getUnitById and
+  // getMoveableById.
   getEntityById(id: number): Entity {
     let entity;
     entity = this._units.get(id.toString());
@@ -76,7 +85,6 @@ export default class Player {
     }
     return entity;
   }
-
 
   getId(): PlayerID {
     return this._id;
