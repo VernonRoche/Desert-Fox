@@ -74,7 +74,7 @@ export default class Game {
     const availableUnits: Unit[] = [];
     for (const unit of player.getUnits()) {
       for (const neighbourHex of this._map.findHex(unit.getCurrentPosition()).getNeighbours()) {
-        const canMove = this.canMove(player, unit, neighbourHex.getID());
+        const canMove = this.canMove(player, unit, neighbourHex.getId());
         if (typeof canMove === "string") {
           throw new Error(canMove);
         }
@@ -106,7 +106,7 @@ export default class Game {
     }
   }
 
-  disembarkEntity(player: Player, supplyUnit: SupplyUnit): Embarkable | undefined{
+  disembarkEntity(player: Player, supplyUnit: SupplyUnit): Embarkable | undefined {
     if (!player.hasEntity(supplyUnit)) {
       throw new Error("supply unit does not exist");
     }
@@ -255,7 +255,7 @@ export default class Game {
     }
     let attackerPlayer: Player;
     // Player 1 attacks
-    if (this._map.hexBelongsToPlayer(originHex.getID(), this._player1)) {
+    if (this._map.hexBelongsToPlayer(originHex.getId(), this._player1)) {
       if (!this._map.hexBelongsToPlayer(destination, this._player1)) {
         attackerPlayer = this._player1;
       } else {
@@ -370,12 +370,12 @@ export default class Game {
               if (!defenderUnit.moraleCheck()) {
                 for (const hexNeighbour of destinationHex.getNeighbours()) {
                   if (
-                    this._map.hexBelongsToPlayer(hexNeighbour.getID(), defenderPlayer) &&
+                    this._map.hexBelongsToPlayer(hexNeighbour.getId(), defenderPlayer) &&
                     hexNeighbour.getUnits().length === 0
                   ) {
                     hexNeighbour.addUnit(defenderUnit);
                     destinationHex.removeUnit(defenderUnit);
-                    defenderUnit.place(hexNeighbour.getID());
+                    defenderUnit.place(hexNeighbour.getId());
                     break;
                   }
                 }
@@ -388,12 +388,12 @@ export default class Game {
             case MoraleResult.W:
               for (const hexNeighbour of destinationHex.getNeighbours()) {
                 if (
-                  this._map.hexBelongsToPlayer(hexNeighbour.getID(), defenderPlayer) &&
+                  this._map.hexBelongsToPlayer(hexNeighbour.getId(), defenderPlayer) &&
                   hexNeighbour.getUnits().length === 0
                 ) {
                   hexNeighbour.addUnit(defenderUnit);
                   destinationHex.removeUnit(defenderUnit);
-                  defenderUnit.place(hexNeighbour.getID());
+                  defenderUnit.place(hexNeighbour.getId());
                   break;
                 }
               }
@@ -480,12 +480,12 @@ export default class Game {
           if (!attacker.moraleCheck()) {
             for (const hexNeighbour of originHex.getNeighbours()) {
               if (
-                this._map.hexBelongsToPlayer(hexNeighbour.getID(), attackerPlayer) &&
+                this._map.hexBelongsToPlayer(hexNeighbour.getId(), attackerPlayer) &&
                 hexNeighbour.getUnits().length === 0
               ) {
                 hexNeighbour.addUnit(attacker);
                 originHex.removeUnit(attacker);
-                attacker.place(hexNeighbour.getID());
+                attacker.place(hexNeighbour.getId());
                 break;
               }
             }
@@ -498,12 +498,12 @@ export default class Game {
         case MoraleResult.W:
           for (const hexNeighbour of originHex.getNeighbours()) {
             if (
-              this._map.hexBelongsToPlayer(hexNeighbour.getID(), attackerPlayer) &&
+              this._map.hexBelongsToPlayer(hexNeighbour.getId(), attackerPlayer) &&
               hexNeighbour.getUnits().length === 0
             ) {
               hexNeighbour.addUnit(attacker);
               originHex.removeUnit(attacker);
-              attacker.place(hexNeighbour.getID());
+              attacker.place(hexNeighbour.getId());
               break;
             }
           }

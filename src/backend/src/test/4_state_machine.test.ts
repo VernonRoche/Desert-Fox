@@ -50,9 +50,20 @@ describe("State Machine tests", function () {
     });
   });
   testService.send("RESET");
+  it("Testing the turn counter before a phase loop", function () {
+    if (testService.state.context.turn !== 1) {
+      throw new Error(
+        "Turn counter not working correctly. It is " +
+          testService.state.context.turn +
+          " instead of 1",
+      );
+    }
+  });
   it("Testing the loop of phases", function () {
     for (let i = 0; i < 9; i++) {
       testService.send("NEXT");
+      console.log(testService.state.value.toString());
+      if (testService.state.value.toString() === "turn_maker") console.log("turn maker");
     }
     if (testService.state.value.toString() !== "first_player_movement") {
       throw new Error(
@@ -63,4 +74,14 @@ describe("State Machine tests", function () {
     }
   });
   testService.send("RESET");
+  it("Testing the turn counter after a phase loop", function () {
+    testService.send("INC"); // simulating a turn maker phase
+    if (testService.state.context.turn !== 2) {
+      throw new Error(
+        "Turn counter not working correctly. It is " +
+          testService.state.context.turn +
+          " instead of 2",
+      );
+    }
+  });
 });

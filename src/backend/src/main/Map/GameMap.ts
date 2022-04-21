@@ -46,8 +46,8 @@ export default class GameMap {
       }
     });
     for (const hex of this._hexagons.values()) {
-      const x = hex.getID().getX();
-      const y = hex.getID().getY();
+      const x = hex.getId().getX();
+      const y = hex.getId().getY();
       const getNeighbourCoordinates = function (x: number, y: number): HexID[] {
         const neighbourList: HexID[] = [];
         if (x % 2 == 0) {
@@ -124,7 +124,7 @@ export default class GameMap {
       hex.getSupplyUnits().forEach((supplyUnit) => supplyUnits.push(supplyUnit.toJson(player)));
 
       json.push({
-        hexId: hex.getID().id(),
+        hexId: hex.getId().id(),
         terrain: hex.getTerrain().terrainType,
         units: units,
         base: base,

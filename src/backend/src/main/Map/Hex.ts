@@ -135,7 +135,7 @@ export default class Hex {
     return this._units.length === this._HEX_CAPACITY;
   }
 
-  getID(): HexID {
+  getId(): HexID {
     return this._hexId;
   }
 

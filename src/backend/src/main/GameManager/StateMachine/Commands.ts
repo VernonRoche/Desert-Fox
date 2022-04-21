@@ -1,6 +1,8 @@
 import Embarkable from "../../Embarkable";
 import SupplyUnit from "../../Infrastructure/SupplyUnit";
+import Hex from "../../Map/Hex";
 import HexID from "../../Map/HexID";
+import Unit from "../../Units/Unit";
 import Player from "../Player";
 import { StateMachine } from "./StateMachine";
 
@@ -28,7 +30,8 @@ type EmbarkArgs = {
 };
 
 type AttackArgs = MoveArgs & {
-  combatSupply?: boolean;
+  hexIdAttacker?: string;
+  hexIdDefender?: string;
 };
 
 type Commands = Record<string, (stateMachine: StateMachine, player: Player, args: AllArgs) => void>;
@@ -96,6 +99,11 @@ export const _commands: Commands = {
       player.getSocket().emit(args.type, { error: "invalidhexid" });
       return;
     }
+    const hexId = +args.hexId;
+    if (isNaN(hexId) && args.hexId.length !== 4) {
+      player.getSocket().emit(args.type, { error: "invalidhexid" });
+      return;
+    }
     const hex = game
       .getMap()
       .findHex(new HexID(+args.hexId.substring(0, 2), +args.hexId.substring(2, 4)));
@@ -106,7 +114,82 @@ export const _commands: Commands = {
     player.getSocket().emit(args.type, { units, bases, dumps, supplyUnits });
   },
   attack: (stateMachine: StateMachine, _player: Player, _args: AttackArgs & BaseCommand) => {
-    //TODO
+    if (!stateMachine.checkIfCorrectPlayer(stateMachine.getPhase(), _player.getId())) {
+      _player.getSocket().emit(_args.type, { error: "turnerror" });
+    }
+    if (!_args.hexIdAttacker || !_args.hexIdDefender) {
+      _player.getSocket().emit(_args.type, { error: "invalidargs" });
+      return;
+    }
+    const attackerId = +_args.hexIdAttacker;
+    if (isNaN(attackerId) && _args.hexIdAttacker.length !== 4) {
+      _player.getSocket().emit(_args.type, { error: "invalidattackingunitid" });
+      return;
+    }
+    const defenderId = +_args.hexIdDefender;
+    if (isNaN(defenderId) && _args.hexIdDefender.length !== 4) {
+      _player.getSocket().emit(_args.type, { error: "invaliddefendingingunitid" });
+      return;
+    }
+    const game = stateMachine.getSocketServer().getGame();
+    if (!game) {
+      _player.getSocket().emit(_args.type, { error: "nogame" });
+      return;
+    }
+    let attackerHex: Hex;
+    try {
+      attackerHex = game
+        .getMap()
+        .findHex(
+          new HexID(+_args.hexIdAttacker.substring(0, 2), +_args.hexIdAttacker.substring(2, 4)),
+        );
+      if (!attackerHex) {
+        throw new Error("attackerHex not found");
+      }
+    } catch (e) {
+      _player.getSocket().emit(_args.type, { error: "invalidattackinghex" });
+      return;
+    }
+    const attackers: Unit[] = attackerHex.getUnits(); //because it might be modified( for example if a unit dies in combat )
+    attackers.filter(
+      (unit) =>
+        unit.getType() === "foot" &&
+        unit.getType() === "motirized" &&
+        unit.getType() === "mechanized" &&
+        _player.hasEntity(unit),
+    );
+    let defenderHex: Hex;
+    try {
+      defenderHex = game
+        .getMap()
+        .findHex(
+          new HexID(+_args.hexIdAttacker.substring(0, 2), +_args.hexIdAttacker.substring(2, 4)),
+        );
+      if (!defenderHex) {
+        throw new Error("defenderHex not found");
+      }
+    } catch (e) {
+      _player.getSocket().emit(_args.type, { error: "invaliddefendinghex" });
+      return;
+    }
+    const defenders: Unit[] = defenderHex.getUnits();
+    defenders.filter(
+      (unit) =>
+        unit.getType() === "foot" &&
+        unit.getType() === "motirized" &&
+        unit.getType() === "mechanized" &&
+        _player.hasEntity(unit),
+    );
+    if (attackers.length === 0 || defenders.length === 0) {
+      _player.getSocket().emit(_args.type, { error: "nounits" });
+      return;
+    }
+    try {
+      game.attackHex(attackers, defenderHex.getId());
+    } catch (e) {
+      _player.getSocket().emit(_args.type, { error: "invalidattack" });
+      return;
+    }
   },
   embark: (stateMachine: StateMachine, player: Player, args: BaseCommand & EmbarkArgs) => {
     if (!args.embarkingId || !args.toEmbarkId) {
@@ -131,7 +214,7 @@ export const _commands: Commands = {
     }
 
     const toEmbarkId = +args.toEmbarkId;
-    if (isNaN(toEmbarkId)) {
+    if (isNaN(toEmbarkId) && args.toEmbarkId.length !== 4) {
       player.getSocket().emit(args.type, { error: "invalidembarkid" });
       return;
     }
@@ -164,7 +247,7 @@ export const _commands: Commands = {
       return;
     }
     const unitId = +args.embarkingId;
-    if (isNaN(unitId)) {
+    if (isNaN(unitId) && args.embarkingId.length !== 4) {
       player.getSocket().emit(args.type, { error: "invalidsupplyunitid" });
       return;
     }
@@ -185,9 +268,9 @@ export const _commands: Commands = {
         player.getSocket().emit(args.type, { error: "nogame" });
         return;
       }
-      const toDisembark : Embarkable | undefined = game.disembarkEntity(player, unit as SupplyUnit);
-      if(!toDisembark) {
-        player.getSocket().emit(args.type, { error: "invalidisembark" });
+      const toDisembark: Embarkable | undefined = game.disembarkEntity(player, unit as SupplyUnit);
+      if (!toDisembark) {
+        player.getSocket().emit(args.type, { error: "invaliddisembark" });
         return;
       }
       player.getSocket().emit(args.type, { error: false });

@@ -38,7 +38,7 @@ class Pathfinder {
 
     //record visited nodes with a set. The string is the toString of a HexID
     const visitedNodes = new Set<string>();
-    visitedNodes.add(startHex.getID().toString());
+    visitedNodes.add(startHex.getId().toString());
 
     let currentNode = startHex;
     //loop through nodes
@@ -54,7 +54,7 @@ class Pathfinder {
       for (const neighbourHex of neighbourHexes) {
         //add node to queue if not already visited
         if (
-          !visitedNodes.has(neighbourHex.getID().toString()) &&
+          !visitedNodes.has(neighbourHex.getId().toString()) &&
           !nodesToVisitQueue.includes(neighbourHex)
         ) {
           nodesToVisitQueue.push(neighbourHex);
@@ -68,20 +68,20 @@ class Pathfinder {
           thisDist =
             dist + (neighbourHex.getTerrain().terrainType === TerrainTypes.MOUNTAIN ? 1000 : 1);
         //check if we are moving through enemy hex
-        if (!this._map.hexBelongsToPlayer(neighbourHex.getID(), player)) {
+        if (!this._map.hexBelongsToPlayer(neighbourHex.getId(), player)) {
           thisDist += 1000;
         }
         // check if we enter enemy zone of control
         if (!supplyCheck && !(unitType === "motorized")) {
           for (const potentialZOCHex of neighbourHex.getNeighbours()) {
-            if (!this._map.hexBelongsToPlayer(potentialZOCHex.getID(), player)) {
+            if (!this._map.hexBelongsToPlayer(potentialZOCHex.getId(), player)) {
               thisDist += 1;
               break;
             }
           }
         } else if (supplyCheck) {
           for (const potentialZOCHex of neighbourHex.getNeighbours()) {
-            if (!this._map.hexBelongsToPlayer(potentialZOCHex.getID(), player)) {
+            if (!this._map.hexBelongsToPlayer(potentialZOCHex.getId(), player)) {
               thisDist += 1000;
               break;
             }
@@ -109,7 +109,7 @@ class Pathfinder {
       }
 
       //mark that we've visited this node
-      visitedNodes.add(currentNode.getID().toString());
+      visitedNodes.add(currentNode.getId().toString());
 
       //exit if done
       if (nodesToVisitQueue.length === 0) {
@@ -129,7 +129,7 @@ class Pathfinder {
 
     currentNode = endHex;
     while (currentNode !== startHex) {
-      path.push(currentNode.getID());
+      path.push(currentNode.getId());
 
       const temp = prevNodes.get(currentNode);
       if (temp === undefined) {
@@ -137,7 +137,7 @@ class Pathfinder {
       }
       currentNode = temp;
     }
-    path.push(startHex.getID());
+    path.push(startHex.getId());
 
     //reverse the path so it starts with startHex
     path.reverse();

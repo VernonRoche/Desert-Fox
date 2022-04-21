@@ -77,7 +77,6 @@ export default class Player {
     return entity;
   }
 
-
   getId(): PlayerID {
     return this._id;
   }
