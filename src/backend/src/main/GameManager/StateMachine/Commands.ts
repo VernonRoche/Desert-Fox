@@ -153,42 +153,10 @@ export const _commands: Commands = {
       return;
     }
     const attackers: Unit[] = attackerHex.getUnits(); //because it might be modified( for example if a unit dies in combat )
-    attackers.filter(
-      (unit) =>
-        unit.getType() === "foot" &&
-        unit.getType() === "motirized" &&
-        unit.getType() === "mechanized" &&
-        _player.hasEntity(unit),
-    );
-    let defenderHex: Hex;
     try {
-      defenderHex = game
-        .getMap()
-        .findHex(
-          new HexID(+_args.hexIdAttacker.substring(0, 2), +_args.hexIdAttacker.substring(2, 4)),
-        );
-      if (!defenderHex) {
-        throw new Error("defenderHex not found");
-      }
+      game.attackHex(attackers, new HexID(+_args.hexIdDefender.substring(0, 2), +_args.hexIdDefender.substring(2, 4)));
     } catch (e) {
-      _player.getSocket().emit(_args.type, { error: "invaliddefendinghex" });
-      return;
-    }
-    const defenders: Unit[] = defenderHex.getUnits();
-    defenders.filter(
-      (unit) =>
-        unit.getType() === "foot" &&
-        unit.getType() === "motirized" &&
-        unit.getType() === "mechanized" &&
-        _player.hasEntity(unit),
-    );
-    if (attackers.length === 0 || defenders.length === 0) {
-      _player.getSocket().emit(_args.type, { error: "nounits" });
-      return;
-    }
-    try {
-      game.attackHex(attackers, defenderHex.getId());
-    } catch (e) {
+      console.log(e);
       _player.getSocket().emit(_args.type, { error: "invalidattack" });
       return;
     }

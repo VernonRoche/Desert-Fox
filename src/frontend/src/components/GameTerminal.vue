@@ -280,8 +280,8 @@ const commands: Commands = {
 
     socket.emit("command", {
       type: "attack",
-      attackingId: args[0],
-      attackedId: args[1],
+      hexIdAttacker: args[0],
+      hexIdDefender: args[1],
     });
 
     socket.once("attack", (resp: { error: string | false }) => {
