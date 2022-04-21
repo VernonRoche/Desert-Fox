@@ -32,8 +32,8 @@ Une fois les deux joueurs créés et la partie initialisée, la carte est envoy�
 
 Le code à gauche du serveur est le début du {\tt JSON} original envoyé à chaque client.
 On peut voir comment il est constitué : c'est un tableau d'objets. Chacun de ces objets représente une case.
-Chaque case possède un ``id``, un identifiant, ainsi qu'un ``terrain`` qui décrit son type de terrain.
-Il possède aussi 3 aux champs, ``units``, ``dumps`` et ``supplyUnits`` qui sont des tableaux d'objets.
+Chaque case possède un {\tt id}, ici appelé {\tt hexId}, un identifiant, ainsi qu'un {\tt terrain} qui décrit son type de terrain.
+Il possède aussi 3 aux champs, {\tt units}, {\tt dumps} et {\tt supplyUnits} qui sont des tableaux d'objets.
 Comme leurs noms l'indique ces objets représentent des tableaux d'unités, de dépôts ou d'unités de ravitaillement.
 
 À partir de ce moment-là, le moteur graphique du jeu est chargé de dessiner la carte reçue en JSON.
