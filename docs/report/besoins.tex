@@ -339,6 +339,34 @@ Nous pouvons voir que l'unité 0 s'est déplacé de l'hexagone \lstinline{0102} 
 \caption{Mouvement de l'unité \lstinline{0} vers l'hexagone \lstinline{0206}}.
 \end{figure}
 
+Le joueur peut aussi utiliser une de ses unités de soutien pour bouger soit une unité de type {\tt foot} soit un dump.
+Il peut faire cela avec la commande {\tt embark} qui prend en parametre l'identifiant de l'unité du soutien qui va embarquer, ainsi que l'identifiant de l'unité qui va etre embarquée. Voici un exemple :\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.35]{data/Embark_command.jpg}
+    \caption{Embarquement de l'unité \lstinline{0} dans l'unité de soutien  \lstinline{15}}.
+\end{figure}
+
+Il faut noter que l'unité qui est embarqué est inexistante dans la carte. Elle ne peut donc pas bouger elle meme, ni attaquer. Si l'unité du soutien a embarqué une unité, elle bougera avec elle. Dans la figure ci dessous nous pouvons voir que si nous embarquons un dump, qui est une entité qui ne peut pas bouger elle meme, nous pouvons la faire bouger avec l'unité de soutien. Ici nous la bougeons de l'hexagone \lstinline{0406} vers l'hexagone \lstinline{0407} \\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.35]{data/Embark_dump.jpg}
+    \caption{Embarquement du dump \lstinline{22} dans l'unité de soutien  \lstinline{12} suivi par un deplacement de l'unité du soutien à l'hexagone \lstinline{0407} (avec le dump)}.
+\end{figure}
+
+Afin de pouvoir reutiliser l'unité ou l'entité embarquée, nous devons utiliser la commande disembark, laquelle permet de debarquer cette dernière.
+Dans la figure ci dessous nous pouvons voir que apres avoir bougé l'unité de soutien {\tt 15}, laquelle contient l'unité {\tt 0} et désembarquer, l'unité est dorénavant disponible pour un autre mouvement ou action. Elle est aussi affiché à nouveau dans la carte.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.35]{data/Disembark.jpg}
+    \caption{Mouvement de l'unité du soutien \lstinline{15}, laquelle contient l'unité \lstinline{0} à l'hexagone \lstinline{0411}, suivi du désembarquement de l'unité embarquée}.
+\end{figure}
+
+L'utilisateur peut aussi utiliser la commande {\tt attack} pour attaquer une unité adverse. Il faut noter que l'attaque est uniquement possible si l'unité est dans une case adjacente de l'unité adverse. Dans l'exemple ci dessous, nous pouvons voir que l'unité {\tt 5} \\
+
 Le joueur peut afficher des informations concernant ses unités dans le terminal.
 En tapant \og units \fg{}, le joueur à toutes ses unités présent avec le mouvement point et  les points de vies.\\
 \begin{figure}[H]
