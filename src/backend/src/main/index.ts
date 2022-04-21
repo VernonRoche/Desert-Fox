@@ -14,8 +14,15 @@ async function main() {
     .option("quiet", {
       alias: "q",
       default: false,
-      describe: "Mode muet (n'affiche plus les messages du serveur et de la machine d'état)",
+      describe: "Quiet mode",
       boolean: true,
+    })
+    .option("client-adress", {
+      alias: "c",
+      default: "http://localhost:8000",
+      describe: "Clients adress they will connect from",
+      requiresArg: true,
+      string: true,
     })
     .option("help", {
       alias: "h",
@@ -31,11 +38,11 @@ async function main() {
     return;
   }
 
-  const socketServer = new SocketServer(8000, 3001, !args.quiet);
+  const socketServer = new SocketServer(args.clientAdress, 3001, !args.quiet);
   const stateMachine = new StateMachine(socketServer, !args.quiet);
   socketServer.run(stateMachine);
 
-  console.log("Client port needs to be:", socketServer.clientPort);
+  console.log("Client address needs to be:", socketServer.clientAddress);
   console.log("Server port is:", socketServer.serverPort);
 
   process.on("SIGINT", () => {
