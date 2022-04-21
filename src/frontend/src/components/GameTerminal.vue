@@ -205,7 +205,7 @@ const commands: Commands = {
       }
     });
   },
-  disembark: (args: string[]){
+  disembark: (args: string[]) => {
     const disembarkingId = +args[0];
     if (isNaN(disembarkingId)) {
       addLine(
@@ -225,7 +225,7 @@ const commands: Commands = {
         addLine("Game", `L'unité ${args[0]} a débarqué`);
       }
     });
-  }
+  },
 };
 
 addLine("Game", "Connexion au serveur...");
