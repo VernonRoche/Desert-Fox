@@ -14,16 +14,22 @@ Le serveur a 3 fonctionnalités principales :
 
 Le serveur permet aux clients de communiquer avec le jeu en manipulant ce dernier selon les commandes reçues.
 
-\subsubsection{Connexions}
-
 Le serveur écoute sur le port 3001 par défaut, mais peut être modifié en lui passant un argument en ligne de commande au moment de le lancer.
-Pour que le serveur accepte les connexions entrantes, il faut que la connexion provienne d'une adresse en particulier. Par défaut celle ci est \begin{verbatim}http://localhost:8000\end{verbatim}, mais elle peut être modifiée en ligne de commande au moment de le lancer.
-Il possède une liste des {\tt sockets} connectée au serveur, qui sont les connexions des clients.
+Pour que le serveur accepte les connexions entrantes, il faut que la connexion provienne d'une adresse en particulier. Par défaut celle ci est {\tt http://localhost:8000}, mais elle peut être modifiée en ligne de commande au moment de le lancer.
+Le serveur possède une liste de {\tt sockets} connectées au serveur, qui sont les connexions des clients. Elle permet de vérifier s'il y a déjà les 2 joueurs nécessaires pour commencer une partie. Dans ce cas, le serveur refusera toute connexion supplémentaire. Dans le cas contraire, il accepte les connexions supplémentaires.
 
-TODO: Expliquer l'architecture du serveur en détail, c'est-à-dire 2 listes: une de player et une de sockets, il y a une stateMachine qui gère les différents états du jeu,
-le jeu est créé quand les 2 joueurs sont connectés, la carte est envoyée à  ce moment-là, quand une action est effectuée qui change la carte il faut renvoyer la carte
+Quand les 2 joueurs sont connectés, le jeu est lancé et la machine d'état est initialisée. Le serveur envoie la carte et leurs unités aux deux joueurs.
+
+La machine d'état est manipulée par le serveur grâce aux commandes qu'il reçoit. Si par exemple un client envoie la commande {\tt done} quand c'est son tour, alors le serveur va faire avancer la machine d'état et donc passer la phase actuelle.
+Pour plus d'informations, voir \ref{machine_d_etat}.
+
+La machine d'état manipule également le serveur pour envoyer les données aux clients selon les phases.
+
+En résumé, le serveur créé la machine d'état et la contrôle pour que le jeu puisse être joué. Une fois le jeu commencé, c'est la machine d'état qui va utiliser le serveur pour écouter les commandes des clients.
+
 
 \subsection{Architecture de la machine d'états}
+\label{machine_d_etat}
 \input{statemachine}
 
 
