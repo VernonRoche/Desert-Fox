@@ -2,11 +2,12 @@
 
 \section{Architecture Logiciel}
 
-Nous avons divisé notre modèle en deux grandes architectures, le serveur et les unités. 
+Nous avons divisé notre modèle en deux grandes architectures, le serveur et les unités.
 
 \subsection{Architecture du serveur}
 
-
+TODO: Expliquer l'architecture du serveur en détail, c'est-à-dire 2 listes: une de player et une de sockets, il y a une stateMachine qui gère les différents états du jeu,
+le jeu est créé quand les 2 joueurs sont connectés, la carte est envoyée à  ce moment-là, quand une action est effectuée qui change la carte il faut renvoyer la carte
 
 \subsection{Architecture des unités}
 
@@ -18,7 +19,7 @@ Nous avons divisé notre modèle en deux grandes architectures, le serveur et le
 \end{figure}
 
 Nous avons fait le choix de réunir toutes les unités sous la même interface, ce qui nous permet d'avoir un seul type pour toutes les unités et donc de pouvoir faire des listes de ces entités dans la partie serveur.
-Pour une meilleure factorisation on sépare les unités en deux, celles qui peuvent bouger (\lstinline{Moveable}) et les autres. Nous séparons de nouveau en unités de soutien et d'attaque. Pour assurer la maintenance du code et rajouter des fonctionnalités, nous avons utilisé deux designs patterns, le \lstinline{Decorator} et le \lstinline{Proxy}. Mais pour pouvoir utiliser ces patterns nous avions la contrainte suivante, il fallait que les deux patterns implémentent une interface comme montrer ci-dessous. Nous avons donc était forcé d'ajouter une interface intermédiaire (ici \lstinline{AttackUnit}) pour pouvoir les implémenter. Le décorateur nous permet de changer le comportement des unités dynamiquement sans à avoir à changer toutes les classes qui étendent \lstinline{AbstractUnit}. Mais l'utilisation de ce pattern conduit à un problème, on peut appliquer un décorateur à un objet déjà décorer un nombre de fois infinie. Ce qui nous amène donc à utiliser un \lstinline{Proxy} qui permet de contrôler l'utilisation du décorateur. 
+Pour une meilleure factorisation on sépare les unités en deux, celles qui peuvent bouger (\lstinline{Moveable}) et les autres. Nous séparons de nouveau en unités de soutien et d'attaque. Pour assurer la maintenance du code et rajouter des fonctionnalités, nous avons utilisé deux designs patterns, le \lstinline{Decorator} et le \lstinline{Proxy}. Mais pour pouvoir utiliser ces patterns nous avions la contrainte suivante, il fallait que les deux patterns implémentent une interface comme montrer ci-dessous. Nous avons donc était forcé d'ajouter une interface intermédiaire (ici \lstinline{AttackUnit}) pour pouvoir les implémenter. Le décorateur nous permet de changer le comportement des unités dynamiquement sans à avoir à changer toutes les classes qui étendent \lstinline{AbstractUnit}. Mais l'utilisation de ce pattern conduit à un problème, on peut appliquer un décorateur à un objet déjà décorer un nombre de fois infinie. Ce qui nous amène donc à utiliser un \lstinline{Proxy} qui permet de contrôler l'utilisation du décorateur.
 
 Toute la démonstration précédente était notre réflexion lors de la conception de l'architecture. Mais nous avons implémenté l'attaque en dernier, il est donc possible que les patterns énoncés ne soient pas présents dans le code.
 
@@ -81,16 +82,16 @@ Pour dessiner les hexagones de la map nous avons cherché des algorithmes pour n
 \end{figure}
 % source https://eperezcosano.github.io/hex-grid
 
- Le problème de ce genre d'affichage est que deux cases sur la même ligne (avec les croix) ne se touchent pas. On ne peut donc pas faire de déplacement d'unité. Nous avons alors fait nos propres méthodes pour avoir un hexagone dans l'autre sens (avec la pointe vers le haut) et qui est donc adjacente à ses six voisins comme suit. Pour cela on calcule les points grâce au cercle trigonométrique.
- 
+Le problème de ce genre d'affichage est que deux cases sur la même ligne (avec les croix) ne se touchent pas. On ne peut donc pas faire de déplacement d'unité. Nous avons alors fait nos propres méthodes pour avoir un hexagone dans l'autre sens (avec la pointe vers le haut) et qui est donc adjacente à ses six voisins comme suit. Pour cela on calcule les points grâce au cercle trigonométrique.
+
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.3]{data/hexagon.png}
     \caption{Les étapes pour dessiner un hexagone}
 \end{figure}
 
- On peut aussi mettre six unités d'attaque dans une case, on réutilise donc le calcul de ces points pour faire la moyenne par rapport au centre. On se retrouve donc avec une unité dans chaque coin de l'hexagone. Ce qui donne le résultat suivant.
- 
+On peut aussi mettre six unités d'attaque dans une case, on réutilise donc le calcul de ces points pour faire la moyenne par rapport au centre. On se retrouve donc avec une unité dans chaque coin de l'hexagone. Ce qui donne le résultat suivant.
+
 \begin{figure}[H]
     \centering
     \includegraphics[scale=.7]{data/hexagon_with_units.png}

@@ -29,4 +29,10 @@ export default interface Unit extends Moveable {
   toJson(player: Player): unitJson;
 
   getLifePoints(): number;
+
+  disrupt(): void;
+
+  undisrupt(): void;
+
+  isDisrupted(): boolean;
 }

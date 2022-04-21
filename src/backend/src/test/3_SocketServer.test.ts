@@ -15,15 +15,15 @@ describe("Socket server tests", function () {
   let stateMachine: StateMachine;
   let player1: Socket;
   let player2: Socket;
-  const CLIENT_PORT = 5050;
+  const CLIENT_ADDRESS = "http://localhost:8000";
   const SERVER_PORT = 5000;
   it("Initialize socket server", function () {
-    server = new SocketServer(CLIENT_PORT, SERVER_PORT, false);
+    server = new SocketServer(CLIENT_ADDRESS, SERVER_PORT, false);
     stateMachine = new StateMachine(server, false);
   });
 
   it("webServer stores correctly clientPort", function () {
-    if (server.clientPort !== CLIENT_PORT) {
+    if (server.clientAddress !== CLIENT_ADDRESS) {
       throw new Error("clientPort is not stored correctly");
     }
   });

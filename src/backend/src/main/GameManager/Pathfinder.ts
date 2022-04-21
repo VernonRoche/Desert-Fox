@@ -75,7 +75,12 @@ class Pathfinder {
         if (!supplyCheck && !(unitType === "motorized")) {
           for (const potentialZOCHex of neighbourHex.getNeighbours()) {
             if (!this._map.hexBelongsToPlayer(potentialZOCHex.getId(), player)) {
-              thisDist += 1;
+              for (const enemyUnit of potentialZOCHex.getUnits()) {
+                if (!enemyUnit.isDisrupted()) {
+                  thisDist += 1;
+                  break;
+                }
+              }
               break;
             }
           }
