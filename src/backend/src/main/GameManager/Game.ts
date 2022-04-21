@@ -48,7 +48,6 @@ export default class Game {
     if (!player.hasEntity(unit)) return "that unit does not exist";
     if (unit.getType() === "foot")
       if ((unit as unknown as Embarkable).isEmbarked()) return "unit is embarked";
-
     // Check if the player owns the unit
     if (!this._map.hexBelongsToPlayer(destination, player))
       return "enemies are present in this hex";
@@ -60,7 +59,6 @@ export default class Game {
       player,
       unit.getType(),
     );
-
     if (sumOfWeight > unit.getRemainingMovementPoints()) return "not enough movement points";
 
     return { movePossible: true, cost: sumOfWeight };
@@ -95,12 +93,15 @@ export default class Game {
     if (toEmbark.getCurrentPosition().toString() !== supplyUnit.getCurrentPosition().toString()) {
       throw new Error("embarkable entity is not in the same hex as the supply unit");
     }
-    const hex = this._map.findHex(supplyUnit.getCurrentPosition());
+    if (toEmbark.getType() !== "foot" && toEmbark.getType() !== "dump") {
+      throw new Error("embarkable entity is not a foot or a dump");
+    }
     try {
       supplyUnit.embark(toEmbark);
     } catch (e) {
       throw new Error("already embarked");
     }
+    toEmbark.embark();
   }
 
   disembarkEntity(player: Player, supplyUnit: SupplyUnit): Embarkable | undefined {
@@ -113,7 +114,7 @@ export default class Game {
     } catch (e) {
       throw new Error("no entity to disembark");
     }
-    const hex = this._map.findHex(supplyUnit.getCurrentPosition());
+    toDisembark?.disembark();
     return toDisembark;
   }
 

@@ -29,6 +29,19 @@ export class StateMachine {
       }
       this.checkPhaseAndSupplies();
     });
+    this.socketServer.sockets.forEach((socket) => {
+      //starts at first_player_movement
+      const check = this.checkIfCorrectPlayer(
+        this.getPhase(),
+        this.socketServer.getPlayerFromSocket(socket).getId(),
+      );
+      socket.emit("phase", {
+        phase: this.getPhase(),
+        play: check.correct,
+        commands: check.commands,
+        auto: false,
+      });
+    });
   }
 
   stopMachine() {
@@ -104,13 +117,6 @@ export class StateMachine {
       default:
         break;
     }
-    if (actualPhase !== "initial")
-      this.socketServer.broadcast("phase", {
-        phase: actualPhase,
-        play: false,
-        commands: [],
-        auto: true,
-      });
   }
 
   runPlayerCommand(player: Player, command: string, args: any): void {
@@ -159,10 +165,9 @@ export class StateMachine {
   ): { correct: boolean; commands: string[] } {
     switch (currentPhase) {
       case "first_player_movement":
-      case "first_player_reaction":
-      case "first_player_movement2":
-      case "first_player_reaction2": {
-        if (playerId === PlayerID.ONE) return { correct: true, commands: ["move"] };
+      case "first_player_movement2": {
+        if (playerId === PlayerID.ONE)
+          return { correct: true, commands: ["move", "embark", "disembark"] };
         console.log("movement", currentPhase, playerId);
         break;
       }
@@ -173,10 +178,9 @@ export class StateMachine {
         break;
       }
       case "second_player_movement":
-      case "second_player_reaction":
-      case "second_player_movement2":
-      case "second_player_reaction2": {
-        if (playerId === PlayerID.TWO) return { correct: true, commands: ["move"] };
+      case "second_player_movement2": {
+        if (playerId === PlayerID.TWO)
+          return { correct: true, commands: ["move", "embark", "disembark"] };
         break;
       }
       case "second_player_combat":

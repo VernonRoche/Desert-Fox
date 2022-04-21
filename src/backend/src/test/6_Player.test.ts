@@ -11,7 +11,7 @@ describe("Player Test", function () {
   });
   const id = PlayerID.ONE;
   const footHexId = new HexID(2, 2);
-  const foot = new Foot(id, footHexId, 3, 3, 12, 12);
+  const foot = new Foot(id, footHexId, 3, 12, 12);
   const _dump = new Dump(getNewId(), footHexId);
 
   //const socket = io('http://localhost:${5001}');

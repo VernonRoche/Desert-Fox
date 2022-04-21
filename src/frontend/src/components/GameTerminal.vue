@@ -177,13 +177,9 @@ const commands: Commands = {
         }
         // dump
         let dumpString = "";
-        if (dumps.length > 0) {
-          dumpString = `Il y a l'hexagone (${addZeroIfNeeded(
-            dumps[0]._currentPosition._y,
-          )}${addZeroIfNeeded(dumps[0]._currentPosition._x)}) ${dumps.length} dump${
-            dumps.length > 1 ? "s" : ""
-          }`;
-        }
+        dumps.forEach((dump) => {
+          dumpString += `Le depot ${dump._id}\n`;
+        });
 
         //supplyUnit
         let supplyString = "";
@@ -253,7 +249,7 @@ const commands: Commands = {
     }
     socket.emit("command", {
       type: "disembark",
-      disembarkingId: args[0],
+      embarkingId: args[0],
     });
     socket.once("disembark", (resp: { error: string | false }) => {
       if (resp.error) {
