@@ -156,7 +156,7 @@ export default class GameMap {
   // For convenience purposes an empty hex belongs to both players.
   public hexBelongsToPlayer(hexID: HexID, player: Player): boolean {
     const hex = this.findHex(hexID);
-    if (hex.getUnits().length === 0) {
+    if (hex.getUnits().length === 0 && hex.getSupplyUnits().length === 0) {
       return true;
     }
     return hex.getUnits().some((unit) => player.hasEntity(unit));

@@ -120,9 +120,11 @@ export default abstract class AbstractUnit implements Unit {
   disrupt(): void {
     if (!this._isDisrupted) {
       this._isDisrupted = true;
-      this._movementPoints /= 2;
-      this._remainingMovementPoints /= 2;
       this._moraleRating++;
+      if (this.getType() === "motorized") {
+        this._movementPoints /= 2;
+        this._remainingMovementPoints /= 2;
+      }
     }
   }
 
@@ -133,9 +135,11 @@ export default abstract class AbstractUnit implements Unit {
   undisrupt(): void {
     if (this._isDisrupted) {
       this._isDisrupted = false;
-      this._movementPoints *= 2;
-      this._remainingMovementPoints *= 2;
       this._moraleRating--;
+      if (this.getType() === "motorized") {
+        this._movementPoints *= 2;
+        this._remainingMovementPoints *= 2;
+      }
     }
   }
 }
