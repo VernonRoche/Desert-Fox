@@ -13,6 +13,7 @@ export default abstract class AbstractUnit implements Unit {
   private _lifePoints: number;
   private _moraleRating: number;
   private _hasAttacked: boolean;
+  private _isDisrupted: boolean;
 
   constructor(
     id: number,
@@ -30,6 +31,7 @@ export default abstract class AbstractUnit implements Unit {
     this._id = id;
     this._moraleRating = moraleRating;
     this._hasAttacked = false;
+    this._isDisrupted = false;
   }
 
   hasAttacked(): boolean {
@@ -113,5 +115,27 @@ export default abstract class AbstractUnit implements Unit {
 
   public getLifePoints(): number {
     return this._lifePoints;
+  }
+
+  disrupt(): void {
+    if (!this._isDisrupted) {
+      this._isDisrupted = true;
+      this._movementPoints /= 2;
+      this._remainingMovementPoints /= 2;
+      this._moraleRating++;
+    }
+  }
+
+  isDisrupted(): boolean {
+    return this._isDisrupted;
+  }
+
+  undisrupt(): void {
+    if (this._isDisrupted) {
+      this._isDisrupted = false;
+      this._movementPoints *= 2;
+      this._remainingMovementPoints *= 2;
+      this._moraleRating--;
+    }
   }
 }
