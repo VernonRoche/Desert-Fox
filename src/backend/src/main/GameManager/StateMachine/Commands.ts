@@ -185,9 +185,9 @@ export const _commands: Commands = {
         player.getSocket().emit(args.type, { error: "nogame" });
         return;
       }
-      const toDisembark : Embarkable | undefined = game.disembarkEntity(player, unit as SupplyUnit);
-      if(!toDisembark) {
-        player.getSocket().emit(args.type, { error: "invalidisembark" });
+      const toDisembark: Embarkable | undefined = game.disembarkEntity(player, unit as SupplyUnit);
+      if (!toDisembark) {
+        player.getSocket().emit(args.type, { error: "invaliddisembark" });
         return;
       }
       player.getSocket().emit(args.type, { error: false });
