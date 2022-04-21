@@ -20,11 +20,11 @@ describe("Game instance tests", function () {
   let stateMachine: StateMachine;
   let player1: Socket;
   let player2: Socket;
-  const CLIENT_PORT = 5051;
+  const CLIENT_ADDRESS = "http://localhost:8000";
   const SERVER_PORT = 5001;
 
   it("Initialize server", function () {
-    server = new SocketServer(CLIENT_PORT, SERVER_PORT, false);
+    server = new SocketServer(CLIENT_ADDRESS, SERVER_PORT, false);
     stateMachine = new StateMachine(server, false);
     server.run(stateMachine);
   });

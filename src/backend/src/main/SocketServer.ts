@@ -10,21 +10,21 @@ export class SocketServer {
   private _httpServer: http.Server;
   private _socketServer: Server;
   private _sockets: Socket[] = [];
-  private _clientPort: number;
+  private _clientAddress: string;
   private _serverPort: number;
   private _game?: Game;
   private _players: Player[] = [];
   private _created = false;
   private _verbose;
 
-  constructor(clientPort: number, serverPort: number, verbose = true) {
+  constructor(clientAddress: string, serverPort: number, verbose = true) {
     this._verbose = verbose;
-    this._clientPort = clientPort;
+    this._clientAddress = clientAddress;
     this._serverPort = serverPort;
     this._httpServer = http.createServer(express());
     this._socketServer = new Server(this._httpServer, {
       cors: {
-        origin: "http://localhost:" + clientPort,
+        origin: clientAddress,
       },
     });
 
@@ -39,8 +39,8 @@ export class SocketServer {
     return this._sockets;
   }
 
-  public get clientPort(): number {
-    return this._clientPort;
+  public get clientAddress(): string {
+    return this._clientAddress;
   }
 
   public get serverPort(): number {
