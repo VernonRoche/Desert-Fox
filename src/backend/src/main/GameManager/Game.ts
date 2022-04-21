@@ -235,6 +235,37 @@ export default class Game {
     });
   }
 
+  verifySuppliesForAnUnit(playerId: number, unit: Unit): boolean {
+    if (playerId !== 1 && playerId !== 2) {
+      throw new Error("player id is not valid");
+    }
+    const player = playerId === 1 ? this._player1 : this._player2;
+    if(!player.hasEntity(unit))
+      throw new Error("player does not have the unit");
+    const playerBases = player.getBases();
+    const playerDumps = player.getDumps();
+    const playerSupplies = player.getSupplyUnits();
+    if (
+      !this.checkUnitSupplies(
+        player,
+        [unit],
+        playerBases,
+        playerDumps,
+        playerSupplies.filter(
+          (supplyUnit) =>
+            this._pathfinder.findShortestWay(
+              unit.getCurrentPosition(),
+              supplyUnit.getCurrentPosition(),
+              player,
+            ).sumOfWeight <= SUPPLYUNIT_RANGE,
+        ),
+      )
+    ) {
+      return false;
+    }
+    return true;
+  }
+
   /*
    * Main combat function.
    * It does some verifications to see if the combat is possible.
