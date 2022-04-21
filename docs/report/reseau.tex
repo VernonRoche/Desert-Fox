@@ -19,9 +19,26 @@ Ici on peut voir la première phase du serveur qui permet d'enregistrer les conn
 La partie de connexion est gérée par la bibliothèque {\tt socket-io} que nous utilisons pour le serveur et le client. C'est l'avantage essentiel d'utiliser la même technologie sur le backend et le frontend.
 
 Dans le serveur, nous sauvegardons les sockets qui se connectent au serveur. La limite est de 2 puisqu'il y a 2 joueurs maximum. Quand les 2 joueurs sont bien connectés, la partie est pleine. S'il y en a déjà 2 lors d'une connexion d'un troisième socket, alors la connexion de la troisième est refusée et cette dernière reçoit un code d'erreur, {\tt full}, que le frontend de ce socket va afficher à l'utilisateur.
-Si un autre joueur essaie de se connecter, alors le socket n'est pas sauvegardé dans le serveur et elle est déconnectée, il reçoit également une erreur 'full' qui va s'afficher dans le terminal.
+Si un autre joueur essaie de se connecter, alors le socket n'est pas sauvegardé dans le serveur et elle est déconnectée, il reçoit également une erreur, {\tt full}, qui va s'afficher dans le terminal.
 
-Une fois les deux joueurs créés et la partie initialisée, la carte est envoyée aux deux joueurs pour l'affichage.
+Une fois les deux joueurs créés et la partie initialisée, la carte est envoyée aux deux joueurs pour l'affichage. Voir ci-dessous \ref{reseau_carte}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.25]{data/reseau_map.png}
+    \caption{Phase de connexion des joueurs au serveur}
+    \label{reseau_carte}
+\end{figure}
+
+Le code à gauche du serveur est le début du {\tt JSON} original envoyé à chaque client.
+On peut voir comment il est constitué : c'est un tableau d'objets. Chacun de ces objets représente une case.
+Chaque case possède un ``id``, un identifiant, ainsi qu'un ``terrain`` qui décrit son type de terrain.
+Il possède aussi 3 aux champs, ``units``, ``dumps`` et ``supplyUnits`` qui sont des tableaux d'objets.
+Comme leurs noms l'indique ces objets représentent des tableaux d'unités, de dépôts ou d'unités de ravitaillement.
+
+À partir de ce moment-là, le moteur graphique du jeu est chargé de dessiner la carte reçue en JSON.
+L'action \ref{reseau_carte} se répète à chaque changement de la carte dans le jeu.
+
 
 Les phases vont donc s'enchaîner jusqu'à ce qu'une action d'un joueur soit requise.
 
@@ -33,4 +50,4 @@ Les phases vont donc s'enchaîner jusqu'à ce qu'une action d'un joueur soit req
 
 TODO
 
-La partie s'execute normalement jusqu'à la fin.
+La partie s'exécute normalement jusqu'à la fin.
