@@ -50,7 +50,7 @@ export default function drawCaption(p5: P5) {
   p5.fill(colorsDump[0], colorsDump[1], colorsDump[2]);
   p5.rect(width, height, widthRect, heightRect);
   p5.pop();
-  drawText(p5, width, centreY, "0201", "black", "left");
+  drawText(p5, width + 5, centreY, "0201", "black", "left");
   drawText(p5, centreX, centreY, "dump", "black", "left");
   height -= spaceBetween;
 

@@ -10,7 +10,7 @@ export type unitJson = {
   remainingMovementPoints: number;
   owned: boolean;
   embarked: boolean | undefined;
-  disrupted : boolean;
+  disrupted: boolean;
 };
 
 // Interface which represents entities that can fight.
