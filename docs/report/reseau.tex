@@ -40,14 +40,37 @@ Comme leurs noms l'indique ces objets représentent des tableaux d'unités, de d
 L'action \ref{reseau_carte} se répète à chaque changement de la carte dans le jeu.
 
 
-Les phases vont donc s'enchaîner jusqu'à ce qu'une action d'un joueur soit requise.
-
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.25]{data/reseau_commande.png}
     \caption{Phase de jeu, exemple de commande {\tt move}}
+    \label{reseau_commande}
 \end{figure}
 
-TODO
+La figure \ref{reseau_commande} ci-dessus est un exemple de commande envoyée par le client.
+Ici, le joueur souhaite bouger l'unité d'identifiant {\tt 0} de son hexagone vers l'hexagone {\tt 0102}.
 
-La partie s'exécute normalement jusqu'à la fin.
+Dans le client en haut à droite, on peut voir que la {\tt socket} utilisée par le joueur pour communiquer au serveur
+envoie l'événement {\tt command} au serveur. En paramètre de cet événement, le client joint un objet qui va contenir les
+paramètres de la commande. Ces paramètres sont décrits dans l'objet {\tt object}. On peut y voir 3 champs.
+
+Le premier champ {\tt type} indique le type de la commande. Ici, on peut voir que le client indique le type {\tt move}.
+Les autres champs dépendent du type de la commande. Pour le type {\tt move}, il faut indiquer l'identifiant de l'unité et
+l'identifiant de l'hexagone de destination.
+Chacun de ces paramètres sont décrits dans l'objet. {\tt unitId} décrit l'identifiant de l'unité, {\tt hexId} décrit l'identifiant
+de l'hexagone de destination.
+
+Cet objet est donc envoyé au serveur qui va le recevoir grâce à sa {\tt socket} reliée à celle du client.
+Celle ci reçoit directement l'objet {\tt object} envoyé et va le traiter.
+Ce traitement a deux étapes:
+\begin{enumerate}
+    \item On vérifie que les paramètres de la requête sont corrects. Ici, on va vérifier que les numéros sont corrects
+          et qu'ils décrivent bien une unité existante que le joueur possède et un hexagone valide.
+    \item On effectue la commande. La commande elle même va vérifier que l'unité en question possède assez de points de mouvements et l'hexagone de destination est vide ou allié.
+\end{enumerate}
+
+
+Si une erreur est provoquée soit par la phase de vérification ou par la phase de commande, le serveur envoie un objet contenant le champ {\tt error} qui contient le code d'erreur.
+Ce code d'erreur est ensuite reçu par le client qui va l'interpréter à l'utilisateur.
+
+Si la commande est valide et effectue un changement de la carte, le serveur envoie la nouvelle carte aux deux joueurs.
