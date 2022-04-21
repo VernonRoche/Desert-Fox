@@ -207,6 +207,10 @@ const commands: Commands = {
           finalString += `Dump: ${dumpString}\n`;
         }
 
+        if (supplyString) {
+          finalString += `SupplyUnit: ${supplyString}\n`;
+        }
+
         addLine("Game", finalString);
       },
     );
