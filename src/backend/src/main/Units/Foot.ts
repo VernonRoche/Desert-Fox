@@ -31,6 +31,7 @@ export default class Foot extends AbstractUnit implements Embarkable {
       remainingMovementPoints: this.getRemainingMovementPoints(),
       owned: player.hasEntity(this),
       embarked: this.isEmbarked(),
+      disrupted: this.isDisrupted(),
     };
   }
 }

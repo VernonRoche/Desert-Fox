@@ -64,6 +64,7 @@ export default abstract class AbstractUnit implements Unit {
       remainingMovementPoints: this.getRemainingMovementPoints(),
       owned: player.hasEntity(this),
       embarked: undefined,
+      disrupted: this.isDisrupted(),
     };
   }
 
