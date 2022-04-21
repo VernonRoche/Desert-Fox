@@ -25,7 +25,6 @@ export class StateMachine {
       if (!(state.value.toString() in statesWithUserInput)) {
         this.runPhaseActions(state.value.toString());
         if (this.isVerbose) console.log("phase : " + state.value.toString());
-        this.phaseService.send("NEXT");
       }
       this.checkPhaseAndSupplies();
     });
@@ -99,7 +98,7 @@ export class StateMachine {
   runPhaseActions(actualPhase: string): void {
     switch (actualPhase) {
       case "victory_check": //TODO : verify if the user has obtain the "port" of the other player
-        if (this.phaseService.state.context.turn === 38) {
+        {if (this.phaseService.state.context.turn === 38) {
           // replace false with the test
           this.phaseService.stop();
           this.socketServer.sockets.forEach((socket) => {
@@ -126,14 +125,20 @@ export class StateMachine {
           });
           this.stopMachine();
         }
+        this.phaseService.send("NEXT");
         break;
+      }
       case "turn_marker": {
+        this.phaseService.send("NEXT");
         this.phaseService.send("INC");
         this.socketServer.broadcast("turn", {
           current: this.phaseService.state.context.turn,
           total: MaxTurns,
         });
         break;
+      }
+      case "initial": {
+        this.phaseService.send("NEXT");
       }
       default:
         break;
