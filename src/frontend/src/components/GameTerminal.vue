@@ -158,18 +158,20 @@ const commands: Commands = {
 
     socket.once(
       "hex",
-      (resp: { units: Unit[]; bases: Base; dumps: Dump[]; supplyUnits: SupplyUnit[] }) => {
+      (resp: { units: Unit[]; base?: Base; dumps: Dump[]; supplyUnits: SupplyUnit[] }) => {
         let unitString = "";
         resp.units.forEach((unit) => {
           unitString += unitToString(unit);
         });
         let basesString = "";
-        const { _currentPosition, _primary } = resp.bases;
-        basesString += `La base à l'hexagone (${addZeroIfNeeded(
-          _currentPosition._y,
-        )}${addZeroIfNeeded(_currentPosition._x)}) est une base ${
-          _primary ? "primaire" : "secondaire"
-        }`;
+        if (resp.base) {
+          const { _currentPosition, _primary } = resp.base;
+          basesString += `La base à l'hexagone (${addZeroIfNeeded(
+            _currentPosition._y,
+          )}${addZeroIfNeeded(_currentPosition._x)}) est une base ${
+            _primary ? "primaire" : "secondaire"
+          }`;
+        }
         addLine("Game", `Unités: ${unitString}\n Bases: ${basesString}`);
       },
     );
