@@ -78,14 +78,4 @@ export const TurnPhases = {
     },
     INC: { actions: assign({ turn: (context: { turn: number }) => context.turn + 1 }) },
   },
-  guards: {
-    didPlayer1Win: (context: { turn: number }) => {
-      // check if player1 won
-      return context.turn > 38;
-    },
-    didPlayer2Win: () => {
-      // check if player2 won
-      return false; // TODO : add test to see if this player took the port to win the game
-    },
-  },
 };

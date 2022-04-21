@@ -92,13 +92,15 @@ export class StateMachine {
           this.socketServer.broadcast("gameOver", { winner: "player" }); //
         }
         break;
-      case "turn_marker": //TODO
+      case "turn_marker": {
+        //TODO
         this.phaseService.send("INC");
         this.socketServer.broadcast("turn", {
           current: this.phaseService.state.context.turn,
           total: MaxTurns,
         });
         break;
+      }
       default:
         break;
     }
