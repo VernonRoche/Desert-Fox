@@ -99,14 +99,35 @@ export class StateMachine {
   runPhaseActions(actualPhase: string): void {
     switch (actualPhase) {
       case "victory_check": //TODO : verify if the user has obtain the "port" of the other player
-        if (this.phaseService.state.context.turn === 38 || false) {
+        if (this.phaseService.state.context.turn === 38) {
           // replace false with the test
           this.phaseService.stop();
-          this.socketServer.broadcast("gameOver", { winner: "player" }); //
+          this.socketServer.sockets.forEach((socket) => {
+            socket.emit("gameOver", {
+              winner: this.socketServer.getPlayerFromSocket(socket).getId() === PlayerID.ONE,
+            });
+          });
+          this.stopMachine();
+        }
+        const game = this.socketServer.getGame();
+        if (!game) return;
+        if (game.getPlayer1().getUnits().length === 0) {
+          this.socketServer.sockets.forEach((socket) => {
+            socket.emit("gameOver", {
+              winner: this.socketServer.getPlayerFromSocket(socket).getId() === PlayerID.TWO, //player 2 has won
+            });
+          });
+          this.stopMachine();
+        } else if (game.getPlayer2().getUnits().length === 0) {
+          this.socketServer.sockets.forEach((socket) => {
+            socket.emit("gameOver", {
+              winner: this.socketServer.getPlayerFromSocket(socket).getId() === PlayerID.ONE, //player 1 has won
+            });
+          });
+          this.stopMachine();
         }
         break;
       case "turn_marker": {
-        //TODO
         this.phaseService.send("INC");
         this.socketServer.broadcast("turn", {
           current: this.phaseService.state.context.turn,
@@ -168,13 +189,11 @@ export class StateMachine {
       case "first_player_movement2": {
         if (playerId === PlayerID.ONE)
           return { correct: true, commands: ["move", "embark", "disembark"] };
-        console.log("movement", currentPhase, playerId);
         break;
       }
       case "first_player_combat":
       case "first_player_combat2": {
         if (playerId === PlayerID.ONE) return { correct: true, commands: ["attack"] };
-        console.log("combat", currentPhase, playerId);
         break;
       }
       case "second_player_movement":
@@ -185,7 +204,7 @@ export class StateMachine {
       }
       case "second_player_combat":
       case "second_player_combat2": {
-        if (playerId === PlayerID.ONE) return { correct: true, commands: ["attack"] };
+        if (playerId === PlayerID.TWO) return { correct: true, commands: ["attack"] };
         break;
       }
       default:

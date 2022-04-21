@@ -1,12 +1,16 @@
 
 \section{Architecture Logiciel}
 
-Nous avons divisé notre modèle en deux grandes architectures, le serveur et les unités.
+Nous avons divisé notre modèle en trois grandes architectures, le serveur, la machine d'états et les unités.
 
 \subsection{Architecture du serveur}
 
 TODO: Expliquer l'architecture du serveur en détail, c'est-à-dire 2 listes: une de player et une de sockets, il y a une stateMachine qui gère les différents états du jeu,
 le jeu est créé quand les 2 joueurs sont connectés, la carte est envoyée à  ce moment-là, quand une action est effectuée qui change la carte il faut renvoyer la carte
+
+\subsection{Architecture de la machine d'états}
+\input{statemachine}
+
 
 \subsection{Architecture des unités}
 
