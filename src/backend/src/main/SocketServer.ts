@@ -17,17 +17,19 @@ export class SocketServer {
   private _created = false;
   private _verbose;
 
+  // get clientAddress from constructor (and command line) so that no code changes to deploy the server
   constructor(clientAddress: string, serverPort: number, verbose = true) {
     this._verbose = verbose;
     this._clientAddress = clientAddress;
     this._serverPort = serverPort;
     this._httpServer = http.createServer(express());
+    // cors is needed to allow cross origin requests from client
     this._socketServer = new Server(this._httpServer, {
       cors: {
         origin: clientAddress,
       },
     });
-
+    // start server on port `serverPort`
     this._httpServer.listen(serverPort);
   }
 
@@ -47,6 +49,11 @@ export class SocketServer {
     return this._serverPort;
   }
 
+  /**
+   * Create a game with the current players
+   * it sends map to the players
+   * starts the stateMachine
+   */
   private createGame(stateMachine: StateMachine): void {
     if (this.isVerbose) console.log("Game created");
     this._created = true;
@@ -59,7 +66,11 @@ export class SocketServer {
     this.broadcast("turn", { current: 1, total: MaxTurns });
     stateMachine.startMachine();
   }
-
+  /**
+   * Destroy the game
+   * broadcast to all players that the game is over
+   * stop the stateMachine
+   */
   private destroyGame(stateMachine: StateMachine): void {
     if (this.isVerbose) console.log("Game destroyed");
     this._created = false;
@@ -69,6 +80,10 @@ export class SocketServer {
     resetIds();
   }
 
+  /**
+   * Listens to players connection
+   * stateMachine is used to manage the game as the commands are in the stateMachine
+   */
   public run(stateMachine: StateMachine): void {
     //For Prototype Purposes
     this.eventConnection((socket) => {
@@ -108,6 +123,11 @@ export class SocketServer {
   //////////// Routes
   /////////////////////////////////////////////////////////////
 
+  /**
+   * Apply event listeners to given socket
+   * @param socketClient socket to apply event listeners to
+   * @param stateMachine used to destroy game if needed
+   */
   private applyRoutes(socketClient: Socket, stateMachine: StateMachine): void {
     socketClient.on("ping message", () => {
       socketClient.emit("pong message", "pong");
