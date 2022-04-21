@@ -43,7 +43,7 @@ Légende\\
         \item Les hexagones numérotés, chacun représentant une distance définie, par défaut : 16 kilomètres \cmark
         \item Définir les joueurs et leurs spécificités. Par exemple les nationalités possibles, le joueur 
 qui joue le premier et celui qui a l’initiative.\cmark
-        \item Pouvoir poser des unités sur la carte et a retenir celles qui ne sont pas présentes dans
+        \item Pouvoir poser des unités sur la carte et à retenir celles qui ne sont pas présentes dans
 celles-ci \cmark
         \item Pouvoir poser plusieurs unités sur un hexagone.\cmark
         \item Être capable de faire des lancés de dés et d’appliquer des modificateurs. La majeure partie
@@ -82,7 +82,7 @@ oasis par exemple. \cmark
         \begin{itemize}
             \item Envoyer le coup joue au serveur.\cmark
             \item Vérifier que le coup est valide.\cmark
-            \item Retourner une réponse positive ou négative. Si le coup est bon alors envoyer le nouvel état de le carte du jeu au client.\cmark
+            \item Retourner une réponse positive ou négative. Si le coup est bon alors envoyer le nouvel état de la carte du jeu au client.\cmark
         \end{itemize}
     \end{itemize}
 \end{itemize}
@@ -92,7 +92,7 @@ oasis par exemple. \cmark
 \begin{itemize}
     \item \textbf{Priorité 3/3}
     \begin{itemize}
-        \item Définir l'unité comme interface, qui aura un morale, peut être perturbée (disrupted) et qui peut prendre des actions basiques comme attaquer et bouger.\cmark
+        \item Définir l'unité comme interface, qui aura une morale, peut être perturbée (disrupted) et qui peut prendre des actions basiques comme attaquer et bouger.\cmark
         \item Implémenter le système similaire à des points de vie (voir partie Depletion des règles).\cmark
         \item Séparer les unités en catégories différentes: motorisées, à pied, mécanisées, cavalerie etc.\cmark
         \item Mettre en place les situations ou l'unité devient perturbée :
@@ -104,9 +104,9 @@ oasis par exemple. \cmark
         \item Créer un système de zones de contrôle (ZDC):
         \begin{itemize}
             \item Pouvoir calculer si une unité peut exercer une ZDC.
-            \item Choisir quels hexagone sont dans cette ZDC.
+            \item Choisir quel hexagone est dans cette ZDC.
             \item Appliquer des effets potentiels sur des unités présentes dans la ZDC.
-            \item Permettre à certaines unités doivent ignorer les ZDC dans certaines phases d'un tour
+            \item Permettre à certaines unités doit ignorer les ZDC dans certaines phases d'un tour
         \end{itemize}
     \end{itemize}
     \item \textbf{Priorité 2/3}
@@ -129,9 +129,9 @@ oasis par exemple. \cmark
     \begin{itemize}
         \item Déplacement d'un point A à un point B, en parcourant le plus cours chemin
             On utilisera l'algorithme \emph{Dijkstra} pour satisfaire la condition.\cmark
-        \item Appliquer un bonus de mouvement dépendant du terrain d'un hexagone. C'est plus facile de se déplacer sur une plaine plutôt que a travers des montagnes.
+        \item Appliquer un bonus de mouvement dépendant du terrain d'un hexagone. C'est plus facile de se déplacer sur une plaine plutôt qu'à travers des montagnes.
         \item Permettre aux unités qui doivent se replier de bouger de 1-3 hexagones. Ce mouvement ne coûte pas de points de mouvement.\cmark
-        \item Ajouter la mécanique du overrun (fuite). Les unités capables de le faire peuvent pendant leur phase de mouvement attaquer des unités. Les défenseurs alors peuvent utiliser leurs phase de réaction pour bouger un certain nombre de hexagones. La distance est définie par l'unité concernée.\xmark
+        \item Ajouter la mécanique du overrun (fuite). Les unités capables de le faire peuvent pendant leur phase de mouvement attaquer des unités. Les défenseurs alors peuvent utiliser leurs phases de réaction pour bouger un certain nombre d'hexagones. La distance est définie par l'unité concernée.\xmark
     \end{itemize}   
     \item \textbf{Priorité 1/3}
     \begin{itemize}
@@ -145,16 +145,16 @@ oasis par exemple. \cmark
     \begin{itemize}
         \item Pouvoir définir les unités participant au combat de ce round.
         \item Pouvoir déterminer la puissance de combat de l'armée composée de ces unités.
-        \item Définir les règles du combat, par exemple le fait que seul les unités/armées adjacentes peuvent entrer en combat,par la volonté de l'attaquant.
+        \item Définir les règles du combat, par exemple le fait que seules les unités/armées adjacentes peuvent entrer en combat,par la volonté de l'attaquant.
         \item Pouvoir simuler le combat et donner les résultats.
         \begin{itemize}
             \item Déterminer les dégâts causés par une unité en divisant les points d'attaque par les points de défense de l'ennemie pour obtenir un ratio.
-            \item Séparer les défenseurs en groupe de morale. Les unités avec le même morale se retrouvent dans le même groupe. Les résultats seront fait dans l'ordre descendant de morale. Par exemple si on a deux groupes de morale (de 1 et 2), alors les résultats du combat seront d'abord appliqués dans le groupe avec un morale de 2, puis a celui de morale 1.
+            \item Séparer les défenseurs en groupe de morale. Les unités avec la même morale se retrouvent dans le même groupe. Les résultats seront fais dans l'ordre descendant de morale. Par exemple si on a deux groupes de morale (de 1 et 2), alors les résultats du combat seront d'abord appliqués dans le groupe avec une morale de 2, puis a celui de morale 1.
             \item Appliquer des éventuelles règles spéciales.
             \item Si un hexagone contient que des unités de support, alors lancer un dé si l'attaquant le souhaite, pour tenter de capturer les unités. Un résultat de 1-3 est un succès et un résultat de 4-6 veut dire que les unités de support sont détruites.
-            \item Amasser les dégâts et puis causer des dégâts aux unités adverses. Les dégâts sont divises jusqu'à que le maximum d'unités ait reçu un point de dégât, puis infliger les deuxièmes points de dégâts sur les unités, si il reste des points de dégâts à distribuer.
+            \item Amasser les dégâts et puis causer des dégâts aux unités adverses. Les dégâts sont divis jusqu'à que le maximum d'unités ait reçu un point de dégât, puis infliger les deuxièmes points de dégâts sur les unités, s'il reste des points de dégâts à distribuer.
             \item Enlever du plateau les unités détruites, et les ajouter dans la liste d'unités détruites du joueur concernée.
-            \item Lancer un dé pour faire le test de morale des unités qui restent. Si le test échoue, alors l'unité est \"disrupted\".
+            \item Lancer un dé pour faire le test de morale des unités qui reste. Si le test échoue, alors l'unité est \"disrupted\".
         \end{itemize}
         \item Pouvoir simuler la retraite d'une armée si les spécifications le permettent, par exemple le terrain et la condition de l'armée est convenable, et si l'utilisateur le souhaite.
     \end{itemize}
@@ -181,7 +181,7 @@ oasis par exemple. \cmark
         \item Afficher le joueur dont c'est le tour.\cmark
         \item Déterminer et afficher les informations de fin de partie et du vainqueur.
         \item Afficher les différents marqueurs sur l'état de chaque composante du jeu, par exemple hors d'approvisionnement pour les unités.\cmark
-        \item Afficher le résultat et les informations a la fin du combat.\cmark
+        \item Afficher le résultat et les informations à la fin du combat.\cmark
     \end{itemize}
 \end{itemize}
 
@@ -204,13 +204,13 @@ oasis par exemple. \cmark
 
 \subsubsection{Système}
 \begin{itemize}
-    \item Le temps d'attente entre un coup proposé et sa validité évalué devra être de l'ordre de la seconde.\cmark
-    \item Un chat sera créer pour communiquer avec l'adversaire.\cmark
+    \item Le temps d'attente entre un coup proposé et sa validité évalué devront être de l'ordre de la seconde.\cmark
+    \item Un chat sera créé pour communiquer avec l'adversaire.\cmark
 \end{itemize}
 
 \section{Scénario}
 
-Les joueurs devront se connecter sur un serveur afin d'accéder à la partie. Le serveur hébergera la partie en traitant les mécanismes de la partie en arrière plan. Les utilisateurs recevront une interface graphique en provenance du serveur et communiquera avec cette interface pour jouer dans la partie.
+Les joueurs devront se connecter sur un serveur afin d'accéder à la partie. Le serveur hébergera la partie en traitant les mécanismes de la partie en arrière-plan. Les utilisateurs recevront une interface graphique en provenance du serveur et communiqueront avec cette interface pour jouer dans la partie.
 Le serveur avertira l'utilisateur lors d'une mauvaise utilisation de l'interface et des requêtes parasites pour le serveur.
 
 
@@ -229,7 +229,7 @@ La carte s'affiche quand les deux joueurs sont connectés. Ici le joueur 1 peut 
 \includegraphics[scale=0.35]{data/justification2.jpg}
 \caption{Bas de la carte et légende de la carte du jeu}.
 \end{figure}
-En bas de la carte, on peut observer une légende, en bas a gauche.\\
+En bas de la carte, on peut observer une légende, en bas à gauche.\\
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.4]{data/player 1 acces.jpg}
@@ -253,7 +253,7 @@ Voici la page du joueur 2 qui doit attendre l'adversaire de jouer.
 \end{figure}
 
 Le joueur qui peut jouer peut faire bouger son unité dans le terminal a droite de l'image.
-On peut voir que l'unité 0 s'est déplace de l'hexagone \lstinline{0102} à \lstinline{0206}. Le déplacement est valide car on ne dépasse pas le mouvement allouée de l'unité (MA).\\
+On peut voir que l'unité 0 s'est déplacé de l'hexagone \lstinline{0102} à \lstinline{0206}. Le déplacement est valide car on ne dépasse pas le mouvement alloué de l'unité (MA).\\
 
 \begin{figure}[H]
 \centering
@@ -262,7 +262,7 @@ On peut voir que l'unité 0 s'est déplace de l'hexagone \lstinline{0102} à \ls
 \end{figure}
 
 Le joueur peut afficher des informations concernant ses unités dans le terminal.
-En tapant \og units \fg{}, le joueur a toutes ses unités présent avec le mouvement point et  les points de vies.
+En tapant \og units \fg{}, le joueur à toutes ses unités présent avec le mouvement point et  les points de vies.
 
 \begin{figure}[H]
 \centering
@@ -271,7 +271,7 @@ En tapant \og units \fg{}, le joueur a toutes ses unités présent avec le mouve
 \end{figure}
 
 Quand le joueur a terminé son tour, il doit écrire dans le terminal \og done \fg{}
-le joueur ne pourra que communiquer par chat à l'adversaire et l'adversaire peut continuer à jouer.\\
+le joueur ne pourra que communiquer par chat à l'adversaire et l'adversaire peuvent continuer à jouer.\\
 
 \begin{figure}[H]
 \centering

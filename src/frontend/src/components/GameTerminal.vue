@@ -205,6 +205,27 @@ const commands: Commands = {
       }
     });
   },
+  disembark: (args: string[]){
+    const disembarkingId = +args[0];
+    if (isNaN(disembarkingId)) {
+      addLine(
+        "Game",
+        "Argument invalide, le premier argument doit être un numéro (identifiant d'unité)",
+      );
+      return;
+    }
+    socket.emit("command", {
+      type: "disembark",
+      disembarkingId: args[0],
+    });
+    socket.once("disembark", (resp: { error: string | false }) => {
+      if (resp.error) {
+        addLine("Game", getError(resp.error));
+      } else {
+        addLine("Game", `L'unité ${args[0]} a débarqué`);
+      }
+    });
+  }
 };
 
 addLine("Game", "Connexion au serveur...");
