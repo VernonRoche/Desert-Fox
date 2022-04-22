@@ -67,7 +67,7 @@ Consigne : description des tests, discussion de leurs résultats, explication de
 {Si l'identifiant est inclus sur la carte du jeu, signalez cette case}
 {Vérifie l'identifiant dans une table de hachage}
 
-\subsubsection{Vérification du serveur socket}
+\subsubsection{Vérification du serveur {\tt socket}}
 
 \mytest
 {Vérification si le port du client est stocké correctement}
@@ -131,40 +131,40 @@ TODO
 
 \subsubsection{Vérification de la machine d'état}
 \mytest
-{Verification de l'instantiation de la machine d'état}
-{Les spécificités nécéssaires pour demarrer la machine d'état, dont les phases}
+{Vérification de l'instanciation de la machine d'état}
+{Les spécificités nécessaires pour démarrer la machine d'état, dont les phases}
 {Nous affichons une erreur si la machine n'est pas bien instanciée}
 {Vérifie si l'état actuel est l'état initial}
 
 \mytest
-{Verification du redemarrage de la machine d'état}
+{Vérification du redémarrage de la machine d'état}
 {La machine d'état lancée dans le test précédent}
-{Nous affichons une erreur incluant l'état actuel et l'état attendu si la machine n'est pas bien redemarrée}
+{Nous affichons une erreur incluant l'état actuel et l'état attendu si la machine n'est pas bien redémarrée}
 {Vérifie si l'état actuel est bien l'état initial}
 
 \mytest
-{Verification des transitions de la machine d'état}
+{Vérification des transitions de la machine d'état}
 {La machine d'état lancée dans le premier test de cette section}
 {Nous affichons une erreur incluant l'état actuel et l'état attendu si l'état n'est pas bien changé}
-{Vérifie aprés chaque appel au changement de l'état actuel de la machine d'état si ce dernier est correct}
+{Vérifie après chaque appel au changement de l'état actuel de la machine d'état si ce dernier est correct}
 
 \mytest
-{Verification du compteur de tours}
+{Vérification du compteur de tours}
 {La machine d'état lancée dans le premier test de cette section}
 {Nous affichons une erreur incluant l'état actuel et l'état attendu si l'état actuel est érroné}
-{Vérifie si aprés une serie de changement de phases, la machine d'état met bien à jour le nombre du tour actuel}
+{Vérifie si après une série de changement de phases, la machine d'état met bien à jour le nombre du tour actuel}
 
 \mytest
-{Verification du compteur de tours}
+{Vérification du compteur de tours}
 {La machine d'état lancée dans le premier test de cette section}
 {Nous affichons une erreur incluant le nombre de tour actuel et le nombre de tour attendu si le nombre de tour est incorrect}
-{Vérifie si aprés une serie de changement de phases, la machine d'état met bien à jour le nombre du tour actuel}
+{Vérifie si après une série de changement de phases, la machine d'état met bien à jour le nombre du tour actuel}
 
 \mytest
-{Verification le changement de phases pendant un tour}
+{Vérification le changement de phases pendant un tour}
 {La machine d'état lancée dans le premier test de cette section}
 {Nous affichons une erreur incluant l'état actuel et l'état attendu si l'état actuel est érroné}
-{Vérifie si aprés une serie de changement de phases égale au nombre totale de phases dans le jeu, l'état de la machine d'état est initiale}
+{Vérifie si après une série de changement de phases égale au nombre totale de phases dans le jeu, l'état de la machine d'état est initiale}
 
 \subsubsection{Vérification de l'instance du jeu}
 
@@ -175,66 +175,66 @@ TODO
 {Vérifie si le serveur du jeu se lance sans erreur}
 
 \mytest
-{Verification de l'instanciation du joeur 1}
-{Le port du serveur pour que nous puissons connecter le premier joueur}
-{Nous affichons une erreur si le premier joueur n'est pas bien connécté}
+{Vérification de l'instanciation du joeur 1}
+{Le port du serveur pour que nous puisons connecter le premier joueur}
+{Nous affichons une erreur si le premier joueur n'est pas bien connecté}
 {Vérifie si le premier joueur se connecte sans erreur}
 
 \mytest
-{Verification de l'instanciation du joeur 2}
-{Le port du serveur pour que nous puissons connecter le deuxième joueur}
-{Nous affichons une erreur si le deuxième joueur n'est pas bien connécté}
+{Vérification de l'instanciation du joeur 2}
+{Le port du serveur pour que nous puisons connecter le deuxième joueur}
+{Nous affichons une erreur si le deuxième joueur n'est pas bien connecté}
 {Vérifie si le deuxième joueur se connecte sans erreur}
 
 \mytest
-{Verification du lancement du jeu}
+{Vérification du lancement du jeu}
 {Le serveur du jeu}
 {Nous affichons une erreur si le jeu n'est pas bien lancé, ainsi que si les deux joueurs sont bien connectés ou pas}
-{Vérifie si le jeu se lance sans erreur aprés la connexion des 2 joueurs}
+{Vérifie si le jeu se lance sans erreur après la connexion des 2 joueurs}
 
 \mytest
-{Verification de la commande {\tt units} tant que premier joueur}
-{La socket du premier joueur}
-{Nous affichons une erreur si le premier joueur n'a pas reçu le bon resultat en éxécutant la commande {\tt units} ainsi que le nombre correct et actuel si ce dernier est incorrect}
-{Vérifie si le premier joueur recoit bien ses unités avec leurs spécificités aprés l'appel à la commande {\tt units}}
+{Vérification de la commande {\tt units} tant que premier joueur}
+{La {\tt socket} du premier joueur}
+{Nous affichons une erreur si le premier joueur n'a pas reçu le bon résultat en exécutant la commande {\tt units} ainsi que le nombre correct et actuel si ce dernier est incorrect}
+{Vérifie si le premier joueur reçoit bien ses unités avec leurs spécificités après l'appel à la commande {\tt units}}
 
 \mytest
-{Verification de la commande {\tt units} tant que deuxième joueur}
-{La socket du deuxième joueur}
-{Nous affichons une erreur si le deuxième joueur n'a pas reçu le bon resultat en éxécutant la commande {\tt units} ainsi que le nombre correct et actuel si ce dernier est incorrect}
-{Vérifie si le deuxième joueur recoit bien ses unités avec leurs spécificités aprés l'appel à la commande {\tt units}}
+{Vérification de la commande {\tt units} tant que deuxième joueur}
+{La {\tt socket} du deuxième joueur}
+{Nous affichons une erreur si le deuxième joueur n'a pas reçu le bon résultat en exécutant la commande {\tt units} ainsi que le nombre correct et actuel si ce dernier est incorrect}
+{Vérifie si le deuxième joueur reçoit bien ses unités avec leurs spécificités après l'appel à la commande {\tt units}}
 
 \mytest
-{Verification de la commande {\tt move} tant que premier joueur avec des arguments correctes}
-{La socket du premier joueur, ainsi que les arguments corrects pour la commande {\tt move}}
+{Vérification de la commande {\tt move} tant que premier joueur avec des arguments corrects}
+{La {\tt socket} du premier joueur, ainsi que les arguments corrects pour la commande {\tt move}}
 {Nous affichons une erreur si le premier joueur n'a pas bien éffectué {\tt move} ainsi que l'erreur correspondante}
-{Vérifie si le premier joueur effectue correctement le mouvement aprés l'appel à la commande {\tt move} avec des arguments valides}
+{Vérifie si le premier joueur effectue correctement le mouvement après l'appel à la commande {\tt move} avec des arguments valides}
 
 \mytest
-{Verification de la commande {\tt move} tant que premier joueur avec des arguments incorrectes, dont un identifiant d'unité incorrect}
-{La socket du premier joueur, ainsi qu'une unité incorrecte comme argument pour la commande {\tt move}}
-{Nous affichons une erreur si le premier joueur a pu éffectuer la commande {\tt move} avec une unité qu'il ne peut pas bouger}
-{Vérifie si le premier joueur ne peut pas effectuer le mouvement aprés l'appel à la commande {\tt move} avec une unité incorrecte comme argument}
+{Vérification de la commande {\tt move} tant que premier joueur avec des arguments incorrects, dont un identifiant d'unité incorrect}
+{La {\tt socket} du premier joueur, ainsi qu'une unité incorrecte comme argument pour la commande {\tt move}}
+{Nous affichons une erreur si le premier joueur a pu effectuer la commande {\tt move} avec une unité qu'il ne peut pas bouger}
+{Vérifie si le premier joueur ne peut pas effectuer le mouvement après l'appel à la commande {\tt move} avec une unité incorrecte comme argument}
 
 \mytest
-{Verification de la commande {\tt move} tant que premier joueur avec des arguments incorrectes, dont un identifiant d'hexagone incorrect}
-{La socket du premier joueur, ainsi qu'un identifiant d'hexagone incorrect pour la commande {\tt move}}
-{Nous affichons une erreur si le premier joueur a pu éffectuer la commande {\tt move} avec un identifiant d'hexagone qui n'existe pas}
-{Vérifie si le premier joueur ne peut pas effectuer le mouvement aprés l'appel à la commande {\tt move} avec un identifiant d'hexagone incorrect comme argument}
+{Vérification de la commande {\tt move} tant que premier joueur avec des arguments incorrects, dont un identifiant d'hexagone incorrect}
+{La {\tt socket} du premier joueur, ainsi qu'un identifiant d'hexagone incorrect pour la commande {\tt move}}
+{Nous affichons une erreur si le premier joueur a pu effectuer la commande {\tt move} avec un identifiant d'hexagone qui n'existe pas}
+{Vérifie si le premier joueur ne peut pas effectuer le mouvement après l'appel à la commande {\tt move} avec un identifiant d'hexagone incorrect comme argument}
 
 \mytest
-{Verification de la commande {\tt move} tant que premier joueur avec des arguments incorrectes, dont l'identifiant d'une unité de l'adversaire}
-{La socket du premier joueur, ainsi qu'un identifiant d'unité adversaire pour la commande {\tt move} du premier joueur}
-{Nous affichons une erreur si le premier joueur a pu éffectuer la commande {\tt move} avec un identifiant d'unité de l'adversaire}
-{Vérifie si le premier joueur ne peut pas effectuer le mouvement aprés l'appel à la commande {\tt move} avec un identifiant d'unité de l'adversaire comme argument}
+{Vérification de la commande {\tt move} tant que premier joueur avec des arguments incorrects, dont l'identifiant d'une unité de l'adversaire}
+{La {\tt socket} du premier joueur, ainsi qu'un identifiant d'unité adversaire pour la commande {\tt move} du premier joueur}
+{Nous affichons une erreur si le premier joueur a pu effectuer la commande {\tt move} avec un identifiant d'unité de l'adversaire}
+{Vérifie si le premier joueur ne peut pas effectuer le mouvement après l'appel à la commande {\tt move} avec un identifiant d'unité de l'adversaire comme argument}
 
 \mytest
-{Verification de la commande {\tt move} tant que deuxième joueur avec des arguments correctes}
-{La socket du deuxième joueur, ainsi que les arguments corrects pour la commande {\tt move}}
-{Nous affichons une erreur si le deuxième joueur n'a pas bien éffectué {\tt move} ainsi que l'erreur correspondante}
-{Vérifie si le deuxième joueur effectue correctement le mouvement aprés l'appel à la commande {\tt move} avec des arguments valides}
+{Vérification de la commande {\tt move} tant que deuxième joueur avec des arguments corrects}
+{La {\tt socket} du deuxième joueur, ainsi que les arguments corrects pour la commande {\tt move}}
+{Nous affichons une erreur si le deuxième joueur n'a pas bien effectué {\tt move} ainsi que l'erreur correspondante}
+{Vérifie si le deuxième joueur effectue correctement le mouvement après l'appel à la commande {\tt move} avec des arguments valides}
 
-Nous avons pas tésté les memes commandes que le premier joueur car elles sont similaires à celles du premier joueur
+Nous n'avons pas testé les mêmes commandes que le premier joueur car elles sont similaires à celles du premier joueur
 
 
 
