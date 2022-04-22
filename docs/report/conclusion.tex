@@ -1,6 +1,19 @@
 \section{Conclusion}
+Le projet étant fini, nous avons pu établir un bilan de notre progrès, et des difficultés tout au long du développement.
 
-Ce qu'il reste à faire :
+L'un des problèmes majeurs rencontrés durant l'implémentation de ce projet est que les règles du jeu font environ 40 pages.
+Cela qui nous a pris beaucoup de temps à comprendre et donc le début du développement du code a été retardé de quelques semaines.
+De ce fait le projet n'est pas complétement fidèle aux règles du jeu de base. Mais ceci est vrai que pour des petit détails, en réspectact les règles les
+plus importantes et comment elles sont appliquées.
+
+Grace à notre organisation sur Gitlab, la mise en place de tests automatiques et un mode de travail collaboratif rigoureux, nous avons pu travailler en parallèle facilement
+pour développer le projet. Ceci a été complementé par notre organisation en équipes qui se dedient à des missions independantes des autres. En appliquant des principes de
+Génie Logiciel, nous avons pu bien architecturer le logiciel pour qu'il soit facilement maintenable et surtout extensible pour implementer les fonctionnalités restantes.
+
+Malheureusement en ayant un temps très limité pour finir, il a fallu faire des choix, et travailler en priorité sur les besoins les plus importants, qui représentent
+les aspects de base du jeu.
+
+Ce qu'il reste alors à faire :
 \begin{itemize}
     \item Poser un cookie dans le client pour qu'il puisse reprendre une partie en cours s'il est déconnecté.
           Cela implique que la partie n'est pas directement détruite lorsqu'un joueur se déconnecte. Le serveur attendrait environs 3 minutes maximum avant de détruire la partie.
@@ -19,7 +32,3 @@ Ce qu'il reste à faire :
     \item Ajouter un temps de tour, c'est-à-dire que chaque joueur possède un certain temps pour jouer son tour. Actuellement si un jour ne fais rien, l'autre joueur doit attendre qu'il termine son tour.
     \item Ajouter tous les scénarios possibles du jeu de base.
 \end{itemize}
-
-L'un des problèmes majeurs rencontrés durant l'implémentation de ce projet est que les règles du jeu font environ 40 pages.
-Cela qui nous a pris beaucoup de temps à comprendre et donc le début du développement du code a été retardé de quelques semaines.
-De ce fait le projet n'est pas complétement fidèle aux règles du jeu de base.
