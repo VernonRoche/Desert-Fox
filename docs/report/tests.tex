@@ -127,7 +127,47 @@ Consigne : description des tests, discussion de leurs résultats, explication de
 }
 {On récupère les identifiants des différents joueurs dans l'instance du jeu (accessible à partir de l'instance du serveur)}
 
-TODO
+\mytest
+{Vérification de la fin de partie lors de la déconnexion d'un joueur}
+{Une instance du serveur et le socket d'un joueur}
+{Si le jeu est accessible à partir du joueur déconnecté, alors nous levons une exception}
+{On vérifie dans l'instance du serveur, si on peut récupérer le jeu}
+
+\mytest
+{Vérifier si le dernier joueur reste connecté au jeu malgré la déconnexion de son adversaire}
+{Une instance du \texttt{serveur}}
+{On doit retrouver un joueur dans l'instance du \texttt{serveur}, sinon on lève une exception}
+{
+    \begin{itemize}
+        \item On vérifie la longueur de la liste des joueurs
+        \item Le dernier joueur possède le bon identifiant
+        \item On vérifie si le joueur a bien été supprimé de la liste des joueurs 
+    \end{itemize}
+}
+
+\mytest
+{Vérification du redémarrage du jeu lors de la connexion du premier joueur}
+{Socket du premier joueur et une instance du \texttt{serveur}}
+{Si le joueur ne reçoit pas une instance du jeu, nous levons une exception}
+{Lors de la connexion du joueur, il reçoit le jeu}
+
+\mytest
+{Vérification du redémarrage du jeu lors de la connexion du deuxième joueur}
+{Socket du deuxième joueur et une instance du \texttt{serveur}}
+{Si le joueur ne reçoit pas une instance du jeu, nous levons une exception}
+{Lors de la connexion du joueur, il reçoit le jeu}
+
+\mytest
+{Vérification de la communication entre le serveur et le client (joueur)}
+{Le socket d'un joueur}
+{Le joueur envoie un message \texttt{ping} au serveur. Il sera immédiatement répondu par le serveur par un message \texttt{pong}}
+{Le client envoie un message et attends une réponse du serveur.}
+
+\mytest
+{Vérification de la communication entre le serveur et le client}
+{Les sockets des deux joueurs}
+{On vérifie si un message part du point A au point B, sinon on lève une exception}
+{Le joueur \#1 envoie un message \quotes{\texttt{Hello world}} et on vérifie si le joueur \#2 a reçu le message}
 
 \subsubsection{Vérification de la machine d'état}
 \mytest
