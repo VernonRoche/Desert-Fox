@@ -1,3 +1,25 @@
 \section{Conclusion}
 
-Consigne : description de ce qu’il y aurait encore à faire, description des extensions possibles (et comment les réaliser).
+Ce qu'il reste à faire :
+\begin{itemize}
+    \item Poser un cookie dans le client pour qu'il puisse reprendre une partie en cours s'il est déconnecté.
+          Cela implique que la partie n'est pas directement détruite lorsqu'un joueur se déconnecte. Le serveur attendrait environs 3 minutes maximum avant de détruire la partie.
+    \item Ajouter toutes les unités du jeu de base.
+    \item Ajout de la mécanique {\tt overrun} qui permet l'attaque pendant la phase de mouvement.
+    \item Ajout des phases : {\tt renforts}, {\tt allocation}, {\tt initiative}, {\tt aerial superiority}, {\tt supply attrition}, {\tt events}
+          \begin{itemize}
+              \item {\tt renforts} : Permet de ramener des unités détruites sur le terrain et les deux joueurs déterminent les unités disponibles comme renforts en cas d'attaque.
+              \item {\tt allocation} : Permet d'activer les bases, construire des fortifications et entrainer les unités.
+              \item {\tt initiative} : Lancer un dé permettant de déterminer quel joueur commence en premier.
+              \item {\tt aerial superiority} : Permet de déployer ses unités aériennes puis de déterminer qui a l'avantage aérien.
+                    La personne avec l'avantage peut faire des opérations aériennes.
+              \item {\tt supply attrition} : Chaque joueur effectue un test de moral pour chaque unité qu'il possède afin de vérifier si son état devient {\tt disrupted} ou si elles deviennent isolées.
+              \item {\tt events} : Permet de vérifier le status de tous les événements actifs. Chaque joueur déclare quels événements il veut provoquer.
+          \end{itemize}
+    \item Ajouter un temps de tour, c'est-à-dire que chaque joueur possède un certain temps pour jouer son tour. Actuellement si un jour ne fais rien, l'autre joueur doit attendre qu'il termine son tour.
+    \item Ajouter tous les scénarios possibles du jeu de base.
+\end{itemize}
+
+L'un des problèmes majeurs rencontrés durant l'implémentation de ce projet est que les règles du jeu font environ 40 pages.
+Cela qui nous a pris beaucoup de temps à comprendre et donc le début du développement du code a été retardé de quelques semaines.
+De ce fait le projet n'est pas complétement fidèle aux règles du jeu de base.

@@ -30,9 +30,6 @@ Nous avons mis en place divers outils pour contrôler notre implémentation :
 
 \subsection{Test unitaire}
 
-Consigne : description des tests, discussion de leurs résultats, explication des problèmes, des défauts et bugs. Pour chacun des tests avec : (1) spécification et buts du test ;
-(2) cas de tests (données) utilisé ; (3) scénario du test ; (4) analyse du test et les moyens de mise en œuvre de cette analyse.
-
 \subsubsection{Vérification des fichiers dans le fichier {\tt src}}
 
 \mytest
@@ -209,7 +206,7 @@ Consigne : description des tests, discussion de leurs résultats, explication de
 \subsubsection{Vérification de l'instance du jeu}
 
 \mytest
-{Vérification de l'instantiation du serveur du jeu}
+{Vérification de l'instanciation du serveur du jeu}
 {L'adresse du client, le port du serveur et l'instance de la machine d'état}
 {Nous affichons une erreur si l'instance du jeu n'est pas bien instanciée}
 {Vérifie si le serveur du jeu se lance sans erreurs}
@@ -274,7 +271,7 @@ Consigne : description des tests, discussion de leurs résultats, explication de
 {Nous affichons une erreur si le deuxième joueur n'a pas bien effectué {\tt move} ainsi que l'erreur correspondante}
 {Vérifie si le deuxième joueur effectue correctement le mouvement après l'appel à la commande {\tt move} avec des arguments valides}
 
-Nous n'avons pas testé les mêmes commandes que le premier joueur car elles sont similaires à celles du premier joueur
+Nous n'avons pas testé les mêmes commandes que le premier joueur, car elles sont similaires à celles du premier joueur
 
 
 
@@ -283,7 +280,7 @@ Nous n'avons pas testé les mêmes commandes que le premier joueur car elles son
 \mytest
 {Vérification de la création du joueur }
 {Un  {\tt joueur} avec en paramètre un identifiant et un socket}
-{Si le joueur n'a pas d'id et/ou de base et/ou Unités d'approvisionnement, signalez cette erreur}
+{Si le joueur n'a pas d'id ou de base ou Unités d'approvisionnement, signalez cette erreur}
 {Vérifie l'appel d'un {\tt joueur}}
 
 
@@ -346,8 +343,8 @@ Nous n'avons pas testé les mêmes commandes que le premier joueur car elles son
 
 \mytest
 {Vérification de l'appel d'une Base}
-{Une nouvelle {\tt Base} avec en paramètre un {\tt HexID}, une primary et son identifiant }
-{Si la Base n'a pas le bon id et/ou n'a pas la bonne position et/ou si ce n'est pas primaire, signaler l'erreur }
+{Une nouvelle {\tt Base} avec en paramètre un {\tt HexID}, une {\tt primary} et son identifiant }
+{Si la Base n'a pas le bon identifiant, ou n'a pas la bonne position, ou si ce n'est pas primaire, signaler l'erreur }
 {Vérifie le bon appel d'une base}
 
 \mytest
@@ -399,7 +396,7 @@ Nous n'avons pas testé les mêmes commandes que le premier joueur car elles son
 {Nous prenons quatre combinaisons d'entrées distinctes.
     En divisant le nombre d'attaquants par le nombre de défenseurs, on applique les règles du jeu pour définir
     quelle case du tableau des résultats de combat, il faut obtenir. Pour ne pas avoir des résultats aléatoires comme
-    il le faut normalement et avoir des tests exacts, nous ne lancons pas de dé.}
+    il le faut normalement et avoir des tests exacts, nous ne lançons pas de dé.}
 
 \mytest
 {Vérifier si le simulateur de combat retourne les bons résultats pour le moral}
@@ -428,24 +425,24 @@ Nous n'avons pas testé les mêmes commandes que le premier joueur car elles son
 \mytest
 {Vérification de l'approvisionnement d'une unité}
 {Un joueur, une liste d'unités, une liste de bases et dump, ainsi qu'une liste d'unité de soutien}
-{Vérifier si il existe un chemin entre une unité et une base ou un dump proche. Si c'est pas le cas, étendre le chemin avec les unités de soutien. Si il n'y a toujours pas de
-chemin, alors lever une exception}
-{Pour toutes les unités du joueur, dans l'état initial du jeu, il faut qu'elles ont toutes accés a l'approvisionnement, comme les conditions sont satisfaites}
+{Vérifier s'il existe un chemin entre une unité et une base ou un dump proche. Si ce n'est pas le cas, étendre le chemin avec les unités de soutien. Si il n'y a toujours pas de
+    chemin, alors lever une exception}
+{Pour toutes les unités du joueur, dans l'état initial du jeu, il faut qu'elles aient toutes accès à l'approvisionnement, comme les conditions sont satisfaites}
 
 \mytest
 {Vérification de l'embarcation dans une unité de soutien}
 {Une unité de soutien, un dump et un joueur}
 {Si le dump n'est pas dans les objets embarqués de l'unité après avoir été embarqué, lever une exception}
 {Il faut tout d'abord bouger l'unité de soutien à la position du dump et l'embarquer dans l'unité. Puis nous essayons d'embarquer le dump dans celle ci. Si tout se
-passe bien, alors le dump devrait être visible dans les objets que l'unité de soutien a dejà embarquée}
+    passe bien, alors le dump devrait être visible dans les objets que l'unité de soutien a déjà embarqué}
 
 \mytest
 {Vérification du débarquement}
 {Un joueur et une unité de soutien}
-{L'unité de soutien doit désembarquer l'objet qu'elle porte. Si elle ne portait rien ou si l'objet est toujours embarqué ou si l'objet n'est pas visible sur la carte, lever
-une exception}
+{L'unité de soutien doit décharger l'objet qu'elle porte. Si elle ne portait rien ou si l'objet est toujours embarqué ou si l'objet n'est pas visible sur la carte, lever
+    une exception}
 {Pour une unité de soutien donnée, nous savons qu'elle porte sur elle un dump. En le déposant, il doit maintenant être visible dans l'hexagone dans lequel nous l'avons
-posé, et que l'unité de soutien n'ai pas d'autres objets portés}
+    posé, et que l'unité de soutien n'ai pas d'autres objets portés}
 
 \subsubsection{Vérification de la recherche du plus court chemin}
 
@@ -484,4 +481,4 @@ On peut voir le pourcentage de couverture de chaque fichier. On peut aussi aller
 \end{figure}
 
 La couverture du code n'implique pas des tests de qualité. Après quelques recherches nous n'avons pas trouvé de ressource fiable, mais l'information qui ressortait le plus est qu'une bonne qualité de couverture dépasse les 80\%.
-Nous nous sommes donc fixés d'au moins atteindre ce pourcentage. Un fichier fausse notre {\tt coverage}, en effet nous ne testons pas main/GameManager/StateMachine/Command.ts car nous vérifions déjà dans le frontend que les commandes soumises aient les bons arguments.
+Nous nous sommes donc fixés d'au moins atteindre ce pourcentage. Un fichier dégrade notre {\tt coverage}, en effet nous ne testons pas main/GameManager/StateMachine/Command.ts car nous vérifions déjà dans le frontend que les commandes soumises aient les bons arguments.
