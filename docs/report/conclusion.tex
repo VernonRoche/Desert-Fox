@@ -1,3 +1,21 @@
 \section{Conclusion}
 
+Reste à faire:
+\begin{enumerate}
+    \item Poser un genre de cookie dans le client pour qu'il puisse reprendre sa partie en cours.
+          Cela implique que la partie n'est pas directement détruite lorsqu'un joueur se déconnecte.
+    \item Ajouter toutes les unités du jeu de base.
+    \item Ajout de la mécanique {\tt overrun} qui permet l'attaque pendant la phase de mouvement.
+    \item Ajout des phases: {\tt renforts}, {\tt allocation}, {\tt initiative}, {\tt aerial superiority}, {\tt supply attrition}, {\tt events}
+          \begin{itemize}
+              \item {\tt renforts}: Permet de ramener des unités détruites sur le terrain et les deux joueurs déterminent les unités disponibles comme renforts en cas d'attaque.
+              \item {\tt allocation}: Permet d'activer les bases, construire des fortifications et entrainer les unités.
+              \item {\tt initiative}: Lancer un dé permettant de déterminer quel joueur commence en premier.
+              \item {\tt aerial superiority}: Permet de déployer ses unités aérienne puis de déterminer qui a l'avantage aérien.
+                    La personne avec l'avantage peut faire des opérations aériennes.
+              \item {\tt supply attrition}: Chaque joueur effectue un test de moral pour chaque unité qu'il possède afin de vérifier si son état devient {\tt disrupted} ou si elles deviennent isolées.
+              \item {\tt events}: Permet de vérifier le status de tous les événements actifs. Chaque joueur déclare quels événements il veut provoquer.
+          \end{itemize}
+\end{enumerate}
+
 Consigne : description de ce qu’il y aurait encore à faire, description des extensions possibles (et comment les réaliser).
