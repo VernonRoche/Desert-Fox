@@ -50,13 +50,20 @@ type Commands = Record<string, Command>;
 
 const help: Record<string, string> = {
   ping: "Test de la connexion avec le serveur",
-  help: "Affiche l'aide",
-  clear: "Efface le terminal",
+  exit: "Termine la connexion avec le serveur",
+  message: "Envoie un message à votre adversaire. Exemple: message Bonjour",
   move: "La commande prend un identifiant d'unité et un identifiant d'hexagone et fait bouger l'unité sur l'hexagone. Exemple : move 3 0208",
   units: "Récupère la liste de vos unités",
   done: "Indique que vous terminez votre tour",
-  exit: "Termine la connexion avec le serveur",
-  message: "Envoie un message à votre adversaire. Exemple: message Bonjour",
+  help: "Affiche l'aide",
+  clear: "Efface le terminal",
+  hex: "Affiche les informations d'un hexagone",
+  embark:
+    "Permet d'embarquer. Le premier argument est l'id d'un supply unit et le deuxième une entité qui peut être embarquée (foot et dump). Exemple : embark 12 16.",
+  disembark:
+    "Permet de désembarquer. Le seul argument est l'id du supply unit qui a embarqué une entité. Exemple : disembark 12",
+  attack:
+    "Permet aux unités d'un hexagone d'attaquer les unités d'un autre hexagone. Exemple : attack 0208 0209",
 };
 
 const commands: Commands = {
