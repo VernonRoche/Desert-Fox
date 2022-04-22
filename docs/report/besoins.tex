@@ -97,13 +97,13 @@
         Besoins                                                                                                                                                   & Avancement \\
         \hline
         • Définir l'unité comme interface, qui aura une morale, peut être perturbée (disrupted) et qui peut prendre des actions basiques comme attaquer et bouger & \FAIT      \\
-        • Implémenter le système similaire à des points de vie (voir partie \textit{Depletion} des règles)                                                        & \FAIT      \\
+        • Implémenter le système similaire à des points de vie (voir partie {\tt Depletion} des règles)                                                           & \FAIT      \\
         • Séparer les unités en catégories différentes : motorisées, à pied, mécanisées, cavalerie...                                                             & \FAIT      \\
         • Mettre en place les situations ou l'unité devient perturbée :
         \begin{itemize}
             \item Trop de troupes sur un hexagone
             \item Fin d'un mouvement de nuit
-            \item Après la phase de \textit{Supply Attrition}, il y a un échec sur le test d'usure (attrition)
+            \item Après la phase de {\tt Supply Attrition}, il y a un échec sur le test d'usure (attrition)
         \end{itemize}
                                                                                                                                                                   & \FAIT      \\
         \hline
@@ -149,14 +149,14 @@
     \begin{tabular}[h]{|m{14cm}|m{2cm}|}
         \hline
         \rowcolor[HTML]{FFB72B}
-        \multicolumn{2}{|c|}{\textbf{Priorité 2/3}}                                                                                                                                                                                                                                                                         \\
+        \multicolumn{2}{|c|}{\textbf{Priorité 2/3}}                                                                                                                                                                                                                                                                        \\
         \hline
-        Besoins                                                                                                                                                                                                                                                                                                & Avancement \\
+        Besoins                                                                                                                                                                                                                                                                                               & Avancement \\
         \hline
-        • Déplacement d'un point A à un point B, en parcourant le plus cours chemin. On utilisera l'algorithme \emph{Dijkstra} pour satisfaire la condition                                                                                                                                                    & \FAIT      \\
-        • Appliquer un bonus de mouvement dépendant du terrain d'un hexagone. C'est plus facile de se déplacer sur une plaine plutôt qu'à travers des montagnes                                                                                                                                                & ?          \\
-        • Permettre aux unités qui doivent se replier de bouger de 1-3 hexagones. Ce mouvement ne coûte pas de points de mouvement                                                                                                                                                                             & \FAIT      \\
-        • Ajouter la mécanique du \emph{overrun} (fuite). Les unités capables de le faire peuvent pendant leur phase de mouvement attaquer des unités. Les défenseurs alors peuvent utiliser leurs phases de réaction pour bouger un certain nombre d'hexagones. La distance est définie par l'unité concernée & \NOP       \\
+        • Déplacement d'un point A à un point B, en parcourant le plus cours chemin. On utilisera l'algorithme {\tt Dijkstra} pour satisfaire la condition                                                                                                                                                    & \FAIT      \\
+        • Appliquer un bonus de mouvement dépendant du terrain d'un hexagone. Il est plus facile de se déplacer sur une plaine plutôt que sur une montagne                                                                                                                                                    & \FAIT      \\
+        • Permettre aux unités qui doivent se replier de bouger de 1-3 hexagones. Ce mouvement ne coûte pas de points de mouvement                                                                                                                                                                            & \FAIT      \\
+        • Ajouter la mécanique du {\tt overrun} (fuite). Les unités capables de le faire peuvent pendant leur phase de mouvement attaquer des unités. Les défenseurs alors peuvent utiliser leurs phases de réaction pour bouger un certain nombre d'hexagones. La distance est définie par l'unité concernée & \NOP       \\
         \hline
     \end{tabular}
 \end{center}
@@ -170,7 +170,7 @@
         \hline
         Besoins             & Avancement            \\
         \hline
-        • Mouvement la nuit & \FAIT                 \\
+        • Mouvement la nuit & \NOP                  \\
         \hline
     \end{tabular}
 \end{center}
@@ -197,7 +197,7 @@
             \item Si un hexagone contient que des unités de support, alors lancer un dé si l'attaquant le souhaite, pour tenter de capturer les unités.\newline Un résultat de 1-3 est un succès et un résultat de 4-6 veut dire que les unités de support sont détruites.
             \item Amasser les dégâts et puis causer des dégâts aux unités adverses.\newline Les dégâts sont divis jusqu'à que le maximum d'unités ait reçu un point de dégât, puis infliger les deuxièmes points de dégâts sur les unités, s'il reste des points de dégâts à distribuer.
             \item Enlever du plateau les unités détruites, et les ajouter dans la liste d'unités détruites du joueur concernée.
-            \item Lancer un dé pour faire le test de morale des unités qui reste. Si le test échoue, alors l'unité est \"disrupted\".
+            \item Lancer un dé pour faire le test de morale des unités qui reste. Si le test échoue, alors l'unité est {\tt disrupted}.
         \end{itemize}                                                                                                                                                       & ?          \\
         • Pouvoir simuler la retraite d'une armée si les spécifications le permettent, par exemple le terrain et la condition de l'armée est convenable, et si l'utilisateur le souhaite & ?          \\
         \hline
@@ -209,11 +209,11 @@
     \begin{tabular}[h]{|m{14cm}|m{2cm}|}
         \hline
         \rowcolor[HTML]{C0D8C0}
-        \multicolumn{2}{|c|}{\textbf{Priorité 1/3}}                                                                   \\
+        \multicolumn{2}{|c|}{\textbf{Priorité 1/3}}                                                                         \\
         \hline
-        Besoins                                                                                          & Avancement \\
+        Besoins                                                                                                & Avancement \\
         \hline
-        • Si un Hex contient plusieurs terrains, le défendant doit pouvoir en choisir un pour sa défense & ?          \\
+        • Si un {\tt Hex} contient plusieurs terrains, le défendant doit pouvoir en choisir un pour sa défense & ?          \\
         \hline
     \end{tabular}
 \end{center}
@@ -251,6 +251,7 @@
         • Déterminer et afficher les informations de fin de partie et du vainqueur                                                       & \FAIT      \\
         • Afficher les différents marqueurs sur l'état de chaque composante du jeu, par exemple hors d'approvisionnement pour les unités & \FAIT      \\
         • Afficher le résultat et les informations à la fin du combat                                                                    & \FAIT      \\
+        • Affiche un message d'erreur ou de refus quand une requête ou commande invalide est entrée.                                     & \FAIT      \\
         \hline
     \end{tabular}
 \end{center}
@@ -275,9 +276,9 @@
 
 \subsubsection{Affichage}
 \begin{itemize}
-    \item Affiche un message d'erreur ou de refus quand une requête ou commande invalide est entrée.
+    \item Le système doit être robuste aux erreurs de saisie et aux erreurs du serveur.
     \item Mettre en place une interface graphique affichant le plateau du jeu, les unités.
-    \item Afficher un message d'attente au joueur  qui ne joue pas .
+    \item Afficher un message d'attente au joueur qui ne joue pas.
 \end{itemize}
 
 \subsubsection{Système}
@@ -294,8 +295,8 @@ Le serveur avertira l'utilisateur lors d'une mauvaise utilisation de l'interface
 
 
 
-La carte s'affiche quand les deux joueurs sont connectés. Ici le joueur 1 peut commencer à jouer
-. Nous pouvons voir en haut de la page, une barre qui affiche la phase actuelle sur 19, le tour  et le nombre d'unités restantes.
+La carte s'affiche quand les deux joueurs sont connectés. Ici le joueur 1 peut commencer à jouer.
+Nous pouvons voir en haut de la page une barre qui affiche le tour actuel sur 48, la phase actuelle et le nombre d'unités restantes.
 
 \begin{figure}[H]
     \centering
@@ -303,7 +304,7 @@ La carte s'affiche quand les deux joueurs sont connectés. Ici le joueur 1 peut 
     \caption{Plateau du jeu Desert Fox}.
 \end{figure}
 
-En bas de la carte, Nous pouvons observer une légende, en bas à gauche.\\
+En bas à gauche de la carte une légende explique les types de terrain et les types d'entités.\\
 
 \begin{figure}[H]
     \centering
@@ -330,8 +331,8 @@ Voici la page du joueur 2 qui doit attendre l'adversaire de jouer.\\
     \caption{Barre d'information du joueur 2}.
 \end{figure}
 
-Le joueur qui peut jouer peut faire bouger son unité dans le terminal a droite de l'image.
-Nous pouvons voir que l'unité 0 s'est déplacé de l'hexagone \lstinline{0102} à \lstinline{0206}. Le déplacement est valide car on ne dépasse pas le mouvement alloué de l'unité (MA).\\
+Le joueur qui peut jouer peut faire bouger son unité dans le terminal à droite de l'image.
+Nous pouvons voir que l'unité 0 s'est déplacé de l'hexagone \lstinline{0102} à \lstinline{0206}. Le déplacement est valide, car on ne dépasse pas la capacité de mouvement de l'unité (MA).\\
 
 \begin{figure}[H]
     \centering
