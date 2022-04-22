@@ -10,7 +10,7 @@ les arêtes du graphe.
 
 Chaque hexagone contient son type de Terrain (Montagne, Plaines, Desert et autres), qui lui même contient les points
 de mouvements requis pour bouger dans celui-ci. Ceci est très utile dans le mouvement, pour trouver le plus court
-chemin entre un hexagone A et un hexagone B. En commençant par l'hexagone ou se trouve l'unité, nous parcourons un
+chemin entre un hexagone A et un hexagone B. En commençant par l'hexagone ou se trouve l'unité, nous faisons un
 parcours en largeur, en calculant le coût nécessaire pour bouger a chaque fois. Enfin nous retenons le plus court
 chemin et puis nous appliquons le mouvement si l'unité a assez de points de mouvements. Les modifications sur
 l'algorithme Dijkstra de base sont que nous vérifions si nous passons dans un hexagone contenant une unité ennemie,
