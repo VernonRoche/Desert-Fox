@@ -24,8 +24,8 @@
 \section{Nos tests}
 Nous avons mis en place divers outils pour contrôler notre implémentation :
 \begin{itemize}
-    \item Chaque \emph{commit} sera vérifier par des pipelines de \emph{GitLab}. Cet outil compile le code proposé sur une machine afin de voir si le code suggérer n'a aucune erreur de compilation.
-    \item L'implémentation de notre \emph{backend} est contrôlé par le framework \emph{NYC}. Nos tests sont surveillés par le framework et nous donne le résultat de \emph{coverage} pour chaque fichier testé.
+    \item Chaque {\tt commit} sera vérifier par des pipelines de {\tt GitLab}. Cet outil compile le code proposé sur une machine afin de voir si le code suggérer n'a aucune erreur de compilation.
+    \item L'implémentation de notre {\tt backend} est contrôlé par le framework {\tt NYC}. Nos tests sont surveillés par le framework et nous donne le résultat de {\tt coverage} pour chaque fichier testé.
 \end{itemize}
 
 \subsection{Test unitaire}
@@ -33,7 +33,7 @@ Nous avons mis en place divers outils pour contrôler notre implémentation :
 Consigne : description des tests, discussion de leurs résultats, explication des problèmes, des défauts et bugs. Pour chacun des tests avec : (1) spécification et buts du test ;
 (2) cas de tests (données) utilisé ; (3) scénario du test ; (4) analyse du test et les moyens de mise en œuvre de cette analyse.
 
-\subsubsection{Vérification des fichiers dans le fichier \emph{src}}
+\subsubsection{Vérification des fichiers dans le fichier {\tt src}}
 
 \mytest
 {Vérifier si les fichiers possède le bon format (\texttt{.ts}) dans le dossier \texttt{src/main}}
@@ -141,7 +141,7 @@ Consigne : description des tests, discussion de leurs résultats, explication de
     \begin{itemize}
         \item On vérifie la longueur de la liste des joueurs
         \item Le dernier joueur possède le bon identifiant
-        \item On vérifie si le joueur a bien été supprimé de la liste des joueurs 
+        \item On vérifie si le joueur a bien été supprimé de la liste des joueurs
     \end{itemize}
 }
 
@@ -301,7 +301,7 @@ Nous n'avons pas testé les mêmes commandes que le premier joueur car elles son
 {Vérifie l'ajout et la suppression du Dump}
 
 
-\subsubsection{Vérification de la classe abstraite \emph{Player}}
+\subsubsection{Vérification de la classe abstraite {\tt Player}}
 
 \mytest
 {Vérification de l'initialisation de l'unité}
@@ -463,7 +463,7 @@ Nous n'avons pas testé les mêmes commandes que le premier joueur car elles son
 
 \subsection{Couverture du code}
 
-Le framework \emph{NYC} nous permet de tester la couverture. Il faut lancer la commande \emph{yarn test} dans le \lstinline{backend} ce qui créé dans le dossier \lstinline{coverage} où se trouve à l'intérieur un \lstinline{index.html} qui donne ceci.
+Le framework {\tt nyc} nous permet de tester la couverture. Il faut lancer la commande {\tt yarn test} dans le \lstinline{backend} ce qui créé dans le dossier \lstinline{coverage} où se trouve à l'intérieur un \lstinline{index.html} qui donne ceci.
 
 \begin{figure}[H]
     \centering
