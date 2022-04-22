@@ -202,20 +202,18 @@
         \hline
         Besoins                                                                                                                                                                          & Avancement \\
         \hline
-        • Pouvoir définir les unités participant à un combat                                                                                                                             & ?          \\
-        • Pouvoir déterminer la puissance de combat de l'armée composée de ces unités                                                                                                    & ?          \\
-        • Définir les règles du combat, par exemple le fait que seules les unités/armées adjacentes peuvent entrer en combat, par la volonté de l'attaquant                              & ?          \\
+        • Pouvoir définir les unités participant à un combat                                                                                                                   & \FAIT          \\
+        • Pouvoir déterminer la puissance de combat de l'armée composée de ces unités                                                                                                    & \FAIT           \\
+        • Définir les règles du combat, par exemple le fait que seules les unités/armées adjacentes peuvent entrer en combat, par la volonté de l'attaquant                              & \FAIT           \\
         • Pouvoir simuler le combat et donner les résultats :
-        \begin{itemize}
-            \item Déterminer les dégâts causés par une unité en divisant les points d'attaque par les points de défense de l'ennemie pour obtenir un ratio.
-            \item Séparer les défenseurs en groupe de morale. Les unités avec la même morale se retrouvent dans le même groupe. Les résultats seront dans l'ordre descendant de morale. Par exemple si on a deux groupes de morale (de 1 et 2), alors les résultats du combat seront d'abord appliqués dans le groupe avec une morale de 2, puis a celui de morale 1.
-            \item Appliquer des éventuelles règles spéciales.
-            \item Si un hexagone contient que des unités de support, alors lancer un dé si l'attaquant le souhaite, pour tenter de capturer les unités.\newline Un résultat de 1-3 est un succès et un résultat de 4-6 veut dire que les unités de support sont détruites.
-            \item Amasser les dégâts et puis causer des dégâts aux unités adverses.\newline Les dégâts sont divis jusqu'à que le maximum d'unités ait reçu un point de dégât, puis infliger les deuxièmes points de dégâts sur les unités, s'il reste des points de dégâts à distribuer.
-            \item Enlever du plateau les unités détruites, et les ajouter dans la liste d'unités détruites du joueur concernée.
-            \item Lancer un dé pour faire le test de morale des unités qui reste. Si le test échoue, alors l'unité est {\tt disrupted}.
-        \end{itemize}                                                                                                                                                       & ?          \\
-        • Pouvoir simuler la retraite d'une armée si les spécifications le permettent, par exemple le terrain et la condition de l'armée est convenable, et si l'utilisateur le souhaite & ?          \\
+        \hspace*{10mm} \- Déterminer les dégâts causés par une unité en divisant le nombre d'attaquants par le nombre de défenseurs de l'ennemie pour obtenir un ratio. & \FAIT          \\
+        \hspace*{10mm} \- Séparer les défenseurs en groupe de morale. Les unités avec le même morale se retrouvent dans le même groupe. Les résultats seront dans l'ordre descendant de morale. Par exemple si on a deux groupes de morale (de 1 et 2), alors les résultats du combat seront d'abord appliqués dans le groupe avec une morale de 2, puis a celui de morale 1. & \FAIT          \\
+        \hspace*{10mm} \- Appliquer des éventuelles règles spéciales. & \NOP         \\
+        \hspace*{10mm} \- Si un hexagone contient que des unités de support, alors lancer un dé si l'attaquant le souhaite, pour tenter de capturer les unités.\newline Un résultat de 1-3 est un succès et un résultat de 4-6 veut dire que les unités de support sont détruites. & \FAIT          \\
+        \hspace*{10mm} \- Amasser les dégâts et puis causer des dégâts aux unités adverses.\newline Les dégâts sont distribués parmis toutes les unités d'un groupe de morale. & \FAIT          \\
+        \hspace*{10mm} \- Enlever du plateau les unités détruites, et les ajouter dans la liste d'unités détruites du joueur concernée. & \FAIT          \\
+        \hspace*{10mm} \- Lancer un dé pour faire le test de morale des unités qui reste. Si le test échoue, alors l'unité est \"disrupted\".    & \FAIT          \\                                                                                                                                                 & ?          \\
+        • Pouvoir simuler la retraite d'une armée si les spécifications le permettent, par exemple le terrain et la condition de l'armée est convenable, et si l'utilisateur le souhaite & & \FAIT          \\         \\
         \hline
     \end{tabular}
 \end{center}
