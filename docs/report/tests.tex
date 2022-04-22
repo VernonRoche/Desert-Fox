@@ -2,23 +2,23 @@
 {
     \begin{center}
         \centering
-        \begin{tabular}[h]{|m{4cm}|m{12cm}|} 
+        \begin{tabular}[h]{|m{4cm}|m{12cm}|}
             \hline
             \rowcolor[HTML]{F8B400}
-            \textbf{But} & #1 \\
+            \textbf{But}    & #1 \\
             \hline
             \hline
             \rowcolor[HTML]{F7F7F7}
-            Entrée & #2 \\
+            Entrée          & #2 \\
             \hline
             \rowcolor[HTML]{F7F7F7}
-            Scénario & #3 \\
+            Scénario        & #3 \\
             \hline
             \rowcolor[HTML]{F7F7F7}
             Analyse du test & #4 \\
             \hline
         \end{tabular}
-    \end{center}  
+    \end{center}
 }
 
 \section{Nos tests}
@@ -68,6 +68,64 @@ Consigne : description des tests, discussion de leurs résultats, explication de
 {Vérifie l'identifiant dans une table de hachage}
 
 \subsubsection{Vérification du serveur {\tt socket}}
+
+\mytest
+{Vérification si le port du client est stocké correctement}
+{Un entier représentant le port du client}
+{En cas d'une inégalité entre le port du client et le port enregistré pour le serveur socket, nous levons une exception}
+{On vérifie avec une comparaison entre deux entiers}
+
+\mytest
+{Vérification si le port du serveur est stocké correctement}
+{Un entier représentant le port du serveur}
+{En cas d'une inégalité entre le port du serveur et le port enregistré pour le serveur socket, nous levons une exception}
+{On vérifie avec une comparaison entre deux entiers}
+
+\mytest
+{Vérification de la limite de joueurs dans une partie (2 joueurs maximum)}
+{La connexion d'un joueur}
+{En cas de connexion d'un troisième joueur, une exception est levée}
+{Avant de vérifier la connexion d'un troisième joueur, nous attendons 500 millisecondes}
+
+\mytest
+{Vérification du lancement de la partie}
+{Une instance du \texttt{serveur}}
+{Avec notre instance du serveur, on essaye de récupérer le jeu, si ce n'est pas le cas, on lève une exception}
+{On vérifie l'instance du jeu avec l'instance du serveur}
+
+\mytest
+{Vérification du joueur \#1 dans la partie}
+{Une instance du \texttt{serveur}}
+{Si le joueur \#1 n'est pas accessible via l'instance du jeu, nous levons une exception}
+{On vérifie dans l'instance du jeu qui est accessible à partir de l'instance du serveur}
+
+\mytest
+{Vérification du joueur \#2 dans la partie}
+{Une instance du \texttt{serveur}}
+{Si le joueur \#2 n'est pas accessible via l'instance du jeu, nous levons une exception}
+{On vérifie dans l'instance du jeu qui est accessible à partir de l'instance du serveur}
+
+\mytest
+{Vérification de l'identifiant du socket du joueur \#1}
+{Une instance du \texttt{serveur}}
+{
+    \begin{itemize}
+        \item Le joueur \#1 possède le socket du joueur \#2 $\rightarrow$ exception
+        \item Le jeu ne possède pas le bon identifiant du joueur \#1 $\rightarrow$ exception
+    \end{itemize}
+}
+{On récupère les identifiants des différents joueurs dans l'instance du jeu (accessible à partir de l'instance du serveur)}
+
+\mytest
+{Vérification de l'identifiant du socket du joueur \#2}
+{Une instance du \texttt{serveur}}
+{
+    \begin{itemize}
+        \item Le joueur \#2 possède le socket du joueur \#1 $\rightarrow$ exception
+        \item Le jeu ne possède pas le bon identifiant du joueur \#2 $\rightarrow$ exception
+    \end{itemize}
+}
+{On récupère les identifiants des différents joueurs dans l'instance du jeu (accessible à partir de l'instance du serveur)}
 
 TODO
 
@@ -182,7 +240,26 @@ Nous n'avons pas testé les mêmes commandes que le premier joueur car elles son
 
 \subsubsection{Vérification de joueur}
 
-TODO
+\mytest
+{Vérification de la création du joueur }
+{Identifiant d'un Joueur}
+{Si le joueur n'a pas d'id et/ou de base et/ou Unités d'approvisionnement , signalez cette erreur}
+{Vérifie l'appel d'un joueur}
+
+
+\mytest
+{Vérification d'ajout d'Unités }
+{Identifiant d'un joueur}
+{S'il n'y a pas d'Unités ou si l'unité est incorrect, signalez cette case}
+{Vérifie l'ajout d'unité}
+
+
+\mytest
+{Vérification de l'ajout et de la suppression du Dump }
+{Identifiant d'un joueur}
+{Si l'identifiant est inclus sur la carte du jeu, signalez cette case}
+{Vérifie l'ajout et la suppression du Dump}
+
 
 \subsubsection{Vérification de la classe abstraite \emph{Player}}
 
@@ -190,7 +267,35 @@ TODO
 
 \subsubsection{Vérification des bases}
 
-TODO
+\mytest
+{Verification de l'appel d'une Base}
+{Une nouvelle Base}
+{Si la Base n'a pas le bon id et/ou n'a pas la bonne position et/ou si c'est pas primaire, signaler l'erreur }
+{Vérifie le bon appel d'une base}
+
+\mytest
+{Verification qu'une base envoie correctement}
+{Une base}
+{Si la base ne peut pas envoyer ,  signaler l'erreur }
+{Vérifie le bon envoie de la base }
+
+\mytest
+{Vérification qu'une base reçoit correctement}
+{Une base}
+{Si la base ne peut pas recevoir ,  signaler l'erreur }
+{Vérifie le bon envoie de la base }
+
+\mytest
+{Vérification qu'une base réinitialise correctement}
+{Une base}
+{Si la base ne peut pas envoyer et/ou recevoir,  signaler l'erreur }
+{Vérifie la bonne initiation de la base }
+
+\mytest
+{Vérification qu'une base place correctement}
+{Une base}
+{Si la base a la même position qu'au début,  signaler l'erreur }
+{Vérifie le bon placement fait par la  base }
 
 \subsubsection{Vérification de l'attaque}
 
@@ -199,14 +304,14 @@ TODO
 {Une unité attaquante et une unité defenseuse}
 {Si un résultat doit détruire une unité ou au contraire ne rien faire, les effets se repercutent dans le jeu}
 {Nous verifions pour les résultats aleatoires possibles, tout résultat de combat est bien appliqué. Nottament vérifier
-que une unité est bien détruite, si elle perd les bons points de vie ou si elle est toujours vivante}
+    que une unité est bien détruite, si elle perd les bons points de vie ou si elle est toujours vivante}
 
 \mytest
 {Vérifier si le combat retourne les bons résultats de morale et applique les bons effets}
 {Une unité attaquante et une unité defenseuse}
 {Si un résultat doit forcer une unité à se replier ou non, alors le changement doit être visible dans le jeu}
 {Nous verifions pour les résultats aleatoires possibles, que si une unité doit se replier, alors l'unité se
-deplace loin de l'ennemie. Si il faut pas alors elle doit rester au même endroit.}
+    deplace loin de l'ennemie. Si il faut pas alors elle doit rester au même endroit.}
 
 \subsubsection{Vérification du combat}
 
@@ -214,19 +319,19 @@ deplace loin de l'ennemie. Si il faut pas alors elle doit rester au même endroi
 {Vérifier si le simulateur de combat retourne les bons résultats pour les degats}
 {Un nombre d'attaquants et de defenseurs, un entier représentant le morale et un type de terrain}
 {Chaque combinaison de paramètres doit retourner le même résultat exact à chaque fois}
-{Nous prenons quatres combinaisons d'entrées distinctes. 
-En divisant le nombre d'attaquants par le nombre de défenseurs, on applique les règles du jeu pour definir
-quelle case du tableau des résultats de combat il faut obtenir. Pour ne pas avoir des résultats aleatoires comme
-il le faut normalement et avoir des tests exacts, nous ne lancons pas de dé.}
+{Nous prenons quatres combinaisons d'entrées distinctes.
+    En divisant le nombre d'attaquants par le nombre de défenseurs, on applique les règles du jeu pour definir
+    quelle case du tableau des résultats de combat il faut obtenir. Pour ne pas avoir des résultats aleatoires comme
+    il le faut normalement et avoir des tests exacts, nous ne lancons pas de dé.}
 
 \mytest
 {Vérifier si le simulateur de combat retourne les bons résultats pour le morale}
 {Un nombre d'attaquants et de defenseurs, un entier représentant le morale et un type de terrain}
 {Chaque combinaison de paramètres doit retourner le même résultat exact à chaque fois}
-{Nous prenons les même quatres combinaisons d'entrées distinctes. 
-En divisant le nombre d'attaquants par le nombre de défenseurs, on applique les règles du jeu pour definir
-quelle case du tableau des résultats de combat il faut obtenir. Pour ne pas avoir des résultats aleatoires comme
-il le faut normalement et avoir des tests exacts, nous ne lancons pas de dé.}
+{Nous prenons les même quatres combinaisons d'entrées distinctes.
+    En divisant le nombre d'attaquants par le nombre de défenseurs, on applique les règles du jeu pour definir
+    quelle case du tableau des résultats de combat il faut obtenir. Pour ne pas avoir des résultats aleatoires comme
+    il le faut normalement et avoir des tests exacts, nous ne lancons pas de dé.}
 
 
 \subsubsection{Vérification du jeu}
@@ -239,17 +344,17 @@ TODO
 {Vérifier si le chemin renvoyé est le plus court}
 {Identifiant d'un hexagone de départ, l'identifiant d'un hexagone de destination et l'unité qui se deplace}
 {Pour un hexagone de départ et de destination donné, un plus court chemin a toujours le même poids. Nous verifions
-si il est égale à celui ci}
+    si il est égale à celui ci}
 {En ayant une unité qui est adjacente à une unité ennemie, nous verifions si le calcul de cout est correcte, car
-le plus court chemin passe à coté d'elle, ce qui teste plusieurs scenarios qui peuvent être rencontrés dans le jeu}
+    le plus court chemin passe à coté d'elle, ce qui teste plusieurs scenarios qui peuvent être rencontrés dans le jeu}
 
 \mytest
 {Vérifier si une unité ne passe pas par un hexagone qui contient des ennemis}
 {Identifiant d'un hexagone de départ, l'identifiant d'un hexagone de destination et l'unité qui se deplace}
 {Si on trouve un plus court chemin entre deux hexagones, le chemin ne doit pas contenir un hexagone qui a des
-unités ennemies.}
+    unités ennemies.}
 {En prenant un plus court chemin, nous verifions pour tout les hexagones du chemin, si il n'appartient pas
-au joueur qui tente de bouger l'unité.}
+    au joueur qui tente de bouger l'unité.}
 
 \subsection{Couverture du code}
 

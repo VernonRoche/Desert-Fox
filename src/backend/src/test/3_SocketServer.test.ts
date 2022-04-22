@@ -22,7 +22,7 @@ describe("Socket server tests", function () {
     stateMachine = new StateMachine(server, false);
   });
 
-  it("webServer stores correctly clientPort", function () {
+  it("webServer stores correctly clientAddress", function () {
     if (server.clientAddress !== CLIENT_ADDRESS) {
       throw new Error("clientPort is not stored correctly");
     }
