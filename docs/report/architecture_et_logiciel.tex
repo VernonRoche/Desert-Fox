@@ -16,7 +16,7 @@ Le serveur permet aux clients de communiquer avec le jeu en manipulant ce dernie
 
 Le serveur écoute sur le port 3001 par défaut, mais peut être modifié en lui passant un argument en ligne de commande au moment de le lancer.
 Pour que le serveur accepte les connexions entrantes, il faut que la connexion provienne d'une adresse en particulier. Par défaut celle ci est {\tt http://localhost:8000}, mais elle peut être modifiée en ligne de commande au moment de le lancer.
-Le serveur possède une liste de {\tt sockets} connectées au serveur, qui sont les connexions des clients. Elle permet de vérifier s'il y a déjà les 2 joueurs nécessaires pour commencer une partie. Dans ce cas, le serveur refusera toute connexion supplémentaire. Dans le cas contraire, il accepte les connexions supplémentaires.
+Le serveur possède une liste de {\tt sockets} connectée au serveur, qui sont les connexions des clients. Elle permet de vérifier s'il y a déjà les 2 joueurs nécessaires pour commencer une partie. Dans ce cas, le serveur refusera toute connexion supplémentaire. Dans le cas contraire, il accepte les connexions supplémentaires.
 
 Quand les 2 joueurs sont connectés, le jeu est lancé et la machine d'état est initialisée. Le serveur envoie la carte et leurs unités aux deux joueurs.
 
@@ -88,7 +88,7 @@ Si les tests ratent, alors un mail est envoyé à l'auteur du commit et le commi
     \item frontend
 \end{itemize}
 
-Le principe de base était que nous développions sur les branches (\lstinline{frontend} et \lstinline{backend}) puis que nous fusionnions ces deux dernières sur la branche \lstinline{dev}. A partir de là, nous vérifions que le frontend et le backend fonctionnaient bien ensemble. Si il avait une erreur, alors c'était là que nous travaillions en attendant de régler le problème. Une fois que nous avions une version stable, nous fusionnions la branche \lstinline{dev} à la branche \lstinline{main}. La branche main est réservée aux versions stables qui compilent et qui fonctionnent correctement. Malheureusement nous nous sommes vite rendu compte que ce n'était pas le moyen le plus optimisé de travailler, car lorsqu'on travaille sur la communication client-serveur sur le \lstinline{backend} et le \lstinline{frontend}, il fallait fusionner les deux branches sur la branche \lstinline{dev} pour pouvoir tester, ce qui prenait beaucoup de temps et était plutôt fastidieux. Nous avons décidé de travailler sur la branche \lstinline{dev} pour faciliter les tests de la communication client serveur. Il aurait sûrement fallu faire des branches en fonction des {\tt features}.
+Le principe de base était que nous développions sur les branches (\lstinline{frontend} et \lstinline{backend}) puisque nous fusionnions ces deux dernières sur la branche \lstinline{dev}. À partir de là, nous vérifions que le frontend et le backend fonctionnaient bien ensemble. S'il avait une erreur, alors c'était là que nous travaillions en attendant de régler le problème. Une fois que nous avions une version stable, nous fusionnions la branche \lstinline{dev} à la branche \lstinline{main}. La branche main est réservée aux versions stables qui compilent et qui fonctionnent correctement. Malheureusement nous nous sommes vite rendu compte que ce n'était pas le moyen le plus optimisé de travailler, car lorsqu'on travaille sur la communication client-serveur sur le \lstinline{backend} et le \lstinline{frontend}, il fallait fusionner les deux branches sur la branche \lstinline{dev} pour pouvoir tester, ce qui prenait beaucoup de temps et était plutôt fastidieux. Nous avons décidé de travailler sur la branche \lstinline{dev} pour faciliter les tests de la communication client serveur. Il aurait sûrement fallu faire des branches en fonction des {\tt features}.
 
 \subsection{Langage de programmation}
 
@@ -107,10 +107,10 @@ Nous y reviendrons plus tard dans une partie dédiée.
 
 \subsection{Interface graphique}
 
-Dans le sujet il était indiqué que l'on n'était pas dans l'obligation de faire une interface graphique. Mais afficher un hexagone dans un terminal est compliqué et la moitié de la carte donnée en exemple est de dimensions 32*29 cases, ce qui aurait donné un rendu illisible. Nous avons donc fait le choix de faire une interface graphique. Pour afficher la carte nous avons testé plusieurs bibliothèques et choisis \lstinline{P5.js} pour plusieurs raisons, la documentation est claire et la bibliothèque est plutôt populaire ce qui facilite les recherches lors d'un problème d'implémentation (tutoriels, Stack Overflow...).
+Dans le sujet, il était indiqué que l'on n'était pas dans l'obligation de faire une interface graphique. Mais afficher un hexagone dans un terminal est compliqué et la moitié de la carte donnée en exemple est de dimensions 32*29 cases, ce qui aurait donné un rendu illisible. Nous avons donc fait le choix de faire une interface graphique. Pour afficher la carte, nous avons testé plusieurs bibliothèques et choisis \lstinline{P5.js} pour plusieurs raisons, la documentation est claire et la bibliothèque est plutôt populaire ce qui facilite les recherches lors d'un problème d'implémentation (tutoriels, Stack Overflow...).
 Notre approche pour afficher la carte est de la dessiner à chaque changement dans le \lstinline{backend} (exemple: un move). La première raison de cette tactique est de rendre le développement de l'affichage plus facile vu que ce n'est pas la priorité du sujet. Si nous avions dû faire un affichage dynamique il aurait fallu créer des objets pour sauvegarder la position des unités dans chaque case. Ce qui implique alors une duplication de la logique du \lstinline{backend}, nous avons voulu éviter ça. Ici le \lstinline{backend} envoie des données, on les parse et on les affiche.
 
-Pour dessiner les hexagones de la map nous avons cherché des algorithmes pour ne pas avoir à les développer nous-mêmes mais nous n'avons trouvé que des affichages comme suivant.
+Pour dessiner les hexagones de la map nous avons cherché des algorithmes pour ne pas avoir à les développer nous-mêmes, mais nous n'avons trouvé que des affichages comme suivant.
 
 \begin{figure}[H]
     \centering

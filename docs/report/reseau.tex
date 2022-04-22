@@ -62,11 +62,11 @@ de l'hexagone de destination.
 
 Cet objet est donc envoyé au serveur qui va le recevoir grâce à sa {\tt socket} reliée à celle du client.
 Celle ci reçoit directement l'objet {\tt object} envoyé et va le traiter.
-Ce traitement a deux étapes:
+Ce traitement a deux étapes :
 \begin{enumerate}
     \item On vérifie que les paramètres de la requête sont corrects. Ici, on va vérifier que les numéros sont corrects
           et qu'ils décrivent bien une unité existante que le joueur possède et un hexagone valide.
-    \item On effectue la commande. La commande elle même va vérifier que l'unité en question possède assez de points de mouvements et l'hexagone de destination est vide ou allié.
+    \item On effectue la commande. La commande elle-même va vérifier que l'unité en question possède assez de points de mouvements et l'hexagone de destination est vide ou allié.
 \end{enumerate}
 
 

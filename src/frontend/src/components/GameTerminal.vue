@@ -298,6 +298,7 @@ const commands: Commands = {
           morale: MoraleResult;
         };
       }) => {
+        console.log(resp);
         if (resp.error) {
           addLine("Game", getError(resp.error));
           return;
@@ -305,6 +306,10 @@ const commands: Commands = {
         const { damage, morale } = resp.result;
         const damageExplanation = damageExplanations[damage] ?? "";
         const moraleExplanation = moraleExplanations[morale] ?? "";
+        if (moraleExplanation === "" && damageExplanation === "") {
+          addLine("Game", `L'attaque a reussi, et vos unités n'ont pas subit d'effets negatifs`);
+          return;
+        }
         addLine("Game", `${damageExplanation}${moraleExplanation}`);
       },
     );
@@ -358,17 +363,23 @@ socket.on(
       damage: DamageResult;
       morale: MoraleResult;
     };
-    defenderHexId: { _x: number; _y: number };
+    defenderHexId: string;
   }) => {
+    console.log(resp);
     const { result, defenderHexId } = resp;
     const { damage, morale } = result;
     const damageExplanation = damageExplanations[damage] ?? "";
     const moraleExplanation = moraleExplanations[morale] ?? "";
+    if (moraleExplanation === "" && damageExplanation === "") {
+      addLine(
+        "Game",
+        `Votre adversaire a attaqué vos unités à l'hexagone ${defenderHexId}. Vos unités ont put se defendre et n'ont pas subit d'effets negatifs`,
+      );
+      return;
+    }
     addLine(
       "Game",
-      `L'hexagone ${hexIdToString(
-        defenderHexId,
-      )} a été attaqué. ${damageExplanation}${moraleExplanation}`,
+      `L'hexagone ${defenderHexId} a été attaqué. ${damageExplanation}${moraleExplanation}`,
     );
   },
 );
