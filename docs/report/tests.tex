@@ -303,7 +303,44 @@ Nous n'avons pas testé les mêmes commandes que le premier joueur car elles son
 
 \subsubsection{Vérification de la classe abstraite \emph{Player}}
 
-TODO
+\mytest
+{Vérification de l'initialisation de l'unité}
+{Une instance de l'unité}
+{Si l'instance de l'unité ne contient pas les mêmes valeurs données lors de sa création, alors on lève une exception}
+{On vérifie dans chaque attribut de l'unité, si l'initialisation est correcte}
+
+\mytest
+{Vérification de la valeur du retour du jeu de dé}
+{Un dé}
+{Si le dé ne sort pas une valeur entre \texttt{1} et \texttt{6}, alors on lève une exception}
+{On lance un dé, et on regarde sa valeur}
+
+\mytest
+{Vérification de l'exportation d'une unité en format \texttt{json}}
+{Une instance du joueur et son unité}
+{On vérifie si ces valeurs initiales sont correctes, sinon on lève une exception}
+{
+    On regarde plusieurs de ces attributs :
+    \begin{itemize}
+        \item Son identifiant
+        \item Sa position
+        \item Ses points de mouvements
+        \item Son type
+        \item Son propriétaire
+    \end{itemize}
+}
+
+\mytest
+{Vérification de l'ajout et de la suppression des unités}
+{Une instance du joueur et son unité}
+{On vérifie les changements effectuer par l'ajout et la suppression des unités}
+{On observe combien d'unités possède le joueur}
+
+\mytest
+{Vérification de la perte de vie pour une unité}
+{Une instance d'une unité}
+{Si l'unité contient une valeur négative pour ces points de vie, on lève une exception}
+{Nous regardons directement dans ces points de vie}
 
 \subsubsection{Vérification des bases}
 
