@@ -161,7 +161,7 @@ export const _commands: Commands = {
       _player.getSocket().emit(_args.type, { error: false, result: result.attacker });
       stateMachine.getSocketServer().sockets[Math.abs(_player.getId() - 1)].emit("attackResult", {
         result: result.defender,
-        defendHexId: _args.hexIdDefender,
+        defenderHexId: _args.hexIdDefender,
       });
     } catch (e) {
       console.log(e);
