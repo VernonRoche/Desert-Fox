@@ -318,18 +318,14 @@ Nous pouvons voir en haut de la page une barre qui affiche le tour actuel et le 
     \caption{Plateau du jeu Desert Fox}.
 \end{figure}
 
-En bas à gauche de la carte une légende explique les types de terrain et les types d'entités.\\
+En bas à gauche de la carte une légende(figure \ref{fig:map_legend}) explique les types de terrain et les types d'entités.\\
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.45]{data/Bas_de_map.png}
     \caption{Bas de la carte du jeu}.
 \end{figure}
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.8]{data/Map_Legend.png}
-    \caption{Légende de la carte du jeu}.
-\end{figure}
+
 
 Voici la page du joueur 1 qui peut jouer.\\
 \begin{figure}[H]
@@ -350,12 +346,12 @@ Nous pouvons voir que l'unité 0 s'est déplacé de l'hexagone \lstinline{0102} 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.35]{data/move_unit_player_1.jpg}
+    \includegraphics[scale=0.45]{data/move_unit_player_1.jpg}
     \caption{Mouvement de l'unité \lstinline{0} vers l'hexagone \lstinline{0206}}.
 \end{figure}
 
 Le joueur peut aussi utiliser une de ses unités de soutien pour bouger soit une unité de type {\tt foot} soit un dump.
-Il peut faire cela avec la commande {\tt embark} qui prend en parametre l'identifiant de l'unité du soutien qui va embarquer, ainsi que l'identifiant de l'unité qui va etre embarquée. Voici un exemple :\\
+Il peut faire cela avec la commande {\tt embark} qui prend en paramètre l'identifiant de l'unité du soutien qui va embarquer, ainsi que l'identifiant de l'unité qui va etre embarquée. Voici un exemple :\\
 
 \begin{figure}[H]
     \centering
@@ -363,7 +359,7 @@ Il peut faire cela avec la commande {\tt embark} qui prend en parametre l'identi
     \caption{Embarquement de l'unité \lstinline{0} dans l'unité de soutien  \lstinline{15}}.
 \end{figure}
 
-Il faut noter que l'unité qui est embarqué est inexistante dans la carte. Elle ne peut donc pas bouger elle meme, ni attaquer. Si l'unité du soutien a embarqué une unité, elle bougera avec elle. Dans la figure ci dessous nous pouvons voir que si nous embarquons un dump, qui est une entité qui ne peut pas bouger elle meme, nous pouvons la faire bouger avec l'unité de soutien. Ici nous la bougeons de l'hexagone \lstinline{0406} vers l'hexagone \lstinline{0407} \\
+Il faut noter que l'unité qui est embarqué est inexistante dans la carte. Elle ne peut donc pas bouger elle meme, ni attaquer. Si l'unité du soutien a embarqué une unité, elle bougera avec elle. Dans la figure ci-dessous nous pouvons voir que si nous embarquons un dump, qui est une entité qui ne peut pas bouger elle meme, nous pouvons la faire bouger avec l'unité de soutien. Ici nous la bougeons de l'hexagone \lstinline{0406} vers l'hexagone \lstinline{0407} \\
 
 \begin{figure}[H]
     \centering
@@ -380,10 +376,32 @@ Dans la figure ci dessous nous pouvons voir que après avoir bougé l'unité de 
     \caption{Mouvement de l'unité du soutien \lstinline{15}, laquelle contient l'unité \lstinline{0} à l'hexagone \lstinline{0411}, suivi du désembarquement de l'unité embarquée}.
 \end{figure}
 
-L'utilisateur peut aussi utiliser la commande {\tt attack} pour attaquer une unité adverse. Il faut noter que l'attaque est uniquement possible si l'unité est dans une case adjacente de l'unité adverse. Dans l'exemple ci dessous, nous pouvons voir que l'unité {\tt 5} \\
+L'utilisateur peut aussi utiliser la commande {\tt attack} pour attaquer une unité adverse. Il faut noter que l'attaque est uniquement possible si l'unité est dans une case adjacente de l'unité adverse. Dans la figure ci-dessous, nous pouvons voir que le deuxième joueur a décidé de se préparer pour une attaque en bougeant son unité {\tt 11} à l'hexagone adjacente de l'unité {\tt 5} de son adversaire.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.35]{data/beforeAttack.jpg}
+    \caption{Mouvement de l'unité \lstinline{11} à l'hexagone \lstinline{1021}, l'hexagone adjacent à \lstinline{1020}, qui contient l'unité \lstinline{5} de l'adversaire }.
+\end{figure}
+
+Ensuite, le deuxième joueur lance l'attaque en utilisant la commande {\tt attack} suivie des deux identifiants d'hexagones ( {\tt 1021} {\tt 1020}, respectivement celle de l'attaquant et l'attaqué ). Le résultat du combat est alors affiché dans le terminal pour les deux joueurs : \\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.35]{data/Attacker.jpg}
+    \caption{ L'exécution de la commande {\tt attack} et le résultat de cette dernière pour l'attaquant }.
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.35]{data/Defender.jpg}
+    \caption{L'affichage du résultat de la commande {\tt attack} pour le défendant }.
+\end{figure}
+
+Nous pouvons voir que l'attaque a échoué, et les unités attaquantes ont perdu des points de vie et sont devenues {\tt disrupted}, tandis que les unités qui défendent ont réussi à se défendre, mais font un test de morale pour vérifier si elles se replient, ce qui n'est pas arrivé dans cette situation.
 
 Le joueur peut afficher des informations concernant ses unités dans le terminal.
-En tapant \og units \fg{}, le joueur à toutes ses unités présent avec le mouvement point et  les points de vies.
+En tapant \og units \fg{}, le joueur à toutes ses unités présentes avec le mouvement point et  les points de vies.
 . Vous pouvez voir un exemple d'utilisation dans l'annexe a la figure \ref{fig:units_command}. \\
 
 
@@ -393,28 +411,13 @@ Quand le joueur a terminé son tour, il doit écrire dans le terminal \og done \
 
 
 
-Le joueur peut aussi afficher les entités, par exemple les unités, les bases, les dumps et les unités de soutien qui sont present dans une hexagone.
-Cela est possible grace a la commande {\tt hex}, qui prend en parametre un identifiant d'hexagone.Voici un exemple :\\
+Le joueur peut aussi afficher les entités, par exemple les unités, les bases, les dumps et les unités de soutien qui sont présent dans un hexagone.
+Cela est possible grâce a la commande {\tt hex}, qui prend en paramètre un identifiant d'hexagone. Voir la figure \ref{fig:hex_command} pour un exemple d'utilisation.\\
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.75]{data/hex_command.jpg}
-    \caption{Utilisation de la commande hex}.
-\end{figure}
 
-Les deux joueurs peuvent communiquer ensemble  à l'aide du terminal, le joueur doit écrire au dans le terminal \og message \fg{} puis écrit son message.\\
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.6]{data/chat.jpg}
-    \caption{Communication entre deux joueurs}.
-\end{figure}
+Les deux joueurs peuvent communiquer ensemble  à l'aide du terminal, le joueur doit écrire au dans le terminal \og message \fg{} puis écrit son message. Voir la figure \ref{fig:message_command} pour un exemple d'utilisation. \\
 
-Un message d'erreur s'affiche dans le terminal si le joueur écrit  des mauvaises commandes.
-Par exemple, le joueur oublie les arguments, ou donne un mauvais hexagone.\\
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.6]{data/erreur.jpg}
-    \caption{Exemple de mauvaises commandes}.
-\end{figure}
+Un message d'erreur s'affiche dans le terminal si le joueur effectue des mauvaises commandes.
+Par exemple, le joueur oublie des arguments ou passe des mauvais arguments. Voir figure \ref{fig:wrong_command} pour un exemple d'utilisation\\
 
