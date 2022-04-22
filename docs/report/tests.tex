@@ -48,20 +48,20 @@ Nous avons mis en place divers outils pour contrôler notre implémentation :
 {Chaque fichier possède une classe doit commencer par une majuscule dans le dossier \texttt{src/main}}
 {Un ensemble de fichiers}
 {En cas de non-respect des consignes, on affiche les fichiers qui ne respectent la capitalisation de la première lettre}
-{On ajoute dans une liste les fichiers qui ne respecte pas la condition (parcours d'un dossier + manipulation de chaîne de caractère pour récupérer la première}
+{Nous ajoutons dans une liste les fichiers qui ne respecte pas la condition (parcours d'un dossier + manipulation de chaîne de caractère pour récupérer la première}
 
 \subsubsection{Vérification de la carte du jeu}
 
 \mytest
 {Vérification de l'emplacement d'une case d'hexagone \#1}
 {Identifiant d'une vraie case d'hexagone}
-{Si l'identifiant n'est pas sur la carte du jeu, signalez cette case}
+{Si l'identifiant n'est pas sur la carte du jeu, signaler cette case}
 {Vérifie l'identifiant dans une table de hachage}
 
 \mytest
 {Vérification de l'emplacement d'une case d'hexagone \#2}
 {Identifiant d'une fausse case d'hexagone}
-{Si l'identifiant est inclus sur la carte du jeu, signalez cette case}
+{Si l'identifiant est inclus sur la carte du jeu, signaler cette case}
 {Vérifie l'identifiant dans une table de hachage}
 
 \subsubsection{Vérification du serveur {\tt socket}}
@@ -70,13 +70,13 @@ Nous avons mis en place divers outils pour contrôler notre implémentation :
 {Vérification si le port du client est stocké correctement}
 {Un entier représentant le port du client}
 {En cas d'une inégalité entre le port du client et le port enregistré pour le serveur socket, nous levons une exception}
-{On vérifie avec une comparaison entre deux entiers}
+{Nous vérifions avec une comparaison entre deux entiers}
 
 \mytest
 {Vérification si le port du serveur est stocké correctement}
 {Un entier représentant le port du serveur}
 {En cas d'une inégalité entre le port du serveur et le port enregistré pour le serveur socket, nous levons une exception}
-{On vérifie avec une comparaison entre deux entiers}
+{Nous vérifions avec une comparaison entre deux entiers}
 
 \mytest
 {Vérification de la limite de joueurs dans une partie (2 joueurs maximum)}
@@ -87,20 +87,20 @@ Nous avons mis en place divers outils pour contrôler notre implémentation :
 \mytest
 {Vérification du lancement de la partie}
 {Une instance du \texttt{serveur}}
-{Avec notre instance du serveur, on essaye de récupérer le jeu, si ce n'est pas le cas, on lève une exception}
-{On vérifie l'instance du jeu avec l'instance du serveur}
+{Avec notre instance du serveur, nous essayons de récupérer le jeu, si ce n'est pas le cas, nous levons une exception}
+{Nous vérifions l'instance du jeu avec l'instance du serveur}
 
 \mytest
 {Vérification du joueur \#1 dans la partie}
 {Une instance du \texttt{serveur}}
 {Si le joueur \#1 n'est pas accessible via l'instance du jeu, nous levons une exception}
-{On vérifie dans l'instance du jeu qui est accessible à partir de l'instance du serveur}
+{Nous vérifions dans l'instance du jeu qui est accessible à partir de l'instance du serveur}
 
 \mytest
 {Vérification du joueur \#2 dans la partie}
 {Une instance du \texttt{serveur}}
 {Si le joueur \#2 n'est pas accessible via l'instance du jeu, nous levons une exception}
-{On vérifie dans l'instance du jeu qui est accessible à partir de l'instance du serveur}
+{Nous vérifions dans l'instance du jeu qui est accessible à partir de l'instance du serveur}
 
 \mytest
 {Vérification de l'identifiant du socket du joueur \#1}
@@ -111,7 +111,7 @@ Nous avons mis en place divers outils pour contrôler notre implémentation :
         \item Le jeu ne possède pas le bon identifiant du joueur \#1 $\rightarrow$ exception
     \end{itemize}
 }
-{On récupère les identifiants des différents joueurs dans l'instance du jeu (accessible à partir de l'instance du serveur)}
+{Nous récupérons les identifiants des différents joueurs dans l'instance du jeu (accessible à partir de l'instance du serveur)}
 
 \mytest
 {Vérification de l'identifiant du socket du joueur \#2}
@@ -122,23 +122,23 @@ Nous avons mis en place divers outils pour contrôler notre implémentation :
         \item Le jeu ne possède pas le bon identifiant du joueur \#2 $\rightarrow$ exception
     \end{itemize}
 }
-{On récupère les identifiants des différents joueurs dans l'instance du jeu (accessible à partir de l'instance du serveur)}
+{Nous récupérons les identifiants des différents joueurs dans l'instance du jeu (accessible à partir de l'instance du serveur)}
 
 \mytest
 {Vérification de la fin de partie lors de la déconnexion d'un joueur}
 {Une instance du serveur et le socket d'un joueur}
 {Si le jeu est accessible à partir du joueur déconnecté, alors nous levons une exception}
-{On vérifie dans l'instance du serveur, si on peut récupérer le jeu}
+{Nosu vérifions dans l'instance du serveur, si on peut récupérer le jeu}
 
 \mytest
 {Vérifier si le dernier joueur reste connecté au jeu malgré la déconnexion de son adversaire}
 {Une instance du \texttt{serveur}}
-{On doit retrouver un joueur dans l'instance du \texttt{serveur}, sinon on lève une exception}
+{Nous devons retrouver un joueur dans l'instance du \texttt{serveur}, sinon on lève une exception}
 {
     \begin{itemize}
-        \item On vérifie la longueur de la liste des joueurs
+        \item Nous vérifions la longueur de la liste des joueurs
         \item Le dernier joueur possède le bon identifiant
-        \item On vérifie si le joueur a bien été supprimé de la liste des joueurs
+        \item Nous vérifions si le joueur a bien été supprimé de la liste des joueurs
     \end{itemize}
 }
 
