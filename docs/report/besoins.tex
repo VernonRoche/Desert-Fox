@@ -15,7 +15,7 @@
         \hline
         • Les hexagones numérotés, chacun représentant une distance définie, par défaut : 16 kilomètres                                                 & \FAIT      \\
         • Définir les joueurs et leurs spécificités. Par exemple les nationalités possibles, le joueur qui joue le premier et celui qui a l’initiative. & \FAIT      \\
-        • Pouvoir poser des unités sur la carte et à retenir celles qui ne sont pas présentes dans celles-ci                                            & \FAIT      \\
+        • Pouvoir poser des unités sur la carte et à retenir celles qui ne sont plus présentes dans celle-ci                                            & \FAIT      \\
         • Pouvoir poser plusieurs unités sur un hexagone                                                                                                & \FAIT      \\
         • Définir une séquence de tour :
         \begin{itemize}
@@ -41,7 +41,7 @@
         \hline
         • Différencier plusieurs types de terrain, les montages, les mers de sable et les crêtes par exemple                                                                     & \FAIT      \\
         • Créer une base pour les cartes d’évènements. Celles-ci étant très différentes, l’implémentation sera limitée aux évènements génériques (non spécifiques aux scénarios) & \NOP       \\
-        • Pouvoir charger la carte du jeu à partir d’un fichier \textsc{txt} ou \textsc{json} et pouvoir la sauvegarder aux mêmes formats                                        & \FAIT      \\
+        • Pouvoir charger la carte du jeu à partir d’un fichier \textsc{txt} ou \textsc{json}                                         & \FAIT      \\
         \hline
     \end{tabular}
 \end{center}
@@ -73,7 +73,7 @@
         \hline
         • Pouvoir échanger des informations basiques entre serveur et client                                                         & \FAIT      \\
         • Pouvoir convertir un état de la carte du jeu en format utilisable par le client pour pouvoir ensuite afficher le plateau   & \FAIT      \\
-        • Envoyer un coup joue dans un format utile pour le serveur, pour pouvoir faire des éventuelles modifications sur le plateau & \FAIT      \\
+        • Envoyer un coup joué dans un format utile pour le serveur, pour pouvoir faire des éventuelles modifications sur le plateau & \FAIT      \\
         • Vérification des coups :
         \begin{itemize}
             \item Envoyer le coup joue au serveur
@@ -172,7 +172,7 @@
         • Déplacement d'un point A à un point B, en parcourant le plus cours chemin. On utilisera l'algorithme {\tt Dijkstra} pour satisfaire la condition                                                                                                                                                    & \FAIT      \\
         • Appliquer un bonus de mouvement dépendant du terrain d'un hexagone. Il est plus facile de se déplacer sur une plaine plutôt que sur une montagne                                                                                                                                                    & \FAIT      \\
         • Permettre aux unités qui doivent se replier de bouger de 1-3 hexagones. Ce mouvement ne coûte pas de points de mouvement                                                                                                                                                                            & \FAIT      \\
-        • Ajouter la mécanique du {\tt overrun} (fuite). Les unités capables de le faire peuvent pendant leur phase de mouvement attaquer des unités. Les défenseurs alors peuvent utiliser leurs phases de réaction pour bouger un certain nombre d'hexagones. La distance est définie par l'unité concernée & \NOP       \\
+        • Ajouter la mécanique du {\tt overrun} (fuite). Les unités capables de le faire peuvent, pendant leur phase de mouvement, attaquer des unités. Les défenseurs alors peuvent utiliser leurs phases de réaction pour bouger un certain nombre d'hexagones. La distance est définie par l'unité concernée & \NOP       \\
         \hline
     \end{tabular}
 \end{center}
@@ -205,7 +205,7 @@
         • Pouvoir définir les unités participant à un combat                                                                                                                                                                                                                                                                                                                  & \FAIT      \\
         • Pouvoir déterminer la puissance de combat de l'armée composée de ces unités                                                                                                                                                                                                                                                                                         & \FAIT      \\
         • Définir les règles du combat, par exemple le fait que seules les unités/armées adjacentes peuvent entrer en combat, par la volonté de l'attaquant                                                                                                                                                                                                                   & \FAIT      \\
-        • Pouvoir simuler le combat et donner les résultats :
+        • Pouvoir simuler le combat et donner les résultats :\\
         \hspace*{10mm} \- Déterminer les dégâts causés par une unité en divisant le nombre d'attaquants par le nombre de défenseurs de l'ennemie pour obtenir un ratio.                                                                                                                                                                                                       & \FAIT      \\
         \hspace*{10mm} \- Séparer les défenseurs en groupe de morale. Les unités avec le même morale se retrouvent dans le même groupe. Les résultats seront dans l'ordre descendant de morale. Par exemple si on a deux groupes de morale (de 1 et 2), alors les résultats du combat seront d'abord appliqués dans le groupe avec une morale de 2, puis a celui de morale 1. & \FAIT      \\
         \hspace*{10mm} \- Appliquer des éventuelles règles spéciales.                                                                                                                                                                                                                                                                                                         & \NOP       \\
