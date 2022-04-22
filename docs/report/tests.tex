@@ -420,28 +420,32 @@ Nous n'avons pas testé les mêmes commandes que le premier joueur car elles son
 {On observe la valeur de retour de l'instance du jeu}
 
 \mytest
-{}
-{}
-{}
-{}
+{Vérification des unités qui peuvent se déplacer}
+{Un joueur}
+{Les unités qui sont capables de bouger doivent être présentes dans la liste}
+{En étant au début du jeu, toutes les unités doivent être capables de bouger. Nous vérifions donc si elles sont toutes présentes dans la liste retournée}
 
 \mytest
-{}
-{}
-{}
-{}
+{Vérification de l'approvisionnement d'une unité}
+{Un joueur, une liste d'unités, une liste de bases et dump, ainsi qu'une liste d'unité de soutien}
+{Vérifier si il existe un chemin entre une unité et une base ou un dump proche. Si c'est pas le cas, étendre le chemin avec les unités de soutien. Si il n'y a toujours pas de
+chemin, alors lever une exception}
+{Pour toutes les unités du joueur, dans l'état initial du jeu, il faut qu'elles ont toutes accés a l'approvisionnement, comme les conditions sont satisfaites}
 
 \mytest
-{}
-{}
-{}
-{}
+{Vérification de l'embarcation dans une unité de soutien}
+{Une unité de soutien, un dump et un joueur}
+{Si le dump n'est pas dans les objets embarqués de l'unité après avoir été embarqué, lever une exception}
+{Il faut tout d'abord bouger l'unité de soutien à la position du dump et l'embarquer dans l'unité. Puis nous essayons d'embarquer le dump dans celle ci. Si tout se
+passe bien, alors le dump devrait être visible dans les objets que l'unité de soutien a dejà embarquée}
 
 \mytest
-{}
-{}
-{}
-{}
+{Vérification du débarquement}
+{Un joueur et une unité de soutien}
+{L'unité de soutien doit désembarquer l'objet qu'elle porte. Si elle ne portait rien ou si l'objet est toujours embarqué ou si l'objet n'est pas visible sur la carte, lever
+une exception}
+{Pour une unité de soutien donnée, nous savons qu'elle porte sur elle un dump. En le déposant, il doit maintenant être visible dans l'hexagone dans lequel nous l'avons
+posé, et que l'unité de soutien n'ai pas d'autres objets portés}
 
 \subsubsection{Vérification de la recherche du plus court chemin}
 
