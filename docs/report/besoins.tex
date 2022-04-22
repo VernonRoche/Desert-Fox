@@ -59,7 +59,7 @@
         \hline
     \end{tabular}
 \end{center}
-
+ 
 \subsubsection{API}
 
 \begin{center}
@@ -89,24 +89,22 @@
 
 \begin{center}
     \centering
-    \begin{tabular}[h]{|m{14cm}|m{2cm}|}
-        \hline
-        \rowcolor[HTML]{FFA8A8}
-        \multicolumn{2}{|c|}{\textbf{Priorité 3/3}}                                                                                                                            \\
-        \hline
-        Besoins                                                                                                                                                   & Avancement \\
-        \hline
-        • Définir l'unité comme interface, qui aura une morale, peut être perturbée (disrupted) et qui peut prendre des actions basiques comme attaquer et bouger & \FAIT      \\
-        • Implémenter le système similaire à des points de vie (voir partie \textit{Depletion} des règles)                                                        & \FAIT      \\
-        • Séparer les unités en catégories différentes : motorisées, à pied, mécanisées, cavalerie...                                                             & \FAIT      \\
-        • Mettre en place les situations ou l'unité devient perturbée :
-        \begin{itemize}
-            \item Trop de troupes sur un hexagone
-            \item Fin d'un mouvement de nuit
-            \item Après la phase de \textit{Supply Attrition}, il y a un échec sur le test d'usure (attrition)
-        \end{itemize}
-                                                                                                                                                                  & \FAIT      \\
-        \hline
+    \begin{tabular}[h]{|m{14cm}|m{2cm}|} 
+    \hline
+    \rowcolor[HTML]{FFA8A8}
+    \multicolumn{2}{|c|}{\textbf{Priorité 3/3}}\\
+    \hline
+    Besoins & Avancement\\
+    \hline
+    • Définir l'unité comme interface, qui aura une morale, peut être perturbée (disrupted) et qui peut prendre des actions basiques comme attaquer et bouger & \FAIT \\ 
+    • Implémenter le système similaire à des points de vie (voir partie \textit{Depletion} des règles)  & \FAIT \\
+    • Séparer les unités en catégories différentes : motorisées, à pied, mécanisées, cavalerie... & \FAIT \\
+    • Mettre en place les situations ou l'unité devient perturbée : \\
+    \hspace*{10mm} \- Résultat d'un combat  &  \FAIT \\
+    \hspace*{10mm} \- Trop de troupes sur un hexagone  &  \FAIT \\
+    \hspace*{10mm} \- Fin d'un mouvement de nuit  &  \NOP \\
+    \hspace*{10mm} \- Au début d'une phase de mouvement, si l'unité n'a pas accès à l'approvisionnement  &  \FAIT \\
+    \hline
     \end{tabular}
 \end{center}
 
