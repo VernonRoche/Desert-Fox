@@ -130,7 +130,7 @@ export const _commands: Commands = {
     }
     const defenderId = +_args.hexIdDefender;
     if (isNaN(defenderId) && _args.hexIdDefender.length !== 4) {
-      _player.getSocket().emit(_args.type, { error: "invaliddefendingingunitid" });
+      _player.getSocket().emit(_args.type, { error: "invaliddefendingunitid" });
       return;
     }
     const game = stateMachine.getSocketServer().getGame();

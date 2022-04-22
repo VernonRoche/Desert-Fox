@@ -1,5 +1,5 @@
 Un des mécanismes principaux du jeu est le mouvement des unités.
-Étant sur une carte hexagonale, une unité peut se déplacer si certaines conditions sont satisfaites.
+Étant sur une carte composée d'hexagones, une unité peut se déplacer si certaines conditions sont satisfaites.
 Par exemple, une unité ne peut pas avancer dans un hexagone avec des ennemis présents, ou si l'unité n'a plus de
 points de mouvement, une valeur numérique que chaque unité contient. Ayant débuté avec un mouvement simple case
 par case, nous avons implémenté l'algorithme de Dijkstra (que nous avons appris en cours d'algorithmique des graphes en Licence) 
@@ -8,7 +8,7 @@ le contexte du jeu. En ayant comme entrée l'unité qui souhaite bouger et l'hex
 crée un graphe à partir des hexagones de la carte, chacun étant un nœud du graphe et les connexions avec ses voisins
 les arêtes du graphe.
 
-Chaque hexagone contient son type de Terrain (Montagne, plaines, dessert et autres), qui lui-même contient les points
+Chaque hexagone contient son type de Terrain (Montagne, Plaines, Desert et autres), qui lui même contient les points
 de mouvements requis pour bouger dans celui-ci. Ceci est très utile dans le mouvement, pour trouver le plus court
 chemin entre un hexagone A et un hexagone B. En commençant par l'hexagone ou se trouve l'unité, nous parcourons un
 parcours en largeur, en calculant le coût nécessaire pour bouger a chaque fois. Enfin nous retenons le plus court

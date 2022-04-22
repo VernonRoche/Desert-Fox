@@ -24,8 +24,8 @@
 \section{Nos tests}
 Nous avons mis en place divers outils pour contrôler notre implémentation :
 \begin{itemize}
-    \item Chaque \emph{commit} sera vérifier par des pipelines de \emph{GitLab}. Cet outil compile le code proposé sur une machine afin de voir si le code suggérer n'a aucune erreur de compilation.
-    \item L'implémentation de notre \emph{backend} est contrôlé par le framework \emph{NYC}. Nos tests sont surveillés par le framework et nous donne le résultat de \emph{coverage} pour chaque fichier testé.
+    \item Chaque {\tt commit} sera vérifier par des pipelines de {\tt GitLab}. Cet outil compile le code proposé sur une machine afin de voir si le code suggérer n'a aucune erreur de compilation.
+    \item L'implémentation de notre {\tt backend} est contrôlé par le framework {\tt NYC}. Nos tests sont surveillés par le framework et nous donne le résultat de {\tt coverage} pour chaque fichier testé.
 \end{itemize}
 
 \subsection{Test unitaire}
@@ -33,7 +33,7 @@ Nous avons mis en place divers outils pour contrôler notre implémentation :
 Consigne : description des tests, discussion de leurs résultats, explication des problèmes, des défauts et bugs. Pour chacun des tests avec : (1) spécification et buts du test ;
 (2) cas de tests (données) utilisé ; (3) scénario du test ; (4) analyse du test et les moyens de mise en œuvre de cette analyse.
 
-\subsubsection{Vérification des fichiers dans le fichier \emph{src}}
+\subsubsection{Vérification des fichiers dans le fichier {\tt src}}
 
 \mytest
 {Vérifier si les fichiers possède le bon format (\texttt{.ts}) dans le dossier \texttt{src/main}}
@@ -141,7 +141,7 @@ Consigne : description des tests, discussion de leurs résultats, explication de
     \begin{itemize}
         \item On vérifie la longueur de la liste des joueurs
         \item Le dernier joueur possède le bon identifiant
-        \item On vérifie si le joueur a bien été supprimé de la liste des joueurs 
+        \item On vérifie si le joueur a bien été supprimé de la liste des joueurs
     \end{itemize}
 }
 
@@ -301,9 +301,46 @@ Nous n'avons pas testé les mêmes commandes que le premier joueur car elles son
 {Vérifie l'ajout et la suppression du Dump}
 
 
-\subsubsection{Vérification de la classe abstraite \emph{Player}}
+\subsubsection{Vérification de la classe abstraite {\tt Player}}
 
-TODO
+\mytest
+{Vérification de l'initialisation de l'unité}
+{Une instance de l'unité}
+{Si l'instance de l'unité ne contient pas les mêmes valeurs données lors de sa création, alors on lève une exception}
+{On vérifie dans chaque attribut de l'unité, si l'initialisation est correcte}
+
+\mytest
+{Vérification de la valeur du retour du jeu de dé}
+{Un dé}
+{Si le dé ne sort pas une valeur entre \texttt{1} et \texttt{6}, alors on lève une exception}
+{On lance un dé, et on regarde sa valeur}
+
+\mytest
+{Vérification de l'exportation d'une unité en format \texttt{json}}
+{Une instance du joueur et son unité}
+{On vérifie si ces valeurs initiales sont correctes, sinon on lève une exception}
+{
+    On regarde plusieurs de ces attributs :
+    \begin{itemize}
+        \item Son identifiant
+        \item Sa position
+        \item Ses points de mouvements
+        \item Son type
+        \item Son propriétaire
+    \end{itemize}
+}
+
+\mytest
+{Vérification de l'ajout et de la suppression des unités}
+{Une instance du joueur et son unité}
+{On vérifie les changements effectuer par l'ajout et la suppression des unités}
+{On observe combien d'unités possède le joueur}
+
+\mytest
+{Vérification de la perte de vie pour une unité}
+{Une instance d'une unité}
+{Si l'unité contient une valeur négative pour ces points de vie, on lève une exception}
+{Nous regardons directement dans ces points de vie}
 
 \subsubsection{Vérification des bases}
 
@@ -376,7 +413,39 @@ TODO
 
 \subsubsection{Vérification du jeu}
 
-TODO
+\mytest
+{Vérification de l'initialisation du jeu}
+{Une instance du jeu}
+{Le jeu doit s'initialiser correction, sinon on lève une exception}
+{On observe la valeur de retour de l'instance du jeu}
+
+\mytest
+{Vérification des unités qui peuvent se déplacer}
+{Un joueur}
+{Les unités qui sont capables de bouger doivent être présentes dans la liste}
+{En étant au début du jeu, toutes les unités doivent être capables de bouger. Nous vérifions donc si elles sont toutes présentes dans la liste retournée}
+
+\mytest
+{Vérification de l'approvisionnement d'une unité}
+{Un joueur, une liste d'unités, une liste de bases et dump, ainsi qu'une liste d'unité de soutien}
+{Vérifier si il existe un chemin entre une unité et une base ou un dump proche. Si c'est pas le cas, étendre le chemin avec les unités de soutien. Si il n'y a toujours pas de
+chemin, alors lever une exception}
+{Pour toutes les unités du joueur, dans l'état initial du jeu, il faut qu'elles ont toutes accés a l'approvisionnement, comme les conditions sont satisfaites}
+
+\mytest
+{Vérification de l'embarcation dans une unité de soutien}
+{Une unité de soutien, un dump et un joueur}
+{Si le dump n'est pas dans les objets embarqués de l'unité après avoir été embarqué, lever une exception}
+{Il faut tout d'abord bouger l'unité de soutien à la position du dump et l'embarquer dans l'unité. Puis nous essayons d'embarquer le dump dans celle ci. Si tout se
+passe bien, alors le dump devrait être visible dans les objets que l'unité de soutien a dejà embarquée}
+
+\mytest
+{Vérification du débarquement}
+{Un joueur et une unité de soutien}
+{L'unité de soutien doit désembarquer l'objet qu'elle porte. Si elle ne portait rien ou si l'objet est toujours embarqué ou si l'objet n'est pas visible sur la carte, lever
+une exception}
+{Pour une unité de soutien donnée, nous savons qu'elle porte sur elle un dump. En le déposant, il doit maintenant être visible dans l'hexagone dans lequel nous l'avons
+posé, et que l'unité de soutien n'ai pas d'autres objets portés}
 
 \subsubsection{Vérification de la recherche du plus court chemin}
 
@@ -398,11 +467,11 @@ TODO
 
 \subsection{Couverture du code}
 
-Le framework \emph{NYC} nous permet de tester la couverture. Il faut lancer la commande \emph{yarn test} dans le \lstinline{backend} ce qui créé dans le dossier \lstinline{coverage} où se trouve à l'intérieur un \lstinline{index.html} qui donne ceci.
+Le framework {\tt nyc} nous permet de tester la couverture. Il faut lancer la commande {\tt yarn test} dans le \lstinline{backend} ce qui créé dans le dossier \lstinline{coverage} où se trouve à l'intérieur un \lstinline{index.html} qui donne ceci.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.35]{data/couverture_test_1.jpg}
+    \includegraphics[scale=0.35]{data/couverture_test_1.png}
     \caption{Couverture générale du backend}
 \end{figure}
 
@@ -414,4 +483,5 @@ On peut voir le pourcentage de couverture de chaque fichier. On peut aussi aller
     \caption{Couverture d'un fichier}
 \end{figure}
 
-La couverture du code n'implique pas des tests de qualité. Après quelques recherches, nous avons trouvé qu'une couverture minimale de bonne qualité dépasse les 80\%. Nous nous sommes donc fixés d'au moins atteindre ce pourcentage.
+La couverture du code n'implique pas des tests de qualité. Après quelques recherches nous n'avons pas trouvé de ressource fiable, mais l'information qui ressortait le plus est qu'une bonne qualité de couverture dépasse les 80\%.
+Nous nous sommes donc fixés d'au moins atteindre ce pourcentage. Un fichier fausse notre {\tt coverage}, en effet nous ne testons pas main/GameManager/StateMachine/Command.ts car nous vérifions déjà dans le frontend que les commandes soumises aient les bons arguments.
