@@ -8,12 +8,12 @@ le contexte du jeu. En ayant comme entrée l'unité qui souhaite bouger et l'hex
 crée un graphe à partir des hexagones de la carte, chacun étant un nœud du graphe et les connexions avec ses voisins
 les arêtes du graphe.
 
-Chaque hexagone contient son type de Terrain (Montagne, plaines, dessert et autres), qui lui même contient les points
+Chaque hexagone contient son type de Terrain (Montagne, plaines, dessert et autres), qui lui-même contient les points
 de mouvements requis pour bouger dans celui-ci. Ceci est très utile dans le mouvement, pour trouver le plus court
 chemin entre un hexagone A et un hexagone B. En commençant par l'hexagone ou se trouve l'unité, nous parcourons un
 parcours en largeur, en calculant le coût nécessaire pour bouger a chaque fois. Enfin nous retenons le plus court
 chemin et puis nous appliquons le mouvement si l'unité a assez de points de mouvements. Les modifications sur
-l'algorithme Dijkstra de base est que nous vérifions si nous passons dans un hexagone contenant une unité ennemie,
+l'algorithme Dijkstra de base sont que nous vérifions si nous passons dans un hexagone contenant une unité ennemie,
 ainsi que si nous passons à côté d'une unité exerçant une zone de contrôle, ce qui nous ralentit (augmente le coût
 d'un hexagone). La zone de contrôle est un mécanisme du jeu ou chaque unité exerce une influence autour de son
 hexagone. Donc tout hexagone adjacent de la position d'une unité se trouve dans sa zone de contrôle.
@@ -28,26 +28,25 @@ tant que {\tt supply}, pour simplifier. Les supply peuvent se diviser en deux ca
 nous avons des caisses d'approvisionnement, les dénommés {\tt dump}. Les dump sont placés sur la carte et peuvent
 être utilisés pour donner soit du general supply ou du combat supply a une unité. Nous avons ensuite des camions,
 les unités de soutien, qui peuvent emporter des dump et quelques unités spécifiques, pour les déplacer et déposer
-rapidement sur la carte. Enfin, chaque joueur a des bases pour organiser son approvisionnement, placés elles aussi
+rapidement sur la carte. Enfin, chaque joueur a des bases pour organiser son approvisionnement, placés, elles aussi,
 sur la carte.
 
 Pour définir si une unité a du general supply, il faut pouvoir tracer un chemin depuis l'unité, jusqu'au dump ou la
 base amie la plus proche. Ce chemin peut être de longueur 7 au maximum jusqu'à un dump, ou 14 jusqu'à une base. Par
-contre ce chemin peut être étendu, si une unité de soutien se trouve sur ce chemin. Si c'est le cas alors le chemin est
-étendu de 7 hexagones. Par exemple, si une unité A est a une distance de 20 hexagones d'une base B, alors normalement
+contre, ce chemin peut être étendu, si une unité de soutien se trouve sur ce chemin. Si c'est le cas alors le chemin est
+étendu de 7 hexagones. Par exemple, si une unité A est à une distance de 20 hexagones d'une base B, alors normalement
 il n'y a pas de chemin pour pouvoir bénéficier de general supply. Si par contre, il existe une unité de soutien entre
 A et B, alors nous pourrons tracer un chemin grâce à l'extension de la distance que l'unité de soutien nous donne.
 Pour faire ça en réalité, nous avons conclu que la logique ressemblait beaucoup à notre algorithme de mouvement,
 avec des contraintes en plus. Nous avons donc modifié notre algorithme de Dijkstra pour pouvoir l'utiliser dans
-le cas où nous voulons tracer un chemin entre une unité et un dump ou une base. Enfin, il fallait ajouter des
-contraintes en plus dans ce cas, comme le fait que nous ne pouvons pas tracer un chemin qui passe par des montagnes,
+le cas où nous voulons tracer un chemin entre une unité et un dump ou une base. Enfin, il fallait ajouter dans ce cas, comme le fait que nous ne pouvons pas tracer un chemin qui passe par des montagnes,
 ou par une zone de contrôle ennemie.
 
 Pour connaître si une unité a accès au combat supply, il suffit de suivre les étapes que pour le general supply,
-mais en excluant les bases, car une unité peut obtenir des combat supply seulement depuis un dump.
+mais en excluant les bases, car une unité peut obtenir des combats supply seulement depuis un dump.
 
 Ne pas avoir un des types de supply peut avoir des effets dévastateurs sur une unité. Si au début de la phase de
-mouvement une unité ne peut pas tracer un chemin pour avoir du general supply, alors est est disrupted.
-Dans ce cas, l'unité ne peut pas exercer de zone de contrôle, son mouvement est réduit de moitié, et l'unité est
+mouvement une unité ne peut pas tracer un chemin pour avoir du general supply, alors elle est disrupted.
+Dans ce cas, l'unité ne peut pas exercer de zone de contrôle, son mouvement est réduit de moitié et l'unité est
 moins bonne au combat. Si l'unité n'a pas de combat supply, alors elle est moins bonne au combat, ce qui sera plus
 détaillé dans la partie où nous expliquons le déroulement du combat.
