@@ -191,20 +191,20 @@ Consigne : description des tests, discussion de leurs résultats, explication de
 \mytest
 {Vérification du compteur de tours}
 {La machine d'état lancée dans le premier test de cette section}
-{Nous affichons une erreur incluant l'état actuel et l'état attendu si l'état actuel est érroné}
-{Vérifie si après une série de changement de phases, la machine d'état met bien à jour le nombre du tour actuel}
+{Nous affichons une erreur incluant l'état actuel et l'état attendu si l'état actuel est erroné}
+{Vérifie si après une série de changements de phases, la machine d'état met bien à jour le nombre du tour actuel}
 
 \mytest
 {Vérification du compteur de tours}
 {La machine d'état lancée dans le premier test de cette section}
-{Nous affichons une erreur incluant le nombre de tour actuel et le nombre de tour attendu si le nombre de tour est incorrect}
-{Vérifie si après une série de changement de phases, la machine d'état met bien à jour le nombre du tour actuel}
+{Nous affichons une erreur incluant le nombre de tours actuels et le nombre de tours attendu si le nombre de tours est incorrect}
+{Vérifie si après une série de changements de phases, la machine d'état met bien à jour le nombre du tour actuel}
 
 \mytest
 {Vérification le changement de phases pendant un tour}
 {La machine d'état lancée dans le premier test de cette section}
-{Nous affichons une erreur incluant l'état actuel et l'état attendu si l'état actuel est érroné}
-{Vérifie si après une série de changement de phases égale au nombre totale de phases dans le jeu, l'état de la machine d'état est initiale}
+{Nous affichons une erreur incluant l'état actuel et l'état attendu si l'état actuel est erroné}
+{Vérifie si après une série de changements de phases égale au nombre totale de phases dans le jeu, l'état de la machine d'état est initiale}
 
 \subsubsection{Vérification de l'instance du jeu}
 
@@ -212,17 +212,17 @@ Consigne : description des tests, discussion de leurs résultats, explication de
 {Vérification de l'instantiation du serveur du jeu}
 {L'adresse du client, le port du serveur et l'instance de la machine d'état}
 {Nous affichons une erreur si l'instance du jeu n'est pas bien instanciée}
-{Vérifie si le serveur du jeu se lance sans erreur}
+{Vérifie si le serveur du jeu se lance sans erreurs}
 
 \mytest
-{Vérification de l'instanciation du joeur 1}
-{Le port du serveur pour que nous puisons connecter le premier joueur}
+{Vérification de l'instanciation du joueur 1}
+{Le port du serveur pour que nous puisions connecter le premier joueur}
 {Nous affichons une erreur si le premier joueur n'est pas bien connecté}
 {Vérifie si le premier joueur se connecte sans erreur}
 
 \mytest
-{Vérification de l'instanciation du joeur 2}
-{Le port du serveur pour que nous puisons connecter le deuxième joueur}
+{Vérification de l'instanciation du joueur 2}
+{Le port du serveur pour que nous puisions connecter le deuxième joueur}
 {Nous affichons une erreur si le deuxième joueur n'est pas bien connecté}
 {Vérifie si le deuxième joueur se connecte sans erreur}
 
@@ -247,7 +247,7 @@ Consigne : description des tests, discussion de leurs résultats, explication de
 \mytest
 {Vérification de la commande {\tt move} tant que premier joueur avec des arguments corrects}
 {La {\tt socket} du premier joueur, ainsi que les arguments corrects pour la commande {\tt move}}
-{Nous affichons une erreur si le premier joueur n'a pas bien éffectué {\tt move} ainsi que l'erreur correspondante}
+{Nous affichons une erreur si le premier joueur n'a pas bien effectué {\tt move} ainsi que l'erreur correspondante}
 {Vérifie si le premier joueur effectue correctement le mouvement après l'appel à la commande {\tt move} avec des arguments valides}
 
 \mytest
@@ -340,38 +340,38 @@ TODO
 \subsubsection{Vérification de l'attaque}
 
 \mytest
-{Vérifier si le combat retourne les bons résultats de dégats et applique les bons effets}
-{Une unité attaquante et une unité defenseuse}
-{Si un résultat doit détruire une unité ou au contraire ne rien faire, les effets se repercutent dans le jeu}
-{Nous verifions pour les résultats aleatoires possibles, tout résultat de combat est bien appliqué. Nottament vérifier
-    que une unité est bien détruite, si elle perd les bons points de vie ou si elle est toujours vivante}
+{Vérifier si le combat retourne les bons résultats de dégâts et applique les bons effets}
+{Une unité attaquante et une unité défenseuse}
+{Si un résultat doit détruire une unité ou au contraire ne rien faire, les effets se répercutent dans le jeu}
+{Nous vérifions pour les résultats aléatoires possibles, tout résultat de combat est bien appliqué. Notamment vérifier
+    qu'une unité est bien détruite, si elle perd les bons points de vie ou si elle est toujours vivante}
 
 \mytest
 {Vérifier si le combat retourne les bons résultats de morale et applique les bons effets}
-{Une unité attaquante et une unité defenseuse}
+{Une unité attaquante et une unité défenseuse}
 {Si un résultat doit forcer une unité à se replier ou non, alors le changement doit être visible dans le jeu}
-{Nous verifions pour les résultats aleatoires possibles, que si une unité doit se replier, alors l'unité se
-    deplace loin de l'ennemie. Si il faut pas alors elle doit rester au même endroit.}
+{Nous vérifions pour les résultats aléatoires possibles, que si une unité doit se replier, alors l'unité se
+    déplace loin de l'ennemie. S'il ne faut pas alors elle doit rester au même endroit.}
 
 \subsubsection{Vérification du combat}
 
 \mytest
-{Vérifier si le simulateur de combat retourne les bons résultats pour les degats}
-{Un nombre d'attaquants et de defenseurs, un entier représentant le morale et un type de terrain}
+{Vérifier si le simulateur de combat retourne les bons résultats pour les dégâts}
+{Un nombre d'attaquants et de défenseurs, un entier représentant le moral et un type de terrain}
 {Chaque combinaison de paramètres doit retourner le même résultat exact à chaque fois}
-{Nous prenons quatres combinaisons d'entrées distinctes.
-    En divisant le nombre d'attaquants par le nombre de défenseurs, on applique les règles du jeu pour definir
-    quelle case du tableau des résultats de combat il faut obtenir. Pour ne pas avoir des résultats aleatoires comme
+{Nous prenons quatre combinaisons d'entrées distinctes.
+    En divisant le nombre d'attaquants par le nombre de défenseurs, on applique les règles du jeu pour définir
+    quelle case du tableau des résultats de combat, il faut obtenir. Pour ne pas avoir des résultats aléatoires comme
     il le faut normalement et avoir des tests exacts, nous ne lancons pas de dé.}
 
 \mytest
-{Vérifier si le simulateur de combat retourne les bons résultats pour le morale}
-{Un nombre d'attaquants et de defenseurs, un entier représentant le morale et un type de terrain}
+{Vérifier si le simulateur de combat retourne les bons résultats pour le moral}
+{Un nombre d'attaquants et de défenseurs, un entier représentant le moral et un type de terrain}
 {Chaque combinaison de paramètres doit retourner le même résultat exact à chaque fois}
-{Nous prenons les même quatres combinaisons d'entrées distinctes.
-    En divisant le nombre d'attaquants par le nombre de défenseurs, on applique les règles du jeu pour definir
-    quelle case du tableau des résultats de combat il faut obtenir. Pour ne pas avoir des résultats aleatoires comme
-    il le faut normalement et avoir des tests exacts, nous ne lancons pas de dé.}
+{Nous prenons les quatre combinaisons d'entrées distinctes.
+    En divisant le nombre d'attaquants par le nombre de défenseurs, on applique les règles du jeu pour définir
+    quelle case du tableau des résultats de combat, il faut obtenir. Pour ne pas avoir des résultats aléatoires comme
+    il le faut normalement et avoir des tests exacts, nous ne lançons pas de dé.}
 
 
 \subsubsection{Vérification du jeu}
@@ -382,18 +382,18 @@ TODO
 
 \mytest
 {Vérifier si le chemin renvoyé est le plus court}
-{Identifiant d'un hexagone de départ, l'identifiant d'un hexagone de destination et l'unité qui se deplace}
-{Pour un hexagone de départ et de destination donné, un plus court chemin a toujours le même poids. Nous verifions
-    si il est égale à celui ci}
-{En ayant une unité qui est adjacente à une unité ennemie, nous verifions si le calcul de cout est correcte, car
-    le plus court chemin passe à coté d'elle, ce qui teste plusieurs scenarios qui peuvent être rencontrés dans le jeu}
+{Identifiant d'un hexagone de départ, l'identifiant d'un hexagone de destination et l'unité qui se déplace}
+{Pour un hexagone de départ et de destination donné, un plus court chemin a toujours le même poids. Nous vérifions
+    s'il est égale à celui ci}
+{En ayant une unité qui est adjacente à une unité ennemie, nous vérifions si le calcul de cout est correcte, car
+    le plus court chemin passe à côté d'elle, ce qui teste plusieurs scenarios qui peuvent être rencontrés dans le jeu}
 
 \mytest
 {Vérifier si une unité ne passe pas par un hexagone qui contient des ennemis}
-{Identifiant d'un hexagone de départ, l'identifiant d'un hexagone de destination et l'unité qui se deplace}
+{Identifiant d'un hexagone de départ, l'identifiant d'un hexagone de destination et l'unité qui se déplace}
 {Si on trouve un plus court chemin entre deux hexagones, le chemin ne doit pas contenir un hexagone qui a des
     unités ennemies.}
-{En prenant un plus court chemin, nous verifions pour tout les hexagones du chemin, si il n'appartient pas
+{En prenant un plus court chemin, nous vérifions pour tous les hexagones du chemin, s'il n'appartient pas
     au joueur qui tente de bouger l'unité.}
 
 \subsection{Couverture du code}
@@ -414,4 +414,4 @@ On peut voir le pourcentage de couverture de chaque fichier. On peut aussi aller
     \caption{Couverture d'un fichier}
 \end{figure}
 
-La couverture du code n'implique pas des tests de qualité. Après quelques recherches nous avons trouvé qu'une couverture minimale de bonne qualité dépasse les 80\%. Nous nous sommes donc fixés d'au moins atteindre ce pourcentage.
+La couverture du code n'implique pas des tests de qualité. Après quelques recherches, nous avons trouvé qu'une couverture minimale de bonne qualité dépasse les 80\%. Nous nous sommes donc fixés d'au moins atteindre ce pourcentage.
