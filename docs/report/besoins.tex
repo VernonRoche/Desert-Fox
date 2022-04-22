@@ -24,7 +24,7 @@
         \end{itemize}
                                                                                                                                                         & \FAIT      \\
         • Afficher un terminal qui permettra aux joueurs de donner des commandes d'attaque ou mouvement                                                 & \FAIT      \\
-        • Être capable de faire des lancés de dés et d’appliquer des modificateurs. La majeure partie du jeu se base sur les dés                        & \NOP       \\
+        • Être capable de faire des lancés de dés et d’appliquer des modificateurs. La majeure partie du jeu se base sur les dés                        & \FAIT       \\
         • Pouvoir déterminer quel joueur a l’initiative                                                                                                 & \NOP       \\
         \hline
     \end{tabular}
@@ -40,7 +40,7 @@
         Besoins                                                                                                                                                                  & Avancement \\
         \hline
         • Différencier plusieurs types de terrain, les montages, les mers de sable et les crêtes par exemple                                                                     & \FAIT      \\
-        • Créer une base pour les cartes d’évènements. Celles-ci étant très différentes, l’implémentation sera limitée aux évènements génériques (non spécifiques aux scénarios) & \FAIT      \\
+        • Créer une base pour les cartes d’évènements. Celles-ci étant très différentes, l’implémentation sera limitée aux évènements génériques (non spécifiques aux scénarios) & \NOP      \\
         • Pouvoir charger la carte du jeu à partir d’un fichier \textsc{txt} ou \textsc{json} et pouvoir la sauvegarder aux mêmes formats                                        & \FAIT      \\
         \hline
     \end{tabular}
@@ -137,7 +137,25 @@
         Besoins                                                                                                                              & Avancement \\
         \hline
         • Déplacement case par case et enlever les points de mouvement correspondants de l'unité. Ceci pour limiter la capacité de mouvement & \FAIT      \\
-        • Le joueur du Commonwealth peut accélérer le mouvement de ses unités en utilisant le rail et transport maritime                     & \NOP       \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\begin{center}
+    \centering
+    \begin{tabular}[h]{|m{14cm}|m{2cm}|}
+        \hline
+        \rowcolor[HTML]{FFA8A8}
+        \multicolumn{2}{|c|}{\textbf{Priorité 1/3}}                                                                                                       \\
+        \hline
+        Besoins                                                                                                                              & Avancement \\
+        \hline
+        • Le joueur Allié peut accélérer le mouvement de ses unités en utilisant le rail et le transport maritime                            & \NOP       \\
+        • Avoir les types de mouvement speciaux:
+        \begin{itemize}
+            \item Mouvement sur une route pour avancer plus vite
+            \item Mouvement forcée pour bouger plus vite mais recevoir des effets négatifs à la fin du mouvement
+        \end{itemize}
         \hline
     \end{tabular}
 \end{center}
@@ -152,7 +170,7 @@
         Besoins                                                                                                                                                                                                                                                                                                & Avancement \\
         \hline
         • Déplacement d'un point A à un point B, en parcourant le plus cours chemin. On utilisera l'algorithme \emph{Dijkstra} pour satisfaire la condition                                                                                                                                                    & \FAIT      \\
-        • Appliquer un bonus de mouvement dépendant du terrain d'un hexagone. C'est plus facile de se déplacer sur une plaine plutôt qu'à travers des montagnes                                                                                                                                                & ?          \\
+        • Appliquer un bonus de mouvement dépendant du terrain d'un hexagone. C'est plus facile de se déplacer sur une plaine plutôt qu'à travers des montagnes                                                                                                                                                & \FAIT         \\
         • Permettre aux unités qui doivent se replier de bouger de 1-3 hexagones. Ce mouvement ne coûte pas de points de mouvement                                                                                                                                                                             & \FAIT      \\
         • Ajouter la mécanique du \emph{overrun} (fuite). Les unités capables de le faire peuvent pendant leur phase de mouvement attaquer des unités. Les défenseurs alors peuvent utiliser leurs phases de réaction pour bouger un certain nombre d'hexagones. La distance est définie par l'unité concernée & \NOP       \\
         \hline
@@ -168,7 +186,7 @@
         \hline
         Besoins             & Avancement            \\
         \hline
-        • Mouvement la nuit & \FAIT                 \\
+        • Mouvement la nuit & \NOP                \\
         \hline
     \end{tabular}
 \end{center}
@@ -184,7 +202,7 @@
         \hline
         Besoins                                                                                                                                                                          & Avancement \\
         \hline
-        • Pouvoir définir les unités participant au combat de ce round                                                                                                                   & ?          \\
+        • Pouvoir définir les unités participant à un combat                                                                                                                   & ?          \\
         • Pouvoir déterminer la puissance de combat de l'armée composée de ces unités                                                                                                    & ?          \\
         • Définir les règles du combat, par exemple le fait que seules les unités/armées adjacentes peuvent entrer en combat, par la volonté de l'attaquant                              & ?          \\
         • Pouvoir simuler le combat et donner les résultats :
