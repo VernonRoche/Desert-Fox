@@ -242,21 +242,21 @@ Nous n'avons pas testé les mêmes commandes que le premier joueur car elles son
 
 \mytest
 {Vérification de la création du joueur }
-{Identifiant d'un Joueur}
-{Si le joueur n'a pas d'id et/ou de base et/ou Unités d'approvisionnement , signalez cette erreur}
-{Vérifie l'appel d'un joueur}
+{Un  {\tt joueur} avec en paramètre un identifiant et un socket}
+{Si le joueur n'a pas d'id et/ou de base et/ou Unités d'approvisionnement, signalez cette erreur}
+{Vérifie l'appel d'un {\tt joueur}}
 
 
 \mytest
 {Vérification d'ajout d'Unités }
-{Identifiant d'un joueur}
-{S'il n'y a pas d'Unités ou si l'unité est incorrect, signalez cette case}
+{Un {\tt joueur} et une {\tt unité}}
+{S'il n'y a pas d'Unités ou si l'unité est incorrect, signalez cette case, sinon l'ajouter}
 {Vérifie l'ajout d'unité}
 
 
 \mytest
 {Vérification de l'ajout et de la suppression du Dump }
-{Identifiant d'un joueur}
+{Un nouveau {\tt joueur} avec en paramètre un identifiant et un socket et un {\tt Dump} avec les arguments correcte}
 {Si l'identifiant est inclus sur la carte du jeu, signalez cette case}
 {Vérifie l'ajout et la suppression du Dump}
 
@@ -268,21 +268,21 @@ TODO
 \subsubsection{Vérification des bases}
 
 \mytest
-{Verification de l'appel d'une Base}
-{Une nouvelle Base}
-{Si la Base n'a pas le bon id et/ou n'a pas la bonne position et/ou si c'est pas primaire, signaler l'erreur }
+{Vérification de l'appel d'une Base}
+{Une nouvelle {\tt Base} avec en paramètre un {\tt HexID}, une primary et son identifiant }
+{Si la Base n'a pas le bon id et/ou n'a pas la bonne position et/ou si ce n'est pas primaire, signaler l'erreur }
 {Vérifie le bon appel d'une base}
 
 \mytest
-{Verification qu'une base envoie correctement}
+{Vérification qu'une base envoie correctement}
 {Une base}
-{Si la base ne peut pas envoyer ,  signaler l'erreur }
+{Si la base ne peut pas envoyer,  signaler l'erreur }
 {Vérifie le bon envoie de la base }
 
 \mytest
 {Vérification qu'une base reçoit correctement}
 {Une base}
-{Si la base ne peut pas recevoir ,  signaler l'erreur }
+{Si la base ne peut pas recevoir,  signaler l'erreur }
 {Vérifie le bon envoie de la base }
 
 \mytest
@@ -293,7 +293,7 @@ TODO
 
 \mytest
 {Vérification qu'une base place correctement}
-{Une base}
+{Une base et un nouveau {\tt HexID}}
 {Si la base a la même position qu'au début,  signaler l'erreur }
 {Vérifie le bon placement fait par la  base }
 
