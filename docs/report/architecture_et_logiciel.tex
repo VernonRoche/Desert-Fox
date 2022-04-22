@@ -1,0 +1,156 @@
+
+\section{Architecture Logiciel}
+
+Nous avons divisé notre modèle en trois grandes architectures, le serveur, la machine d'états et les unités.
+
+\subsection{Architecture du serveur}
+
+Le serveur a 3 fonctionnalités principales :
+\begin{enumerate}
+    \item Gérer les connexions avec les clients
+    \item Gérer la machine d'état du jeu
+    \item Gérer le jeu
+\end{enumerate}
+
+Le serveur permet aux clients de communiquer avec le jeu en manipulant ce dernier selon les commandes reçues.
+
+Le serveur écoute sur le port {\tt 3001} par défaut, mais peut être modifié en lui passant un argument en ligne de commande au moment de le lancer.
+Afin que le serveur accepte les connexions entrantes, il faut que la connexion provienne d'une adresse en particulier. Par défaut, l'adresse est {\tt http://localhost:8000}, mais elle peut être modifiée en ligne de commande au moment de le lancer.
+Le serveur possède une liste de {\tt sockets} connectée au serveur, à savoir les connexions des clients. Il vérifie si les 2 joueurs sont connectée pour commencer une partie. Lors du lancement du jeu, le serveur refusera toute connexion supplémentaire. Dans le cas contraire, il accepte les connexions supplémentaires.
+
+Quand les 2 joueurs sont connectés, le jeu est lancé et la machine d'état est initialisée. Le serveur envoie la carte et les unités aux deux joueurs.
+
+La machine d'état est manipulée par le serveur grâce aux commandes qu'il reçoit. Par exemple, si un client envoie la commande {\tt done} pendant son tour, alors le serveur va faire avancer la machine d'état et donc passer la phase actuelle.
+Pour plus d'informations, voir \ref{machine_d_etat}.
+
+La machine d'état manipule également le serveur pour envoyer les données aux clients selon les phases.
+
+En résumé, le serveur créé la machine d'état et la contrôle pour que le jeu puisse être joué. Une fois le jeu commencé, c'est la machine d'état qui va utiliser le serveur pour écouter les commandes des clients.
+
+
+\subsection{Architecture de la machine d'états}
+\label{machine_d_etat}
+\input{statemachine}
+
+
+\subsection{Architecture des unités}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.3]{data/uml_entityV4.png}
+    \caption{Diagramme UML de l'objet Entity}
+    \label{fig:uml_entity}
+\end{figure}
+
+Nous avons fait le choix de réunir toutes les unités sous la même interface, ce qui nous permet d'avoir un seul type pour toutes les unités et donc de pouvoir faire des listes de ces entités dans la partie serveur.
+Pour une meilleure factorisation nous séparons les unités en deux, celles qui peuvent bouger (\lstinline{Moveable}) et les autres. Nous séparons de nouveau en unités de soutien et d'attaque. Pour assurer la maintenance du code et rajouter des fonctionnalités, nous avons utilisé deux designs patterns, le \lstinline{Decorator} et le \lstinline{Proxy}. Mais pour pouvoir utiliser ces patterns nous avions la contrainte suivante, il fallait que les deux patterns implémentent une interface comme montrer ci-dessous. Nous avons donc était forcé d'ajouter une interface intermédiaire (ici \lstinline{AttackUnit}) pour pouvoir les implémenter. Le décorateur nous permet de changer le comportement des unités dynamiquement sans à avoir à changer toutes les classes qui étendent \lstinline{AbstractUnit}. Mais l'utilisation de ce pattern nous conduit à un problème, nous pouvons appliquer un décorateur à un objet déjà décoré un nombre de fois infinie. Ce qui nous amène donc à utiliser un \lstinline{Proxy} qui permet de contrôler l'utilisation du décorateur.
+
+Toute la démonstration précédente était notre réflexion lors de la conception de l'architecture. Mais nous avons implémenté l'attaque en dernier, nous n'avons donc pas intégré ces patterns dans notre code.
+
+\begin{figure}[H]
+    \centering
+    \def\stackalignment{r}
+    \stackunder{\includegraphics[scale=0.3]{data/UML_Decorator_Pattern_Example.png}}%
+    {\scriptsize%
+        Source : Wikipédia}
+    \caption{Exemple d'un {\tt Decorator}}
+    \label{fig:UML_Decorator_Pattern_Example}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.3]{data/uml_abstract_unit.png}
+    \caption{Diagramme UML des unités}
+    \label{fig:uml_abstract_unit}
+\end{figure}
+
+Dans les règles, il existe toutes les unités d'attaque qui se trouvent ci-dessus. Comme nous avions un temps limité nous avons décidé de ne pas toutes les implémenter, car même si certaines ont un comportement différent le travail aurait été trop chronophage et donc nous avons privilégié des aspects plus importants du projet. On peut trouver les unités d'attaque choisies dans le diagramme \ref{fig:uml_entity} (Foot, Mechanized, Motorized).
+
+\subsection{Mouvement et Approvisionnement}
+
+\input{mouvement_et_supply}
+
+\subsection{Combat}
+
+\input{combat}
+
+\section{Technologies}
+
+\subsection{Service d'hébergement}
+
+Pour le service d'hébergement, nous avons utilisé le GitLab du CREMI comme demandé dans les consignes. Nous avons paramétré les pipelines pour qu'à chaque commit, il effectue les tests automatiquement pour aider à ne pas faire des commits complètement erronés.
+Si les tests ratent, alors un mail est envoyé à l'auteur du commit et le commit est marqué sur GitLab avec une croix rouge signifiant l'échec des tests. Concernant les branches nous avons divisé le dépôt en quatre:
+\begin{itemize}
+    \item main
+    \item dev
+    \item backend
+    \item frontend
+\end{itemize}
+
+Le principe de base était que nous développions sur les branches (\lstinline{frontend} et \lstinline{backend}) puisque nous fusionnions ces deux dernières sur la branche \lstinline{dev}.
+À partir de là, nous vérifions que le {\tt frontend} et le {\tt backend} fonctionnaient bien ensemble.
+S'il avait une erreur, alors c'était là que nous travaillions en attendant de régler le problème.
+Une fois que nous avions une version stable, nous fusionnions la branche \lstinline{dev} à la branche \lstinline{main}.
+La branche {\tt main} est réservée aux versions stables qui compilent et qui fonctionnent correctement.
+Malheureusement nous nous sommes vite rendu compte que ce n'était pas le moyen le plus optimisé de travailler, car lorsque nous travaillions sur la communication client-serveur sur le \lstinline{backend} et le \lstinline{frontend}, il fallait fusionner les deux branches sur la branche \lstinline{dev} pour pouvoir tester, ce qui prenait beaucoup de temps et était plutôt fastidieux.
+Nous avons décidé de travailler sur la branche \lstinline{dev} pour faciliter les tests de la communication client serveur.
+Il aurait sûrement fallu faire des branches en fonction des {\tt features}.
+
+\subsection{Langage de programmation}
+
+Nous avons choisi comme langage de programmation \lstinline{TypeScript} pour le \lstinline{backend} et le \lstinline{frontend}. En effet, en ayant la même technologie pour tout le projet cela rend la communication beaucoup plus simple entre les deux côtés.
+Nous aurions aussi pu utiliser \lstinline{JavaScript}, mais une surcouche de typage nous permet de sécuriser la production du code grâce à la vérification du typage à la compilation, qui n'existe pas dans \lstinline{JavaScript}.
+Enfin ce choix nous a laissé la liberté de ne pas faire que de la programmation objet, par exemple le \lstinline{frontend} est en majorité de la programmation impérative et fonctionnelle.
+
+\subsection{Communication client-serveur}
+
+\input{reseau}
+
+\subsection{Test}
+
+Pour les tests, nous avons utilisé {\tt Mocha} qui est un {\tt framework} de test pour les programmes Node.js.
+Nous testons le backend et les communications des sockets parce qu'il est compliqué de tester l'affichage.
+Nous avons réalisé des tests unitaires, la couverture ({\tt coverage}) du code est aussi vérifiée grâce à {\tt nyc} qui est un {\tt framework} compatible avec {\tt Mocha}.
+Nous y reviendrons plus tard dans une partie dédiée.
+
+\subsection{Interface graphique}
+
+Dans le sujet, il était indiqué qu'il n'était pas obligatoire de faire une interface graphique. Mais afficher un hexagone dans un terminal est compliqué et la moitié de la carte donnée en exemple est de dimensions 32*29 cases, ce qui aurait donné un rendu illisible.
+Nous avons donc fait le choix de faire une interface graphique. Pour afficher la carte, nous avons testé plusieurs bibliothèques et choisis \lstinline{P5.js} pour plusieurs raisons, la documentation est claire et la bibliothèque est plutôt populaire ce qui facilite les recherches lors d'un problème d'implémentation (tutoriels, Stack Overflow...).
+Notre approche pour afficher la carte est de la dessiner à chaque changement dans le \lstinline{backend} (exemple: un {\tt move}). La première raison de cette tactique est de rendre le développement de l'affichage plus facile étant donné que ce n'est pas la priorité du sujet. Si nous avions dû faire un affichage dynamique il aurait fallu créer des objets pour sauvegarder la position des unités dans chaque case, impliquant alors une duplication de la logique du \lstinline{backend}. Nous avons donc voulu éviter ça. Ici le \lstinline{backend} envoie des données, que nous parsons et affichons.
+
+Pour dessiner les hexagones de la carte nous avons cherché des algorithmes pour ne pas avoir à les développer nous-mêmes, mais nous n'avons trouvé que des affichages comme suivant :
+
+\begin{figure}[H]
+    \centering
+    \def\stackalignment{r}
+    \stackunder{\includegraphics[scale=0.3]{data/hexmap_exemple.png}}%
+    {\scriptsize%
+        Source : https://eperezcosano.github.io/hex-grid}
+    \caption{Deux lignes d'hexagones}
+    \label{fig:hexmap_exemple}
+\end{figure}
+
+L'hexagone de base a la pointe vers le haut dans le plateau donné de {\tt Desert Fox}.
+Le problème de ce genre d'affichage est que deux cases sur la même ligne (avec les croix) ne se touchent pas. Si nous voulons faire un déplacement, nous devons alors passer par une case intermédiaire dans la ligne au-dessus ou au-dessous, nous voulions éviter ça. Nous avons donc fait nos propres méthodes pour avoir un hexagone dans l'autre sens (avec la pointe vers le haut) et qui est donc adjacente à ses six voisins comme dans la Fig \ref{fig:hexagon}. Pour cela nous calculons les points grâce au cercle trigonométrique.
+
+
+\begin{figure}[H]
+    \centering
+    \def\stackalignment{r}
+    \stackunder{\includegraphics[scale=0.3]{data/hexagon.png}}%
+    {\scriptsize%
+        Source : https://fr.wikipedia.org/wiki/Hexagone}
+    \caption{Les étapes pour dessiner un hexagone}
+    \label{fig:hexagon}
+\end{figure}
+
+Nous pouvons aussi mettre six unités d'attaque dans une case. Nous réutilisons donc le calcul de ces points pour faire la moyenne par rapport au centre. Nous nous retrouvons donc avec une unité dans chaque coin de l'hexagone. Ce qui donne le résultat suivant.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=.7]{data/hexagon_with_units.png}
+    \caption{Affichage hexagone avec des unités}
+    \label{fig:hexagon_with_units}
+\end{figure}

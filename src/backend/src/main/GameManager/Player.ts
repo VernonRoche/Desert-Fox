@@ -1,121 +1,95 @@
 import PlayerID from "./PlayerID";
-import AbstractUnit from "../Units/AbstractUnit";
+import Unit from "../Units/Unit";
 import Base from "../Infrastructure/Base";
 import SupplyUnit from "../Infrastructure/SupplyUnit";
-import RefitPoint from "../Infrastructure/RefitPoint";
 import Entity from "../Entity";
 import { Socket } from "socket.io";
-import fs from "fs";
-import HexID from "../Map/HexID";
-import Mechanized from "../Units/Mechanized";
-import Motorized from "../Units/Motorized";
-import Foot from "../Units/Foot";
-
-export type playerUnitJson = {
-  id: number;
-  type: string;
-  currentPosition: string;
-  movementPoints: number;
-  combatFactor: number;
-  moraleRating: number;
-  lifePoints: number;
-};
+import Dump from "../Infrastructure/Dump";
+import Moveable from "../Moveable";
 
 export default class Player {
   private _id: PlayerID;
-  private _units: Map<string, AbstractUnit>;
+  private _units: Map<string, Unit>;
   private _bases: Map<string, Base>;
+  private _dumps: Map<string, Dump>;
   private _supplyUnits: Map<string, SupplyUnit>;
-  private _refitPoints: Map<string, RefitPoint>;
   private _socket: Socket;
 
-  constructor(
-    id: PlayerID,
-    bases: Base[],
-    supplyUnits: SupplyUnit[],
-    refitPoints: RefitPoint[],
-    socket: Socket,
-  ) {
+  constructor(id: PlayerID, socket: Socket) {
     this._id = id;
     this._units = new Map();
-    id === PlayerID.ONE
-      ? this.loadUnitsByFile("Player1Units")
-      : this.loadUnitsByFile("Player2Units");
-    this._bases = new Map(bases.map((b) => [b.getId().toString(), b]));
-    this._supplyUnits = new Map(supplyUnits.map((s) => [s.getId().toString(), s]));
-    this._refitPoints = new Map(refitPoints.map((r) => [r.getId().toString(), r]));
+    this._bases = new Map();
+    this._dumps = new Map();
+    this._supplyUnits = new Map();
     this._socket = socket;
   }
 
-  public hasUnit(entity: Entity): boolean {
-    return (
-      this._units.has(entity.getId().toString()) || this._supplyUnits.has(entity.getId().toString())
-    );
+  // The function verifies if the player has the parameter entity.
+  // It also indirectly verifies that it's type is valid.
+  // Loops through the different lists of entities held by the player.
+  hasEntity(entity: Entity): boolean {
+    switch (entity.getType()) {
+      case "motorized":
+      case "foot":
+      case "mechanized":
+        return this._units.has(entity.getId().toString());
+      case "supply":
+        return this._supplyUnits.has(entity.getId().toString());
+      case "base":
+        return this._bases.has(entity.getId().toString());
+      case "dump":
+        return this._dumps.has(entity.getId().toString());
+      default:
+        throw new Error("Invalid entity type");
+    }
   }
 
-  loadUnitsByFile(filename: string): void {
-    const json = fs.readFileSync("units/" + filename + ".json", "utf8");
-    const map = JSON.parse(json);
-    map.forEach((unit: playerUnitJson) => {
-      const x = +unit.currentPosition.substring(2, 4);
-      const y = +unit.currentPosition.substring(0, 2);
-      if (isNaN(x) || isNaN(y)) {
-        console.log("Error loading unit: " + unit.id + " " + unit.currentPosition);
-        throw new Error("Error loading unit: " + unit.id + " " + unit.currentPosition);
-      }
-      if (unit.type === "mechanized")
-        this._units.set(
-          unit.id.toString(),
-          new Mechanized(
-            unit.id,
-            new HexID(y, x),
-            unit.moraleRating,
-            unit.combatFactor,
-            unit.movementPoints,
-            unit.lifePoints,
-          ),
-        );
-      else if (unit.type === "foot")
-        this._units.set(
-          unit.id.toString(),
-          new Foot(
-            unit.id,
-            new HexID(y, x),
-            unit.moraleRating,
-            unit.combatFactor,
-            unit.movementPoints,
-            unit.lifePoints,
-          ),
-        );
-      else if (unit.type === "motorized")
-        this._units.set(
-          unit.id.toString(),
-          new Motorized(
-            unit.id,
-            new HexID(y, x),
-            unit.moraleRating,
-            unit.combatFactor,
-            unit.movementPoints,
-            unit.lifePoints,
-          ),
-        );
-      else throw new Error("Unknown unit type: " + unit.type);
-    });
-  }
-  getUnitById(id: number): AbstractUnit {
+  // The function fetches a unit with a given id.
+  getUnitById(id: number): Unit {
     const unit = this._units.get(id.toString());
-
     if (!unit) {
       throw new Error("Nonexisting entity");
     }
     return unit;
   }
 
+  // The function acts as getUnitById, but may also return a supply unit.
+  getMoveableById(id: number): Moveable {
+    let unit = this._units.get(id.toString());
+    if (!unit) {
+      unit = this._supplyUnits.get(id.toString()) as Unit | undefined;
+      if (!unit) {
+        throw new Error("Nonexisting entity");
+      }
+    }
+    return unit;
+  }
+
+  // This function is the most generalized one, similar to getUnitById and
+  // getMoveableById.
+  getEntityById(id: number): Entity {
+    let entity;
+    entity = this._units.get(id.toString());
+    if (!entity) {
+      entity = this._supplyUnits.get(id.toString());
+      if (!entity) {
+        entity = this._bases.get(id.toString());
+        if (!entity) {
+          entity = this._dumps.get(id.toString());
+          if (!entity) {
+            throw new Error("Nonexisting entity");
+          }
+        }
+      }
+    }
+    return entity;
+  }
+
   getId(): PlayerID {
     return this._id;
   }
 
-  getUnits(): AbstractUnit[] {
+  getUnits(): Unit[] {
     return Array.from(this._units.values());
   }
 
@@ -123,19 +97,43 @@ export default class Player {
     return Array.from(this._bases.values());
   }
 
-  getSupplyUnits(): SupplyUnit[] {
-    return Array.from(this._supplyUnits.values());
+  getDumps(): Dump[] {
+    return Array.from(this._dumps.values());
   }
 
-  getRefitPoints(): RefitPoint[] {
-    return Array.from(this._refitPoints.values());
+  getSupplyUnits(): SupplyUnit[] {
+    return Array.from(this._supplyUnits.values());
   }
 
   getSocket(): Socket {
     return this._socket;
   }
 
-  addUnit(unit: AbstractUnit): void {
+  addUnit(unit: Unit): void {
     this._units.set(unit.getId().toString(), unit);
+  }
+
+  addBase(base: Base): void {
+    this._bases.set(base.getId().toString(), base);
+  }
+
+  addDump(dump: Dump): void {
+    this._dumps.set(dump.getId().toString(), dump);
+  }
+
+  addSupplyUnit(supplyUnit: SupplyUnit): void {
+    this._supplyUnits.set(supplyUnit.getId().toString(), supplyUnit);
+  }
+
+  removeUnit(defenderUnit: Unit) {
+    this._units.delete(defenderUnit.getId().toString());
+  }
+
+  removeDump(dump: Dump) {
+    if (this.hasEntity(dump)) this._dumps.delete(dump.getId().toString());
+  }
+
+  removeSupplyUnit(supplyUnit: SupplyUnit) {
+    this._supplyUnits.delete(supplyUnit.getId().toString());
   }
 }

@@ -1,0 +1,104 @@
+{
+    "units" : [
+        {
+            "type": "foot",
+            "currentPosition": "2032",
+            "movementPoints": "12",
+            "moraleRating": "3",
+            "lifePoints": "1"
+        },
+        {
+            "type": "foot",
+            "currentPosition": "2031",
+            "movementPoints": "12",
+            "moraleRating": "3",
+            "lifePoints": "1"
+        },
+        {
+            "type": "mechanized",
+            "currentPosition": "1931",
+            "movementPoints": "14",
+            "moraleRating": "3",
+            "lifePoints": "2"
+        },
+        {
+            "type": "motorized",
+            "currentPosition": "2030",
+            "movementPoints": "20",
+            "moraleRating": "3",
+            "lifePoints": "1"
+        },
+        {
+            "type": "mechanized",
+            "currentPosition": "1831",
+            "movementPoints": "15",
+            "moraleRating": "3",
+            "lifePoints": "2"
+        },
+        {
+            "type": "motorized",
+            "currentPosition": "1830",
+            "movementPoints": "22",
+            "moraleRating": "3",
+            "lifePoints": "1"
+        }
+    ],
+    "bases": [
+        {
+            "currentPosition": "1829",
+            "primary": true
+        }
+    ],
+    "dumps": [
+        {
+            "currentPosition": "1629"
+        },
+        {
+            "currentPosition": "2122"
+        },
+        {
+            "currentPosition": "1623"
+        },
+        {
+            "currentPosition": "0610"
+        },
+        {
+            "currentPosition": "1425"
+        },
+        {
+            "currentPosition": "0825"
+        },
+        {
+            "currentPosition": "1121"
+        },
+        {
+            "currentPosition": "2012"
+        },
+        {
+            "currentPosition": "2111"
+        },
+        {
+            "currentPosition": "0222"
+        }
+
+        
+    ],
+    "supplyUnits": [
+        {
+            "currentPosition" : "1729",
+            "movementPoints" : "12"
+        },
+        {
+            "currentPosition" : "2028",
+            "movementPoints" : "12"
+        },
+        {
+            "currentPosition" : "1630",
+            "movementPoints" : "12"
+        },
+        {
+            "currentPosition" : "1929",
+            "movementPoints" : "12"
+        }
+    ]
+}

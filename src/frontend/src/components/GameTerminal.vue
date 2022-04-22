@@ -28,7 +28,7 @@
         placeholder="Commande"
         type="text"
         minlength="1"
-        class="bg-transparent w-full"
+        class="bg-transparent w-full outline-none"
         @keyup.up="handleKeyUp"
       />
     </form>
@@ -37,25 +37,33 @@
 
 <script lang="ts" setup>
 import { onUnmounted, ref } from "@vue/runtime-dom";
-import { Unit } from "../utils/constants/types";
+import { Base, Dump, SupplyUnit, Unit } from "../utils/constants/types";
 import socket from "../utils/ClientSocket";
-import { moveErrors } from "../utils/constants/errorExplanation";
+import getError from "../utils/constants/errorExplanation";
 
 const terminalInput = ref("");
 const lines = ref<{ data: string; author: string; time: Date }[]>([]);
+const currentPlay = ref<boolean>(false);
 
 type Command = (args: string[]) => void;
 type Commands = Record<string, Command>;
 
 const help: Record<string, string> = {
   ping: "Test de la connexion avec le serveur",
-  help: "Affiche l'aide",
-  clear: "Efface le terminal",
-  move: "Cela prend un index d'unité et un index de Hexagon et fait bouger l'unité sur le Hexagon. Exemple : move 3 0208",
+  exit: "Termine la connexion avec le serveur",
+  message: "Envoie un message à votre adversaire. Exemple: message Bonjour",
+  move: "La commande prend un identifiant d'unité et un identifiant d'hexagone et fait bouger l'unité sur l'hexagone. Exemple : move 3 0208",
   units: "Récupère la liste de vos unités",
   done: "Indique que vous terminez votre tour",
-  exit: "Termine la connexion avec le serveur",
-
+  help: "Affiche l'aide",
+  clear: "Efface le terminal",
+  hex: "Affiche les informations d'un hexagone",
+  embark:
+    "Permet d'embarquer. Le premier argument est l'id d'un supply unit et le deuxième une entité qui peut être embarquée (foot et dump). Exemple : embark 12 16.",
+  disembark:
+    "Permet de désembarquer. Le seul argument est l'id du supply unit qui a embarqué une entité. Exemple : disembark 12",
+  attack:
+    "Permet aux unités d'un hexagone d'attaquer les unités d'un autre hexagone. Exemple : attack 0208 0209",
 };
 
 const commands: Commands = {
@@ -90,7 +98,7 @@ const commands: Commands = {
     });
     socket.once("move", (resp: { error: string | false }) => {
       if (resp.error) {
-        addLine("Game", moveErrors[resp.error] ?? resp.error);
+        addLine("Game", getError(resp.error));
       } else {
         addLine("Game", `L'unitée ${args[0]} s'est déplacée sur le hex ${args[1]}`);
       }
@@ -102,28 +110,23 @@ const commands: Commands = {
       type: "units",
     });
 
-    socket.once("units", (resp: Unit[]) => {
-      function addZeroIfNeeded(number: number) {
-        return number < 10 ? `0${number}` : number;
+    socket.once("units", (resp: Unit[] & { error: "nogame" }) => {
+      if (resp.error /*  === "nogame" */) {
+        addLine("Game", "La partie n'est pas lancée");
+        return;
       }
-      console.log(resp);
-      addLine(
-        "Game",
-        resp
-          .map(
-            ({ _id, _lifePoints, _currentPosition, _remainingMovementPoints }) =>
-              `Unit ${_id} has ${_lifePoints} life point at hexId (${addZeroIfNeeded(
-                _currentPosition._y,
-              )}${addZeroIfNeeded(
-                _currentPosition._x,
-              )}) with ${_remainingMovementPoints} movement points`,
-          )
-          .join("\n"),
-      );
+      addLine("Game", resp.map(unitToString).join(""));
     });
   },
   done: () => {
     socket.emit("done");
+    socket.once("done", (resp: { error: string | false }) => {
+      if (resp.error) {
+        addLine("Game", getError(resp.error));
+      } else {
+        addLine("Game", "Votre tour est terminé");
+      }
+    });
   },
   // local commands
   help: () => {
@@ -136,12 +139,191 @@ const commands: Commands = {
   clear: () => {
     lines.value = [];
   },
+
+  hex: (args: string[]) => {
+    if (args.length !== 1) {
+      addLine(
+        "Game",
+        "Nombre d'arguments invalide, le premier argument doit être un numéro (identifiant d'hexagone)",
+      );
+      return;
+    }
+
+    const hexId = +args[0];
+    if (isNaN(hexId)) {
+      addLine(
+        "Game",
+        "Argument invalide, le premier argument doit être un numéro (identifiant d'hexagone)",
+      );
+      return;
+    }
+
+    socket.emit("command", {
+      type: "hex",
+      hexId: args[0],
+    });
+
+    socket.once(
+      "hex",
+      (resp: { units: Unit[]; base?: Base; dumps: Dump[]; supplyUnits: SupplyUnit[] }) => {
+        // unit
+        let unitString = "";
+        const { units, dumps, supplyUnits, base } = resp;
+        units.forEach((unit) => {
+          unitString += unitToString(unit);
+        });
+        // base
+        let baseString = "";
+        if (base) {
+          const { _currentPosition, _primary } = base;
+          baseString += `La base à l'hexagone (${hexIdToString(_currentPosition)}) est une base ${
+            _primary ? "primaire" : "secondaire"
+          }`;
+        }
+        // dump
+        let dumpString = "";
+        dumps.forEach((dump) => {
+          dumpString += `Le depot ${dump._id}\n`;
+        });
+
+        //supplyUnit
+        let supplyString = "";
+        supplyUnits.forEach((supplyUnit) => {
+          supplyString += `L'unité ${supplyUnit._id} possède ${supplyUnit._movementPoints} points de mouvements\n`;
+        });
+        let finalString = "";
+
+        if (unitString) {
+          finalString += `Unités: ${unitString}\n`;
+        }
+        if (baseString) {
+          finalString += `Base: ${baseString}\n`;
+        }
+
+        if (dumpString) {
+          finalString += `Dump: ${dumpString}\n`;
+        }
+
+        if (supplyString) {
+          finalString += `SupplyUnit: ${supplyString}\n`;
+        }
+
+        addLine("Game", finalString);
+      },
+    );
+  },
+  embark: (args: string[]) => {
+    if (args.length !== 2) {
+      addLine(
+        "Game",
+        "Trop d'arguments, le premier argument doit être un numéro (identifiant d'unité) et le deuxième argument doit être un numéro (identifiant d'hexagone)",
+      );
+      return;
+    }
+
+    const embarkingId = +args[0];
+    const toEmbarkId = +args[1];
+    if (isNaN(embarkingId) || isNaN(toEmbarkId)) {
+      addLine(
+        "Game",
+        "Argument invalide, le premier argument doit être un numéro (identifiant d'unité) et le deuxième argument doit être un numéro (identifiant d'hexagone)",
+      );
+      return;
+    }
+    socket.emit("command", {
+      type: "embark",
+      embarkingId: args[0],
+      toEmbarkId: args[1],
+    });
+    socket.once("embark", (resp: { error: string | false }) => {
+      if (resp.error) {
+        addLine("Game", getError(resp.error));
+      } else {
+        addLine("Game", `L'unité ${args[0]} a embarqué ${args[1]}`);
+      }
+    });
+  },
+  disembark: (args: string[]) => {
+    const disembarkingId = +args[0];
+    if (isNaN(disembarkingId)) {
+      addLine(
+        "Game",
+        "Argument invalide, le premier argument doit être un numéro (identifiant d'unité)",
+      );
+      return;
+    }
+    socket.emit("command", {
+      type: "disembark",
+      embarkingId: args[0],
+    });
+    socket.once("disembark", (resp: { error: string | false }) => {
+      if (resp.error) {
+        addLine("Game", getError(resp.error));
+      } else {
+        addLine("Game", `L'unité ${args[0]} a débarqué`);
+      }
+    });
+  },
+  attack: (args: string[]) => {
+    if (args.length !== 2) {
+      addLine(
+        "Game",
+        "Nombre d'arguments invalide, le premier argument doit être un identifiant d'hexagone et le deuxième argument doit être un identifiant d'hexagone",
+      );
+      return;
+    }
+    const attackingId = +args[0];
+    const attackedId = +args[1];
+
+    if (isNaN(attackingId) || isNaN(attackedId)) {
+      addLine(
+        "Game",
+        "Argument invalide, le premier argument doit être un numéro (identifiant d'unité) et le deuxième argument doit être un numéro (identifiant d'hexagone)",
+      );
+      return;
+    }
+
+    socket.emit("command", {
+      type: "attack",
+      hexIdAttacker: args[0],
+      hexIdDefender: args[1],
+    });
+
+    socket.once(
+      "attack",
+      (resp: {
+        error: string | false;
+        result: {
+          damage: DamageResult;
+          morale: MoraleResult;
+        };
+      }) => {
+        console.log(resp);
+        if (resp.error) {
+          addLine("Game", getError(resp.error));
+          return;
+        }
+        const { damage, morale } = resp.result;
+        const damageExplanation = damageExplanations[damage] ?? "";
+        const moraleExplanation = moraleExplanations[morale] ?? "";
+        if (moraleExplanation === "" && damageExplanation === "") {
+          addLine("Game", `L'attaque a reussi, et vos unités n'ont pas subit d'effets negatifs`);
+          return;
+        }
+        addLine("Game", `${damageExplanation}${moraleExplanation}`);
+      },
+    );
+  },
 };
 
 addLine("Game", "Connexion au serveur...");
 
 socket.on("connect", () => {
   addLine("Game", "Vous êtes connecté au serveur");
+});
+
+socket.on("message", (message: string) => {
+  addLine("Adversaire", message);
 });
 
 socket.on("pong message", (msg) => {
@@ -156,6 +338,52 @@ socket.on("commandMessage", (resp: { error: string } & string) => {
   }
 });
 
+type DamageResult = "NONE" | "Q" | "H" | "E" | "X" | "XX";
+type MoraleResult = "NONE" | "M" | "D" | "W" | "R";
+
+const damageExplanations: Record<string, string> = {
+  Q: "Un quart des points de vie totaux de votre hexagone a été distribué en dégats à vos unités. ",
+  H: "La moitié des points de vie totaux de votre hexagone a été distribué en dégats à vos unités. ",
+  E: "Toutes vos unités ont été détruites. ",
+  X: "Vos unités ont subit la moitié des dégats infligés aux défenseurs. ",
+  XX: "Vos unités ont subit les même dégats infligés aux défenseurs. ",
+};
+
+const moraleExplanations: Record<string, string> = {
+  M: "Les unités font un test de morale.",
+  D: "Les unités obtiennent l'état ((disrupted)).",
+  W: "Les unités se replient et obtiennent l'état ((disrupted)).",
+  R: "Les unités se replient et obtiennent l'état ((disrupted)).",
+};
+
+socket.on(
+  "attackResult",
+  (resp: {
+    result: {
+      damage: DamageResult;
+      morale: MoraleResult;
+    };
+    defenderHexId: string;
+  }) => {
+    console.log(resp);
+    const { result, defenderHexId } = resp;
+    const { damage, morale } = result;
+    const damageExplanation = damageExplanations[damage] ?? "";
+    const moraleExplanation = moraleExplanations[morale] ?? "";
+    if (moraleExplanation === "" && damageExplanation === "") {
+      addLine(
+        "Game",
+        `Votre adversaire a attaqué vos unités à l'hexagone ${defenderHexId}. Vos unités ont put se defendre et n'ont pas subit d'effets negatifs`,
+      );
+      return;
+    }
+    addLine(
+      "Game",
+      `L'hexagone ${defenderHexId} a été attaqué. ${damageExplanation}${moraleExplanation}`,
+    );
+  },
+);
+
 socket.on("phase", (resp: { phase: string; play: boolean; commands: string[]; auto: boolean }) => {
   if (resp.auto) {
     // handle automatic phase
@@ -163,8 +391,10 @@ socket.on("phase", (resp: { phase: string; play: boolean; commands: string[]; au
   }
   if (resp.play) {
     addLine("Game", "Vous pouvez jouer les commandes suivantes: " + resp.commands.join(", "));
+    currentPlay.value = true;
   } else {
     addLine("Game", "Vous ne pouvez pas jouer");
+    currentPlay.value = false;
   }
 });
 
@@ -228,11 +458,21 @@ function handleKeyUp() {
   terminalInput.value = filtered[filtered.length - 1].data;
 }
 
+function addZeroIfNeeded(number: number) {
+  return number < 10 ? `0${number}` : number;
+}
+
+function unitToString(unit: Unit) {
+  return `L'unité ${unit._id} a ${unit._lifePoints} point${
+    +unit._lifePoints > 1 ? "s" : ""
+  } de vie à l'hexagone (${addZeroIfNeeded(unit._currentPosition._y)}${addZeroIfNeeded(
+    unit._currentPosition._x,
+  )}) avec ${unit._remainingMovementPoints} points de mouvement\n`;
+}
+
+function hexIdToString(hexId: { _x: number; _y: number }) {
+  return `(${addZeroIfNeeded(hexId._y)}${addZeroIfNeeded(hexId._x)})`;
+}
+
 onUnmounted(disconnectSocket);
 </script>
-
-<style scoped>
-input:focus {
-  outline: none;
-}
-</style>

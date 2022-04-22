@@ -1,0 +1,87 @@
+\documentclass{article}[a4paper, 12pt]
+\usepackage{minted}
+\usepackage{csquotes}
+\usepackage{french}
+\usepackage{hyperref}
+\usepackage{stackengine}
+\usepackage[top=2.54cm, bottom=2.54cm, left=2.54cm, right=2.54cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+\usepackage{copyrightbox}
+\usepackage{multirow}%tableaux
+\usepackage{listings} %cahier des besoins
+\usepackage{bbding}
+\usepackage{pifont}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{enotez}
+
+\def\FAIT{\textcolor[HTML]{4E944F}{\textbf{\ding{52}}}}
+\def\NOP{\textcolor[HTML]{E83A14}{\textbf{\ding{55}}}}
+
+\newcommand{\quotes}[1]{``#1''}
+
+\lstset{
+language=C,
+extendedchars=true,
+basicstyle=\tt,
+%numbers=left, numberstyle=\tiny, stepnumber=2, numbersep=5pt,
+lineskip=-1pt
+}
+
+\bibliographystyle{alpha} %format des citations
+
+\title{\LARGE \textbf{Mémoire Projet de Programmation  } \\ \Large \textbf{Jeu de statégie : Desert Fox}}
+\author{Kristo Dhima, Garion Goubard, Sylvain Lascostes, \\Romain Réau, Vincent Samson et Alexandros Stergiou }
+\date{Année universitaire 2021-2022}
+
+\begin{document}
+
+\maketitle
+\begin{center}
+    \center
+    \includegraphics[scale=0.2]{data/Universite_Bordeaux_RVB-10.jpg}
+
+\end{center}
+
+\newpage
+
+{\hypersetup{hidelinks} \tableofcontents} %table des matière
+
+
+\newpage
+
+\input{intro}
+
+\newpage
+
+\input{besoins}
+
+\input{description_du_jeu}
+\newpage
+
+\input{scenario}
+\newpage
+
+\input{architecture_et_logiciel}
+
+\input{tests}
+
+
+\input{conclusion}
+
+\section{Source images}
+
+\input{Annexe}
+
+
+\section{Bibliographie}
+    
+\bibliography{bibiography}
+
+\printendnotes
+
+
+
+\end{document}

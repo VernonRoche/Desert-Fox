@@ -1,11 +1,15 @@
+import { resetIds } from "../main/IdManager";
 import GameMap from "../main/Map/GameMap";
 import HexID from "../main/Map/HexID";
 import Maps from "../main/Map/Maps";
 
 describe("Game map test", function () {
+  this.afterAll(() => {
+    resetIds();
+  });
   let map: GameMap;
   it("Instantiate map", function () {
-    map = new GameMap(new Map(), "libya" as Maps);
+    map = new GameMap("libya" as Maps, new Map());
   });
   it("Valid Hex should not throw", function () {
     const hexId = new HexID(1, 1);

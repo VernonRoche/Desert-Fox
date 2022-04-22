@@ -1,3 +1,6 @@
+// This class is used to identify each individual hexagon on the map.
+// It also represents it's coordinates on the map.
+// It is represented in YX format.
 export default class HexID {
   private _x: number;
   private _y: number;

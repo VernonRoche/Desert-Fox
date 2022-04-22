@@ -21,7 +21,7 @@ socket.on("gameDestroyed", () => {
 
 onMounted(() => {
   socket.on("map", (gameMap: string) => {
-    console.log("Game was created an map is", gameMap);
+    //console.log("Game was created an map is", gameMap);
 
     const canvasExisted = document.getElementById("defaultCanvas0");
     canvasExisted?.remove();

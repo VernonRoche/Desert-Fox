@@ -1,6 +1,16 @@
 const cosPI6 = Math.cos(Math.PI / 6);
 const sinPI6 = Math.sin(Math.PI / 6);
 
+/**
+ *
+ * @param x center of the hexagon
+ * @param y center of the hexagon
+ * @param r radius of the hexagon
+ * @param index hexagon corner number
+ * @param unit if unit == true then we calculate the center between the corner of the hexagon and his center
+ * @returns coordonates points of the corner of the hexagon or the center of unit if unit == true
+ */
+
 export default function handlerHexPoints(
   x: number,
   y: number,
@@ -8,8 +18,6 @@ export default function handlerHexPoints(
   index: number,
   unit?: boolean,
 ): { x: number; y: number } {
-  //if (index < 0 || index > 5) throw new Error("index must be between 0 and 5");
-
   const hexPoints = hexPointsFromIndex(x, y, r, index);
 
   if (unit !== true) {
@@ -18,7 +26,7 @@ export default function handlerHexPoints(
 
   /* return the center between the two points */
   const center = { x: (hexPoints.x + x) / 2, y: (hexPoints.y + y) / 2 };
-  const diff = r - 5;
+  const diff = r;
 
   const functions = [
     () => {
@@ -44,46 +52,84 @@ export default function handlerHexPoints(
   return functions[index]();
 }
 
+/**
+ *
+ * @param x center of the hexagon
+ * @param r radius of the hexagon
+ * @returns positive x point trigonometry
+ */
+export function pointCosPos(x: number, r: number) {
+  return cosPI6 * r + x;
+}
+
+/**
+ *
+ * @param y center of the hexagon
+ * @param r radius of the hexagon
+ * @returns positive y point trigonometry
+ */
+export function pointSinPos(y: number, r: number) {
+  return sinPI6 * r + y;
+}
+
+/**
+ *
+ * @param x center of the hexagon
+ * @param r radius of the hexagon
+ * @returns negative x point trigonometry
+ */
+export function pointCosNeg(x: number, r: number) {
+  return -cosPI6 * r + x;
+}
+
+/**
+ *
+ * @param y center of the hexagon
+ * @param r radius of the hexagon
+ * @returns negative y point trigonometry
+ */
+export function pointSinNeg(y: number, r: number) {
+  return -sinPI6 * r + y;
+}
+
+/**
+ *
+ * @param x center of the hexagon
+ * @param y center of the hexagon
+ * @param r radius of the hexagon
+ * @param index hexagon corner number
+ * @returns coordonates points of the number corner of the hexagon
+ */
 function hexPointsFromIndex(
   x: number,
   y: number,
   r: number,
   index: number,
 ): { x: number; y: number } {
-  function pointCosPos() {
-    return cosPI6 * r + x;
-  }
-
-  function pointSinPos() {
-    return sinPI6 * r + y;
-  }
-
-  function pointCosNeg() {
-    return -cosPI6 * r + x;
-  }
-
-  function pointSinNeg() {
-    return -sinPI6 * r + y;
-  }
-
   const functions = [
     () => {
+      //point at the top of the hexagon
       return { x: x, y: y - r };
     },
     () => {
-      return { x: pointCosPos(), y: pointSinNeg() };
+      //point at the top right of the hexagon
+      return { x: pointCosPos(x, r), y: pointSinNeg(y, r) };
     },
     () => {
-      return { x: pointCosPos(), y: pointSinPos() };
+      //point at bottom right of the hexagon
+      return { x: pointCosPos(x, r), y: pointSinPos(y, r) };
     },
     () => {
+      //point at bottom of the hexagon
       return { x: x, y: y + r };
     },
     () => {
-      return { x: pointCosNeg(), y: pointSinPos() };
+      //point at bottom left of the hexagon
+      return { x: pointCosNeg(x, r), y: pointSinPos(y, r) };
     },
     () => {
-      return { x: pointCosNeg(), y: pointSinNeg() };
+      //point at top left of the hexagon
+      return { x: pointCosNeg(x, r), y: pointSinNeg(y, r) };
     },
   ];
 

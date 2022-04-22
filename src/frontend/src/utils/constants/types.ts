@@ -1,9 +1,11 @@
+type Position = {
+  _x: number;
+  _y: number;
+};
+
 export type Unit = {
   _combatFactor: string;
-  _currentPosition: {
-    _x: number;
-    _y: number;
-  };
+  _currentPosition: Position;
   _id: string;
   _lifePoints: string;
   _moraleRating: string;
@@ -11,6 +13,9 @@ export type Unit = {
   _remainingMovementPoints: string;
 };
 
+/**
+ * Type of the map when we parse data from the backend
+ */
 export type GameMap = {
   hexId: string;
   terrain: string;
@@ -18,10 +23,50 @@ export type GameMap = {
     {
       type: string;
       id: number;
-      currentPosition: { _x: number; _y: number };
+      currentPosition: Position;
       movementPoints: number;
       remainingMovementPoints: number;
+      owned: boolean;
+      embarked: boolean | undefined;
+      disrupted: boolean;
+    },
+  ];
+  base:
+    | {
+        id: number;
+        curentPosition: Position;
+        primary: boolean;
+        owned: boolean;
+      }
+    | undefined;
+  dumps: [
+    {
+      id: number;
+      currentPosition: Position;
+      owned: boolean;
+    },
+  ];
+  supplyUnits: [
+    {
+      id: number;
+      currentPosition: Position;
+      movementPoints: number;
       owned: boolean;
     },
   ];
 }[];
+
+export type Base = {
+  _currentPosition: Position;
+  _primary: boolean;
+};
+
+export type Dump = {
+  _id: number;
+  _currentPosition: Position;
+};
+export type SupplyUnit = {
+  _currentPosition: Position;
+  _movementPoints: number;
+  _id: number;
+};

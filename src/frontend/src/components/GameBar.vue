@@ -3,6 +3,7 @@
     class="bg-gradient-to-bl from-blue-300 to-violet-700 p-2 text-white font-bold fixed z-10 w-4/5"
   >
     <div v-if="gameCreated" class="flex justify-around items-center">
+      <h1>Tour: {{ currentTurn }} / {{ totalTurns }}</h1>
       <h1>Phase actuelle: {{ phaseSentence }}</h1>
       <h1>{{ turnSentence }}</h1>
       <h1>Nombre d'unités restantes: {{ nbUnits }}</h1>
@@ -18,6 +19,11 @@ import { Unit } from "../utils/constants/types";
 
 const phases: Record<string, string> = {
   player_movement: "Phase de déplacement",
+  player_reaction: "Phase de réaction",
+  player_combat: "Phase de combat",
+  reinforcements: "Renforts",
+  initiative: "Initiative",
+  allocation: "Activation des bases",
 };
 
 const gameCreated = ref(false);
@@ -25,6 +31,8 @@ const gameDestroyed = ref(false);
 const phase = ref("");
 const isPlaying = ref(false);
 const nbUnits = ref(0);
+const currentTurn = ref(0);
+const totalTurns = ref(0);
 
 socket.on("units", (units: Unit[]) => {
   nbUnits.value = units.length;
@@ -59,8 +67,13 @@ const turnSentence = computed(() => {
 });
 
 socket.on("phase", (resp: { phase: string; play: boolean; commands: string[]; auto: boolean }) => {
-  phase.value = resp.phase.replaceAll("first_", "").replaceAll("second_", "");
+  phase.value = resp.phase.replaceAll("first_", "").replaceAll("second_", "").replaceAll("2", "");
   isPlaying.value = resp.play;
+});
+
+socket.on("turn", (resp: { current: number; total: number }) => {
+  currentTurn.value = resp.current;
+  totalTurns.value = resp.total;
 });
 
 socket.on("gameDestroyed", () => {
