@@ -88,11 +88,20 @@ Si les tests ratent, alors un mail est envoyé à l'auteur du commit et le commi
     \item frontend
 \end{itemize}
 
-Le principe de base était que nous développions sur les branches (\lstinline{frontend} et \lstinline{backend}) puisque nous fusionnions ces deux dernières sur la branche \lstinline{dev}. À partir de là, nous vérifions que le frontend et le backend fonctionnaient bien ensemble. S'il avait une erreur, alors c'était là que nous travaillions en attendant de régler le problème. Une fois que nous avions une version stable, nous fusionnions la branche \lstinline{dev} à la branche \lstinline{main}. La branche main est réservée aux versions stables qui compilent et qui fonctionnent correctement. Malheureusement nous nous sommes vite rendu compte que ce n'était pas le moyen le plus optimisé de travailler, car lorsqu'on travaille sur la communication client-serveur sur le \lstinline{backend} et le \lstinline{frontend}, il fallait fusionner les deux branches sur la branche \lstinline{dev} pour pouvoir tester, ce qui prenait beaucoup de temps et était plutôt fastidieux. Nous avons décidé de travailler sur la branche \lstinline{dev} pour faciliter les tests de la communication client serveur. Il aurait sûrement fallu faire des branches en fonction des {\tt features}.
+Le principe de base était que nous développions sur les branches (\lstinline{frontend} et \lstinline{backend}) puisque nous fusionnions ces deux dernières sur la branche \lstinline{dev}.
+À partir de là, nous vérifions que le {\tt frontend} et le {\tt backend} fonctionnaient bien ensemble.
+S'il avait une erreur, alors c'était là que nous travaillions en attendant de régler le problème.
+Une fois que nous avions une version stable, nous fusionnions la branche \lstinline{dev} à la branche \lstinline{main}.
+La branche {\tt main} est réservée aux versions stables qui compilent et qui fonctionnent correctement.
+Malheureusement nous nous sommes vite rendu compte que ce n'était pas le moyen le plus optimisé de travailler, car lorsqu'on travaille sur la communication client-serveur sur le \lstinline{backend} et le \lstinline{frontend}, il fallait fusionner les deux branches sur la branche \lstinline{dev} pour pouvoir tester, ce qui prenait beaucoup de temps et était plutôt fastidieux.
+Nous avons décidé de travailler sur la branche \lstinline{dev} pour faciliter les tests de la communication client serveur.
+Il aurait sûrement fallu faire des branches en fonction des {\tt features}.
 
 \subsection{Langage de programmation}
 
-Nous avons choisi comme langage de programmation \lstinline{TypeScript} pour le \lstinline{backend} et le \lstinline{frontend}. En effet, en ayant la même technologie pour tout le projet cela rend la communication beaucoup plus simple entre les deux côtés. On aurait aussi pu utiliser \lstinline{JavaScript}, mais une surcouche de typage nous permet de sécuriser la production du code grâce à la vérification du typage à la compilation, qui n'existe pas dans \lstinline{JavaScript}. Enfin ce choix nous a laissé la liberté de ne pas faire que de la programmation objet, par exemple le \lstinline{frontend} est en majorité de la programmation impérative et fonctionnelle.
+Nous avons choisi comme langage de programmation \lstinline{TypeScript} pour le \lstinline{backend} et le \lstinline{frontend}. En effet, en ayant la même technologie pour tout le projet cela rend la communication beaucoup plus simple entre les deux côtés.
+Nous aurions aussi pu utiliser \lstinline{JavaScript}, mais une surcouche de typage nous permet de sécuriser la production du code grâce à la vérification du typage à la compilation, qui n'existe pas dans \lstinline{JavaScript}.
+Enfin ce choix nous a laissé la liberté de ne pas faire que de la programmation objet, par exemple le \lstinline{frontend} est en majorité de la programmation impérative et fonctionnelle.
 
 \subsection{Communication client-serveur}
 
@@ -102,15 +111,16 @@ Nous avons choisi comme langage de programmation \lstinline{TypeScript} pour le 
 
 Pour les tests, nous avons utilisé {\tt Mocha} qui est un {\tt framework} de test pour les programmes Node.js.
 Nous testons le backend et les communications des sockets parce qu'il est compliqué de tester l'affichage.
-Nous avons réalisé des tests unitaires, la couverture ({\tt coverage}) du code est aussi vérifiée grâce à nyc qui est un {\tt framework} compatible avec Mocha.
+Nous avons réalisé des tests unitaires, la couverture ({\tt coverage}) du code est aussi vérifiée grâce à {\tt nyc} qui est un {\tt framework} compatible avec {\tt Mocha}.
 Nous y reviendrons plus tard dans une partie dédiée.
 
 \subsection{Interface graphique}
 
-Dans le sujet, il était indiqué que l'on n'était pas dans l'obligation de faire une interface graphique. Mais afficher un hexagone dans un terminal est compliqué et la moitié de la carte donnée en exemple est de dimensions 32*29 cases, ce qui aurait donné un rendu illisible. Nous avons donc fait le choix de faire une interface graphique. Pour afficher la carte, nous avons testé plusieurs bibliothèques et choisis \lstinline{P5.js} pour plusieurs raisons, la documentation est claire et la bibliothèque est plutôt populaire ce qui facilite les recherches lors d'un problème d'implémentation (tutoriels, Stack Overflow...).
-Notre approche pour afficher la carte est de la dessiner à chaque changement dans le \lstinline{backend} (exemple: un move). La première raison de cette tactique est de rendre le développement de l'affichage plus facile vu que ce n'est pas la priorité du sujet. Si nous avions dû faire un affichage dynamique il aurait fallu créer des objets pour sauvegarder la position des unités dans chaque case. Ce qui implique alors une duplication de la logique du \lstinline{backend}, nous avons voulu éviter ça. Ici le \lstinline{backend} envoie des données, on les parse et on les affiche.
+Dans le sujet, il était indiqué que l'on n'était pas dans l'obligation de faire une interface graphique. Mais afficher un hexagone dans un terminal est compliqué et la moitié de la carte donnée en exemple est de dimensions 32*29 cases, ce qui aurait donné un rendu illisible.
+Nous avons donc fait le choix de faire une interface graphique. Pour afficher la carte, nous avons testé plusieurs bibliothèques et choisis \lstinline{P5.js} pour plusieurs raisons, la documentation est claire et la bibliothèque est plutôt populaire ce qui facilite les recherches lors d'un problème d'implémentation (tutoriels, Stack Overflow...).
+Notre approche pour afficher la carte est de la dessiner à chaque changement dans le \lstinline{backend} (exemple: un {\tt move}). La première raison de cette tactique est de rendre le développement de l'affichage plus facile étant donné que ce n'est pas la priorité du sujet. Si nous avions dû faire un affichage dynamique il aurait fallu créer des objets pour sauvegarder la position des unités dans chaque case, impliquant alors une duplication de la logique du \lstinline{backend}. Nous avons donc voulu éviter ça. Ici le \lstinline{backend} envoie des données, que nous parsons et affichons.
 
-Pour dessiner les hexagones de la map nous avons cherché des algorithmes pour ne pas avoir à les développer nous-mêmes, mais nous n'avons trouvé que des affichages comme suivant.
+Pour dessiner les hexagones de la carte nous avons cherché des algorithmes pour ne pas avoir à les développer nous-mêmes, mais nous n'avons trouvé que des affichages comme suivant :
 
 \begin{figure}[H]
     \centering
@@ -122,8 +132,8 @@ Pour dessiner les hexagones de la map nous avons cherché des algorithmes pour n
     \label{fig:hexmap_exemple}
 \end{figure}
 
+L'hexagone de base a la pointe vers le haut dans le plateau donné de {\tt Desert Fox}.
 Le problème de ce genre d'affichage est que deux cases sur la même ligne (avec les croix) ne se touchent pas. Si on veut faire un déplacement on doit alors passer par une case intermédiaire dans la ligne au-dessus ou au-dessous, nous voulions éviter ça. Nous avons donc fait nos propres méthodes pour avoir un hexagone dans l'autre sens (avec la pointe vers le haut) et qui est donc adjacente à ses six voisins comme dans la Fig \ref{fig:hexagon}. Pour cela on calcule les points grâce au cercle trigonométrique.
-
 
 
 \begin{figure}[H]
